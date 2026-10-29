@@ -69,6 +69,7 @@ requirements.lock锁定42个运行依赖，requirements-dev.lock增加15个开�
 | [07-state-and-storage.md](docs/07-state-and-storage.md) | 状态、缓存失效、事务、幂等、恢复语义 |
 | [03-evaluation.md](docs/03-evaluation.md) | 测试矩阵、模型评估、证据产物与验收门槛 |
 | [08-development-plan.md](docs/08-development-plan.md) | SDD/TDD 顺序、阶段完成条件、建议时间分配 |
+| [09-development-skills.md](docs/09-development-skills.md) | 六个开发技能的使用时机、来源和项目适配；不属于项目运行依赖 |
 | [04-ai-usage.md](docs/04-ai-usage.md) | 当前真实 AI 使用范围和后续记录方式 |
 | [05-retrospective.md](docs/05-retrospective.md) | 设计阶段风险；实现后填写实际复盘 |
 

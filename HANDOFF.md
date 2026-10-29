@@ -14,7 +14,9 @@
 
 **S1已完成实现与自验，状态ready_for_review，用户验收pending。** 用户于2026-10-29明确授权S1；S0未收到单独验收通过表述，保留pending，不将推进授权伪记为验收。S2及以后未获授权。
 
-已验证的S0基线提交：`576acfbbc000da535f1ee7ae9164029434ed2aed`，此前已核对与远端main一致。S1开始于`48874f6c44dcb6bde94106a859e36bd1603bcfc3`，开始时main工作区干净、单一worktree，本地origin/main同SHA；本轮未重新联网核对远端，S1未推送。S1提交通过`git log -1 --format=%H -- docs/stages/S1.md`定位，避免嵌入自身提交SHA。
+S0基线为`576acfbbc000da535f1ee7ae9164029434ed2aed`，此前已核对与远端main一致。S1实现提交为`018903379bde17b7443907a459354ce1f3e0eb2c`。本轮技能配置开始时main工作区干净、单一worktree，HEAD为S1提交、本地origin/main仍为`48874f6c44dcb6bde94106a859e36bd1603bcfc3`；未重新联网核对或推送项目远端。后续文档提交通过`git log -1 --format=%H -- HANDOFF.md`定位。
+
+当前新增工作仅为用户授权的6个开发技能安装和文档规则，详见[开发技能使用约定](docs/09-development-skills.md)与[安装记录](docs/tooling/skills-installation.json)。旧ToolMonsters版handoff已在活动技能目录外备份；当前handoff来自用户指定中文仓库。本次未修改业务代码、未重跑pytest、未调用模型；下述115项通过属于S1已有证据，S2仍未获启动授权。
 
 | 阶段 | 实际开发状态 | 用户验收 | 证据或下一步 |
 |---|---|---|---|
@@ -51,6 +53,7 @@ S1决策：结构解析与Clock时效检查分开；脚本指纹不含制作档�
 | docs/06-contracts.md、contracts/ | 接口和工具契约；改行为先改规格 |
 | docs/07-state-and-storage.md | 状态权威、缓存失效、保存事务、幂等、限额 |
 | docs/08-development-plan.md | S0—S8范围、逐阶段验收和停止边界 |
+| docs/09-development-skills.md | 技能使用时机、项目适配、固定来源和安装证据 |
 | docs/stages/S0.md | 已发生的S0自验事实，用户验收待定 |
 | docs/stages/S1.md | 当前S1验收入口；范围、两轮Red、Green与正式wheel复核命令 |
 | tests/unit/test_environment.py、test_package.py | 4项S0回归 |
@@ -97,3 +100,8 @@ S2后续获准时，先按阶段计划补验收断言并取得Red，再做包内
 | 2026-10-29 | S0工程基线提交并推送 | 576acfb；技术自验通过，用户验收pending |
 | 2026-10-29 | 按用户要求建立持续交接文档及强制更新规则 | 仅文档维护，未开始S1、未新增模型调用 |
 | 2026-10-29 | 用户明确授权S1；实现并完成自验 | ready_for_review；115项含S0回归，开发/正式wheel环境均通过；用户验收pending，未开始S2 |
+| 2026-10-29 | 用户要求安装6个中文开发技能，并写入开发规则 | 已安装并核对固定来源；旧handoff已备份，仅更新规则和交接，S1验收/S2授权状态不变 |
+
+## Suggested skills
+
+下一位代理按[使用约定](docs/09-development-skills.md)选择并读取实际SKILL.md：处理交接用handoff，修改代理文档用writing-for-agents；S2明确获准后先用tdd逐个行为开发，业务阶段交付前用code-review。遇到已观察的疑难缺陷或具体接口问题时，再读取diagnosing-bugs或codebase-design。karpathy-guidelines继续适用。

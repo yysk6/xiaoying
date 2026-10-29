@@ -1,0 +1,143 @@
+{
+  "kind": "agent_guidance_installation",
+  "installed_on": "2026-10-29",
+  "verified_at_utc": "2026-10-29T14:23:57.247149+00:00",
+  "source_repository": "vinvcn/mattpocock-skills-zh-CN",
+  "source_commit": "5b57718666917f8a6a0ff3066ae8d5ec386baef4",
+  "installation_root": "$CODEX_HOME/skills",
+  "installed_skills": [
+    "tdd",
+    "handoff",
+    "writing-for-agents",
+    "code-review",
+    "diagnosing-bugs",
+    "codebase-design"
+  ],
+  "metadata_names_verified": 6,
+  "files_verified": 18,
+  "files": [
+    {
+      "skill": "code-review",
+      "relative_path": "SKILL.md",
+      "git_blob_sha": "e7d8ebda610e096f49d800d2e8ab02f6cfafb92d",
+      "sha256": "22c1f5715f5d2d2262414587fa51e9250137dfe4566569e1b6dc70ee0ed86e7d"
+    },
+    {
+      "skill": "code-review",
+      "relative_path": "agents/openai.yaml",
+      "git_blob_sha": "70124bba67d8cd195233809f2658785c60804a52",
+      "sha256": "54471a28297e3c6d9a657f90de452cd5c9de18b3afb80807b7018dffc3bbc9cb"
+    },
+    {
+      "skill": "codebase-design",
+      "relative_path": "DEEPENING.md",
+      "git_blob_sha": "eab4723938d272ac52cf26a9ebe04c13610ae927",
+      "sha256": "b97be85532b49ec90366b5c6a58235822460822bc5092b6a53539eca61e25550"
+    },
+    {
+      "skill": "codebase-design",
+      "relative_path": "DESIGN-IT-TWICE.md",
+      "git_blob_sha": "b71b995e0974e3b341909d12672752a05229c3fa",
+      "sha256": "224be2d6b46326d395756028c8c74f8a1daa10de87c0d8d0c4bd06ac888bb48d"
+    },
+    {
+      "skill": "codebase-design",
+      "relative_path": "SKILL.md",
+      "git_blob_sha": "031395742536f3eadb48d18666bdc62f83808d11",
+      "sha256": "7f3980323c33e69b014465d184a6686e8e07e5fa346756528c641f13db0c82c4"
+    },
+    {
+      "skill": "codebase-design",
+      "relative_path": "agents/openai.yaml",
+      "git_blob_sha": "8039fe098d71c48149ad83e86dbc8101f03f9e2d",
+      "sha256": "f0156533d37e2ff5172a4fa95a66e32342f4277637ae74d20378c4d0cedc5d65"
+    },
+    {
+      "skill": "diagnosing-bugs",
+      "relative_path": "SKILL.md",
+      "git_blob_sha": "c4ad76e0d26eac12989c56b6595b79e942b22d91",
+      "sha256": "dab67537bf231020f163fb9e2fab26d94f4a01c3cb6cf9791e877de72904dfe4"
+    },
+    {
+      "skill": "diagnosing-bugs",
+      "relative_path": "agents/openai.yaml",
+      "git_blob_sha": "f90e651f9f7007eb8c0103a37e4a16863886f845",
+      "sha256": "084c006e5e259e2101c6b8f2fd8e6bcc9029aa84df671579cbd1fc0f51391d86"
+    },
+    {
+      "skill": "diagnosing-bugs",
+      "relative_path": "scripts/hitl-loop.template.sh",
+      "git_blob_sha": "6072270edc1a9f5f4c7557dd6f441a05619acb6f",
+      "sha256": "3b0d975b6d30d5b39cd481c0f38649ab39f6a7fbfe9bd9006a313aa94981fffb"
+    },
+    {
+      "skill": "tdd",
+      "relative_path": "SKILL.md",
+      "git_blob_sha": "baf212ffafcf0240abfdd545b7910324fa3bf351",
+      "sha256": "501d61cc99499d963bb8901edff13265a4658da1615e0b580079483351d48341"
+    },
+    {
+      "skill": "tdd",
+      "relative_path": "agents/openai.yaml",
+      "git_blob_sha": "e36c6fecb72d575924d571326f31e8270f4920e4",
+      "sha256": "0f1ec049713cc1a28e2ce99429f981619bd47f7b7c9546ea6b3d518ad6ad62ae"
+    },
+    {
+      "skill": "tdd",
+      "relative_path": "mocking.md",
+      "git_blob_sha": "4892df80b2882325d03c77238bd98605c8175a7e",
+      "sha256": "86bab93e56a17ebcedde87b8768df84e466c57640518692d2f8a186a1ac127e9"
+    },
+    {
+      "skill": "tdd",
+      "relative_path": "tests.md",
+      "git_blob_sha": "f07c956d2b9f3e93d73e24cfff802409b05814fe",
+      "sha256": "64e8842920c80b826a7661f6bb9a7ebb9f08db477ec5e44fbd3cdc5e0e6ac8c8"
+    },
+    {
+      "skill": "handoff",
+      "relative_path": "SKILL.md",
+      "git_blob_sha": "c12caf3f46fd9ac82289971495e22d50cf1b83f3",
+      "sha256": "c7b0328a9020c4fd1cf4ea605c06526dfac25947fa451aec170ef1285859b42a"
+    },
+    {
+      "skill": "handoff",
+      "relative_path": "agents/openai.yaml",
+      "git_blob_sha": "54577c06cbd635c3b7a5d2aaba684c1fe0bb0a92",
+      "sha256": "1b5b62c24303287dec39410ce6132967326a6731be7d7389d98bca00efed0f1e"
+    },
+    {
+      "skill": "writing-for-agents",
+      "relative_path": "SKILL-MECHANICS.md",
+      "git_blob_sha": "2c42692ac1e3fb893497025d8c73d2533cff8bd1",
+      "sha256": "1643719cbbe0fc9d23a0fb437d9803a671d9f18f4517ac5d3892856d11e4db28"
+    },
+    {
+      "skill": "writing-for-agents",
+      "relative_path": "SKILL.md",
+      "git_blob_sha": "858c2fe61d6352e68d86384f95b2062c37e9bd28",
+      "sha256": "a3f5f8300b0247ada906e9104fc4c5e33db1400ae44997c5e5516204cdefcef2"
+    },
+    {
+      "skill": "writing-for-agents",
+      "relative_path": "agents/openai.yaml",
+      "git_blob_sha": "ae51a103614a85e9c52a85ebae9e80224dae3bff",
+      "sha256": "02eb61c04bbf61276527b2e197d3c8dbe5e8778bbb3d53b33cb2c0e9b9c6db86"
+    }
+  ],
+  "old_handoff_backup": {
+    "source_repository": "ToolMonsters/handoff-skill",
+    "path_relative_to_codex_home": "skill-backups/handoff-ToolMonsters-20261029",
+    "skill_sha256": "365fb3ff32960add00c51345310f5115741476d9461e54e25938399bccb397a3",
+    "verified": true
+  },
+  "actual_skills_used_in_document_update": [
+    "skill-installer",
+    "writing-for-agents",
+    "handoff"
+  ],
+  "business_tests_this_change": "NOT_RUN_DOCUMENTATION_ONLY",
+  "model_calls": 0,
+  "s1_acceptance": "pending",
+  "s2_started": false
+}
