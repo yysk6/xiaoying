@@ -1,0 +1,9 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+___________ test_invalid_pricing_is_rejected_without_default_quote ____________
+tests\unit\test_catalog.py:46: in test_invalid_pricing_is_rejected_without_default_quote
+    with pytest.raises(Fault, match='PRICING_INVALID'):
+E   Failed: DID NOT RAISE <class 'content_planner.domain.Fault'>
+=========================== short test summary info ===========================
+FAILED tests/unit/test_catalog.py::test_invalid_pricing_is_rejected_without_default_quote
+1 failed in 0.30s

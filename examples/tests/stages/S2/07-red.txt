@@ -1,0 +1,9 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+________________________ test_empty_alias_is_rejected _________________________
+tests\unit\test_catalog.py:86: in test_empty_alias_is_rejected
+    with pytest.raises(Fault, match='CATALOG_UNAVAILABLE'):
+E   Failed: DID NOT RAISE <class 'content_planner.domain.Fault'>
+=========================== short test summary info ===========================
+FAILED tests/unit/test_catalog.py::test_empty_alias_is_rejected - Failed: DID...
+1 failed in 0.35s

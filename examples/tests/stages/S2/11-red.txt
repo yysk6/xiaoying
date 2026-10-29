@@ -1,0 +1,57 @@
+FFFFFFFFF                                                                [100%]
+================================== FAILURES ===================================
+_ test_search_rejects_invalid_arguments_without_observing_materials[arguments0] _
+tests\unit\test_tools.py:55: in test_search_rejects_invalid_arguments_without_observing_materials
+    assert not result['ok'] and result['error']['code'] == 'INVALID_ARGUMENT'
+E   assert (not True)
+_ test_search_rejects_invalid_arguments_without_observing_materials[arguments1] _
+tests\unit\test_tools.py:55: in test_search_rejects_invalid_arguments_without_observing_materials
+    assert not result['ok'] and result['error']['code'] == 'INVALID_ARGUMENT'
+E   assert (not True)
+_ test_search_rejects_invalid_arguments_without_observing_materials[arguments2] _
+tests\unit\test_tools.py:55: in test_search_rejects_invalid_arguments_without_observing_materials
+    assert not result['ok'] and result['error']['code'] == 'INVALID_ARGUMENT'
+E   assert (not True)
+_ test_search_rejects_invalid_arguments_without_observing_materials[arguments3] _
+tests\unit\test_tools.py:54: in test_search_rejects_invalid_arguments_without_observing_materials
+    result = tools.search_materials('invalid', arguments)
+src\content_planner\tools.py:36: in search_materials
+    materials = self._catalog.search(arguments['query'], arguments['top_k'])
+src\content_planner\catalog.py:85: in search
+    return sorted(matches, key=lambda item: (-item['score'], item['material_id']))[:top_k]
+E   TypeError: slice indices must be integers or None or have an __index__ method
+_ test_search_rejects_invalid_arguments_without_observing_materials[arguments4] _
+tests\unit\test_tools.py:54: in test_search_rejects_invalid_arguments_without_observing_materials
+    result = tools.search_materials('invalid', arguments)
+src\content_planner\tools.py:36: in search_materials
+    materials = self._catalog.search(arguments['query'], arguments['top_k'])
+src\content_planner\catalog.py:85: in search
+    return sorted(matches, key=lambda item: (-item['score'], item['material_id']))[:top_k]
+E   TypeError: slice indices must be integers or None or have an __index__ method
+_ test_search_rejects_invalid_arguments_without_observing_materials[arguments5] _
+tests\unit\test_tools.py:55: in test_search_rejects_invalid_arguments_without_observing_materials
+    assert not result['ok'] and result['error']['code'] == 'INVALID_ARGUMENT'
+E   assert (not True)
+_ test_search_rejects_invalid_arguments_without_observing_materials[arguments6] _
+tests\unit\test_tools.py:55: in test_search_rejects_invalid_arguments_without_observing_materials
+    assert not result['ok'] and result['error']['code'] == 'INVALID_ARGUMENT'
+E   assert (not True)
+_ test_search_rejects_invalid_arguments_without_observing_materials[arguments7] _
+tests\unit\test_tools.py:55: in test_search_rejects_invalid_arguments_without_observing_materials
+    assert not result['ok'] and result['error']['code'] == 'INVALID_ARGUMENT'
+E   assert (not True)
+_ test_search_rejects_invalid_arguments_without_observing_materials[arguments8] _
+tests\unit\test_tools.py:55: in test_search_rejects_invalid_arguments_without_observing_materials
+    assert not result['ok'] and result['error']['code'] == 'INVALID_ARGUMENT'
+E   assert (not True)
+=========================== short test summary info ===========================
+FAILED tests/unit/test_tools.py::test_search_rejects_invalid_arguments_without_observing_materials[arguments0]
+FAILED tests/unit/test_tools.py::test_search_rejects_invalid_arguments_without_observing_materials[arguments1]
+FAILED tests/unit/test_tools.py::test_search_rejects_invalid_arguments_without_observing_materials[arguments2]
+FAILED tests/unit/test_tools.py::test_search_rejects_invalid_arguments_without_observing_materials[arguments3]
+FAILED tests/unit/test_tools.py::test_search_rejects_invalid_arguments_without_observing_materials[arguments4]
+FAILED tests/unit/test_tools.py::test_search_rejects_invalid_arguments_without_observing_materials[arguments5]
+FAILED tests/unit/test_tools.py::test_search_rejects_invalid_arguments_without_observing_materials[arguments6]
+FAILED tests/unit/test_tools.py::test_search_rejects_invalid_arguments_without_observing_materials[arguments7]
+FAILED tests/unit/test_tools.py::test_search_rejects_invalid_arguments_without_observing_materials[arguments8]
+9 failed in 0.41s

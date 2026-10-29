@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="9" skipped="0" tests="9" time="0.393" timestamp="2026-10-29T22:40:56.858956+08:00" hostname="LAPTOP-MGTK4A2U"><testcase classname="tests.unit.test_tools" name="test_search_rejects_invalid_arguments_without_observing_materials[arguments0]" time="0.004"><failure message="assert (not True)">tests\unit\test_tools.py:55: in test_search_rejects_invalid_arguments_without_observing_materials
+    assert not result['ok'] and result['error']['code'] == 'INVALID_ARGUMENT'
+E   assert (not True)</failure></testcase><testcase classname="tests.unit.test_tools" name="test_search_rejects_invalid_arguments_without_observing_materials[arguments1]" time="0.002"><failure message="assert (not True)">tests\unit\test_tools.py:55: in test_search_rejects_invalid_arguments_without_observing_materials
+    assert not result['ok'] and result['error']['code'] == 'INVALID_ARGUMENT'
+E   assert (not True)</failure></testcase><testcase classname="tests.unit.test_tools" name="test_search_rejects_invalid_arguments_without_observing_materials[arguments2]" time="0.002"><failure message="assert (not True)">tests\unit\test_tools.py:55: in test_search_rejects_invalid_arguments_without_observing_materials
+    assert not result['ok'] and result['error']['code'] == 'INVALID_ARGUMENT'
+E   assert (not True)</failure></testcase><testcase classname="tests.unit.test_tools" name="test_search_rejects_invalid_arguments_without_observing_materials[arguments3]" time="0.002"><failure message="TypeError: slice indices must be integers or None or have an __index__ method">tests\unit\test_tools.py:54: in test_search_rejects_invalid_arguments_without_observing_materials
+    result = tools.search_materials('invalid', arguments)
+src\content_planner\tools.py:36: in search_materials
+    materials = self._catalog.search(arguments['query'], arguments['top_k'])
+src\content_planner\catalog.py:85: in search
+    return sorted(matches, key=lambda item: (-item['score'], item['material_id']))[:top_k]
+E   TypeError: slice indices must be integers or None or have an __index__ method</failure></testcase><testcase classname="tests.unit.test_tools" name="test_search_rejects_invalid_arguments_without_observing_materials[arguments4]" time="0.003"><failure message="TypeError: slice indices must be integers or None or have an __index__ method">tests\unit\test_tools.py:54: in test_search_rejects_invalid_arguments_without_observing_materials
+    result = tools.search_materials('invalid', arguments)
+src\content_planner\tools.py:36: in search_materials
+    materials = self._catalog.search(arguments['query'], arguments['top_k'])
+src\content_planner\catalog.py:85: in search
+    return sorted(matches, key=lambda item: (-item['score'], item['material_id']))[:top_k]
+E   TypeError: slice indices must be integers or None or have an __index__ method</failure></testcase><testcase classname="tests.unit.test_tools" name="test_search_rejects_invalid_arguments_without_observing_materials[arguments5]" time="0.003"><failure message="assert (not True)">tests\unit\test_tools.py:55: in test_search_rejects_invalid_arguments_without_observing_materials
+    assert not result['ok'] and result['error']['code'] == 'INVALID_ARGUMENT'
+E   assert (not True)</failure></testcase><testcase classname="tests.unit.test_tools" name="test_search_rejects_invalid_arguments_without_observing_materials[arguments6]" time="0.002"><failure message="assert (not True)">tests\unit\test_tools.py:55: in test_search_rejects_invalid_arguments_without_observing_materials
+    assert not result['ok'] and result['error']['code'] == 'INVALID_ARGUMENT'
+E   assert (not True)</failure></testcase><testcase classname="tests.unit.test_tools" name="test_search_rejects_invalid_arguments_without_observing_materials[arguments7]" time="0.002"><failure message="assert (not True)">tests\unit\test_tools.py:55: in test_search_rejects_invalid_arguments_without_observing_materials
+    assert not result['ok'] and result['error']['code'] == 'INVALID_ARGUMENT'
+E   assert (not True)</failure></testcase><testcase classname="tests.unit.test_tools" name="test_search_rejects_invalid_arguments_without_observing_materials[arguments8]" time="0.002"><failure message="assert (not True)">tests\unit\test_tools.py:55: in test_search_rejects_invalid_arguments_without_observing_materials
+    assert not result['ok'] and result['error']['code'] == 'INVALID_ARGUMENT'
+E   assert (not True)</failure></testcase></testsuite></testsuites>

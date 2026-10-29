@@ -1,0 +1,12 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+___________ test_search_normalizes_aliases_and_returns_stable_top_k ___________
+tests\unit\test_catalog.py:103: in test_search_normalizes_aliases_and_returns_stable_top_k
+    assert [item['material_id'] for item in catalog.search('  CAPTION  ', 5)] == ['M01']
+E   AssertionError: assert [] == ['M01']
+E     
+E     Right contains one more item: 'M01'
+E     Use -v to get more diff
+=========================== short test summary info ===========================
+FAILED tests/unit/test_catalog.py::test_search_normalizes_aliases_and_returns_stable_top_k
+1 failed in 0.32s

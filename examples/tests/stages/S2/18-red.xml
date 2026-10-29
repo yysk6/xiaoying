@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.354" timestamp="2026-10-29T22:47:42.005466+08:00" hostname="LAPTOP-MGTK4A2U"><testcase classname="tests.unit.test_tools" name="test_estimate_and_alternative_share_one_instant_and_next_estimate_refreshes_it" time="0.010"><failure message="AssertionError: assert '2026-10-29T03:30:02+00:00' == '2026-10-29T03:30:01+00:00'&#10;  &#10;  - 2026-10-29T03:30:01+00:00&#10;  ?                   ^&#10;  + 2026-10-29T03:30:02+00:00&#10;  ?                   ^">tests\unit\test_tools.py:188: in test_estimate_and_alternative_share_one_instant_and_next_estimate_refreshes_it
+    assert first['alternatives'][0]['estimated_finish_at'] == (quoted + timedelta(minutes=90)).isoformat()
+E   AssertionError: assert '2026-10-29T03:30:02+00:00' == '2026-10-29T03:30:01+00:00'
+E     
+E     - 2026-10-29T03:30:01+00:00
+E     ?                   ^
+E     + 2026-10-29T03:30:02+00:00
+E     ?                   ^</failure></testcase></testsuite></testsuites>

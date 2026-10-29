@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.267" timestamp="2026-10-29T22:34:15.162729+08:00" hostname="LAPTOP-MGTK4A2U"><testcase classname="tests.unit.test_catalog" name="test_default_data_is_packaged_and_matches_spec_fixtures" time="0.004"><failure message="AssertionError: materials.json&#10;assert False&#10; +  where False = is_file()&#10; +    where is_file = WindowsPath('C:/Users/11250/Desktop/xiaoying/src/content_planner/data/materials.json').is_file&#10; +      where WindowsPath('C:/Users/11250/Desktop/xiaoying/src/content_planner/data/materials.json') = joinpath('materials.json')&#10; +        where joinpath = WindowsPath('C:/Users/11250/Desktop/xiaoying/src/content_planner/data').joinpath">tests\unit\test_catalog.py:12: in test_default_data_is_packaged_and_matches_spec_fixtures
+    assert data.joinpath(name).is_file(), name
+E   AssertionError: materials.json
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = WindowsPath('C:/Users/11250/Desktop/xiaoying/src/content_planner/data/materials.json').is_file
+E    +      where WindowsPath('C:/Users/11250/Desktop/xiaoying/src/content_planner/data/materials.json') = joinpath('materials.json')
+E    +        where joinpath = WindowsPath('C:/Users/11250/Desktop/xiaoying/src/content_planner/data').joinpath</failure></testcase></testsuite></testsuites>

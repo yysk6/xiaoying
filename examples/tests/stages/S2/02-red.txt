@@ -1,0 +1,9 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__________ test_catalog_loads_hashes_from_package_outside_repository __________
+tests\unit\test_catalog.py:18: in test_catalog_loads_hashes_from_package_outside_repository
+    from content_planner.catalog import load_catalog
+E   ModuleNotFoundError: No module named 'content_planner.catalog'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_catalog.py::test_catalog_loads_hashes_from_package_outside_repository
+1 failed in 0.29s

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="0.377" timestamp="2026-10-29T22:37:16.442626+08:00" hostname="LAPTOP-MGTK4A2U"><testcase classname="tests.unit.test_catalog" name="test_malformed_data_has_explicit_error[materials-CATALOG_UNAVAILABLE]" time="0.034"><failure message="json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)">tests\unit\test_catalog.py:78: in test_malformed_data_has_explicit_error
+    load_catalog(data_directory)
+src\content_planner\catalog.py:80: in load_catalog
+    parsed = {name: json.loads(data) for name, data in raw.items()}
+src\content_planner\catalog.py:80: in &lt;dictcomp&gt;
+    parsed = {name: json.loads(data) for name, data in raw.items()}
+..\..\AppData\Local\Programs\Python\Python310\lib\json\__init__.py:346: in loads
+    return _default_decoder.decode(s)
+..\..\AppData\Local\Programs\Python\Python310\lib\json\decoder.py:337: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+..\..\AppData\Local\Programs\Python\Python310\lib\json\decoder.py:355: in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+E   json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)</failure></testcase><testcase classname="tests.unit.test_catalog" name="test_malformed_data_has_explicit_error[aliases-CATALOG_UNAVAILABLE]" time="0.008"><failure message="json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)">tests\unit\test_catalog.py:78: in test_malformed_data_has_explicit_error
+    load_catalog(data_directory)
+src\content_planner\catalog.py:80: in load_catalog
+    parsed = {name: json.loads(data) for name, data in raw.items()}
+src\content_planner\catalog.py:80: in &lt;dictcomp&gt;
+    parsed = {name: json.loads(data) for name, data in raw.items()}
+..\..\AppData\Local\Programs\Python\Python310\lib\json\__init__.py:346: in loads
+    return _default_decoder.decode(s)
+..\..\AppData\Local\Programs\Python\Python310\lib\json\decoder.py:337: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+..\..\AppData\Local\Programs\Python\Python310\lib\json\decoder.py:355: in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+E   json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)</failure></testcase><testcase classname="tests.unit.test_catalog" name="test_malformed_data_has_explicit_error[pricing-PRICING_INVALID]" time="0.008"><failure message="json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)">tests\unit\test_catalog.py:78: in test_malformed_data_has_explicit_error
+    load_catalog(data_directory)
+src\content_planner\catalog.py:80: in load_catalog
+    parsed = {name: json.loads(data) for name, data in raw.items()}
+src\content_planner\catalog.py:80: in &lt;dictcomp&gt;
+    parsed = {name: json.loads(data) for name, data in raw.items()}
+..\..\AppData\Local\Programs\Python\Python310\lib\json\__init__.py:346: in loads
+    return _default_decoder.decode(s)
+..\..\AppData\Local\Programs\Python\Python310\lib\json\decoder.py:337: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+..\..\AppData\Local\Programs\Python\Python310\lib\json\decoder.py:355: in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+E   json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)</failure></testcase></testsuite></testsuites>

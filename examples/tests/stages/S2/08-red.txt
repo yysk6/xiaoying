@@ -1,0 +1,9 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_____ test_catalog_search_counts_distinct_tags_and_handles_empty_results ______
+tests\unit\test_catalog.py:94: in test_catalog_search_counts_distinct_tags_and_handles_empty_results
+    assert catalog.search('不存在的功能', 5) == []
+E   AttributeError: 'Catalog' object has no attribute 'search'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_catalog.py::test_catalog_search_counts_distinct_tags_and_handles_empty_results
+1 failed in 0.29s

@@ -1,0 +1,11 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+______ test_script_generation_produces_program_owned_id_and_fact_context ______
+tests\unit\test_tools.py:111: in test_script_generation_produces_program_owned_id_and_fact_context
+    tools, client, _ = make_script_tools([draft_json()])
+tests\unit\test_tools.py:96: in make_script_tools
+    from content_planner.model import FakeModelClient
+E   ModuleNotFoundError: No module named 'content_planner.model'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_tools.py::test_script_generation_produces_program_owned_id_and_fact_context
+1 failed in 0.40s

@@ -1,0 +1,12 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+________________ test_task_owns_its_validated_catalog_snapshot ________________
+tests\unit\test_tools.py:334: in test_task_owns_its_validated_catalog_snapshot
+    assert search(tools)['data']['materials'][0]['facts'] == [
+E   AssertionError: assert [] == ['影芽剪辑支持自动生成字...生成的字幕文本可以编辑。']
+E     
+E     Right contains 2 more items, first extra item: '影芽剪辑支持自动生成字幕。'
+E     Use -v to get more diff
+=========================== short test summary info ===========================
+FAILED tests/unit/test_tools.py::test_task_owns_its_validated_catalog_snapshot
+1 failed in 0.41s

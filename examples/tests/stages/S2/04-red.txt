@@ -1,0 +1,9 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__________________ test_duplicate_material_ids_are_rejected ___________________
+tests\unit\test_catalog.py:57: in test_duplicate_material_ids_are_rejected
+    with pytest.raises(Fault, match='CATALOG_UNAVAILABLE'):
+E   Failed: DID NOT RAISE <class 'content_planner.domain.Fault'>
+=========================== short test summary info ===========================
+FAILED tests/unit/test_catalog.py::test_duplicate_material_ids_are_rejected
+1 failed in 0.33s

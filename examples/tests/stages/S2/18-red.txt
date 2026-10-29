@@ -1,0 +1,14 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_ test_estimate_and_alternative_share_one_instant_and_next_estimate_refreshes_it _
+tests\unit\test_tools.py:188: in test_estimate_and_alternative_share_one_instant_and_next_estimate_refreshes_it
+    assert first['alternatives'][0]['estimated_finish_at'] == (quoted + timedelta(minutes=90)).isoformat()
+E   AssertionError: assert '2026-10-29T03:30:02+00:00' == '2026-10-29T03:30:01+00:00'
+E     
+E     - 2026-10-29T03:30:01+00:00
+E     ?                   ^
+E     + 2026-10-29T03:30:02+00:00
+E     ?                   ^
+=========================== short test summary info ===========================
+FAILED tests/unit/test_tools.py::test_estimate_and_alternative_share_one_instant_and_next_estimate_refreshes_it
+1 failed in 0.37s

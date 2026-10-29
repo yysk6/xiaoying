@@ -1,107 +1,69 @@
 # 项目上下文交接
 
-更新日期：2026-10-29（北京时间）。本文件是接手开发的首读入口，记录当前事实和允许推进的范围；规格以docs/与contracts/为准，历史细节以阶段报告和Git记录为准。
+更新：2026-10-29（北京时间）。首读本文件后核对实际Git；需求与契约以docs/、contracts/为准，历史实现与证据引用阶段报告，不靠本快照推定授权。
 
-## 1. 接手后的第一步
+## 接手步骤
 
-1. 阅读AGENTS.md、本文件、[阶段计划](docs/08-development-plan.md)和当前阶段报告。
-2. 执行`git status --short --branch`、`git log -3 --oneline`、`git remote -v`，核对实际工作区。不要仅依据本文假定HEAD、权限或环境未变化。
-3. 检查当前阶段是否已获用户明确验收；未验收不得进入下一阶段。不要覆盖接手时已有的未提交改动。
+1. 阅读AGENTS.md、本文件、[阶段计划](docs/08-development-plan.md)、[S2报告](docs/stages/S2.md)。
+2. 执行git status --short --branch、git log -3 --oneline、git worktree list、git remote -v；保留已有未提交改动。完成标准是确认实际HEAD、分支、工作区和远端配置。
+3. 确认用户最新授权/验收。当前仅S2获准，已交付待验收；下一步处理反馈，S3等待明确授权。
 
-项目位置：`C:/Users/11250/Desktop/xiaoying/`，仅用于本机定位。仓库：[yysk6/xiaoying](https://github.com/yysk6/xiaoying)，分支main，remote为origin。程序与测试不得硬编码该绝对路径。
+## 当前事实与授权
 
-## 2. 当前停在哪里
+**S2 ready_for_review，用户验收pending。** 用户明确要求“现在进行s2”，因此完成了本阶段；没有将该授权当作S0/S1单独验收通过。S3—S8未开始。
 
-**S1已完成实现与自验，状态ready_for_review，用户验收pending。** 用户于2026-10-29明确授权S1；S0未收到单独验收通过表述，保留pending，不将推进授权伪记为验收。S2及以后未获授权。
-
-S0基线为`576acfbbc000da535f1ee7ae9164029434ed2aed`，此前已核对与远端main一致。S1实现提交为`018903379bde17b7443907a459354ce1f3e0eb2c`。本轮技能配置开始时main工作区干净、单一worktree，HEAD为S1提交、本地origin/main仍为`48874f6c44dcb6bde94106a859e36bd1603bcfc3`；未重新联网核对或推送项目远端。后续文档提交通过`git log -1 --format=%H -- HANDOFF.md`定位。
-
-当前新增工作仅为用户授权的6个开发技能安装和文档规则，详见[开发技能使用约定](docs/09-development-skills.md)与[安装记录](docs/tooling/skills-installation.json)。旧ToolMonsters版handoff已在活动技能目录外备份；当前handoff来自用户指定中文仓库。本次未修改业务代码、未重跑pytest、未调用模型；下述115项通过属于S1已有证据，S2仍未获启动授权。
-
-| 阶段 | 实际开发状态 | 用户验收 | 证据或下一步 |
+| 阶段 | 实现/自验 | 用户验收 | 证据 |
 |---|---|---|---|
-| S0 工程基线 | ready_for_review | pending | [S0报告](docs/stages/S0.md)；等待明确验收 |
-| S1 契约与领域规则 | ready_for_review | pending | [S1报告](docs/stages/S1.md)；115项含S0回归，开发/正式wheel环境均通过 |
-| S2 本地工具 | planned | 未开始 | 以阶段计划为准 |
-| S3 存储与幂等 | planned | 未开始 | 以阶段计划为准 |
-| S4 离线Agent循环 | planned | 未开始 | 以阶段计划为准 |
-| S5 CLI核心链路 | planned | 未开始 | 以阶段计划为准 |
-| S6 失败续跑 | planned | 未开始 | 以阶段计划为准 |
-| S7 真实模型 | planned | 未开始 | 配置与效果尚未验证 |
-| S8 可移植性与交付 | planned | 未开始 | 不得将未执行的平台标为通过 |
+| S0 工程基线 | ready_for_review | pending | [S0](docs/stages/S0.md)，原4项工程证据保留 |
+| S1 契约与领域 | ready_for_review | pending | [S1](docs/stages/S1.md)，当时开发/正式wheel各115项通过 |
+| S2 本地工具 | ready_for_review | pending | [S2](docs/stages/S2.md)，当前开发/正式wheel各171项通过；双轴审查完成 |
+| S3—S8 | planned | 未开始 | [计划](docs/08-development-plan.md)按阶段执行 |
 
-## 3. 已完成的工程事实
+S2实际增加包内资料及校验、别名/tag确定性检索、候选修订、Fake脚本生成、估算与本地状态。未实现数据库保存、业务图、累计额度、CLI、业务恢复或真实HTTP。全项目尚未完成。
 
-- Python 3.10.8 / Windows，使用项目内独立.venv，不修改全局环境。
-- LangGraph 1.2.18、SQLite checkpointer 3.1.2、Pydantic 2.12.5、HTTPX 0.28.1、pytest 9.0.3组合已安装并通过S0验证。
-- requirements.lock固定42个运行依赖；requirements-dev.lock另外固定15个开发/构建依赖。基于Windows/Python 3.10生成，固定版本但未强制校验下载产物哈希。
-- S1新增contracts.py/domain.py：严格输入与脚本DTO、NFC/UTC、可注入Clock、输入/候选/脚本指纹、确定性四分项报价、脚本JSON/来源/明确事实规则。不含业务工具分派、Agent、业务数据库或CLI。
-- 当前默认pytest有111项S1单测和4项S0回归，合计115项；开发环境115 passed，正式wheel干净环境115 passed，独立测试总数仍为115。S0原始4项结果是历史记录，不覆盖重写。
-- checkpoint探针验证“节点一成功、节点二失败、关闭连接重建图后继续，节点一不重跑”；它不证明业务续跑、幂等或真实模型ReAct效果。
-- S1重新构建sdist/wheel，全新work/s1-clean从本地wheelhouse离线安装。仓库外cwd以隔离模式导入contracts/domain的实际路径均为新环境site-packages；关闭pytest源路径注入后运行全部115项。两份依赖锁与S0一致。
-- 模型调用次数仍为0；A02/A03/A19仅有S1领域断言，完整A01—A23端到端案例与Live仍为NOT_RUN。素材文件读取/校验与工具封装留S2。
+## 版本与同步
 
-当前证据：[S1汇总](examples/tests/stages/S1/summary.json)、[开发JUnit](examples/tests/stages/S1/green-junit.xml)、[干净安装](examples/tests/stages/S1/clean-install.json)、[干净JUnit](examples/tests/stages/S1/clean-junit.xml)、[领域演示](examples/tests/stages/S1/domain-demo.json)。两轮Red分别33 failed/10 passed与42 failed/23 passed，均退出码1；完整命令见S1报告。S0原证据保留在examples/tests/stages/S0/。
+仓库为[yysk6/xiaoying](https://github.com/yysk6/xiaoying)，main，单worktree。S2起始提交`c83699d1e8417fd917f69da74150604aff5499a1`，开始时工作区干净。S2提交用`git log -1 --format=%H -- docs/stages/S2.md`定位；不要猜测本文自身SHA。
 
-S1决策：结构解析与Clock时效检查分开；脚本指纹不含制作档位；报价只计算指定档位，不自动降档；只在外部输入与脚本边界做规格要求的校验，内部函数接收可信参数，不添加通用重试或防御框架。
+本地origin/main为`48874f6c44dcb6bde94106a859e36bd1603bcfc3`。本轮未联网核对远端，未推送；本地跟踪引用不等于远端实时状态。S0原同步记录与S1提交细节见对应阶段报告。本机Git需要命令级safe.directory时只针对实际项目路径设置，不改全局信任。
 
-## 4. 关键文件与使用方法
+## 当前验证与复核
 
-| 文件或目录 | 用途/注意事项 |
-|---|---|
-| docs/01-requirements.md | R01—R15需求；未实现不等于可省略 |
-| docs/06-contracts.md、contracts/ | 接口和工具契约；改行为先改规格 |
-| docs/07-state-and-storage.md | 状态权威、缓存失效、保存事务、幂等、限额 |
-| docs/08-development-plan.md | S0—S8范围、逐阶段验收和停止边界 |
-| docs/09-development-skills.md | 技能使用时机、项目适配、固定来源和安装证据 |
-| docs/stages/S0.md | 已发生的S0自验事实，用户验收待定 |
-| docs/stages/S1.md | 当前S1验收入口；范围、两轮Red、Green与正式wheel复核命令 |
-| tests/unit/test_environment.py、test_package.py | 4项S0回归 |
-| tests/unit/test_contracts.py、test_domain.py | 已从草稿审阅迁入并扩充的111项S1单测；原planned副本已删除 |
-| scripts/lock_dependencies.py | 从已安装项目metadata生成精确版本快照；不是求解器 |
-| scripts/verify_s0.py | 新环境安装正式wheel并验证，目标路径必须不存在，不自动删除旧环境 |
-| content-planner-spec/ | 迁入前历史快照，不是维护源，已被Git忽略 |
-| .venv/、work/、dist/ | 本地环境和中间产物，不提交Git；新机器需按README重建 |
+Windows/Python 3.10.8；依赖锁与S2基线相同，42个运行依赖、15个额外开发依赖。当前共171项（56项S2 + 115项既有回归），开发环境和正式wheel干净环境均171 passed、0 failed、0 skipped。两个环境不累计成342项。真实模型调用仍为0；完整A01—A23及Live、Linux/其他Python仍NOT_RUN。
 
-已有开发环境中的快速复核（PowerShell）：
+PowerShell项目根目录：
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip check
 .\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe -m build --no-isolation
+.\.venv\Scripts\python.exe scripts/verify_s2.py --venv work/s2-review --wheelhouse work/s0-wheelhouse
+.\.venv\Scripts\python.exe examples/s2_local_tools.py
 ```
 
-预期无依赖冲突、115 passed。新机器安装见[README](README.md)，S1正式wheel干净验证见S1报告。verify_s0.py只验证4项S0测试；不要将它当作完整S1验证。已有work/s0-clean/work/s1-clean时使用新环境路径，不删除已有证据。
+新机器按README安装；无本地wheelhouse时省略该选项，从公开PyPI按锁安装。POSIX路径与安装命令见README，未实测的平台仍标NOT_RUN。verify_s2要求全新环境路径；保留已有work/s0-clean、s1-clean、s2-clean、s2-reviewed，选新名称。旧verify_s0只测4项工程测试，不能当作完整S2验证。
 
-## 5. 必须保持的设计与开发边界
+实际记录：[汇总](examples/tests/stages/S2/summary.json)、[开发JUnit](examples/tests/stages/S2/final.xml)、[干净环境命令](examples/tests/stages/S2/clean-install.json)、[干净JUnit](examples/tests/stages/S2/clean-junit.xml)、[Red/Green命令](examples/tests/stages/S2/cycles.jsonl)、[工具演示](examples/tests/stages/S2/local-tools-demo.json)。演示使用固定Clock和显式动作，状态仍running，不是Agent、保存记录或真实模型效果。
 
-- 使用karpathy-guidelines、SDD和TDD；先定义可验收行为、测试失败、最小实现，再作必要整理，不提前做下一阶段。
-- 项目仅依赖公开第三方库和标准工具；不依赖Codex内部插件/MCP/账户/目录，换编辑器不影响运行。
-- 选定模型deepseek-v4-pro，真实接入属于S7。密钥只能从本地环境变量读取，不能从聊天、交接文档、日志或提交中硬编码复制。密钥和API可用性目前未验证。
-- 四个业务工具：search_materials、generate_script、estimate_cost、save_plan；两个控制动作：revise_plan、stop_task。程序守住约束，模型选择下一动作。
-- 预算是最终活动方案的模拟报价，不是Agent尝试费用或API账单。报价/工期来自合成数据，不能用固定条件分支替模型选择basic。
-- completed仅表示本地方案事务提交成功，不表示视频制作/审核/发布完成。原输入的预算、截止时间不可擅自修改。
-- mock只验证流程，不能证明真实模型效果；测试、工具执行和用户验收必须分别记录。
-- 当前已验证目标为Windows。Linux及其他Python版本未测；Linux不是题目要求或S0验收条件，用户无需安装。后续不要把可移植性说明误作已完成的跨系统验收。
+双轴审查见[S2-review](docs/stages/S2-review.md)：Standards发现0；Spec初始发现1项synthetic数字类型缺口，真实Red后修复并复核；两个轴未解决项均0。无S2技术阻塞，用户验收仍独立待定。
 
-## 6. 下一步允许做什么
+## 继续时要保持的决策
 
-S1已交付验收包，当前只允许处理S1验收反馈。**等待用户明确验收S1或明确授权S2后再开展S2。** 无S1技术阻塞，不需要提前调用模型、联网安装或增加系统。
+- 公开边界和本阶段细化以[契约](docs/06-contracts.md)为准；先改规格/验收，再TDD改变行为。遵循karpathy-guidelines，保持最小充分修改。
+- LocalTools拥有一份已验证资料快照，每个动作不重读文件；manifest记录原始文件哈希。跨快照恢复核对归S6。
+- 档位变化复用脚本、废弃当前估算；素材/brief变化使两者失效，历史保留。每次显式估算新读一次Clock，两档位共用时刻；估算不自动替调用方选basic。
+- 调用方提供唯一tool_call_id。工具失败留观察，不自动重试；Fake只提供显式生成响应，planner与额度归S4。
+- 预算是活动模拟报价；completed只表示本地事务提交。保存、幂等、唯一约束和保存前期限复核归S3，不能把当前工具测试当作这些链路通过。
+- 应用只依赖公开包/标准工具，无Codex运行依赖。DeepSeek官方deepseek-v4-pro接入归S7，密钥只读环境变量；离线测试不联网、不发付费请求。
 
-S2后续获准时，先按阶段计划补验收断言并取得Red，再做包内资料、检索、候选修订、Fake脚本生成与工具封装。不接保存、CLI、自主循环或真实模型。已有S1契约与哈希语义有变动时先修规格和必要回归，不静默改口径。
+## 文档与下一步
 
-## 7. 更新要求与历史
+当前维护入口：docs/01需求、02模块设计、06/contracts契约、07状态/存储、08阶段计划、09技能约定。content-planner-spec/是不维护的历史快照；.venv/work/dist不提交，换机器按README重建。
 
-每阶段完成实现和自验后、交付验收包前，必须更新本文的当前快照和阶段表；用户验收通过、要求修订、发生阻塞或中断交接时再次更新。未更新不能宣称阶段交接完成。Git保留历史，不把本文变成逐条工具流水账。
+下一步仅处理S2验收反馈；获得S3明确授权后，先读其范围、细化存储断言，再用真实临时SQLite验证事务/幂等。未获授权不提前实现。
 
-更新至少覆盖：日期/阶段、实现状态与用户验收、实际范围和改动、关键决策、测试命令/结果/证据、基线提交与已知远端同步情况、未验证项/阻塞、下一步授权边界、恢复/复核命令。未知信息明确写未核对；不得填造密钥、通过结果、个人贡献或自身提交SHA。
-
-| 日期 | 事件 | 状态说明 |
-|---|---|---|
-| 2026-10-29 | S0工程基线提交并推送 | 576acfb；技术自验通过，用户验收pending |
-| 2026-10-29 | 按用户要求建立持续交接文档及强制更新规则 | 仅文档维护，未开始S1、未新增模型调用 |
-| 2026-10-29 | 用户明确授权S1；实现并完成自验 | ready_for_review；115项含S0回归，开发/正式wheel环境均通过；用户验收pending，未开始S2 |
-| 2026-10-29 | 用户要求安装6个中文开发技能，并写入开发规则 | 已安装并核对固定来源；旧handoff已备份，仅更新规则和交接，S1验收/S2授权状态不变 |
+用户验收/要求修订、阶段自验结束、重要阻塞或中断时更新本文件；详细证据继续写阶段报告，Git保留历史。S2交付时已按handoff和writing-for-agents更新本文，根路径覆盖handoff默认临时目录规则，见docs/09。
 
 ## Suggested skills
 
-下一位代理按[使用约定](docs/09-development-skills.md)选择并读取实际SKILL.md：处理交接用handoff，修改代理文档用writing-for-agents；S2明确获准后先用tdd逐个行为开发，业务阶段交付前用code-review。遇到已观察的疑难缺陷或具体接口问题时，再读取diagnosing-bugs或codebase-design。karpathy-guidelines继续适用。
+接手按[技能约定](docs/09-development-skills.md)读取实际SKILL.md：交接更新用handoff、代理文档用writing-for-agents、业务实现用tdd（含tests.md/mocking.md）、阶段审查用code-review双轴。karpathy-guidelines持续适用。原因不明的已观察故障才用diagnosing-bugs，具体模块接口问题才用codebase-design；本次S2未触发后两者。

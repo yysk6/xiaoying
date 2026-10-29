@@ -1,0 +1,38 @@
+{
+  "version": "materials-v1",
+  "synthetic": true,
+  "materials": [
+    {
+      "material_id": "M01",
+      "version": "2026-10-29",
+      "title": "影芽剪辑字幕功能",
+      "tags": [
+        "字幕",
+        "自动字幕",
+        "字幕编辑"
+      ],
+      "facts": [
+        "影芽剪辑支持自动生成字幕。",
+        "自动生成的字幕文本可以编辑。"
+      ],
+      "fee_units": 1,
+      "lead_minutes": 10
+    },
+    {
+      "material_id": "M02",
+      "version": "2026-10-29",
+      "title": "影芽剪辑片段编辑",
+      "tags": [
+        "裁剪",
+        "拼接",
+        "剪辑入门"
+      ],
+      "facts": [
+        "影芽剪辑支持裁剪视频片段。",
+        "影芽剪辑支持拼接视频片段。"
+      ],
+      "fee_units": 1,
+      "lead_minutes": 10
+    }
+  ]
+}

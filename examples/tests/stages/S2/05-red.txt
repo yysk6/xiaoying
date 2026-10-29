@@ -1,0 +1,43 @@
+FFF                                                                      [100%]
+================================== FAILURES ===================================
+__ test_missing_data_file_has_explicit_error[materials-CATALOG_UNAVAILABLE] ___
+tests\unit\test_catalog.py:68: in test_missing_data_file_has_explicit_error
+    load_catalog(data_directory)
+src\content_planner\catalog.py:73: in load_catalog
+    raw = {name: location.joinpath(name + '.json').read_bytes() for name in ('materials', 'pricing', 'aliases')}
+src\content_planner\catalog.py:73: in <dictcomp>
+    raw = {name: location.joinpath(name + '.json').read_bytes() for name in ('materials', 'pricing', 'aliases')}
+..\..\AppData\Local\Programs\Python\Python310\lib\pathlib.py:1126: in read_bytes
+    with self.open(mode='rb') as f:
+..\..\AppData\Local\Programs\Python\Python310\lib\pathlib.py:1119: in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\11250\\AppData\\Local\\Temp\\pytest-of-11250\\pytest-36\\test_missing_data_file_has_exp0\\materials.json'
+___ test_missing_data_file_has_explicit_error[aliases-CATALOG_UNAVAILABLE] ____
+tests\unit\test_catalog.py:68: in test_missing_data_file_has_explicit_error
+    load_catalog(data_directory)
+src\content_planner\catalog.py:73: in load_catalog
+    raw = {name: location.joinpath(name + '.json').read_bytes() for name in ('materials', 'pricing', 'aliases')}
+src\content_planner\catalog.py:73: in <dictcomp>
+    raw = {name: location.joinpath(name + '.json').read_bytes() for name in ('materials', 'pricing', 'aliases')}
+..\..\AppData\Local\Programs\Python\Python310\lib\pathlib.py:1126: in read_bytes
+    with self.open(mode='rb') as f:
+..\..\AppData\Local\Programs\Python\Python310\lib\pathlib.py:1119: in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\11250\\AppData\\Local\\Temp\\pytest-of-11250\\pytest-36\\test_missing_data_file_has_exp1\\aliases.json'
+__ test_missing_data_file_has_explicit_error[pricing-ESTIMATOR_UNAVAILABLE] ___
+tests\unit\test_catalog.py:68: in test_missing_data_file_has_explicit_error
+    load_catalog(data_directory)
+src\content_planner\catalog.py:73: in load_catalog
+    raw = {name: location.joinpath(name + '.json').read_bytes() for name in ('materials', 'pricing', 'aliases')}
+src\content_planner\catalog.py:73: in <dictcomp>
+    raw = {name: location.joinpath(name + '.json').read_bytes() for name in ('materials', 'pricing', 'aliases')}
+..\..\AppData\Local\Programs\Python\Python310\lib\pathlib.py:1126: in read_bytes
+    with self.open(mode='rb') as f:
+..\..\AppData\Local\Programs\Python\Python310\lib\pathlib.py:1119: in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+E   FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\11250\\AppData\\Local\\Temp\\pytest-of-11250\\pytest-36\\test_missing_data_file_has_exp2\\pricing.json'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_catalog.py::test_missing_data_file_has_explicit_error[materials-CATALOG_UNAVAILABLE]
+FAILED tests/unit/test_catalog.py::test_missing_data_file_has_explicit_error[aliases-CATALOG_UNAVAILABLE]
+FAILED tests/unit/test_catalog.py::test_missing_data_file_has_explicit_error[pricing-ESTIMATOR_UNAVAILABLE]
+3 failed in 0.47s

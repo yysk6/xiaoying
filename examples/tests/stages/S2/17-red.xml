@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.355" timestamp="2026-10-29T22:46:42.713670+08:00" hostname="LAPTOP-MGTK4A2U"><testcase classname="tests.unit.test_tools" name="test_estimation_reports_premium_gap_and_basic_alternative_without_selecting_it" time="0.008"><failure message="AttributeError: 'LocalTools' object has no attribute 'estimate_cost'">tests\unit\test_tools.py:163: in test_estimation_reports_premium_gap_and_basic_alternative_without_selecting_it
+    result = estimate(tools)
+tests\unit\test_tools.py:155: in estimate
+    return tools.estimate_cost(call_id, {'plan_revision': revision, 'rationale': '核对约束'})
+E   AttributeError: 'LocalTools' object has no attribute 'estimate_cost'</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.376" timestamp="2026-10-29T22:51:20.307637+08:00" hostname="LAPTOP-MGTK4A2U"><testcase classname="tests.unit.test_tools" name="test_unavailable_clock_retains_previous_estimate_and_reports_retryable_failure" time="0.009"><failure message="OSError: clock unavailable">tests\unit\test_tools.py:210: in test_unavailable_clock_retains_previous_estimate_and_reports_retryable_failure
+    failed = estimate(tools, call_id='unavailable')
+tests\unit\test_tools.py:155: in estimate
+    return tools.estimate_cost(call_id, {'plan_revision': revision, 'rationale': '核对约束'})
+src\content_planner\tools.py:61: in estimate_cost
+    return self._invoke('estimate_cost', tool_call_id, arguments, RevisionArgs, self._estimate)
+src\content_planner\tools.py:71: in _invoke
+    data, reused = operation(args, call_id)
+src\content_planner\tools.py:158: in _estimate
+    clock = _QuoteClock(self._clock.now())
+tests\unit\test_tools.py:201: in now
+    raise OSError('clock unavailable')
+E   OSError: clock unavailable</failure></testcase></testsuite></testsuites>

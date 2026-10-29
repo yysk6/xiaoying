@@ -1,0 +1,417 @@
+{
+  "stage": "S2",
+  "status": "ready_for_review",
+  "user_acceptance": "pending",
+  "baseline_commit": "c83699d1e8417fd917f69da74150604aff5499a1",
+  "remote_rechecked": false,
+  "pushed": false,
+  "environment": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.10.8 (tags/v3.10.8:aaaf517, Oct 11 2022, 16:50:30) [MSC v.1933 64 bit (AMD64)]"
+  },
+  "development": {
+    "tests": 171,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 171
+  },
+  "clean_wheel": {
+    "tests": 171,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 171
+  },
+  "clean_steps_exit_codes": {
+    "install_locked_dependencies": 0,
+    "install_wheel": 0,
+    "pip_check": 0,
+    "wheel_import_and_resources": 0,
+    "all_tests_against_wheel": 0
+  },
+  "s2_test_count": 56,
+  "prior_test_count": 115,
+  "live_model_calls": 0,
+  "locks": {
+    "requirements.lock": {
+      "sha256": "165f241926f9c4093702eae9c00d1f0cba81b375a882a4596366cd6b0d6973b7",
+      "unchanged_from_baseline": true
+    },
+    "requirements-dev.lock": {
+      "sha256": "ac8af0a8b8a88c6e600a9dc1d5de6fdad9e0a495085ef2fcbfc1d61d70ec47f9",
+      "unchanged_from_baseline": true
+    }
+  },
+  "wheel_sha256": "1899cb76a25bf1c2a3c16a02f2aafa186b714e4229a8eea8b6e653c369c6733c",
+  "resources": {
+    "materials.json": {
+      "sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+      "matches_fixture": true
+    },
+    "pricing.json": {
+      "sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+      "matches_fixture": true
+    },
+    "aliases.json": {
+      "sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+      "matches_fixture": true
+    }
+  },
+  "red_green": {
+    "01": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 1
+      }
+    },
+    "02": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 2
+      }
+    },
+    "03": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 3
+      }
+    },
+    "04": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 4
+      }
+    },
+    "05": {
+      "red": {
+        "tests": 3,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 7
+      }
+    },
+    "06": {
+      "red": {
+        "tests": 3,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 10
+      }
+    },
+    "07": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 11
+      }
+    },
+    "08": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 12
+      }
+    },
+    "09": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 13
+      }
+    },
+    "10": {
+      "red": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 1,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 1
+      }
+    },
+    "11": {
+      "red": {
+        "tests": 9,
+        "failures": 9,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 10
+      }
+    },
+    "12": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 11
+      }
+    },
+    "13": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 12
+      }
+    },
+    "14": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 13
+      }
+    },
+    "15": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 14,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 14
+      }
+    },
+    "16": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 15,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 15
+      }
+    },
+    "17": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 16,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 16
+      }
+    },
+    "18": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 17,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 17
+      }
+    },
+    "19": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 18,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 18
+      }
+    },
+    "20": {
+      "red": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 35,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 35
+      }
+    },
+    "21": {
+      "red": {
+        "tests": 2,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 0
+      },
+      "green": {
+        "tests": 20,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 20
+      }
+    }
+  },
+  "review": {
+    "standards_findings": 0,
+    "spec_initial_findings": 1,
+    "spec_fixed_findings": 1,
+    "unresolved": 0
+  },
+  "not_run": [
+    "A01-A23 complete end-to-end cases",
+    "live model",
+    "Linux",
+    "other Python versions"
+  ],
+  "measured_window": {
+    "start_utc": "2026-10-29T14:27:58+00:00",
+    "validation_summary_utc": "2026-10-29T15:00:58.343766+00:00",
+    "includes": "reading, specification, implementation, tests and review up to this summary",
+    "excludes": "subsequent final documentation, commit and delivery; no per-category timing"
+  }
+}

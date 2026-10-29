@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.069" timestamp="2026-10-29T22:40:51.300470+08:00" hostname="LAPTOP-MGTK4A2U"><testcase classname="tests.unit.test_tools" name="test_empty_then_rewritten_search_accumulates_observed_materials" time="0.007" /></testsuite></testsuites>

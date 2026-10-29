@@ -33,6 +33,8 @@ karpathy-guidelines继续作为整体开发指导：明确假设、最小充分�
 6. **本地规格足够。** code-review的规格来源使用docs/、contracts/与当前阶段报告；本项目没有新增issue tracker配置需求，无须为此安装或运行setup-matt-pocock-skills。
 7. **按触发条件读取。** 每次先读取实际将使用的SKILL.md和该分支需要的引用，不将六份内容每轮全部加载。阶段报告记录本次实际使用的技能、作用和证据；安装成功不等于该技能已执行或审查通过。
 
-## 当前配置结果
+## 安装完成时的历史记录
 
 2026-10-29已完成6个技能安装，核对frontmatter名称及18个文件与固定提交一致，并验证旧handoff备份完整。当前文档维护实际使用skill-installer、writing-for-agents与handoff；未执行tdd业务切片、code-review子代理审查或S2开发。业务测试未因本次文档更新重跑，S1已有结果仍见[阶段报告](stages/S1.md)。技能将在安装后的下一个用户回合可被发现使用。
+
+2026-10-29后续S2已实际使用karpathy-guidelines、tdd（含tests.md/mocking.md）、code-review双轴并行审查、writing-for-agents与handoff。执行和修复证据见[S2报告](stages/S2.md)及[审查记录](stages/S2-review.md)。diagnosing-bugs/codebase-design未触发，不将安装或常规TDD修正写成已使用这两个技能。

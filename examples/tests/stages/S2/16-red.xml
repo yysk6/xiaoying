@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.359" timestamp="2026-10-29T22:46:11.848548+08:00" hostname="LAPTOP-MGTK4A2U"><testcase classname="tests.unit.test_tools" name="test_generation_failure_is_observed_without_automatic_retry_or_lost_search" time="0.007"><failure message="content_planner.model.ModelUnavailable: temporary">tests\unit\test_tools.py:142: in test_generation_failure_is_observed_without_automatic_retry_or_lost_search
+    failed = generate(tools)
+tests\unit\test_tools.py:107: in generate
+    return tools.generate_script(call_id, {'plan_revision': revision, 'rationale': '生成当前草稿'})
+src\content_planner\tools.py:47: in generate_script
+    return self._invoke('generate_script', tool_call_id, arguments, RevisionArgs, self._generate)
+src\content_planner\tools.py:57: in _invoke
+    data, reused = operation(args, call_id)
+src\content_planner\tools.py:127: in _generate
+    draft = parse_script(self._model.generate_script(context), material)
+src\content_planner\model.py:31: in generate_script
+    raise response
+E   content_planner.model.ModelUnavailable: temporary</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,9 @@
+E                                                                        [100%]
+=================================== ERRORS ====================================
+_ ERROR at setup of test_empty_then_rewritten_search_accumulates_observed_materials _
+tests\unit\test_tools.py:21: in tools
+    from content_planner.tools import LocalTools
+E   ModuleNotFoundError: No module named 'content_planner.tools'
+=========================== short test summary info ===========================
+ERROR tests/unit/test_tools.py::test_empty_then_rewritten_search_accumulates_observed_materials
+1 error in 0.30s

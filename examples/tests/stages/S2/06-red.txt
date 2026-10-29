@@ -1,0 +1,49 @@
+FFF                                                                      [100%]
+================================== FAILURES ===================================
+____ test_malformed_data_has_explicit_error[materials-CATALOG_UNAVAILABLE] ____
+tests\unit\test_catalog.py:78: in test_malformed_data_has_explicit_error
+    load_catalog(data_directory)
+src\content_planner\catalog.py:80: in load_catalog
+    parsed = {name: json.loads(data) for name, data in raw.items()}
+src\content_planner\catalog.py:80: in <dictcomp>
+    parsed = {name: json.loads(data) for name, data in raw.items()}
+..\..\AppData\Local\Programs\Python\Python310\lib\json\__init__.py:346: in loads
+    return _default_decoder.decode(s)
+..\..\AppData\Local\Programs\Python\Python310\lib\json\decoder.py:337: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+..\..\AppData\Local\Programs\Python\Python310\lib\json\decoder.py:355: in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+E   json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+_____ test_malformed_data_has_explicit_error[aliases-CATALOG_UNAVAILABLE] _____
+tests\unit\test_catalog.py:78: in test_malformed_data_has_explicit_error
+    load_catalog(data_directory)
+src\content_planner\catalog.py:80: in load_catalog
+    parsed = {name: json.loads(data) for name, data in raw.items()}
+src\content_planner\catalog.py:80: in <dictcomp>
+    parsed = {name: json.loads(data) for name, data in raw.items()}
+..\..\AppData\Local\Programs\Python\Python310\lib\json\__init__.py:346: in loads
+    return _default_decoder.decode(s)
+..\..\AppData\Local\Programs\Python\Python310\lib\json\decoder.py:337: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+..\..\AppData\Local\Programs\Python\Python310\lib\json\decoder.py:355: in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+E   json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+_______ test_malformed_data_has_explicit_error[pricing-PRICING_INVALID] _______
+tests\unit\test_catalog.py:78: in test_malformed_data_has_explicit_error
+    load_catalog(data_directory)
+src\content_planner\catalog.py:80: in load_catalog
+    parsed = {name: json.loads(data) for name, data in raw.items()}
+src\content_planner\catalog.py:80: in <dictcomp>
+    parsed = {name: json.loads(data) for name, data in raw.items()}
+..\..\AppData\Local\Programs\Python\Python310\lib\json\__init__.py:346: in loads
+    return _default_decoder.decode(s)
+..\..\AppData\Local\Programs\Python\Python310\lib\json\decoder.py:337: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+..\..\AppData\Local\Programs\Python\Python310\lib\json\decoder.py:355: in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+E   json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+=========================== short test summary info ===========================
+FAILED tests/unit/test_catalog.py::test_malformed_data_has_explicit_error[materials-CATALOG_UNAVAILABLE]
+FAILED tests/unit/test_catalog.py::test_malformed_data_has_explicit_error[aliases-CATALOG_UNAVAILABLE]
+FAILED tests/unit/test_catalog.py::test_malformed_data_has_explicit_error[pricing-PRICING_INVALID]
+3 failed in 0.39s

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.307" timestamp="2026-10-29T22:41:46.909118+08:00" hostname="LAPTOP-MGTK4A2U"><testcase classname="tests.unit.test_tools" name="test_revision_requires_observed_material_and_reuses_same_candidate" time="0.004"><failure message="AttributeError: 'LocalTools' object has no attribute 'revise_plan'">tests\unit\test_tools.py:66: in test_revision_requires_observed_material_and_reuses_same_candidate
+    unknown = revise(tools, material_id='M99')
+tests\unit\test_tools.py:61: in revise
+    return tools.revise_plan(call_id, {'material_id': material_id, 'creative_brief': brief,
+E   AttributeError: 'LocalTools' object has no attribute 'revise_plan'</failure></testcase></testsuite></testsuites>

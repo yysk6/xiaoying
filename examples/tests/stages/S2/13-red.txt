@@ -1,0 +1,9 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__________ test_fifth_candidate_is_rejected_without_changing_fourth ___________
+tests\unit\test_tools.py:84: in test_fifth_candidate_is_rejected_without_changing_fourth
+    assert not rejected['ok'] and rejected['error']['code'] == 'REVISION_LIMIT_REACHED'
+E   assert (not True)
+=========================== short test summary info ===========================
+FAILED tests/unit/test_tools.py::test_fifth_candidate_is_rejected_without_changing_fourth
+1 failed in 0.34s

@@ -1,0 +1,19 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_ test_generation_failure_is_observed_without_automatic_retry_or_lost_search __
+tests\unit\test_tools.py:142: in test_generation_failure_is_observed_without_automatic_retry_or_lost_search
+    failed = generate(tools)
+tests\unit\test_tools.py:107: in generate
+    return tools.generate_script(call_id, {'plan_revision': revision, 'rationale': '生成当前草稿'})
+src\content_planner\tools.py:47: in generate_script
+    return self._invoke('generate_script', tool_call_id, arguments, RevisionArgs, self._generate)
+src\content_planner\tools.py:57: in _invoke
+    data, reused = operation(args, call_id)
+src\content_planner\tools.py:127: in _generate
+    draft = parse_script(self._model.generate_script(context), material)
+src\content_planner\model.py:31: in generate_script
+    raise response
+E   content_planner.model.ModelUnavailable: temporary
+=========================== short test summary info ===========================
+FAILED tests/unit/test_tools.py::test_generation_failure_is_observed_without_automatic_retry_or_lost_search
+1 failed in 0.38s

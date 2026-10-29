@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.386" timestamp="2026-10-29T22:43:29.572334+08:00" hostname="LAPTOP-MGTK4A2U"><testcase classname="tests.unit.test_tools" name="test_script_generation_produces_program_owned_id_and_fact_context" time="0.002"><failure message="ModuleNotFoundError: No module named 'content_planner.model'">tests\unit\test_tools.py:111: in test_script_generation_produces_program_owned_id_and_fact_context
+    tools, client, _ = make_script_tools([draft_json()])
+tests\unit\test_tools.py:96: in make_script_tools
+    from content_planner.model import FakeModelClient
+E   ModuleNotFoundError: No module named 'content_planner.model'</failure></testcase></testsuite></testsuites>

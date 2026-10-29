@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.325" timestamp="2026-10-29T22:42:39.375057+08:00" hostname="LAPTOP-MGTK4A2U"><testcase classname="tests.unit.test_tools" name="test_fifth_candidate_is_rejected_without_changing_fourth" time="0.006"><failure message="assert (not True)">tests\unit\test_tools.py:84: in test_fifth_candidate_is_rejected_without_changing_fourth
+    assert not rejected['ok'] and rejected['error']['code'] == 'REVISION_LIMIT_REACHED'
+E   assert (not True)</failure></testcase></testsuite></testsuites>

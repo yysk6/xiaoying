@@ -1,0 +1,24 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+________ test_matching_script_is_reused_without_another_model_request _________
+src\content_planner\model.py:27: in generate_script
+    response = next(self._responses)
+E   StopIteration
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_tools.py:130: in test_matching_script_is_reused_without_another_model_request
+    second = generate(tools, call_id='generate-2')
+tests\unit\test_tools.py:107: in generate
+    return tools.generate_script(call_id, {'plan_revision': revision, 'rationale': '生成当前草稿'})
+src\content_planner\tools.py:47: in generate_script
+    return self._invoke('generate_script', tool_call_id, arguments, RevisionArgs, self._generate)
+src\content_planner\tools.py:57: in _invoke
+    data, reused = operation(args, call_id)
+src\content_planner\tools.py:124: in _generate
+    draft = parse_script(self._model.generate_script(context), material)
+src\content_planner\model.py:29: in generate_script
+    raise ModelUnavailable('No configured fake response remains') from error
+E   content_planner.model.ModelUnavailable: No configured fake response remains
+=========================== short test summary info ===========================
+FAILED tests/unit/test_tools.py::test_matching_script_is_reused_without_another_model_request
+1 failed in 0.36s

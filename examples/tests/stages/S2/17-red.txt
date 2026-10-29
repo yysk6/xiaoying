@@ -1,0 +1,11 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_ test_estimation_reports_premium_gap_and_basic_alternative_without_selecting_it _
+tests\unit\test_tools.py:163: in test_estimation_reports_premium_gap_and_basic_alternative_without_selecting_it
+    result = estimate(tools)
+tests\unit\test_tools.py:155: in estimate
+    return tools.estimate_cost(call_id, {'plan_revision': revision, 'rationale': '核对约束'})
+E   AttributeError: 'LocalTools' object has no attribute 'estimate_cost'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_tools.py::test_estimation_reports_premium_gap_and_basic_alternative_without_selecting_it
+1 failed in 0.37s

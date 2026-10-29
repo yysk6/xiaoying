@@ -1,0 +1,476 @@
+{
+  "kind": "explicit_local_tool_demo",
+  "clock_source": "fixed_fixture",
+  "fake_generation_calls": 1,
+  "live_model_calls": 0,
+  "snapshot": {
+    "request": {
+      "request_id": "s2-demo",
+      "topic": "字幕功能推广",
+      "budget_units": 10,
+      "deadline_at": "2026-10-29T05:00:00+00:00"
+    },
+    "manifest": {
+      "schema_version": "1.0",
+      "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+      "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+      "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+      "planner_prompt_version": "planner-v1",
+      "script_prompt_version": "script-v1",
+      "model_id": "mock",
+      "thinking": "disabled"
+    },
+    "seen_material_ids": [
+      "M01"
+    ],
+    "tool_results": [
+      {
+        "tool_call_id": "search-empty",
+        "tool": "search_materials",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "query": "不存在的功能",
+          "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+          "materials": []
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "search-caption",
+        "tool": "search_materials",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "query": "caption",
+          "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+          "materials": [
+            {
+              "material_id": "M01",
+              "version": "2026-10-29",
+              "title": "影芽剪辑字幕功能",
+              "tags": [
+                "字幕",
+                "自动字幕",
+                "字幕编辑"
+              ],
+              "facts": [
+                "影芽剪辑支持自动生成字幕。",
+                "自动生成的字幕文本可以编辑。"
+              ],
+              "fee_units": 1,
+              "lead_minutes": 10,
+              "score": 1
+            }
+          ]
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "revise-premium",
+        "tool": "revise_plan",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "revision": 1,
+          "candidate_hash": "72550aff070d360e030ff73d14f0e4efb64bf279fd0f6b84510db19b3ca56171",
+          "material_id": "M01",
+          "creative_brief": "演示字幕编辑",
+          "production_mode": "premium",
+          "script_input_hash": "44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc",
+          "script_reused": false,
+          "invalidated": []
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "generate-first",
+        "tool": "generate_script",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "script_id": "script_44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc",
+          "script_input_hash": "44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc",
+          "title": "字幕编辑演示",
+          "hook": "试试自动字幕",
+          "body": "自动生成的字幕文本可以编辑。",
+          "cta": "体验字幕编辑",
+          "source_ids": [
+            "M01"
+          ]
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "estimate-premium",
+        "tool": "estimate_cost",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "estimate_id": "estimate_515491a9153c8786354b9cfb0f11c96a3086e7045f9f40773d1a2e508bb1646f",
+          "revision": 1,
+          "candidate_hash": "72550aff070d360e030ff73d14f0e4efb64bf279fd0f6b84510db19b3ca56171",
+          "script_id": "script_44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc",
+          "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "line_items": [
+            {
+              "step_id": "material_prepare",
+              "catalog_item_id": "M01",
+              "fee_units": 1,
+              "duration_minutes": 10
+            },
+            {
+              "step_id": "script_finalize",
+              "catalog_item_id": "script_finalize",
+              "fee_units": 2,
+              "duration_minutes": 20
+            },
+            {
+              "step_id": "video_edit",
+              "catalog_item_id": "video_edit:premium",
+              "fee_units": 8,
+              "duration_minutes": 90
+            },
+            {
+              "step_id": "review",
+              "catalog_item_id": "review",
+              "fee_units": 1,
+              "duration_minutes": 15
+            }
+          ],
+          "quoted_at": "2026-10-29T02:00:00+00:00",
+          "total_units": 12,
+          "total_minutes": 135,
+          "estimated_finish_at": "2026-10-29T04:15:00+00:00",
+          "within_budget": false,
+          "within_deadline": true,
+          "feasible": false,
+          "budget_gap_units": 2,
+          "deadline_gap_minutes": 0,
+          "alternatives": [
+            {
+              "total_units": 8,
+              "total_minutes": 90,
+              "estimated_finish_at": "2026-10-29T03:30:00+00:00",
+              "within_budget": true,
+              "within_deadline": true,
+              "feasible": true,
+              "budget_gap_units": 0,
+              "deadline_gap_minutes": 0,
+              "production_mode": "basic"
+            }
+          ]
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "revise-basic",
+        "tool": "revise_plan",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "revision": 2,
+          "candidate_hash": "48ed76a1da361f4cbcf6dea509a0b1ab4ffd405ecb65ec3d8e775ee379228622",
+          "material_id": "M01",
+          "creative_brief": "演示字幕编辑",
+          "production_mode": "basic",
+          "script_input_hash": "44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc",
+          "script_reused": true,
+          "invalidated": [
+            "estimate"
+          ]
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "generate-reuse",
+        "tool": "generate_script",
+        "ok": true,
+        "reused": true,
+        "data": {
+          "script_id": "script_44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc",
+          "script_input_hash": "44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc",
+          "title": "字幕编辑演示",
+          "hook": "试试自动字幕",
+          "body": "自动生成的字幕文本可以编辑。",
+          "cta": "体验字幕编辑",
+          "source_ids": [
+            "M01"
+          ]
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "estimate-basic",
+        "tool": "estimate_cost",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "estimate_id": "estimate_c653923c16a1aafc01749708c276c635d7f3fdf15a32ad34877688811b6383e1",
+          "revision": 2,
+          "candidate_hash": "48ed76a1da361f4cbcf6dea509a0b1ab4ffd405ecb65ec3d8e775ee379228622",
+          "script_id": "script_44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc",
+          "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "line_items": [
+            {
+              "step_id": "material_prepare",
+              "catalog_item_id": "M01",
+              "fee_units": 1,
+              "duration_minutes": 10
+            },
+            {
+              "step_id": "script_finalize",
+              "catalog_item_id": "script_finalize",
+              "fee_units": 2,
+              "duration_minutes": 20
+            },
+            {
+              "step_id": "video_edit",
+              "catalog_item_id": "video_edit:basic",
+              "fee_units": 4,
+              "duration_minutes": 45
+            },
+            {
+              "step_id": "review",
+              "catalog_item_id": "review",
+              "fee_units": 1,
+              "duration_minutes": 15
+            }
+          ],
+          "quoted_at": "2026-10-29T02:00:00+00:00",
+          "total_units": 8,
+          "total_minutes": 90,
+          "estimated_finish_at": "2026-10-29T03:30:00+00:00",
+          "within_budget": true,
+          "within_deadline": true,
+          "feasible": true,
+          "budget_gap_units": 0,
+          "deadline_gap_minutes": 0,
+          "alternatives": [
+            {
+              "total_units": 12,
+              "total_minutes": 135,
+              "estimated_finish_at": "2026-10-29T04:15:00+00:00",
+              "within_budget": false,
+              "within_deadline": true,
+              "feasible": false,
+              "budget_gap_units": 2,
+              "deadline_gap_minutes": 0,
+              "production_mode": "premium"
+            }
+          ]
+        },
+        "error": null
+      }
+    ],
+    "last_observation": {
+      "tool_call_id": "estimate-basic",
+      "tool": "estimate_cost",
+      "ok": true,
+      "reused": false,
+      "data": {
+        "estimate_id": "estimate_c653923c16a1aafc01749708c276c635d7f3fdf15a32ad34877688811b6383e1",
+        "revision": 2,
+        "candidate_hash": "48ed76a1da361f4cbcf6dea509a0b1ab4ffd405ecb65ec3d8e775ee379228622",
+        "script_id": "script_44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc",
+        "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+        "line_items": [
+          {
+            "step_id": "material_prepare",
+            "catalog_item_id": "M01",
+            "fee_units": 1,
+            "duration_minutes": 10
+          },
+          {
+            "step_id": "script_finalize",
+            "catalog_item_id": "script_finalize",
+            "fee_units": 2,
+            "duration_minutes": 20
+          },
+          {
+            "step_id": "video_edit",
+            "catalog_item_id": "video_edit:basic",
+            "fee_units": 4,
+            "duration_minutes": 45
+          },
+          {
+            "step_id": "review",
+            "catalog_item_id": "review",
+            "fee_units": 1,
+            "duration_minutes": 15
+          }
+        ],
+        "quoted_at": "2026-10-29T02:00:00+00:00",
+        "total_units": 8,
+        "total_minutes": 90,
+        "estimated_finish_at": "2026-10-29T03:30:00+00:00",
+        "within_budget": true,
+        "within_deadline": true,
+        "feasible": true,
+        "budget_gap_units": 0,
+        "deadline_gap_minutes": 0,
+        "alternatives": [
+          {
+            "total_units": 12,
+            "total_minutes": 135,
+            "estimated_finish_at": "2026-10-29T04:15:00+00:00",
+            "within_budget": false,
+            "within_deadline": true,
+            "feasible": false,
+            "budget_gap_units": 2,
+            "deadline_gap_minutes": 0,
+            "production_mode": "premium"
+          }
+        ]
+      },
+      "error": null
+    },
+    "candidate_history": {
+      "1": {
+        "revision": 1,
+        "candidate_hash": "72550aff070d360e030ff73d14f0e4efb64bf279fd0f6b84510db19b3ca56171",
+        "material_id": "M01",
+        "creative_brief": "演示字幕编辑",
+        "production_mode": "premium",
+        "script_input_hash": "44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc"
+      },
+      "2": {
+        "revision": 2,
+        "candidate_hash": "48ed76a1da361f4cbcf6dea509a0b1ab4ffd405ecb65ec3d8e775ee379228622",
+        "material_id": "M01",
+        "creative_brief": "演示字幕编辑",
+        "production_mode": "basic",
+        "script_input_hash": "44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc"
+      }
+    },
+    "current_revision": 2,
+    "script_artifacts": {
+      "44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc": {
+        "script_id": "script_44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc",
+        "script_input_hash": "44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc",
+        "title": "字幕编辑演示",
+        "hook": "试试自动字幕",
+        "body": "自动生成的字幕文本可以编辑。",
+        "cta": "体验字幕编辑",
+        "source_ids": [
+          "M01"
+        ]
+      }
+    },
+    "estimate_history": {
+      "estimate_515491a9153c8786354b9cfb0f11c96a3086e7045f9f40773d1a2e508bb1646f": {
+        "estimate_id": "estimate_515491a9153c8786354b9cfb0f11c96a3086e7045f9f40773d1a2e508bb1646f",
+        "revision": 1,
+        "candidate_hash": "72550aff070d360e030ff73d14f0e4efb64bf279fd0f6b84510db19b3ca56171",
+        "script_id": "script_44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc",
+        "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+        "line_items": [
+          {
+            "step_id": "material_prepare",
+            "catalog_item_id": "M01",
+            "fee_units": 1,
+            "duration_minutes": 10
+          },
+          {
+            "step_id": "script_finalize",
+            "catalog_item_id": "script_finalize",
+            "fee_units": 2,
+            "duration_minutes": 20
+          },
+          {
+            "step_id": "video_edit",
+            "catalog_item_id": "video_edit:premium",
+            "fee_units": 8,
+            "duration_minutes": 90
+          },
+          {
+            "step_id": "review",
+            "catalog_item_id": "review",
+            "fee_units": 1,
+            "duration_minutes": 15
+          }
+        ],
+        "quoted_at": "2026-10-29T02:00:00+00:00",
+        "total_units": 12,
+        "total_minutes": 135,
+        "estimated_finish_at": "2026-10-29T04:15:00+00:00",
+        "within_budget": false,
+        "within_deadline": true,
+        "feasible": false,
+        "budget_gap_units": 2,
+        "deadline_gap_minutes": 0,
+        "alternatives": [
+          {
+            "total_units": 8,
+            "total_minutes": 90,
+            "estimated_finish_at": "2026-10-29T03:30:00+00:00",
+            "within_budget": true,
+            "within_deadline": true,
+            "feasible": true,
+            "budget_gap_units": 0,
+            "deadline_gap_minutes": 0,
+            "production_mode": "basic"
+          }
+        ]
+      },
+      "estimate_c653923c16a1aafc01749708c276c635d7f3fdf15a32ad34877688811b6383e1": {
+        "estimate_id": "estimate_c653923c16a1aafc01749708c276c635d7f3fdf15a32ad34877688811b6383e1",
+        "revision": 2,
+        "candidate_hash": "48ed76a1da361f4cbcf6dea509a0b1ab4ffd405ecb65ec3d8e775ee379228622",
+        "script_id": "script_44eca573d089057bd02b424f095d13fadc711e2228b092d7b0f5555f364849fc",
+        "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+        "line_items": [
+          {
+            "step_id": "material_prepare",
+            "catalog_item_id": "M01",
+            "fee_units": 1,
+            "duration_minutes": 10
+          },
+          {
+            "step_id": "script_finalize",
+            "catalog_item_id": "script_finalize",
+            "fee_units": 2,
+            "duration_minutes": 20
+          },
+          {
+            "step_id": "video_edit",
+            "catalog_item_id": "video_edit:basic",
+            "fee_units": 4,
+            "duration_minutes": 45
+          },
+          {
+            "step_id": "review",
+            "catalog_item_id": "review",
+            "fee_units": 1,
+            "duration_minutes": 15
+          }
+        ],
+        "quoted_at": "2026-10-29T02:00:00+00:00",
+        "total_units": 8,
+        "total_minutes": 90,
+        "estimated_finish_at": "2026-10-29T03:30:00+00:00",
+        "within_budget": true,
+        "within_deadline": true,
+        "feasible": true,
+        "budget_gap_units": 0,
+        "deadline_gap_minutes": 0,
+        "alternatives": [
+          {
+            "total_units": 12,
+            "total_minutes": 135,
+            "estimated_finish_at": "2026-10-29T04:15:00+00:00",
+            "within_budget": false,
+            "within_deadline": true,
+            "feasible": false,
+            "budget_gap_units": 2,
+            "deadline_gap_minutes": 0,
+            "production_mode": "premium"
+          }
+        ]
+      }
+    },
+    "current_estimate_id": "estimate_c653923c16a1aafc01749708c276c635d7f3fdf15a32ad34877688811b6383e1",
+    "status": "running",
+    "reason": null
+  }
+}

@@ -1,0 +1,14 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+________________ test_synthetic_flag_requires_boolean_true[1] _________________
+tests\unit\test_catalog.py:140: in test_synthetic_flag_requires_boolean_true
+    with pytest.raises(Fault, match='CATALOG_UNAVAILABLE'):
+E   Failed: DID NOT RAISE <class 'content_planner.domain.Fault'>
+_______________ test_synthetic_flag_requires_boolean_true[1.0] ________________
+tests\unit\test_catalog.py:140: in test_synthetic_flag_requires_boolean_true
+    with pytest.raises(Fault, match='CATALOG_UNAVAILABLE'):
+E   Failed: DID NOT RAISE <class 'content_planner.domain.Fault'>
+=========================== short test summary info ===========================
+FAILED tests/unit/test_catalog.py::test_synthetic_flag_requires_boolean_true[1]
+FAILED tests/unit/test_catalog.py::test_synthetic_flag_requires_boolean_true[1.0]
+2 failed in 0.36s

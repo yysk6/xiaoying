@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.302" timestamp="2026-10-29T22:38:51.891443+08:00" hostname="LAPTOP-MGTK4A2U"><testcase classname="tests.unit.test_catalog" name="test_search_normalizes_aliases_and_returns_stable_top_k" time="0.013"><failure message="AssertionError: assert [] == ['M01']&#10;  &#10;  Right contains one more item: 'M01'&#10;  Use -v to get more diff">tests\unit\test_catalog.py:103: in test_search_normalizes_aliases_and_returns_stable_top_k
+    assert [item['material_id'] for item in catalog.search('  CAPTION  ', 5)] == ['M01']
+E   AssertionError: assert [] == ['M01']
+E     
+E     Right contains one more item: 'M01'
+E     Use -v to get more diff</failure></testcase></testsuite></testsuites>

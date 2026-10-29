@@ -1,0 +1,76 @@
+{
+  "stage": "S2",
+  "status": "passed",
+  "steps": [
+    {
+      "name": "install_locked_dependencies",
+      "command": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s2-clean\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "install",
+        "--no-deps",
+        "--no-index",
+        "--find-links",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s0-wheelhouse",
+        "-r",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\requirements-dev.lock"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "install_wheel",
+      "command": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s2-clean\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "install",
+        "--no-index",
+        "--no-deps",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\dist\\xiaoying_content_planner-0.1.0-py3-none-any.whl"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "pip_check",
+      "command": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s2-clean\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "wheel_import_and_resources",
+      "command": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s2-clean\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys,json; from pathlib import Path; from importlib import resources; from content_planner import catalog,contracts,domain,model,tools; modules=[catalog,contracts,domain,model,tools]; assert all(Path(m.__file__).resolve().is_relative_to(Path(sys.prefix).resolve()) for m in modules); data=resources.files('content_planner').joinpath('data'); assert all(data.joinpath(n+'.json').is_file() for n in ('materials','pricing','aliases')); assert catalog.load_catalog().search('caption',1)[0]['material_id']=='M01'; print(json.dumps({'modules':[m.__file__ for m in modules],'resources':'passed'}))"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "all_tests_against_wheel",
+      "command": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s2-clean\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "pytest",
+        "-q",
+        "-c",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\pyproject.toml",
+        "-o",
+        "pythonpath=",
+        "--import-mode=importlib",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\tests",
+        "--junitxml=C:\\Users\\11250\\Desktop\\xiaoying\\examples\\tests\\stages\\S2\\clean-junit.xml"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "live_model_calls": 0,
+  "offline_install": true,
+  "cwd_is_repository": false
+}

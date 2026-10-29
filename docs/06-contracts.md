@@ -12,7 +12,7 @@ python -m content_planner show --request-id <ID> --db <runtime.db> --output-dir 
 python -m content_planner resume --request-id <ID> --db <runtime.db> --output-dir <directory>
 ```
 
-`run` 默认 backend=mock、db=`work/runtime.db`、output-dir=`work/runs/<request_id>`；业务资料从项目 `data/` 读取。`resume` 使用原任务 backend 和配置，不允许借续跑变更模型/资料/预算。`show` 不调用模型或业务工具。live 模式缺少模型环境变量时明确报配置错误，不退回 Mock。
+`run` 默认 backend=mock、db=`work/runtime.db`、output-dir=`work/runs/<request_id>`；业务资料通过包资源 `content_planner/data/` 读取。`resume` 使用原任务 backend 和配置，不允许借续跑变更模型/资料/预算。`show` 不调用模型或业务工具。live 模式缺少模型环境变量时明确报配置错误，不退回 Mock。
 
 退出码：0=completed；2=needs_input/输入或配置错误/请求冲突；3=incomplete；1=不能构造可信结果的进程/存储故障。`show` 的退出码反映所查任务状态。错误和进度写 stderr，stdout 只写最终 JSON。输出目录创建失败不回滚已提交方案，输出 `EXPORT_FAILED` 警告并允许重新 show。
 
@@ -46,6 +46,18 @@ S1只实现`Request`、`ScriptDraft`与纯领域函数，不提前实现六动�
 `ScriptDraft`只接收title/hook/body/cta/source_ids；脚本ID与指纹是后续工具从可信状态补充的派生字段，模型不能提交。`parse_script(raw_json, material)`将JSON/结构错误统一映射为SCRIPT_INVALID，再执行来源与事实规则，不自动修复。百分比按完整数字token比较，不能因80%是180%的子串就视为有依据；允许小数和数字与%之间的空白。固定禁用语按去空白后的单字段文本检查。事实校验版本基线为script-v1；此处细化匹配方式，不扩展到任意自然语言事实证明。
 
 ## 所有动作的共同规则
+
+### S2本地入口与验收细化（实现前）
+
+S2的公开测试入口为`load_catalog(directory=None)`、`Catalog.search(query, top_k)`和`LocalTools`的search_materials/revise_plan/generate_script/estimate_cost四个方法。每个方法接收调用方提供的唯一tool_call_id及arguments字典，严格校验模型参数，返回现行ToolResult；调用方负责选择动作，不存在自动执行下一步。save_plan归S3，stop_task及自主循环归S4，不创建空实现。
+
+合成数据以原始fixture字节复制到`content_planner/data/`并随wheel/sdist打包，默认通过importlib.resources读取，与cwd无关；显式directory只替换资料位置。原始文件SHA-256进入manifest。加载时校验严格类型、非负报价/分钟、结构和唯一素材ID；材料/别名读取或格式错误为CATALOG_UNAVAILABLE，报价不可读为ESTIMATOR_UNAVAILABLE、内容非法为PRICING_INVALID。加载结果是本任务的已验证资料快照，工具不在每次调用重复读取；跨资料快照恢复的manifest核对属于S6。
+
+LocalTools持有单请求的本地工具状态，snapshot()只返回JSON兼容副本，包含请求、manifest、候选与产物历史、当前引用及工具结果。每次拒绝/失败也保留ToolResult，但不替模型重试；失败不创建脚本或估算成功产物，已有有效结果保留。S2不写数据库、事件表、checkpoint或业务执行Trace，不提前实现累计动作/模型额度；最多4个候选版本的本地规则在本阶段守住。
+
+ModelClient在S2只定义model_id和generate_script(context)->JSON字符串的外部边界，后续再添加planner决策能力。生成上下文仅含主题、素材ID/事实、brief、固定受众/平台与ScriptDraft输出Schema；FakeModelClient使用显式响应/故障列表，耗尽或ModelUnavailable映射为SCRIPT_MODEL_UNAVAILABLE，不内置自动重试。脚本ID与哈希由程序补充，不接受模型提交。
+
+估算时Clock只读一次，当前档位与另一档位使用同一时刻计算，避免alternatives比较混入时间差；估算ID为`estimate_`加tool_call_id的完整SHA-256。只有当前候选的匹配脚本才能估算；每次显式估算产生新引用。实质修订清除current_estimate_id，invalidated只列实际失效的当前产物类型，历史不删除。保存时拒绝旧estimate的端到端断言留S3，不能因S2观察到失效就记为保存链路通过。
 
 模型每次选择恰好一个动作。四个业务工具为 `search_materials`、`generate_script`、`estimate_cost`、`save_plan`；两个控制动作为 `revise_plan`、`stop_task`。六者均以函数工具 schema 暴露，只有前四个计为题目业务工具。
 

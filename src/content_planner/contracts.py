@@ -1,7 +1,7 @@
 """Strict input DTOs; time-dependent and cross-field rules live in domain."""
 
 from datetime import datetime, timezone
-from typing import Annotated
+from typing import Annotated, Literal
 import unicodedata
 
 from pydantic import AfterValidator, BaseModel, BeforeValidator, ConfigDict, Field, field_validator
@@ -55,3 +55,23 @@ class ScriptDraft(StrictDTO):
     cta: Annotated[str, Field(min_length=1, max_length=200)]
     source_ids: Annotated[list[MaterialId], Field(min_length=1, max_length=1,
                                                json_schema_extra={"uniqueItems": True})]
+
+
+class ActionArgs(StrictDTO):
+    rationale: Annotated[str, Field(min_length=1, max_length=200,
+                                   description='可公开的一句话动作依据，不包含内部思维过程')]
+
+
+class SearchMaterialsArgs(ActionArgs):
+    query: Annotated[str, Field(min_length=1, max_length=200)]
+    top_k: Annotated[int, Field(ge=1, le=5)]
+
+
+class RevisePlanArgs(ActionArgs):
+    material_id: MaterialId
+    creative_brief: Annotated[str, Field(min_length=1, max_length=500)]
+    production_mode: Literal['basic', 'premium']
+
+
+class RevisionArgs(ActionArgs):
+    plan_revision: Annotated[int, Field(ge=1, le=4)]

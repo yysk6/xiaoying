@@ -1,0 +1,14 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+___________ test_default_data_is_packaged_and_matches_spec_fixtures ___________
+tests\unit\test_catalog.py:12: in test_default_data_is_packaged_and_matches_spec_fixtures
+    assert data.joinpath(name).is_file(), name
+E   AssertionError: materials.json
+E   assert False
+E    +  where False = is_file()
+E    +    where is_file = WindowsPath('C:/Users/11250/Desktop/xiaoying/src/content_planner/data/materials.json').is_file
+E    +      where WindowsPath('C:/Users/11250/Desktop/xiaoying/src/content_planner/data/materials.json') = joinpath('materials.json')
+E    +        where joinpath = WindowsPath('C:/Users/11250/Desktop/xiaoying/src/content_planner/data').joinpath
+=========================== short test summary info ===========================
+FAILED tests/unit/test_catalog.py::test_default_data_is_packaged_and_matches_spec_fixtures
+1 failed in 0.29s

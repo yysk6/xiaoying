@@ -1,0 +1,19 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_ test_unavailable_clock_retains_previous_estimate_and_reports_retryable_failure _
+tests\unit\test_tools.py:210: in test_unavailable_clock_retains_previous_estimate_and_reports_retryable_failure
+    failed = estimate(tools, call_id='unavailable')
+tests\unit\test_tools.py:155: in estimate
+    return tools.estimate_cost(call_id, {'plan_revision': revision, 'rationale': '核对约束'})
+src\content_planner\tools.py:61: in estimate_cost
+    return self._invoke('estimate_cost', tool_call_id, arguments, RevisionArgs, self._estimate)
+src\content_planner\tools.py:71: in _invoke
+    data, reused = operation(args, call_id)
+src\content_planner\tools.py:158: in _estimate
+    clock = _QuoteClock(self._clock.now())
+tests\unit\test_tools.py:201: in now
+    raise OSError('clock unavailable')
+E   OSError: clock unavailable
+=========================== short test summary info ===========================
+FAILED tests/unit/test_tools.py::test_unavailable_clock_retains_previous_estimate_and_reports_retryable_failure
+1 failed in 0.39s

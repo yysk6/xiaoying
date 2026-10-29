@@ -1,0 +1,109 @@
+* Getting build dependencies for sdist...
+running egg_info
+writing src\xiaoying_content_planner.egg-info\PKG-INFO
+writing dependency_links to src\xiaoying_content_planner.egg-info\dependency_links.txt
+writing requirements to src\xiaoying_content_planner.egg-info\requires.txt
+writing top-level names to src\xiaoying_content_planner.egg-info\top_level.txt
+reading manifest file 'src\xiaoying_content_planner.egg-info\SOURCES.txt'
+writing manifest file 'src\xiaoying_content_planner.egg-info\SOURCES.txt'
+* Building sdist...
+running sdist
+running egg_info
+writing src\xiaoying_content_planner.egg-info\PKG-INFO
+writing dependency_links to src\xiaoying_content_planner.egg-info\dependency_links.txt
+writing requirements to src\xiaoying_content_planner.egg-info\requires.txt
+writing top-level names to src\xiaoying_content_planner.egg-info\top_level.txt
+reading manifest file 'src\xiaoying_content_planner.egg-info\SOURCES.txt'
+writing manifest file 'src\xiaoying_content_planner.egg-info\SOURCES.txt'
+running check
+creating xiaoying_content_planner-0.1.0
+creating xiaoying_content_planner-0.1.0\src\content_planner
+creating xiaoying_content_planner-0.1.0\src\content_planner\data
+creating xiaoying_content_planner-0.1.0\src\xiaoying_content_planner.egg-info
+copying files to xiaoying_content_planner-0.1.0...
+copying README.md -> xiaoying_content_planner-0.1.0
+copying pyproject.toml -> xiaoying_content_planner-0.1.0
+copying src\content_planner\__init__.py -> xiaoying_content_planner-0.1.0\src\content_planner
+copying src\content_planner\catalog.py -> xiaoying_content_planner-0.1.0\src\content_planner
+copying src\content_planner\contracts.py -> xiaoying_content_planner-0.1.0\src\content_planner
+copying src\content_planner\domain.py -> xiaoying_content_planner-0.1.0\src\content_planner
+copying src\content_planner\model.py -> xiaoying_content_planner-0.1.0\src\content_planner
+copying src\content_planner\tools.py -> xiaoying_content_planner-0.1.0\src\content_planner
+copying src\content_planner\data\aliases.json -> xiaoying_content_planner-0.1.0\src\content_planner\data
+copying src\content_planner\data\materials.json -> xiaoying_content_planner-0.1.0\src\content_planner\data
+copying src\content_planner\data\pricing.json -> xiaoying_content_planner-0.1.0\src\content_planner\data
+copying src\xiaoying_content_planner.egg-info\PKG-INFO -> xiaoying_content_planner-0.1.0\src\xiaoying_content_planner.egg-info
+copying src\xiaoying_content_planner.egg-info\SOURCES.txt -> xiaoying_content_planner-0.1.0\src\xiaoying_content_planner.egg-info
+copying src\xiaoying_content_planner.egg-info\dependency_links.txt -> xiaoying_content_planner-0.1.0\src\xiaoying_content_planner.egg-info
+copying src\xiaoying_content_planner.egg-info\requires.txt -> xiaoying_content_planner-0.1.0\src\xiaoying_content_planner.egg-info
+copying src\xiaoying_content_planner.egg-info\top_level.txt -> xiaoying_content_planner-0.1.0\src\xiaoying_content_planner.egg-info
+copying src\xiaoying_content_planner.egg-info\SOURCES.txt -> xiaoying_content_planner-0.1.0\src\xiaoying_content_planner.egg-info
+Writing xiaoying_content_planner-0.1.0\setup.cfg
+Creating tar archive
+removing 'xiaoying_content_planner-0.1.0' (and everything under it)
+* Building wheel from sdist
+* Getting build dependencies for wheel...
+running egg_info
+writing src\xiaoying_content_planner.egg-info\PKG-INFO
+writing dependency_links to src\xiaoying_content_planner.egg-info\dependency_links.txt
+writing requirements to src\xiaoying_content_planner.egg-info\requires.txt
+writing top-level names to src\xiaoying_content_planner.egg-info\top_level.txt
+reading manifest file 'src\xiaoying_content_planner.egg-info\SOURCES.txt'
+writing manifest file 'src\xiaoying_content_planner.egg-info\SOURCES.txt'
+* Building wheel...
+running bdist_wheel
+running build
+running build_py
+creating build\lib\content_planner
+copying src\content_planner\catalog.py -> build\lib\content_planner
+copying src\content_planner\contracts.py -> build\lib\content_planner
+copying src\content_planner\domain.py -> build\lib\content_planner
+copying src\content_planner\model.py -> build\lib\content_planner
+copying src\content_planner\tools.py -> build\lib\content_planner
+copying src\content_planner\__init__.py -> build\lib\content_planner
+running egg_info
+writing src\xiaoying_content_planner.egg-info\PKG-INFO
+writing dependency_links to src\xiaoying_content_planner.egg-info\dependency_links.txt
+writing requirements to src\xiaoying_content_planner.egg-info\requires.txt
+writing top-level names to src\xiaoying_content_planner.egg-info\top_level.txt
+reading manifest file 'src\xiaoying_content_planner.egg-info\SOURCES.txt'
+writing manifest file 'src\xiaoying_content_planner.egg-info\SOURCES.txt'
+creating build\lib\content_planner\data
+copying src\content_planner\data\aliases.json -> build\lib\content_planner\data
+copying src\content_planner\data\materials.json -> build\lib\content_planner\data
+copying src\content_planner\data\pricing.json -> build\lib\content_planner\data
+installing to build\bdist.win-amd64\wheel
+running install
+running install_lib
+creating build\bdist.win-amd64\wheel
+creating build\bdist.win-amd64\wheel\content_planner
+copying build\lib\content_planner\catalog.py -> build\bdist.win-amd64\wheel\.\content_planner
+copying build\lib\content_planner\contracts.py -> build\bdist.win-amd64\wheel\.\content_planner
+creating build\bdist.win-amd64\wheel\content_planner\data
+copying build\lib\content_planner\data\aliases.json -> build\bdist.win-amd64\wheel\.\content_planner\data
+copying build\lib\content_planner\data\materials.json -> build\bdist.win-amd64\wheel\.\content_planner\data
+copying build\lib\content_planner\data\pricing.json -> build\bdist.win-amd64\wheel\.\content_planner\data
+copying build\lib\content_planner\domain.py -> build\bdist.win-amd64\wheel\.\content_planner
+copying build\lib\content_planner\model.py -> build\bdist.win-amd64\wheel\.\content_planner
+copying build\lib\content_planner\tools.py -> build\bdist.win-amd64\wheel\.\content_planner
+copying build\lib\content_planner\__init__.py -> build\bdist.win-amd64\wheel\.\content_planner
+running install_egg_info
+Copying src\xiaoying_content_planner.egg-info to build\bdist.win-amd64\wheel\.\xiaoying_content_planner-0.1.0-py3.10.egg-info
+running install_scripts
+creating build\bdist.win-amd64\wheel\xiaoying_content_planner-0.1.0.dist-info\WHEEL
+creating 'C:\Users\11250\Desktop\xiaoying\dist\.tmp-14nm88cw\xiaoying_content_planner-0.1.0-py3-none-any.whl' and adding 'build\bdist.win-amd64\wheel' to it
+adding 'content_planner/__init__.py'
+adding 'content_planner/catalog.py'
+adding 'content_planner/contracts.py'
+adding 'content_planner/domain.py'
+adding 'content_planner/model.py'
+adding 'content_planner/tools.py'
+adding 'content_planner/data/aliases.json'
+adding 'content_planner/data/materials.json'
+adding 'content_planner/data/pricing.json'
+adding 'xiaoying_content_planner-0.1.0.dist-info/METADATA'
+adding 'xiaoying_content_planner-0.1.0.dist-info/WHEEL'
+adding 'xiaoying_content_planner-0.1.0.dist-info/top_level.txt'
+adding 'xiaoying_content_planner-0.1.0.dist-info/RECORD'
+removing build\bdist.win-amd64\wheel
+Successfully built xiaoying_content_planner-0.1.0.tar.gz and xiaoying_content_planner-0.1.0-py3-none-any.whl

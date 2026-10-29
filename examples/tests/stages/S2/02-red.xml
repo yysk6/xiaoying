@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.276" timestamp="2026-10-29T22:34:32.446542+08:00" hostname="LAPTOP-MGTK4A2U"><testcase classname="tests.unit.test_catalog" name="test_catalog_loads_hashes_from_package_outside_repository" time="0.010"><failure message="ModuleNotFoundError: No module named 'content_planner.catalog'">tests\unit\test_catalog.py:18: in test_catalog_loads_hashes_from_package_outside_repository
+    from content_planner.catalog import load_catalog
+E   ModuleNotFoundError: No module named 'content_planner.catalog'</failure></testcase></testsuite></testsuites>
