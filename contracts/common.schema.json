@@ -1,0 +1,1530 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Shared DTO definitions v1.0",
+  "$defs": {
+    "Script": {
+      "type": "object",
+      "properties": {
+        "script_id": {
+          "type": "string",
+          "pattern": "^script_[0-9a-f]{64}$"
+        },
+        "script_input_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "hook": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "body": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "cta": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^M[0-9]{2}$"
+          },
+          "minItems": 1,
+          "maxItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "script_id",
+        "script_input_hash",
+        "title",
+        "hook",
+        "body",
+        "cta",
+        "source_ids"
+      ],
+      "additionalProperties": false
+    },
+    "Material": {
+      "type": "object",
+      "properties": {
+        "material_id": {
+          "type": "string",
+          "pattern": "^M[0-9]{2}$"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          },
+          "minItems": 1
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "minItems": 1
+        },
+        "fee_units": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lead_minutes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "score": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "material_id",
+        "version",
+        "title",
+        "tags",
+        "facts",
+        "fee_units",
+        "lead_minutes",
+        "score"
+      ],
+      "additionalProperties": false
+    },
+    "LineItem": {
+      "type": "object",
+      "properties": {
+        "step_id": {
+          "enum": [
+            "material_prepare",
+            "script_finalize",
+            "video_edit",
+            "review"
+          ]
+        },
+        "catalog_item_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "fee_units": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "duration_minutes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "step_id",
+        "catalog_item_id",
+        "fee_units",
+        "duration_minutes"
+      ],
+      "additionalProperties": false
+    },
+    "TaskPlanStep": {
+      "type": "object",
+      "properties": {
+        "step_id": {
+          "enum": [
+            "material_prepare",
+            "script_finalize",
+            "video_edit",
+            "review"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "depends_on": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "minItems": 0,
+          "maxItems": 1
+        },
+        "fee_units": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "duration_minutes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status": {
+          "const": "planned"
+        },
+        "starts_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+        },
+        "finishes_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+        }
+      },
+      "required": [
+        "step_id",
+        "description",
+        "depends_on",
+        "fee_units",
+        "duration_minutes",
+        "status",
+        "starts_at",
+        "finishes_at"
+      ],
+      "additionalProperties": false
+    },
+    "Candidate": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "candidate_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "material_id": {
+          "type": "string",
+          "pattern": "^M[0-9]{2}$"
+        },
+        "creative_brief": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "production_mode": {
+          "enum": [
+            "basic",
+            "premium"
+          ]
+        },
+        "script_input_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "revision",
+        "candidate_hash",
+        "material_id",
+        "creative_brief",
+        "production_mode",
+        "script_input_hash"
+      ],
+      "additionalProperties": false
+    },
+    "Alternative": {
+      "type": "object",
+      "properties": {
+        "production_mode": {
+          "enum": [
+            "basic",
+            "premium"
+          ]
+        },
+        "total_units": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_minutes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "estimated_finish_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+        },
+        "within_budget": {
+          "type": "boolean"
+        },
+        "within_deadline": {
+          "type": "boolean"
+        },
+        "feasible": {
+          "type": "boolean"
+        },
+        "budget_gap_units": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "deadline_gap_minutes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "production_mode",
+        "total_units",
+        "total_minutes",
+        "estimated_finish_at",
+        "within_budget",
+        "within_deadline",
+        "feasible",
+        "budget_gap_units",
+        "deadline_gap_minutes"
+      ],
+      "additionalProperties": false
+    },
+    "Estimate": {
+      "type": "object",
+      "properties": {
+        "estimate_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "candidate_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "script_id": {
+          "type": "string",
+          "pattern": "^script_[0-9a-f]{64}$"
+        },
+        "pricing_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "quoted_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+        },
+        "line_items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LineItem"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "total_units": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_minutes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "estimated_finish_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+        },
+        "within_budget": {
+          "type": "boolean"
+        },
+        "within_deadline": {
+          "type": "boolean"
+        },
+        "feasible": {
+          "type": "boolean"
+        },
+        "budget_gap_units": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "deadline_gap_minutes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Alternative"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        }
+      },
+      "required": [
+        "estimate_id",
+        "revision",
+        "candidate_hash",
+        "script_id",
+        "pricing_hash",
+        "quoted_at",
+        "line_items",
+        "total_units",
+        "total_minutes",
+        "estimated_finish_at",
+        "within_budget",
+        "within_deadline",
+        "feasible",
+        "budget_gap_units",
+        "deadline_gap_minutes",
+        "alternatives"
+      ],
+      "additionalProperties": false
+    },
+    "SavedPlan": {
+      "type": "object",
+      "properties": {
+        "plan_id": {
+          "type": "string",
+          "pattern": "^plan_[0-9a-f]{64}$"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9_-]+$"
+        },
+        "topic": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "candidate": {
+          "$ref": "#/$defs/Candidate"
+        },
+        "script": {
+          "$ref": "#/$defs/Script"
+        },
+        "task_plan": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TaskPlanStep"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "line_items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LineItem"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "total_units": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_minutes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "estimated_start_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+        },
+        "estimated_finish_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+        },
+        "deadline_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+        },
+        "budget_units": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "saved_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^M[0-9]{2}$"
+          },
+          "minItems": 1,
+          "maxItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "plan_id",
+        "request_id",
+        "topic",
+        "candidate",
+        "script",
+        "task_plan",
+        "line_items",
+        "total_units",
+        "total_minutes",
+        "estimated_start_at",
+        "estimated_finish_at",
+        "deadline_at",
+        "budget_units",
+        "saved_at",
+        "content_hash",
+        "source_ids"
+      ],
+      "additionalProperties": false
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "details": {
+          "type": "object",
+          "description": "按错误码解释的诊断JSON；不能作为成功产物或修改业务状态"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable",
+        "details"
+      ],
+      "additionalProperties": false
+    },
+    "Manifest": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "catalog_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "pricing_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "aliases_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "planner_prompt_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "script_prompt_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "model_id": {
+          "enum": [
+            "deepseek-v4-pro",
+            "mock"
+          ]
+        },
+        "thinking": {
+          "const": "disabled"
+        }
+      },
+      "required": [
+        "schema_version",
+        "catalog_sha256",
+        "pricing_sha256",
+        "aliases_sha256",
+        "planner_prompt_version",
+        "script_prompt_version",
+        "model_id",
+        "thinking"
+      ],
+      "additionalProperties": false
+    },
+    "ToolResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "tool_call_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "tool": {
+              "const": "search_materials"
+            },
+            "ok": {
+              "type": "boolean"
+            },
+            "reused": {
+              "type": "boolean"
+            },
+            "data": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "catalog_hash": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "materials": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/Material"
+                      },
+                      "minItems": 0,
+                      "maxItems": 5
+                    }
+                  },
+                  "required": [
+                    "query",
+                    "catalog_hash",
+                    "materials"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "error": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Error"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "tool_call_id",
+            "tool",
+            "ok",
+            "reused",
+            "data",
+            "error"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "ok": {
+                    "const": true
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "query": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200
+                      },
+                      "catalog_hash": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{64}$"
+                      },
+                      "materials": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/$defs/Material"
+                        },
+                        "minItems": 0,
+                        "maxItems": 5
+                      }
+                    },
+                    "required": [
+                      "query",
+                      "catalog_hash",
+                      "materials"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "error": {
+                    "type": "null"
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "data": {
+                    "type": "null"
+                  },
+                  "error": {
+                    "$ref": "#/$defs/Error"
+                  },
+                  "reused": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tool_call_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "tool": {
+              "const": "revise_plan"
+            },
+            "ok": {
+              "type": "boolean"
+            },
+            "reused": {
+              "type": "boolean"
+            },
+            "data": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "revision": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 4
+                    },
+                    "candidate_hash": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "material_id": {
+                      "type": "string",
+                      "pattern": "^M[0-9]{2}$"
+                    },
+                    "creative_brief": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "production_mode": {
+                      "enum": [
+                        "basic",
+                        "premium"
+                      ]
+                    },
+                    "script_input_hash": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "script_reused": {
+                      "type": "boolean"
+                    },
+                    "invalidated": {
+                      "type": "array",
+                      "items": {
+                        "enum": [
+                          "script",
+                          "estimate"
+                        ]
+                      },
+                      "minItems": 0,
+                      "maxItems": 2,
+                      "uniqueItems": true
+                    }
+                  },
+                  "required": [
+                    "revision",
+                    "candidate_hash",
+                    "material_id",
+                    "creative_brief",
+                    "production_mode",
+                    "script_input_hash",
+                    "script_reused",
+                    "invalidated"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "error": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Error"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "tool_call_id",
+            "tool",
+            "ok",
+            "reused",
+            "data",
+            "error"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "ok": {
+                    "const": true
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "revision": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 4
+                      },
+                      "candidate_hash": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{64}$"
+                      },
+                      "material_id": {
+                        "type": "string",
+                        "pattern": "^M[0-9]{2}$"
+                      },
+                      "creative_brief": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 500
+                      },
+                      "production_mode": {
+                        "enum": [
+                          "basic",
+                          "premium"
+                        ]
+                      },
+                      "script_input_hash": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{64}$"
+                      },
+                      "script_reused": {
+                        "type": "boolean"
+                      },
+                      "invalidated": {
+                        "type": "array",
+                        "items": {
+                          "enum": [
+                            "script",
+                            "estimate"
+                          ]
+                        },
+                        "minItems": 0,
+                        "maxItems": 2,
+                        "uniqueItems": true
+                      }
+                    },
+                    "required": [
+                      "revision",
+                      "candidate_hash",
+                      "material_id",
+                      "creative_brief",
+                      "production_mode",
+                      "script_input_hash",
+                      "script_reused",
+                      "invalidated"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "error": {
+                    "type": "null"
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "data": {
+                    "type": "null"
+                  },
+                  "error": {
+                    "$ref": "#/$defs/Error"
+                  },
+                  "reused": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tool_call_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "tool": {
+              "const": "generate_script"
+            },
+            "ok": {
+              "type": "boolean"
+            },
+            "reused": {
+              "type": "boolean"
+            },
+            "data": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Script"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "error": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Error"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "tool_call_id",
+            "tool",
+            "ok",
+            "reused",
+            "data",
+            "error"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "ok": {
+                    "const": true
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "data": {
+                    "$ref": "#/$defs/Script"
+                  },
+                  "error": {
+                    "type": "null"
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "data": {
+                    "type": "null"
+                  },
+                  "error": {
+                    "$ref": "#/$defs/Error"
+                  },
+                  "reused": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tool_call_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "tool": {
+              "const": "estimate_cost"
+            },
+            "ok": {
+              "type": "boolean"
+            },
+            "reused": {
+              "type": "boolean"
+            },
+            "data": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Estimate"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "error": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Error"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "tool_call_id",
+            "tool",
+            "ok",
+            "reused",
+            "data",
+            "error"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "ok": {
+                    "const": true
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "data": {
+                    "$ref": "#/$defs/Estimate"
+                  },
+                  "error": {
+                    "type": "null"
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "data": {
+                    "type": "null"
+                  },
+                  "error": {
+                    "$ref": "#/$defs/Error"
+                  },
+                  "reused": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tool_call_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "tool": {
+              "const": "save_plan"
+            },
+            "ok": {
+              "type": "boolean"
+            },
+            "reused": {
+              "type": "boolean"
+            },
+            "data": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "plan_id": {
+                      "type": "string",
+                      "pattern": "^plan_[0-9a-f]{64}$"
+                    },
+                    "request_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 64,
+                      "pattern": "^[A-Za-z0-9_-]+$"
+                    },
+                    "saved_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+                    },
+                    "content_hash": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "saved_plan": {
+                      "$ref": "#/$defs/SavedPlan"
+                    }
+                  },
+                  "required": [
+                    "plan_id",
+                    "request_id",
+                    "saved_at",
+                    "content_hash",
+                    "saved_plan"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "error": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Error"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "tool_call_id",
+            "tool",
+            "ok",
+            "reused",
+            "data",
+            "error"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "ok": {
+                    "const": true
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "plan_id": {
+                        "type": "string",
+                        "pattern": "^plan_[0-9a-f]{64}$"
+                      },
+                      "request_id": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[A-Za-z0-9_-]+$"
+                      },
+                      "saved_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+                      },
+                      "content_hash": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{64}$"
+                      },
+                      "saved_plan": {
+                        "$ref": "#/$defs/SavedPlan"
+                      }
+                    },
+                    "required": [
+                      "plan_id",
+                      "request_id",
+                      "saved_at",
+                      "content_hash",
+                      "saved_plan"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "error": {
+                    "type": "null"
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "data": {
+                    "type": "null"
+                  },
+                  "error": {
+                    "$ref": "#/$defs/Error"
+                  },
+                  "reused": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tool_call_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "tool": {
+              "const": "stop_task"
+            },
+            "ok": {
+              "type": "boolean"
+            },
+            "reused": {
+              "type": "boolean"
+            },
+            "data": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "const": "incomplete"
+                    },
+                    "reason": {
+                      "enum": [
+                        "no_material",
+                        "constraints_unsatisfied",
+                        "tool_failure"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "evaluated_candidates": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/Estimate"
+                      },
+                      "minItems": 0,
+                      "maxItems": 24
+                    },
+                    "latest_gap": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "budget_gap_units": {
+                              "type": "integer",
+                              "minimum": 0
+                            },
+                            "deadline_gap_minutes": {
+                              "type": "integer",
+                              "minimum": 0
+                            }
+                          },
+                          "required": [
+                            "budget_gap_units",
+                            "deadline_gap_minutes"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "retained_artifact_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                      },
+                      "minItems": 0
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "reason",
+                    "message",
+                    "evaluated_candidates",
+                    "latest_gap",
+                    "retained_artifact_ids"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "error": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Error"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "tool_call_id",
+            "tool",
+            "ok",
+            "reused",
+            "data",
+            "error"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "ok": {
+                    "const": true
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "const": "incomplete"
+                      },
+                      "reason": {
+                        "enum": [
+                          "no_material",
+                          "constraints_unsatisfied",
+                          "tool_failure"
+                        ]
+                      },
+                      "message": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 500
+                      },
+                      "evaluated_candidates": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/$defs/Estimate"
+                        },
+                        "minItems": 0,
+                        "maxItems": 24
+                      },
+                      "latest_gap": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "budget_gap_units": {
+                                "type": "integer",
+                                "minimum": 0
+                              },
+                              "deadline_gap_minutes": {
+                                "type": "integer",
+                                "minimum": 0
+                              }
+                            },
+                            "required": [
+                              "budget_gap_units",
+                              "deadline_gap_minutes"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "retained_artifact_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 100
+                        },
+                        "minItems": 0
+                      }
+                    },
+                    "required": [
+                      "status",
+                      "reason",
+                      "message",
+                      "evaluated_candidates",
+                      "latest_gap",
+                      "retained_artifact_ids"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "error": {
+                    "type": "null"
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "data": {
+                    "type": "null"
+                  },
+                  "error": {
+                    "$ref": "#/$defs/Error"
+                  },
+                  "reused": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "ExecutionStep": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "operation_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "tool_call_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "tool": {
+          "enum": [
+            "search_materials",
+            "revise_plan",
+            "generate_script",
+            "estimate_cost",
+            "save_plan",
+            "stop_task"
+          ]
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "enum": [
+            "started",
+            "succeeded",
+            "failed",
+            "rejected",
+            "interrupted"
+          ]
+        },
+        "reused": {
+          "type": "boolean"
+        },
+        "result_index": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "event_id",
+        "operation_id",
+        "tool_call_id",
+        "tool",
+        "attempt",
+        "status",
+        "reused",
+        "result_index",
+        "error_code"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

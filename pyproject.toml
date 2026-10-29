@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xiaoying-content-planner"
+version = "0.1.0"
+description = "A bounded, resumable content planning agent with auditable local tools"
+requires-python = ">=3.10"
+dependencies = [
+  "langgraph==1.2.18",
+  "langgraph-checkpoint-sqlite==3.1.2",
+  "pydantic==2.12.5",
+  "httpx==0.28.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.0.3", "jsonschema==4.26.0", "build==1.4.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+content_planner = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = ["live: explicitly enabled paid model evaluation"]
+addopts = "-ra"

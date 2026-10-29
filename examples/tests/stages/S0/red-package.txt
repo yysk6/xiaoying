@@ -1,0 +1,26 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+______________________ test_minimal_package_is_installed ______________________
+
+    def test_minimal_package_is_installed():
+>       package = importlib.import_module("content_planner")
+
+tests\unit\test_package.py:6: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\AppData\Local\Programs\Python\Python310\lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+<frozen importlib._bootstrap>:1050: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1027: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'content_planner', import_ = <function _gcd_import at 0x000002D0F4BF3490>
+
+>   ???
+E   ModuleNotFoundError: No module named 'content_planner'
+
+<frozen importlib._bootstrap>:1004: ModuleNotFoundError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_package.py::test_minimal_package_is_installed - Module...
+1 failed in 0.14s

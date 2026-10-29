@@ -1,0 +1,125 @@
+{"step": "runtime_from_lock", "command": ["C:\\Users\\11250\\Desktop\\xiaoying\\work\\s0-clean\\Scripts\\python.exe", "-m", "pip", "install", "--disable-pip-version-check", "--no-deps", "--no-index", "--find-links", "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s0-wheelhouse", "-r", "C:\\Users\\11250\\Desktop\\xiaoying\\requirements.lock"]}
+Looking in links: c:\Users\11250\Desktop\xiaoying\work\s0-wheelhouse
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\aiosqlite-0.22.1-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\annotated_types-0.8.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\anyio-4.15.1-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\certifi-2026.10.23-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\charset_normalizer-3.5.2-cp310-cp310-win_amd64.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\distro-1.9.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\exceptiongroup-1.3.1-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\h11-0.16.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\httpcore-1.0.9-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\httpcore2-2.14.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\httpx-0.28.1-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\httpx2-2.14.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\idna-3.20-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\jsonpatch-1.38-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\jsonpointer-3.6-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\langchain_core-1.7.1-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\langchain_protocol-0.0.20-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\langgraph-1.2.18-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\langgraph_checkpoint-4.3.1-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\langgraph_checkpoint_sqlite-3.1.2-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\langgraph_prebuilt-1.1.1-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\langgraph_sdk-0.4.10-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\langsmith-0.14.14-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\orjson-3.13.0-cp310-cp310-win_amd64.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\ormsgpack-1.12.2-cp310-cp310-win_amd64.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\packaging-26.3-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\pydantic-2.12.5-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\pydantic_core-2.41.5-cp310-cp310-win_amd64.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\pyyaml-6.0.3-cp310-cp310-win_amd64.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\requests-2.34.2-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\requests_toolbelt-1.0.0-py2.py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\sniffio-1.3.1-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\sqlite_vec-0.1.9-py3-none-win_amd64.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\tenacity-9.2.1-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\truststore-0.10.5-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\typing_extensions-4.16.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\typing_inspection-0.4.4-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\urllib3-2.8.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\uuid_utils-0.19.0-cp310-abi3-win_amd64.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\websockets-16.1.1-cp310-cp310-win_amd64.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\xxhash-4.0.2-cp310-cp310-win_amd64.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\zstandard-0.25.0-cp310-cp310-win_amd64.whl
+Installing collected packages: sqlite-vec, zstandard, xxhash, websockets, uuid-utils, urllib3, typing-inspection, typing-extensions, truststore, tenacity, sniffio, requests-toolbelt, requests, pyyaml, pydantic-core, pydantic, packaging, ormsgpack, orjson, langsmith, langgraph-sdk, langgraph-prebuilt, langgraph-checkpoint-sqlite, langgraph-checkpoint, langgraph, langchain-protocol, langchain-core, jsonpointer, jsonpatch, idna, httpx2, httpx, httpcore2, httpcore, h11, exceptiongroup, distro, charset-normalizer, certifi, anyio, annotated-types, aiosqlite
+Successfully installed aiosqlite-0.22.1 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.10.23 charset-normalizer-3.5.2 distro-1.9.0 exceptiongroup-1.3.1 h11-0.16.0 httpcore-1.0.9 httpcore2-2.14.0 httpx-0.28.1 httpx2-2.14.0 idna-3.20 jsonpatch-1.38 jsonpointer-3.6 langchain-core-1.7.1 langchain-protocol-0.0.20 langgraph-1.2.18 langgraph-checkpoint-4.3.1 langgraph-checkpoint-sqlite-3.1.2 langgraph-prebuilt-1.1.1 langgraph-sdk-0.4.10 langsmith-0.14.14 orjson-3.13.0 ormsgpack-1.12.2 packaging-26.3 pydantic-2.12.5 pydantic-core-2.41.5 pyyaml-6.0.3 requests-2.34.2 requests-toolbelt-1.0.0 sniffio-1.3.1 sqlite-vec-0.1.9 tenacity-9.2.1 truststore-0.10.5 typing-extensions-4.16.0 typing-inspection-0.4.4 urllib3-2.8.0 uuid-utils-0.19.0 websockets-16.1.1 xxhash-4.0.2 zstandard-0.25.0
+{"step": "install_wheel", "command": ["C:\\Users\\11250\\Desktop\\xiaoying\\work\\s0-clean\\Scripts\\python.exe", "-m", "pip", "install", "--disable-pip-version-check", "--no-deps", "--no-index", "C:\\Users\\11250\\Desktop\\xiaoying\\dist\\xiaoying_content_planner-0.1.0-py3-none-any.whl"]}
+Processing c:\users\11250\desktop\xiaoying\dist\xiaoying_content_planner-0.1.0-py3-none-any.whl
+Installing collected packages: xiaoying-content-planner
+Successfully installed xiaoying-content-planner-0.1.0
+{"step": "runtime_pip_check", "command": ["C:\\Users\\11250\\Desktop\\xiaoying\\work\\s0-clean\\Scripts\\python.exe", "-m", "pip", "check"]}
+No broken requirements found.
+{"step": "wheel_import_outside_repository", "command": ["C:\\Users\\11250\\Desktop\\xiaoying\\work\\s0-clean\\Scripts\\python.exe", "-I", "-c", "import content_planner,sys,json; from pathlib import Path; assert Path(content_planner.__file__).resolve().is_relative_to(Path(sys.prefix).resolve()); assert content_planner.__version__=='0.1.0'; print(json.dumps({'version':content_planner.__version__,'module':content_planner.__file__}))"]}
+{"version": "0.1.0", "module": "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s0-clean\\lib\\site-packages\\content_planner\\__init__.py"}
+{"step": "development_from_lock", "command": ["C:\\Users\\11250\\Desktop\\xiaoying\\work\\s0-clean\\Scripts\\python.exe", "-m", "pip", "install", "--disable-pip-version-check", "--no-deps", "--no-index", "--find-links", "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s0-wheelhouse", "-r", "C:\\Users\\11250\\Desktop\\xiaoying\\requirements-dev.lock"]}
+Looking in links: c:\Users\11250\Desktop\xiaoying\work\s0-wheelhouse
+Requirement already satisfied: aiosqlite==0.22.1 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 4)) (0.22.1)
+Requirement already satisfied: annotated-types==0.8.0 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 5)) (0.8.0)
+Requirement already satisfied: anyio==4.15.1 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 6)) (4.15.1)
+Requirement already satisfied: certifi==2026.10.23 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 7)) (2026.10.23)
+Requirement already satisfied: charset-normalizer==3.5.2 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 8)) (3.5.2)
+Requirement already satisfied: distro==1.9.0 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 9)) (1.9.0)
+Requirement already satisfied: exceptiongroup==1.3.1 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 10)) (1.3.1)
+Requirement already satisfied: h11==0.16.0 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 11)) (0.16.0)
+Requirement already satisfied: httpcore==1.0.9 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 12)) (1.0.9)
+Requirement already satisfied: httpcore2==2.14.0 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 13)) (2.14.0)
+Requirement already satisfied: httpx==0.28.1 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 14)) (0.28.1)
+Requirement already satisfied: httpx2==2.14.0 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 15)) (2.14.0)
+Requirement already satisfied: idna==3.20 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 16)) (3.20)
+Requirement already satisfied: jsonpatch==1.38 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 17)) (1.38)
+Requirement already satisfied: jsonpointer==3.6 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 18)) (3.6)
+Requirement already satisfied: langchain-core==1.7.1 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 19)) (1.7.1)
+Requirement already satisfied: langchain-protocol==0.0.20 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 20)) (0.0.20)
+Requirement already satisfied: langgraph==1.2.18 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 21)) (1.2.18)
+Requirement already satisfied: langgraph-checkpoint==4.3.1 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 22)) (4.3.1)
+Requirement already satisfied: langgraph-checkpoint-sqlite==3.1.2 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 23)) (3.1.2)
+Requirement already satisfied: langgraph-prebuilt==1.1.1 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 24)) (1.1.1)
+Requirement already satisfied: langgraph-sdk==0.4.10 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 25)) (0.4.10)
+Requirement already satisfied: langsmith==0.14.14 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 26)) (0.14.14)
+Requirement already satisfied: orjson==3.13.0 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 27)) (3.13.0)
+Requirement already satisfied: ormsgpack==1.12.2 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 28)) (1.12.2)
+Requirement already satisfied: packaging==26.3 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 29)) (26.3)
+Requirement already satisfied: pydantic==2.12.5 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 30)) (2.12.5)
+Requirement already satisfied: pydantic-core==2.41.5 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 31)) (2.41.5)
+Requirement already satisfied: pyyaml==6.0.3 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 32)) (6.0.3)
+Requirement already satisfied: requests==2.34.2 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 33)) (2.34.2)
+Requirement already satisfied: requests-toolbelt==1.0.0 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 34)) (1.0.0)
+Requirement already satisfied: sniffio==1.3.1 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 35)) (1.3.1)
+Requirement already satisfied: sqlite-vec==0.1.9 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 36)) (0.1.9)
+Requirement already satisfied: tenacity==9.2.1 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 37)) (9.2.1)
+Requirement already satisfied: truststore==0.10.5 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 38)) (0.10.5)
+Requirement already satisfied: typing-extensions==4.16.0 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 39)) (4.16.0)
+Requirement already satisfied: typing-inspection==0.4.4 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 40)) (0.4.4)
+Requirement already satisfied: urllib3==2.8.0 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 41)) (2.8.0)
+Requirement already satisfied: uuid-utils==0.19.0 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 42)) (0.19.0)
+Requirement already satisfied: websockets==16.1.1 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 43)) (16.1.1)
+Requirement already satisfied: xxhash==4.0.2 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 44)) (4.0.2)
+Requirement already satisfied: zstandard==0.25.0 in c:\users\11250\desktop\xiaoying\work\s0-clean\lib\site-packages (from -r C:\Users\11250\Desktop\xiaoying\requirements.lock (line 45)) (0.25.0)
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\attrs-26.1.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\build-1.4.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\colorama-0.4.6-py2.py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\iniconfig-2.3.1-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\jsonschema-4.26.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\jsonschema_specifications-2025.9.1-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\pluggy-1.7.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\pygments-2.21.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\pyproject_hooks-1.3.3-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\pytest-9.0.3-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\referencing-0.37.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\rpds_py-0.30.0-cp310-cp310-win_amd64.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\setuptools-80.9.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\tomli-2.5.0-py3-none-any.whl
+Processing c:\users\11250\desktop\xiaoying\work\s0-wheelhouse\wheel-0.45.1-py3-none-any.whl
+Installing collected packages: wheel, tomli, setuptools, rpds-py, referencing, pytest, pyproject-hooks, pygments, pluggy, jsonschema-specifications, jsonschema, iniconfig, colorama, build, attrs
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 63.2.0
+    Uninstalling setuptools-63.2.0:
+      Successfully uninstalled setuptools-63.2.0
+Successfully installed attrs-26.1.0 build-1.4.0 colorama-0.4.6 iniconfig-2.3.1 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 pluggy-1.7.0 pygments-2.21.0 pyproject-hooks-1.3.3 pytest-9.0.3 referencing-0.37.0 rpds-py-0.30.0 setuptools-80.9.0 tomli-2.5.0 wheel-0.45.1
+{"step": "development_pip_check", "command": ["C:\\Users\\11250\\Desktop\\xiaoying\\work\\s0-clean\\Scripts\\python.exe", "-m", "pip", "check"]}
+No broken requirements found.
+{"step": "s0_tests_against_wheel", "command": ["C:\\Users\\11250\\Desktop\\xiaoying\\work\\s0-clean\\Scripts\\python.exe", "-I", "-m", "pytest", "-q", "-c", "C:\\Users\\11250\\Desktop\\xiaoying\\pyproject.toml", "-o", "pythonpath=", "--import-mode=importlib", "C:\\Users\\11250\\Desktop\\xiaoying\\tests\\unit\\test_environment.py", "C:\\Users\\11250\\Desktop\\xiaoying\\tests\\unit\\test_package.py", "--junitxml=C:\\Users\\11250\\Desktop\\xiaoying\\examples\\tests\\stages\\S0\\clean-junit.xml"]}
+....                                                                     [100%]
+4 passed in 0.91s
+{"stage": "S0", "status": "passed", "steps": [{"name": "runtime_from_lock", "exit_code": 0}, {"name": "install_wheel", "exit_code": 0}, {"name": "runtime_pip_check", "exit_code": 0}, {"name": "wheel_import_outside_repository", "exit_code": 0}, {"name": "development_from_lock", "exit_code": 0}, {"name": "development_pip_check", "exit_code": 0}, {"name": "s0_tests_against_wheel", "exit_code": 0}], "model_calls": 0, "offline_install": true, "cwd_is_repository": false}

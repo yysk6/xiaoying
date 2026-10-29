@@ -1,0 +1,37 @@
+{
+  "stage": "S0",
+  "status": "passed",
+  "steps": [
+    {
+      "name": "runtime_from_lock",
+      "exit_code": 0
+    },
+    {
+      "name": "install_wheel",
+      "exit_code": 0
+    },
+    {
+      "name": "runtime_pip_check",
+      "exit_code": 0
+    },
+    {
+      "name": "wheel_import_outside_repository",
+      "exit_code": 0
+    },
+    {
+      "name": "development_from_lock",
+      "exit_code": 0
+    },
+    {
+      "name": "development_pip_check",
+      "exit_code": 0
+    },
+    {
+      "name": "s0_tests_against_wheel",
+      "exit_code": 0
+    }
+  ],
+  "model_calls": 0,
+  "offline_install": true,
+  "cwd_is_repository": false
+}

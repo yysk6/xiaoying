@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Exported TraceEvent v1.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "event_id": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9_-]+$"
+    },
+    "origin": {
+      "enum": [
+        "model",
+        "fixture_setup",
+        "system"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "model",
+        "tool",
+        "control",
+        "validation",
+        "lifecycle"
+      ]
+    },
+    "operation_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "phase": {
+      "enum": [
+        "started",
+        "succeeded",
+        "failed",
+        "rejected",
+        "interrupted"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "args": {
+      "anyOf": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rationale": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "observation_summary": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "result_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "task_status": {
+      "enum": [
+        "running",
+        "completed",
+        "incomplete"
+      ]
+    },
+    "next_decision_event_id": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+    }
+  },
+  "required": [
+    "schema_version",
+    "event_id",
+    "request_id",
+    "origin",
+    "kind",
+    "operation_id",
+    "phase",
+    "name",
+    "args",
+    "rationale",
+    "observation_summary",
+    "result_ref",
+    "task_status",
+    "next_decision_event_id",
+    "created_at"
+  ],
+  "additionalProperties": false
+}

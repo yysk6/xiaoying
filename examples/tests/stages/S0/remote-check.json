@@ -1,0 +1,6 @@
+{
+  "Command": "git ls-remote origin",
+  "ExitCode": 0,
+  "RefCount": 0,
+  "Refs": []
+}

@@ -1,0 +1,15 @@
+
+=================================== ERRORS ====================================
+_______________ ERROR collecting tests/unit/test_environment.py _______________
+ImportError while importing test module 'C:\Users\11250\Desktop\xiaoying\tests\unit\test_environment.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python310\lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\unit\test_environment.py:6: in <module>
+    from langgraph.graph import StateGraph, START, END
+E   ModuleNotFoundError: No module named 'langgraph'
+=========================== short test summary info ===========================
+ERROR tests/unit/test_environment.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.46s

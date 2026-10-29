@@ -1,0 +1,29 @@
+{
+  "stage": "S0",
+  "status": "ready_for_review",
+  "user_acceptance": "pending",
+  "unique_tests": 4,
+  "runs": {
+    "green-junit.xml": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "clean-junit.xml": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "clean_install": "passed",
+  "model_calls": 0,
+  "linux": "NOT_RUN",
+  "files_scanned": 48,
+  "artifacts": {
+    "requirements.lock": "165f241926f9c4093702eae9c00d1f0cba81b375a882a4596366cd6b0d6973b7",
+    "requirements-dev.lock": "ac8af0a8b8a88c6e600a9dc1d5de6fdad9e0a495085ef2fcbfc1d61d70ec47f9",
+    "xiaoying_content_planner-0.1.0-py3-none-any.whl": "190fe07d06e01357ce5fe1a1e3fe6c3cfc96d398cb42a0e597e44fdd7dabf174"
+  }
+}
