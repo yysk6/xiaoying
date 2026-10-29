@@ -1,3 +1,3 @@
 # 尚未启动阶段的测试草稿
 
-domain_cases.py为此前保留的S1草稿，不由pytest自动收集。S0只验证工程基线，不把该草稿计作通过或跳过。S1获准后将其移回tests/unit/test_domain.py，检查预期并重新运行Red；不能凭草稿存在声称业务验收完成。
+S1已获明确授权，原domain_cases.py草稿的断言经审阅后移入tests/unit/test_contracts.py与test_domain.py，并扩充时间、指纹、报价与脚本边界。实际Red/Green结果见docs/stages/S1.md；原草稿不另算一组测试。

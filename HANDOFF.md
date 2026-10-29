@@ -12,14 +12,14 @@
 
 ## 2. 当前停在哪里
 
-**S0已完成技术自验并推送，状态ready_for_review；用户验收仍为pending。S1未开始。** 用户询问Linux不构成S0验收通过；新增交接文档的要求也不构成继续S1的授权。
+**S1已完成实现与自验，状态ready_for_review，用户验收pending。** 用户于2026-10-29明确授权S1；S0未收到单独验收通过表述，保留pending，不将推进授权伪记为验收。S2及以后未获授权。
 
-已验证的S0基线提交：`576acfbbc000da535f1ee7ae9164029434ed2aed`。此前已核对该SHA与远端main一致。本轮交接/规则更新属于文档变更，不产生新的业务测试结论；最新文档提交通过`git log -1 --format=%H -- HANDOFF.md`查询，避免嵌入自身提交SHA。
+已验证的S0基线提交：`576acfbbc000da535f1ee7ae9164029434ed2aed`，此前已核对与远端main一致。S1开始于`48874f6c44dcb6bde94106a859e36bd1603bcfc3`，开始时main工作区干净、单一worktree，本地origin/main同SHA；本轮未重新联网核对远端，S1未推送。S1提交通过`git log -1 --format=%H -- docs/stages/S1.md`定位，避免嵌入自身提交SHA。
 
 | 阶段 | 实际开发状态 | 用户验收 | 证据或下一步 |
 |---|---|---|---|
 | S0 工程基线 | ready_for_review | pending | [S0报告](docs/stages/S0.md)；等待明确验收 |
-| S1 契约与领域规则 | planned | 未开始 | 有未激活草稿，不是通过的测试 |
+| S1 契约与领域规则 | ready_for_review | pending | [S1报告](docs/stages/S1.md)；115项含S0回归，开发/正式wheel环境均通过 |
 | S2 本地工具 | planned | 未开始 | 以阶段计划为准 |
 | S3 存储与幂等 | planned | 未开始 | 以阶段计划为准 |
 | S4 离线Agent循环 | planned | 未开始 | 以阶段计划为准 |
@@ -33,13 +33,15 @@
 - Python 3.10.8 / Windows，使用项目内独立.venv，不修改全局环境。
 - LangGraph 1.2.18、SQLite checkpointer 3.1.2、Pydantic 2.12.5、HTTPX 0.28.1、pytest 9.0.3组合已安装并通过S0验证。
 - requirements.lock固定42个运行依赖；requirements-dev.lock另外固定15个开发/构建依赖。基于Windows/Python 3.10生成，固定版本但未强制校验下载产物哈希。
-- src/content_planner/__init__.py仅包说明和版本0.1.0，没有领域代码、业务工具、Agent循环、业务数据库表或CLI。
-- 默认pytest有4项工程测试。开发环境4 passed；正式wheel的干净环境中同样4 passed，独立用例总数仍为4。
+- S1新增contracts.py/domain.py：严格输入与脚本DTO、NFC/UTC、可注入Clock、输入/候选/脚本指纹、确定性四分项报价、脚本JSON/来源/明确事实规则。不含业务工具分派、Agent、业务数据库或CLI。
+- 当前默认pytest有111项S1单测和4项S0回归，合计115项；开发环境115 passed，正式wheel干净环境115 passed，独立测试总数仍为115。S0原始4项结果是历史记录，不覆盖重写。
 - checkpoint探针验证“节点一成功、节点二失败、关闭连接重建图后继续，节点一不重跑”；它不证明业务续跑、幂等或真实模型ReAct效果。
-- 已构建sdist/wheel，并通过本地wheelhouse离线安装。仓库外cwd以隔离模式导入的模块来自干净环境site-packages。
-- S0模型调用次数为0；A01—A23业务案例与Live评估尚未通过。
+- S1重新构建sdist/wheel，全新work/s1-clean从本地wheelhouse离线安装。仓库外cwd以隔离模式导入contracts/domain的实际路径均为新环境site-packages；关闭pytest源路径注入后运行全部115项。两份依赖锁与S0一致。
+- 模型调用次数仍为0；A02/A03/A19仅有S1领域断言，完整A01—A23端到端案例与Live仍为NOT_RUN。素材文件读取/校验与工具封装留S2。
 
-证据入口：[汇总](examples/tests/stages/S0/summary.json)、[开发环境JUnit](examples/tests/stages/S0/green-junit.xml)、[干净安装结果](examples/tests/stages/S0/clean-install.json)、[干净环境JUnit](examples/tests/stages/S0/clean-junit.xml)。完整命令和Red记录见S0报告。
+当前证据：[S1汇总](examples/tests/stages/S1/summary.json)、[开发JUnit](examples/tests/stages/S1/green-junit.xml)、[干净安装](examples/tests/stages/S1/clean-install.json)、[干净JUnit](examples/tests/stages/S1/clean-junit.xml)、[领域演示](examples/tests/stages/S1/domain-demo.json)。两轮Red分别33 failed/10 passed与42 failed/23 passed，均退出码1；完整命令见S1报告。S0原证据保留在examples/tests/stages/S0/。
+
+S1决策：结构解析与Clock时效检查分开；脚本指纹不含制作档位；报价只计算指定档位，不自动降档；只在外部输入与脚本边界做规格要求的校验，内部函数接收可信参数，不添加通用重试或防御框架。
 
 ## 4. 关键文件与使用方法
 
@@ -50,8 +52,9 @@
 | docs/07-state-and-storage.md | 状态权威、缓存失效、保存事务、幂等、限额 |
 | docs/08-development-plan.md | S0—S8范围、逐阶段验收和停止边界 |
 | docs/stages/S0.md | 已发生的S0自验事实，用户验收待定 |
-| tests/unit/test_environment.py、test_package.py | 当前默认收集的4项S0测试 |
-| tests/planned/domain_cases.py | S1测试草稿；不收集、不算通过或跳过，S1获准后再激活 |
+| docs/stages/S1.md | 当前S1验收入口；范围、两轮Red、Green与正式wheel复核命令 |
+| tests/unit/test_environment.py、test_package.py | 4项S0回归 |
+| tests/unit/test_contracts.py、test_domain.py | 已从草稿审阅迁入并扩充的111项S1单测；原planned副本已删除 |
 | scripts/lock_dependencies.py | 从已安装项目metadata生成精确版本快照；不是求解器 |
 | scripts/verify_s0.py | 新环境安装正式wheel并验证，目标路径必须不存在，不自动删除旧环境 |
 | content-planner-spec/ | 迁入前历史快照，不是维护源，已被Git忽略 |
@@ -64,7 +67,7 @@
 .\.venv\Scripts\python.exe -m pytest -q
 ```
 
-预期无依赖冲突、4 passed。新机器安装、构建和干净验证见[README](README.md)。已有work/s0-clean时不要复用该路径运行新建环境脚本，使用新的--venv路径，不删除已有证据。
+预期无依赖冲突、115 passed。新机器安装见[README](README.md)，S1正式wheel干净验证见S1报告。verify_s0.py只验证4项S0测试；不要将它当作完整S1验证。已有work/s0-clean/work/s1-clean时使用新环境路径，不删除已有证据。
 
 ## 5. 必须保持的设计与开发边界
 
@@ -79,9 +82,9 @@
 
 ## 6. 下一步允许做什么
 
-当前允许继续处理S0验收反馈和文档维护；**等待用户明确验收S0或明确授权S1后再进入S1**。目前无S0技术阻塞，不需要为此提前调用模型或安装其他系统。
+S1已交付验收包，当前只允许处理S1验收反馈。**等待用户明确验收S1或明确授权S2后再开展S2。** 无S1技术阻塞，不需要提前调用模型、联网安装或增加系统。
 
-S1获准后，仅做输入契约、严格预算/时间校验、Clock、指纹、确定性报价与脚本规则；先审阅/激活S1草稿并取得真实Red。不接数据库、CLI、模型HTTP或业务执行图，不用之前的ModuleNotFoundError冒充完整业务测试证据。
+S2后续获准时，先按阶段计划补验收断言并取得Red，再做包内资料、检索、候选修订、Fake脚本生成与工具封装。不接保存、CLI、自主循环或真实模型。已有S1契约与哈希语义有变动时先修规格和必要回归，不静默改口径。
 
 ## 7. 更新要求与历史
 
@@ -93,3 +96,4 @@ S1获准后，仅做输入契约、严格预算/时间校验、Clock、指纹、
 |---|---|---|
 | 2026-10-29 | S0工程基线提交并推送 | 576acfb；技术自验通过，用户验收pending |
 | 2026-10-29 | 按用户要求建立持续交接文档及强制更新规则 | 仅文档维护，未开始S1、未新增模型调用 |
+| 2026-10-29 | 用户明确授权S1；实现并完成自验 | ready_for_review；115项含S0回归，开发/正式wheel环境均通过；用户验收pending，未开始S2 |

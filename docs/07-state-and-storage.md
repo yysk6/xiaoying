@@ -76,6 +76,10 @@ operation_id规则：planner为`decide:<checkpoint中的决策序号+1>`；工�
 
 input_hash = SHA-256(标准化后的 topic、budget_units、deadline_at UTC、固定受众与平台的 canonical JSON)。request_id 不进入 input_hash；canonical JSON 排序键、UTF-8、无多余空白。
 
+S1确定的指纹序列化：JSON使用ensure_ascii=false、sort_keys=true、separators=(",", ":")，UTC时间使用datetime.isoformat()（+00:00，相同绝对时间的小数尾零归一）。输入对象的键为topic、budget_units、deadline_at、audience（新手创作者）、platform（短视频平台）。
+
+candidate_hash对象包含input_hash、material_hash、creative_brief、production_mode、pricing_hash；script_input_hash对象仅包含topic、audience、platform、material_hash、creative_brief、script_prompt_version、model_id、thinking。brief先做NFC/trim。material_hash对素材内容对象做相同JSON哈希，排除检索score；素材内容变化必须改变指纹。pricing_hash由调用方提供报价文件内容SHA-256，不能只传版本名。模型ID和提示版本显式传入；thinking首版为disabled。request_id、revision、rationale、tool_call_id和当前时间不进入这些内容指纹。指纹纯函数不做缓存读写、版本推进或候选选择，依赖失效执行留待S2。
+
 环境 manifest 独立保存：素材文件内容 SHA-256、报价文件 SHA-256、别名文件 SHA-256、planner/script 提示版本、模型 ID、thinking 配置、契约版本。版本名相同但内容变化仍能被识别。
 
 | 操作 | 条件 | 结果 |

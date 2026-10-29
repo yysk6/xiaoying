@@ -1,0 +1,49 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "title": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "hook": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Hook",
+      "type": "string"
+    },
+    "body": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Body",
+      "type": "string"
+    },
+    "cta": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Cta",
+      "type": "string"
+    },
+    "source_ids": {
+      "items": {
+        "pattern": "^M[0-9]{2}$",
+        "type": "string"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "title": "Source Ids",
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "title",
+    "hook",
+    "body",
+    "cta",
+    "source_ids"
+  ],
+  "title": "ScriptDraft",
+  "type": "object"
+}

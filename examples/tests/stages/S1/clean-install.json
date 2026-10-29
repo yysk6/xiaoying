@@ -1,0 +1,79 @@
+{
+  "stage": "S1",
+  "status": "passed",
+  "platform": "win32",
+  "python": "3.10.8",
+  "offline_install": true,
+  "model_calls": 0,
+  "cwd_is_repository": false,
+  "host_and_model_environment_removed": true,
+  "steps": [
+    {
+      "name": "locked_dependencies",
+      "command": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s1-clean\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "install",
+        "--no-index",
+        "--no-deps",
+        "--find-links",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s0-wheelhouse",
+        "-r",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\requirements-dev.lock"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "install_s1_wheel",
+      "command": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s1-clean\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "install",
+        "--no-index",
+        "--no-deps",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\dist\\xiaoying_content_planner-0.1.0-py3-none-any.whl"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "pip_check",
+      "command": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s1-clean\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "isolated_import",
+      "command": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s1-clean\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys,json; from pathlib import Path; import content_planner.contracts as c; import content_planner.domain as d; assert all(Path(m.__file__).resolve().is_relative_to(Path(sys.prefix).resolve()) for m in (c,d)); print(json.dumps({\"contracts\":c.__file__,\"domain\":d.__file__}))"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "all_tests_against_wheel",
+      "command": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s1-clean\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "pytest",
+        "-q",
+        "-c",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\pyproject.toml",
+        "-o",
+        "pythonpath=",
+        "--import-mode=importlib",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\tests",
+        "--junitxml=C:\\Users\\11250\\Desktop\\xiaoying\\examples\\tests\\stages\\S1\\clean-junit.xml"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

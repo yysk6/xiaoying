@@ -35,6 +35,16 @@ python -m content_planner resume --request-id <ID> --db <runtime.db> --output-di
 
 环境变量：`DEEPSEEK_API_KEY`（仅 live 必需）、`DEEPSEEK_BASE_URL=https://api.deepseek.com`、`DEEPSEEK_MODEL=deepseek-v4-pro`。首版运行仅支持官方 host 与此模型 ID；其他值报配置错误，不暗示兼容任意代理。`.env.example` 只有占位符；环境变量由 shell 设置，本程序首版不自动加载 `.env` 文件。
 
+## S1 领域接口细化（2026-10-29，先于实现）
+
+S1只实现`Request`、`ScriptDraft`与纯领域函数，不提前实现六动作分派、完整TaskResult或数据库。`Request`与request.schema.json一致：request_id必填，三个业务字段可缺失/null；格式错误由Pydantic ValidationError按字段报告。`missing_fields`按topic、budget_units、deadline_at顺序列出缺失/null字段；空白字符串规范化后为空，属于格式错误，不当成缺失。
+
+`require_complete(request, clock)`先检查缺失（NEEDS_INPUT，details.missing_fields），再检查deadline严格晚于clock.now()（INVALID_ARGUMENT，details.field=deadline_at）。结构解析不读取系统时间；后续重复run可先比对指纹再决定是否检查新请求期限。Clock.now()约定返回有时区datetime，SystemClock返回UTC。内部纯函数接收结构合法、字段完整的Request和已经读取的合成数据，不反复验证可信参数，不做通用异常兜底。
+
+`quote(request, material, pricing, production_mode, clock)`只计算调用方指定档位，不替模型选择。返回固定四项line_items、quoted_at、total_units、total_minutes、estimated_finish_at、within_budget、within_deadline、feasible及两个缺口；时间均为UTC ISO字符串，每次调用重新读取Clock。catalog_item_id依次为素材ID、script_finalize、video_edit:<档位>、review。S2再封装工具ID、alternatives、资料读取/校验和工具错误；S1不访问文件、网络或业务数据库。
+
+`ScriptDraft`只接收title/hook/body/cta/source_ids；脚本ID与指纹是后续工具从可信状态补充的派生字段，模型不能提交。`parse_script(raw_json, material)`将JSON/结构错误统一映射为SCRIPT_INVALID，再执行来源与事实规则，不自动修复。百分比按完整数字token比较，不能因80%是180%的子串就视为有依据；允许小数和数字与%之间的空白。固定禁用语按去空白后的单字段文本检查。事实校验版本基线为script-v1；此处细化匹配方式，不扩展到任意自然语言事实证明。
+
 ## 所有动作的共同规则
 
 模型每次选择恰好一个动作。四个业务工具为 `search_materials`、`generate_script`、`estimate_cost`、`save_plan`；两个控制动作为 `revise_plan`、`stop_task`。六者均以函数工具 schema 暴露，只有前四个计为题目业务工具。

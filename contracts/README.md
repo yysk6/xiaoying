@@ -18,3 +18,5 @@ Pydantic必须使用严格整数校验：JSON Schema对`10.0`和`10`的数学整
 脚本事实校验首版边界：source_ids必须等于所选主素材；出现百分比表达（整数或小数后接可选空白和`%`）时，规范化空白后必须在所选facts出现，否则拒绝；固定禁用语“行业第一”“100%准确”不得出现。其他自然语言事实依赖受限提示和人工评估，不宣称已被程序完全证明。校验规则与脚本提示同版本维护，变更必须提升script_prompt_version。
 
 实现阶段以Pydantic定义DTO并导出Schema，CI检查与本规格的字段/必填/枚举/范围语义一致。不能一边改DTO一边保留过时规格。首次生成代码前，本包JSON Schema是接口结构基线。
+
+S1已实现Request与ScriptDraft；导出文件位于examples/tests/stages/S1/。pytest比较Request与request.schema.json、ScriptDraft与common.Script去除派生ID后的字段投影，忽略title/default等注释而保留实际字段约束。其他DTO与CI自动执行尚未实现，不将局部Schema一致性当作完整工具/结果契约通过。

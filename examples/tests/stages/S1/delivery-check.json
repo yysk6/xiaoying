@@ -1,0 +1,8 @@
+{
+  "kind": "static_delivery_check",
+  "local_links_checked": 57,
+  "missing_links": [],
+  "valid_schemas": 6,
+  "credential_pattern_files": [],
+  "note": "Static checks only; does not add business tests or model evidence."
+}

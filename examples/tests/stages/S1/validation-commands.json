@@ -1,0 +1,33 @@
+[
+  {
+    "name": "pip-check",
+    "command": [
+      "C:\\Users\\11250\\Desktop\\xiaoying\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pip",
+      "check"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "green-tests",
+    "command": [
+      "C:\\Users\\11250\\Desktop\\xiaoying\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pytest",
+      "-q",
+      "--junitxml=examples/tests/stages/S1/green-junit.xml"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "build",
+    "command": [
+      "C:\\Users\\11250\\Desktop\\xiaoying\\.venv\\Scripts\\python.exe",
+      "-m",
+      "build",
+      "--no-isolation"
+    ],
+    "exit_code": 0
+  }
+]

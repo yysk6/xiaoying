@@ -1,0 +1,50 @@
+{
+  "stage": "S1",
+  "status": "ready_for_review",
+  "user_acceptance": "pending",
+  "baseline_commit": "48874f6c44dcb6bde94106a859e36bd1603bcfc3",
+  "unique_tests": 115,
+  "s1_unit_tests": 111,
+  "s0_regression_tests": 4,
+  "runs": {
+    "red-contracts.xml": {
+      "tests": 43,
+      "failures": 33,
+      "errors": 0,
+      "skipped": 0
+    },
+    "red-domain.xml": {
+      "tests": 65,
+      "failures": 42,
+      "errors": 0,
+      "skipped": 0
+    },
+    "green-junit.xml": {
+      "tests": 115,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "clean-junit.xml": {
+      "tests": 115,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "clean_install": "passed",
+  "model_calls": 0,
+  "linux": "NOT_RUN",
+  "end_to_end_cases": "NOT_RUN",
+  "live_eval": "NOT_RUN",
+  "artifacts": {
+    "requirements.lock": "165f241926f9c4093702eae9c00d1f0cba81b375a882a4596366cd6b0d6973b7",
+    "requirements-dev.lock": "ac8af0a8b8a88c6e600a9dc1d5de6fdad9e0a495085ef2fcbfc1d61d70ec47f9",
+    "xiaoying_content_planner-0.1.0-py3-none-any.whl": "f08143d35535af0e3afca2764ca94e14dff205defbb7a662f68f39706d88f169"
+  },
+  "timing": {
+    "recorded_start_utc": "2026-10-29 13:37:57 UTC",
+    "recorded_end_utc": "2026-10-29 13:49:11 UTC",
+    "scope": "Partial observed window from contract-test setup through evidence export; prior reading/spec refinement, interruptions, and category-specific time were not timed. Not total project time."
+  }
+}

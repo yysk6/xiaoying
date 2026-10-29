@@ -1,0 +1,110 @@
+{
+  "kind": "pure_domain_function_demo",
+  "clock_source": "fixed_fixture",
+  "clock": "2026-10-29T02:00:00+00:00",
+  "request": {
+    "request_id": "s1-demo",
+    "topic": "字幕推广",
+    "budget_units": 8,
+    "deadline_at": "2026-10-29T03:30:00+00:00"
+  },
+  "quotes": {
+    "basic": {
+      "line_items": [
+        {
+          "step_id": "material_prepare",
+          "catalog_item_id": "M01",
+          "fee_units": 1,
+          "duration_minutes": 10
+        },
+        {
+          "step_id": "script_finalize",
+          "catalog_item_id": "script_finalize",
+          "fee_units": 2,
+          "duration_minutes": 20
+        },
+        {
+          "step_id": "video_edit",
+          "catalog_item_id": "video_edit:basic",
+          "fee_units": 4,
+          "duration_minutes": 45
+        },
+        {
+          "step_id": "review",
+          "catalog_item_id": "review",
+          "fee_units": 1,
+          "duration_minutes": 15
+        }
+      ],
+      "quoted_at": "2026-10-29T02:00:00+00:00",
+      "total_units": 8,
+      "total_minutes": 90,
+      "estimated_finish_at": "2026-10-29T03:30:00+00:00",
+      "within_budget": true,
+      "within_deadline": true,
+      "feasible": true,
+      "budget_gap_units": 0,
+      "deadline_gap_minutes": 0
+    },
+    "premium": {
+      "line_items": [
+        {
+          "step_id": "material_prepare",
+          "catalog_item_id": "M01",
+          "fee_units": 1,
+          "duration_minutes": 10
+        },
+        {
+          "step_id": "script_finalize",
+          "catalog_item_id": "script_finalize",
+          "fee_units": 2,
+          "duration_minutes": 20
+        },
+        {
+          "step_id": "video_edit",
+          "catalog_item_id": "video_edit:premium",
+          "fee_units": 8,
+          "duration_minutes": 90
+        },
+        {
+          "step_id": "review",
+          "catalog_item_id": "review",
+          "fee_units": 1,
+          "duration_minutes": 15
+        }
+      ],
+      "quoted_at": "2026-10-29T02:00:00+00:00",
+      "total_units": 12,
+      "total_minutes": 135,
+      "estimated_finish_at": "2026-10-29T04:15:00+00:00",
+      "within_budget": false,
+      "within_deadline": false,
+      "feasible": false,
+      "budget_gap_units": 4,
+      "deadline_gap_minutes": 45
+    }
+  },
+  "input_hash": "9fee0f24e6cb3fcca11d404cf3b878d9933fa6eff89ad46d573e31af3290325d",
+  "errors": [
+    {
+      "case": "missing_input",
+      "code": "NEEDS_INPUT",
+      "message": "Required business fields are missing",
+      "details": {
+        "missing_fields": [
+          "topic",
+          "budget_units",
+          "deadline_at"
+        ]
+      }
+    },
+    {
+      "case": "invalid_script_json",
+      "code": "SCRIPT_INVALID",
+      "message": "Script JSON or fields are invalid",
+      "details": {}
+    }
+  ],
+  "model_calls": 0,
+  "note": "No CLI, Agent execution, tool execution, database or saved plan is involved."
+}

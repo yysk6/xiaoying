@@ -1,17 +1,19 @@
-# 内容任务规划 Agent — S0 工程基线
+# 内容任务规划 Agent — S1 契约与领域规则
 
 编写日期：2026-10-29（北京时间）。选题：第 2 题。开发方式：SDD（规格驱动开发）+ TDD（测试驱动开发）。
 
-当前S0已完成自验，状态为ready_for_review，等待用户验收。只有最小Python包、依赖锁、工程测试和安装验证脚本；尚未实现业务Agent或CLI，未调用真实模型。规格中的业务示例仍是设计，不是运行证据。
+当前S1已完成自验，状态为ready_for_review，等待用户验收。已有严格输入DTO、Clock、内容指纹、确定性报价与脚本校验；尚未实现业务Agent或CLI，未调用真实模型。用户明确授权了S1；S0未收到单独验收表述，保留pending。
 
 接手或恢复开发请先阅读[上下文交接文档](HANDOFF.md)。该文档须在每阶段交付验收前更新，用户验收或修订后同步更新；规则见AGENTS.md与阶段计划。
 
-## S0 评审入口
+## 当前评审入口
 
+- [S1验收报告](docs/stages/S1.md)：范围、Red/Green、可复核演示及限制。
+- [S1测试汇总](examples/tests/stages/S1/summary.json)：111项S1单测与4项S0回归，开发环境及正式wheel干净环境各115 passed。
 - [S0验收报告](docs/stages/S0.md)：范围、Red/Green、限制和验收步骤。
 - [开发环境结果](examples/tests/stages/S0/green-tests.txt)：4项工程测试通过。
 - [干净安装结果](examples/tests/stages/S0/clean-install.json)：运行/开发锁离线安装、正式wheel导入、相同4项测试通过。
-- [阶段规划](docs/08-development-plan.md)：验收通过后才进入S1。
+- [阶段规划](docs/08-development-plan.md)：当前止于S1验收包，不自动进入S2。
 
 Windows PowerShell（项目根目录，Python 3.10）：
 
@@ -37,7 +39,7 @@ python3 -m venv .venv
 
 requirements.lock锁定42个运行依赖，requirements-dev.lock增加15个开发/构建依赖，基于Windows/Python 3.10实际环境生成。固定版本，未启用artifact哈希校验；不修改全局环境。全新机器首次安装需联网。
 
-构建后运行`python scripts/verify_s0.py --venv work/s0-review`可重建干净环境，从仓库外cwd导入正式wheel并重跑S0测试。目标路径必须不存在；重复评审换一个新路径，不自动删除旧环境。脚本移除模型及宿主专用环境变量，不调用模型。
+构建后运行`python scripts/verify_s0.py --venv work/s0-review`可重建干净环境，从仓库外cwd导入正式wheel并重跑S0的4项工程测试。该脚本不覆盖全部S1测试；S1正式wheel完整复核命令见阶段报告。目标路径必须不存在；重复评审换一个新路径，不自动删除旧环境。脚本移除模型及宿主专用环境变量，不调用模型。
 
 若先将锁定依赖下载到wheelhouse，可增加`--wheelhouse work/s0-wheelhouse`离线安装。本次已实际验证该方式；wheelhouse、虚拟环境和dist产物不提交Git。
 
@@ -45,7 +47,7 @@ requirements.lock锁定42个运行依赖，requirements-dev.lock增加15个开�
 
 后续项目根目录由用户指定为 `C:/Users/11250/Desktop/xiaoying/`。该路径只用于本地开发定位，程序、测试和运行命令不得依赖这一绝对路径。根目录下的docs/与contracts/是后续唯一维护版本；现有content-planner-spec/保留为迁入前快照，不要求同步修改。
 
-项目及开发流程采用公开第三方库、Python标准库、Git和通用命令行工具，不依赖Codex内部插件/MCP/账户/宿主运行时。S0支持安装和工程测试；离线业务模式在S5交付、真实模型模式在S7验证，不能提前宣称可用。
+项目及开发流程采用公开第三方库、Python标准库、Git和通用命令行工具，不依赖Codex内部插件/MCP/账户/宿主运行时。S1支持直接调用纯领域函数与单测；离线业务模式在S5交付、真实模型模式在S7验证。
 
 ## 已确定的路线
 
@@ -72,7 +74,7 @@ requirements.lock锁定42个运行依赖，requirements-dev.lock增加15个开�
 
 机器可读规格在 [contracts/](contracts/)。接口字段约束以 JSON Schema 为准，状态和业务语义以相应文档为准。两者冲突必须先修规格，禁止实现自行选择一种解释。
 
-本轮静态检查结果见 [spec-review.json](spec-review.json)：只验证Schema、文档链接和合成报价一致性，不代表业务测试或真实模型效果验证。
+规格阶段的历史静态检查见 [spec-review.json](spec-review.json)；后续实现和测试结果分别以阶段报告为准，该历史文件不代表当前代码覆盖或模型效果。
 
 ## 必须一致理解的业务口径
 
@@ -87,7 +89,7 @@ requirements.lock锁定42个运行依赖，requirements-dev.lock增加15个开�
 
 ## 开始实现前的门槛
 
-开发按[分阶段计划](docs/08-development-plan.md)推进。每阶段先写测试、最小实现、自验，提交阶段报告后等待用户验收，不自动跨阶段。目前S0未验收。
+开发按[分阶段计划](docs/08-development-plan.md)推进。每阶段先写测试、最小实现、自验，提交阶段报告后等待用户验收，不自动跨阶段。目前S1自验通过，待用户验收。
 
 语言和模型已经确定，技术验证门槛按阶段区分：
 
@@ -113,4 +115,4 @@ docs/                       # 保留本包文档并更新实际结果
 contracts/                  # 本包接口规格；实现后由 Pydantic 导出并检查兼容
 ```
 
-当前src仅含包标识和版本；tests/unit有4项S0测试。S1草稿保留在tests/planned/domain_cases.py，未激活，不计为通过或跳过。业务模块按阶段添加。
+当前src包含包标识、contracts.py及domain.py；tests/unit有4项S0测试和111项S1单测。原S1草稿已审阅、迁入并扩充为test_contracts.py/test_domain.py。素材包内分发、工具分派等按后续阶段添加，S1运行函数接收调用方提供的数据。
