@@ -2,13 +2,14 @@
 
 编写日期：2026-10-29（北京时间）。选题：第 2 题。开发方式：SDD（规格驱动开发）+ TDD（测试驱动开发）。
 
-已实现领域规则、本地工具及S3 SQLite保存/幂等；尚未实现业务Agent或CLI。当前阶段、授权与验收状态统一见[HANDOFF](HANDOFF.md)，实际测试与审查见[S3报告](docs/stages/S3.md)。
+已实现领域规则、本地工具、SQLite保存/幂等及S4离线LangGraph循环；CLI尚未实现。当前阶段、授权与验收状态统一见[HANDOFF](HANDOFF.md)，实际测试与审查见[S4报告](docs/stages/S4.md)。
 
 接手或恢复开发请先阅读[上下文交接文档](HANDOFF.md)。该文档须在每阶段交付验收前更新，用户验收或修订后同步更新；规则见AGENTS.md与阶段计划。
 
 ## 当前评审入口
 
-- [S3验收报告](docs/stages/S3.md)：存储/保存范围、集中Red/Green记录、最终测试与双轴审查。
+- [S4验收报告](docs/stages/S4.md)：离线循环、真实工具反馈、停止/限额、上下文和审查。
+- [S3验收报告](docs/stages/S3.md)：历史存储/保存验证。
 - [S2验收报告](docs/stages/S2.md)：历史工具层测试与wheel验证。
 - [本地工具演示](examples/tests/stages/S2/local-tools-demo.json)：显式调用得到12→8报价，脚本复用；不是Agent决策或保存记录。
 - [S1验收报告](docs/stages/S1.md)：历史契约与领域层证据。
@@ -118,4 +119,4 @@ docs/                       # 保留本包文档并更新实际结果
 contracts/                  # 本包接口规格；实现后由 Pydantic 导出并检查兼容
 ```
 
-LocalTools执行调用方明确指定的检索、修订、生成、估算和保存；保存时注入storage.Repository，已有SQLite请求索引、事件与方案原子提交。完整工具分派、自主循环、CLI及跨进程业务恢复按后续阶段实现。
+PlanningAgent通过LangGraph decide/dispatch执行ModelClient明确返回的六动作；现有LocalTools和SQLite继续守住依赖、约束及保存事实。Fake仅验证流程，不证明真实模型效果。任务记忆与上下文裁剪见docs/02；CLI、跨进程业务resume及真实HTTP按后续阶段实现。

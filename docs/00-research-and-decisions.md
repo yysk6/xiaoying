@@ -14,6 +14,8 @@
 
 不采用完整 LangChain Agent/Deep Agents，不引入 LangSmith 账户、远端 checkpoint 或工作流服务。LangGraph 本身不要求必须使用 LangChain 的模型封装。
 
+2026-10-30重新评估：用户明确决定不接入Deep Agents，继续原路线并授权S4。原任务为有界单任务工具闭环，采用结构化任务记忆、完整交互组裁剪和SQLite checkpoint即可；不为跨任务长期记忆、多Agent或通用文件工具升级框架。此前中断的环境尝试未改变项目依赖/锁文件，应用仍使用Python 3.10.8。上下文细化见docs/02的S4段落。
+
 执行图固定为两个节点 `decide -> dispatch -> decide`；候选方案参数由真实模型选择。图中的固定边是执行骨架，不替模型选择低价方案或决定重试。
 
 ## ADR-002：DeepSeek 的薄 HTTP 适配器

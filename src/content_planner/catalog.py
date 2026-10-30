@@ -79,11 +79,15 @@ class Catalog:
     pricing_hash: str
     aliases_hash: str
 
-    def search(self, query: str, top_k: int) -> list[dict]:
+    def normalize_query(self, query: str) -> str:
         text = normalize_text(query).lower()
         aliases = {alias.lower(): target.lower() for alias, target in self.aliases.items()}
         for alias in sorted(aliases, key=lambda item: (-len(item), item)):
             text = text.replace(alias, aliases[alias])
+        return text
+
+    def search(self, query: str, top_k: int) -> list[dict]:
+        text = self.normalize_query(query)
         matches = []
         for material in self.materials:
             score = sum(tag in text for tag in {item.lower() for item in material.tags})

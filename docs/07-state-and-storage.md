@@ -151,6 +151,14 @@ checkpoint 与 events 不是统一跨连接事务。dispatch 重放相同 operat
 
 ## 限额和失败策略
 
+### S4接通范围（实现前，2026-10-30）
+
+本阶段接通六动作的事件及planner/script模型请求日志，所有started先提交；Repository.start_operation将累计计数检查与写started放在同一短事务。模型32、动作24、候选4沿用下表；同逻辑键连续可重试失败最多2次，第三次返回TOOL_RETRY_LIMIT_REACHED而不实际执行，仍受动作总额限制。合法动作后清除协议错误连续计数，普通业务失败不会被当成参数协议错误。GraphRecursionError映射GRAPH_LIMIT_REACHED。
+
+S4动作事件args_json用`{arguments: 原参数, logical_key: 程序指纹}`信封保存审计参数与重试键；S3保存事务的成功事件继续保存原参数，不改公开ToolResult。计数只从started派生。业务成功/失败及状态补丁随后单独提交；save成功事件与plan保持原事务。JSON参数非法、未知工具及多调用为validation事件，不算执行动作；有完整合法ID时逐一配对错误工具消息，缺ID等无法合法回传时立即停止。重复tool_call_id为协议错误，不能当作新动作执行。
+
+任务工作记忆补充unresolved_failures（逻辑键到失败工具/调用引用），成功解决同键；检索成功清除此前检索不可用，候选变更后stop只考虑仍适用的生成/估算/保存失败。stop_task校验真实空检索/当前不可行估算/当前未解决业务工具错误；成功输出历史估算和保留产物引用，状态incomplete。纯文本结束为MODEL_STOPPED。累计日志和工作状态进入真实SQLite/checkpoint，本阶段不开放CLI/resume或完整导出。
+
 | 限制 | 固定首版值 | 命中后的行为 |
 |---|---|---|
 | 模型请求 | 每任务累计 32 次，包含 script 生成和失败请求 | incomplete / MODEL_CALL_LIMIT_REACHED |

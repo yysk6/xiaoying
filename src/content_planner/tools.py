@@ -4,13 +4,15 @@ from copy import deepcopy
 from dataclasses import dataclass
 from datetime import datetime, timezone
 import hashlib
+import json
 
 from pydantic import ValidationError
 
 from .catalog import Catalog
-from .contracts import Request, RevisionArgs, RevisePlanArgs, SavePlanArgs, ScriptDraft, SearchMaterialsArgs
+from .contracts import Request, RevisionArgs, RevisePlanArgs, SavePlanArgs, ScriptDraft, SearchMaterialsArgs, StopTaskArgs
 from .domain import AUDIENCE, PLATFORM, Clock, Fault, build_saved_plan, candidate_hash, parse_script, quote, require_complete, script_input_hash
 from .model import ModelClient, ModelUnavailable
+from .prompts import PLANNER_VERSION, SCRIPT_VERSION
 from .storage import Repository
 
 
@@ -34,12 +36,13 @@ class LocalTools:
             'request': request.model_dump(mode='json'),
             'manifest': {'schema_version': '1.0', 'catalog_sha256': catalog.catalog_hash,
                          'pricing_sha256': catalog.pricing_hash, 'aliases_sha256': catalog.aliases_hash,
-                         'planner_prompt_version': 'planner-v1', 'script_prompt_version': 'script-v1',
+                         'planner_prompt_version': PLANNER_VERSION, 'script_prompt_version': SCRIPT_VERSION,
                          'model_id': model.model_id, 'thinking': 'disabled'},
             'seen_material_ids': [], 'tool_results': [], 'last_observation': None,
             'candidate_history': {}, 'current_revision': None, 'script_artifacts': {},
             'estimate_history': {}, 'current_estimate_id': None, 'status': 'running', 'reason': None,
             'saved_plan_id': None,
+            'unresolved_failures': {},
         }
         if repository is not None:
             repository.register(request, backend='mock' if model.model_id == 'mock' else 'deepseek',
@@ -73,6 +76,24 @@ class LocalTools:
     def save_plan(self, tool_call_id: str, arguments: dict) -> dict:
         return self._invoke('save_plan', tool_call_id, arguments, SavePlanArgs, self._save)
 
+    def stop_task(self, tool_call_id: str, arguments: dict) -> dict:
+        return self._invoke('stop_task', tool_call_id, arguments, StopTaskArgs, self._stop)
+
+    def logical_key(self, tool: str, arguments: dict) -> str:
+        candidate = self._state['candidate_history'].get(str(self._state['current_revision']), {})
+        script = self._state['script_artifacts'].get(candidate.get('script_input_hash'), {})
+        if tool == 'search_materials':
+            value = [self._catalog.normalize_query(arguments['query']), arguments['top_k'], self._catalog.catalog_hash]
+        elif tool == 'generate_script':
+            value = [candidate.get('script_input_hash')]
+        elif tool in {'estimate_cost', 'save_plan'}:
+            value = [candidate.get('candidate_hash'), script.get('script_id'), self._catalog.pricing_hash]
+            if tool == 'save_plan':
+                value.append(self._request.request_id)
+        else:
+            value = {key: value for key, value in arguments.items() if key != 'rationale'}
+        return tool + ':' + hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
     def _invoke(self, tool, call_id, arguments, argument_type, operation):
         if self._state['status'] == 'completed' and tool != 'save_plan':
             return self._failure(tool, call_id, Fault('TASK_ALREADY_COMPLETED', 'Plan has already been committed'))
@@ -85,11 +106,30 @@ class LocalTools:
         try:
             data, reused = operation(args, call_id)
         except Fault as error:
-            return self._failure(tool, call_id, error)
-        return self._record(tool, call_id, data, reused=reused)
+            result = self._failure(tool, call_id, error)
+        else:
+            result = self._record(tool, call_id, data, reused=reused)
+        if tool in {'search_materials', 'generate_script', 'estimate_cost', 'save_plan'}:
+            key = self.logical_key(tool, args.model_dump(mode='json'))
+            failures = self._state['unresolved_failures']
+            if result['ok']:
+                failures.pop(key, None)
+                if tool == 'search_materials':
+                    self._state['unresolved_failures'] = {key: ref for key, ref in failures.items()
+                                                          if ref['tool'] != 'search_materials'}
+            else:
+                failures[key] = {'tool': tool, 'tool_call_id': call_id}
+        self._state['unresolved_failures'] = {
+            key: ref for key, ref in self._state['unresolved_failures'].items()
+            if ref['tool'] == 'search_materials' or key == self.logical_key(ref['tool'], {})}
+        return result
 
     def _failure(self, tool, call_id, fault):
         return self._record(tool, call_id, error=self._error(fault))
+
+    def reject_action(self, tool: str, call_id: str, fault: Fault) -> dict:
+        """Retain a dispatch rejection without executing its business operation."""
+        return self._failure(tool, call_id, fault)
 
     @staticmethod
     def _error(fault):
@@ -116,7 +156,7 @@ class LocalTools:
         digest = candidate_hash(self._request, material, args.creative_brief, args.production_mode,
                                 self._catalog.pricing_hash)
         script_digest = script_input_hash(self._request, material, args.creative_brief,
-                                          model_id=self._model.model_id, script_prompt_version='script-v1')
+                                          model_id=self._model.model_id, script_prompt_version=SCRIPT_VERSION)
         revision = self._state['current_revision']
         current = self._state['candidate_history'].get(str(revision))
         reused = current is not None and current['candidate_hash'] == digest
@@ -228,3 +268,21 @@ class LocalTools:
             raise
         self._state.update(status='completed', saved_plan_id=data['plan_id'])
         return data, reused
+
+    def _stop(self, args, call_id):
+        state = self._state
+        latest = state['estimate_history'].get(state['current_estimate_id'])
+        empty = any(result['tool'] == 'search_materials' and result['ok'] and not result['data']['materials']
+                    for result in state['tool_results']) and state['current_revision'] is None
+        failures = [ref for key, ref in state['unresolved_failures'].items()
+                    if ref['tool'] == 'search_materials' or key == self.logical_key(ref['tool'], {})]
+        supported = {'no_material': empty, 'constraints_unsatisfied': latest is not None and not latest['feasible'],
+                     'tool_failure': bool(failures)}
+        if not supported[args.reason]:
+            raise Fault('STOP_REASON_UNSUPPORTED', 'Stop reason is not supported by current observations')
+        state.update(status='incomplete', reason=args.reason, message=args.message)
+        gap = {key: latest[key] for key in ('budget_gap_units', 'deadline_gap_minutes')} if latest else None
+        retained = [script['script_id'] for script in state['script_artifacts'].values()] + list(state['estimate_history'])
+        return {'status': 'incomplete', 'reason': args.reason, 'message': args.message,
+                'evaluated_candidates': list(state['estimate_history'].values()), 'latest_gap': gap,
+                'retained_artifact_ids': retained}, False

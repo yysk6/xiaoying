@@ -79,3 +79,13 @@ class RevisionArgs(ActionArgs):
 
 class SavePlanArgs(RevisionArgs):
     estimate_id: Annotated[str, Field(min_length=1, max_length=100)]
+
+
+class StopTaskArgs(ActionArgs):
+    reason: Literal['no_material', 'constraints_unsatisfied', 'tool_failure']
+    message: Annotated[str, Field(min_length=1, max_length=500)]
+
+
+ACTION_ARGS = {'search_materials': SearchMaterialsArgs, 'revise_plan': RevisePlanArgs,
+               'generate_script': RevisionArgs, 'estimate_cost': RevisionArgs,
+               'save_plan': SavePlanArgs, 'stop_task': StopTaskArgs}

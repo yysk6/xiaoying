@@ -145,6 +145,26 @@ class Repository:
         except sqlite3.Error as error:
             raise Fault('STORAGE_UNAVAILABLE', 'Cannot write event') from error
 
+    def start_operation(self, request_id, operation_id, *, limit, **fields):
+        """Check the cumulative quota and persist started in one short transaction."""
+        kinds = ('model',) if fields['kind'] == 'model' else ('tool', 'control')
+        try:
+            with self._db:
+                self._db.execute('BEGIN IMMEDIATE')
+                exists = self._db.execute("SELECT 1 FROM events WHERE request_id=? AND operation_id=? AND phase='started'",
+                                          (request_id, operation_id)).fetchone()
+                if exists:
+                    return
+                placeholders = ','.join('?' for _ in kinds)
+                count = self._db.execute(f"SELECT count(*) FROM events WHERE request_id=? AND phase='started' AND kind IN ({placeholders})",
+                                         (request_id, *kinds)).fetchone()[0]
+                if count >= limit:
+                    code = 'MODEL_CALL_LIMIT_REACHED' if fields['kind'] == 'model' else 'ACTION_LIMIT_REACHED'
+                    raise Fault(code, 'Cumulative operation limit reached')
+                self._insert_event(request_id, operation_id, 'started', **fields)
+        except sqlite3.Error as error:
+            raise Fault('STORAGE_UNAVAILABLE', 'Cannot start operation') from error
+
     def events(self, request_id: str) -> list[dict]:
         try:
             rows = self._db.execute('SELECT * FROM events WHERE request_id=? ORDER BY event_id',

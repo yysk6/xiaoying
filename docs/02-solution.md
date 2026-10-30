@@ -58,6 +58,14 @@ flowchart TD
 
 恢复时使用 checkpoint 中已完成的合法消息与状态；若遇到已提交方案，以数据库已提交事实为准结束。禁止伪造工具调用消息来填补历史。错误日志只包含可公开错误码与必要摘要。
 
+### S4任务记忆与上下文边界（实现前，2026-10-30）
+
+用户决定继续LangGraph路线，不引入Deep Agents或跨任务长期记忆。任务记忆为结构化业务状态、真实事件与框架checkpoint；开发用HANDOFF不进入应用。公开入口为`PlanningAgent(request, catalog, model, clock, repository, checkpointer).run(recursion_limit=80)`，返回内部AgentState，不冒充S5完整TaskResult。一次run启动/读取当前线程，重复run读已有checkpoint；跨进程resume归S6。
+
+ModelClient增加`decide(context)->dict`，返回普通Chat Completions风格assistant消息，tool_calls内保留真实id、function.name与arguments原始JSON字符串。Fake增加显式decisions列表和独立decision_requests；不根据预算/失败内置决策。graph.py只连接decide/dispatch，agent.py承担协议、上下文及额度协调，LocalTools继续执行业务。
+
+每次上下文含固定指令、六动作Schema、不可变请求/报价表、当前候选、有效产物ID/摘要、最近观察、已评估报价与未解决失败及剩余额度。仅向模型传最近完整调用/结果组，历史上限12000个JSON字符；旧组从真实结果生成动作名/ok/error_code摘要，不生成伪造消息或调用额外摘要模型。完整历史保留在checkpoint/events。总context UTF-8序列化不得超过65536字节，包含Schema；必要事实自身超限时以CONTEXT_LIMIT_REACHED停止，不删预算/期限或虚报token精确计数。真实token预算校准归S7。
+
 ## 真实依赖与替身
 
 真实模式：真实 DeepSeek planner + 真实脚本生成；素材、估算、保存为实际本地函数，其中数据为合成资料。
