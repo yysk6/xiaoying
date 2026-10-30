@@ -1,21 +1,21 @@
-# 内容任务规划 Agent — S2 合成资料与本地工具
+# 内容任务规划 Agent
 
 编写日期：2026-10-29（北京时间）。选题：第 2 题。开发方式：SDD（规格驱动开发）+ TDD（测试驱动开发）。
 
-当前S2已完成实现和自验，状态为ready_for_review，等待用户验收。已有包内合成资料、确定性检索、候选修订、Fake脚本生成与估算，以及S1领域规则；尚未实现业务Agent或CLI，未调用真实模型。用户明确授权S2；S0/S1单独验收仍保留pending。
+已实现领域规则、本地工具及S3 SQLite保存/幂等；尚未实现业务Agent或CLI。当前阶段、授权与验收状态统一见[HANDOFF](HANDOFF.md)，实际测试与审查见[S3报告](docs/stages/S3.md)。
 
 接手或恢复开发请先阅读[上下文交接文档](HANDOFF.md)。该文档须在每阶段交付验收前更新，用户验收或修订后同步更新；规则见AGENTS.md与阶段计划。
 
 ## 当前评审入口
 
-- [S2验收报告](docs/stages/S2.md)：范围、逐行为Red/Green、双轴审查与复核命令。
-- [S2测试汇总](examples/tests/stages/S2/summary.json)：56项S2与115项既有回归，开发环境及正式wheel干净环境各171 passed。
+- [S3验收报告](docs/stages/S3.md)：存储/保存范围、集中Red/Green记录、最终测试与双轴审查。
+- [S2验收报告](docs/stages/S2.md)：历史工具层测试与wheel验证。
 - [本地工具演示](examples/tests/stages/S2/local-tools-demo.json)：显式调用得到12→8报价，脚本复用；不是Agent决策或保存记录。
 - [S1验收报告](docs/stages/S1.md)：历史契约与领域层证据。
 - [S0验收报告](docs/stages/S0.md)：范围、Red/Green、限制和验收步骤。
 - [开发环境结果](examples/tests/stages/S0/green-tests.txt)：4项工程测试通过。
 - [干净安装结果](examples/tests/stages/S0/clean-install.json)：运行/开发锁离线安装、正式wheel导入、相同4项测试通过。
-- [阶段规划](docs/08-development-plan.md)：当前止于S2验收包，S3等待授权。
+- [阶段规划](docs/08-development-plan.md)：范围、效率约定与逐阶段交付规则。
 
 Windows PowerShell（项目根目录，Python 3.10）：
 
@@ -41,7 +41,7 @@ python3 -m venv .venv
 
 requirements.lock锁定42个运行依赖，requirements-dev.lock增加15个开发/构建依赖，基于Windows/Python 3.10实际环境生成。固定版本，未启用artifact哈希校验；不修改全局环境。全新机器首次安装需联网。
 
-构建后运行`python scripts/verify_s2.py --venv work/s2-review`可重建干净环境，从仓库外cwd隔离导入正式wheel、检查包内资料并运行全部171项测试。目标路径必须不存在；重复评审换一个新路径，保留旧环境。脚本移除模型及宿主专用环境变量，不调用真实模型。旧verify_s0.py仅复核4项S0工程测试。
+需要复核安装时，先重新构建，再运行`python scripts/verify_s2.py --venv work/package-review`：脚本从仓库外cwd隔离导入正式wheel、检查包内资料并运行当前全部测试。目标路径必须不存在，保留旧环境。脚本移除模型及宿主专用环境变量，不调用真实模型。S2已有实际安装证据；S3未重新验证安装，不能把旧dist当作S3产物。旧verify_s0.py仅复核4项S0工程测试。
 
 若先将锁定依赖下载到wheelhouse，可增加`--wheelhouse work/s0-wheelhouse`离线安装。本次已实际验证该方式；wheelhouse、虚拟环境和dist产物不提交Git。
 
@@ -92,7 +92,7 @@ requirements.lock锁定42个运行依赖，requirements-dev.lock增加15个开�
 
 ## 开始实现前的门槛
 
-开发按[分阶段计划](docs/08-development-plan.md)推进。每阶段先写测试、最小实现、自验，提交阶段报告后等待用户验收，不自动跨阶段。目前S2自验通过，待用户验收。
+开发按[分阶段计划](docs/08-development-plan.md)推进。每阶段先写测试、最小实现、自验，提交阶段报告后等待用户验收；最新状态见HANDOFF。当前数据库仅支持单进程串行操作，不支持并发执行同一任务的checkpoint。
 
 语言和模型已经确定，技术验证门槛按阶段区分：
 
@@ -118,4 +118,4 @@ docs/                       # 保留本包文档并更新实际结果
 contracts/                  # 本包接口规格；实现后由 Pydantic 导出并检查兼容
 ```
 
-当前新增catalog.py、model.py、tools.py及三份包内资料。LocalTools只执行调用方明确指定的四个动作；56项S2测试覆盖检索、候选/产物关系、失败及工具契约。保存、完整工具分派与自主循环按后续阶段实现。
+LocalTools执行调用方明确指定的检索、修订、生成、估算和保存；保存时注入storage.Repository，已有SQLite请求索引、事件与方案原子提交。完整工具分派、自主循环、CLI及跨进程业务恢复按后续阶段实现。

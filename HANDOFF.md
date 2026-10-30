@@ -1,69 +1,47 @@
 # 项目上下文交接
 
-更新：2026-10-29（北京时间）。首读本文件后核对实际Git；需求与契约以docs/、contracts/为准，历史实现与证据引用阶段报告，不靠本快照推定授权。
+更新：2026-10-30（UTC+08）。接手先读AGENTS.md、本文件、[S3报告](docs/stages/S3.md)及[阶段计划](docs/08-development-plan.md)，再执行git status --short --branch、git log -3 --oneline、git worktree list、git remote -v。以实际Git和最新用户指令为准，保留已有未提交改动。
 
-## 接手步骤
+## 当前阶段与授权
 
-1. 阅读AGENTS.md、本文件、[阶段计划](docs/08-development-plan.md)、[S2报告](docs/stages/S2.md)。
-2. 执行git status --short --branch、git log -3 --oneline、git worktree list、git remote -v；保留已有未提交改动。完成标准是确认实际HEAD、分支、工作区和远端配置。
-3. 确认用户最新授权/验收。当前仅S2获准，已交付待验收；下一步处理反馈，S3等待明确授权。
+**S3 ready_for_review，用户验收pending。** 用户明确要求按新开发规则进行S3，已完成实现、自验与双轴审查；这不代填S0—S2的单独验收。S4—S8未开始、未获授权。下一步处理S3反馈，收到明确授权后再开S4。
 
-## 当前事实与授权
+历史报告：[S0](docs/stages/S0.md)、[S1](docs/stages/S1.md)、[S2](docs/stages/S2.md)。当前范围和详细事实集中在[S3](docs/stages/S3.md)，不在其他文档重复整份验收记录。
 
-**S2 ready_for_review，用户验收pending。** 用户明确要求“现在进行s2”，因此完成了本阶段；没有将该授权当作S0/S1单独验收通过。S3—S8未开始。
+## 实现与关键决定
 
-| 阶段 | 实现/自验 | 用户验收 | 证据 |
-|---|---|---|---|
-| S0 工程基线 | ready_for_review | pending | [S0](docs/stages/S0.md)，原4项工程证据保留 |
-| S1 契约与领域 | ready_for_review | pending | [S1](docs/stages/S1.md)，当时开发/正式wheel各115项通过 |
-| S2 本地工具 | ready_for_review | pending | [S2](docs/stages/S2.md)，当前开发/正式wheel各171项通过；双轴审查完成 |
-| S3—S8 | planned | 未开始 | [计划](docs/08-development-plan.md)按阶段执行 |
+- 已有S1领域规则与S2本地资料/检索/修订/Fake生成/估算；S3新增storage.Repository及LocalTools可选repository/save_plan，SQLite为真实标准库实现。
+- requests是不可变输入索引，events保留尝试事实，plans提交行是保存成功权威。保存成功ToolResult与completed补丁和plan原子提交，提交后才更新内存；触发器故障验证整笔回滚。
+- 新请求注册检查完整输入和期限；重复ID先比较标准化指纹，原输入过期也读历史。不同输入REQUEST_CONFLICT；同内容方案复用，异内容SAVE_CONFLICT；数据库唯一约束兜底。
+- 保存必须有当前revision、匹配脚本、最新可行估算，并在保存时重新报价；旧引用/新超期拒绝，失败保留有效产物。已提交方案优先，成功operation重放读取事件/补丁。
+- 接入repository的LocalTools构造时注册请求并查已有提交行；这不是完整service或checkpoint恢复。只有保存动作接入事件，其他动作journal/额度归S4，跨进程恢复/manifest核对归S6。
+- 接口、哈希及错误的权威细节见[存储规格S3细化](docs/07-state-and-storage.md#s3实现边界与验收入口2026-10-30实现前)。仅支持单进程串行操作，不支持并发执行同一任务的checkpoint。
 
-S2实际增加包内资料及校验、别名/tag确定性检索、候选修订、Fake脚本生成、估算与本地状态。未实现数据库保存、业务图、累计额度、CLI、业务恢复或真实HTTP。全项目尚未完成。
+## 验证与复现
 
-## 版本与同步
-
-仓库为[yysk6/xiaoying](https://github.com/yysk6/xiaoying)，main，单worktree。S2起始提交`c83699d1e8417fd917f69da74150604aff5499a1`，开始时工作区干净。S2提交用`git log -1 --format=%H -- docs/stages/S2.md`定位；不要猜测本文自身SHA。
-
-本地origin/main为`48874f6c44dcb6bde94106a859e36bd1603bcfc3`。本轮未联网核对远端，未推送；本地跟踪引用不等于远端实时状态。S0原同步记录与S1提交细节见对应阶段报告。本机Git需要命令级safe.directory时只针对实际项目路径设置，不改全局信任。
-
-## 当前验证与复核
-
-Windows/Python 3.10.8；依赖锁与S2基线相同，42个运行依赖、15个额外开发依赖。当前共171项（56项S2 + 115项既有回归），开发环境和正式wheel干净环境均171 passed、0 failed、0 skipped。两个环境不累计成342项。真实模型调用仍为0；完整A01—A23及Live、Linux/其他Python仍NOT_RUN。
-
-PowerShell项目根目录：
+Windows/Python 3.10.8，最终**193 passed、0 failed、0 skipped**（22项S3新增+171项既有回归），见[最终JUnit](examples/tests/stages/S3/pytest-junit.xml)。真实SQLite行数、外键/唯一约束、触发器回滚、关闭重开查询、保存依赖/时效、输出Schema均有断言。两轴审查发现各0，未解决项0，详细命令与Red/Green集中见S3报告。
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip check
-.\.venv\Scripts\python.exe -m pytest -q
-.\.venv\Scripts\python.exe -m build --no-isolation
-.\.venv\Scripts\python.exe scripts/verify_s2.py --venv work/s2-review --wheelhouse work/s0-wheelhouse
-.\.venv\Scripts\python.exe examples/s2_local_tools.py
+.\.venv\Scripts\python.exe -m pytest -q tests/unit/test_storage.py tests/unit/test_save_plan.py
+.\.venv\Scripts\python.exe -m pytest -q --junitxml=examples/tests/stages/S3/pytest-junit.xml
 ```
 
-新机器按README安装；无本地wheelhouse时省略该选项，从公开PyPI按锁安装。POSIX路径与安装命令见README，未实测的平台仍标NOT_RUN。verify_s2要求全新环境路径；保留已有work/s0-clean、s1-clean、s2-clean、s2-reviewed，选新名称。旧verify_s0只测4项工程测试，不能当作完整S2验证。
+新环境安装与POSIX命令见README；POSIX解释器路径为.venv/bin/python。依赖锁、打包配置、资源和CLI入口未改，本轮未重建wheel或干净环境；旧dist/S2安装证据不能标为S3安装通过。完整A01—A23、Live、Linux/其他Python、S3干净安装仍NOT_RUN，真实模型调用0。无S3技术阻塞。
 
-实际记录：[汇总](examples/tests/stages/S2/summary.json)、[开发JUnit](examples/tests/stages/S2/final.xml)、[干净环境命令](examples/tests/stages/S2/clean-install.json)、[干净JUnit](examples/tests/stages/S2/clean-junit.xml)、[Red/Green命令](examples/tests/stages/S2/cycles.jsonl)、[工具演示](examples/tests/stages/S2/local-tools-demo.json)。演示使用固定Clock和显式动作，状态仍running，不是Agent、保存记录或真实模型效果。
+## Git与同步
 
-双轴审查见[S2-review](docs/stages/S2-review.md)：Standards发现0；Spec初始发现1项synthetic数字类型缺口，真实Red后修复并复核；两个轴未解决项均0。无S2技术阻塞，用户验收仍独立待定。
+仓库[yysk6/xiaoying](https://github.com/yysk6/xiaoying)，main，单worktree。S3起始HEAD为`0a805fdddbf34a3bff5d5c395f3307b63a732e59`，开始时已有用户要求的效率规则改动（HANDOFF、docs/05、docs/08），已保留沿用。阶段提交可通过git log -1 --format=%H -- docs/stages/S3.md定位，不猜测本文自身SHA。
 
-## 继续时要保持的决策
+本地origin/main仍为`48874f6c44dcb6bde94106a859e36bd1603bcfc3`，本轮未联网核对、未推送。需要命令级safe.directory时只针对实际项目路径，不改全局信任。
 
-- 公开边界和本阶段细化以[契约](docs/06-contracts.md)为准；先改规格/验收，再TDD改变行为。遵循karpathy-guidelines，保持最小充分修改。
-- LocalTools拥有一份已验证资料快照，每个动作不重读文件；manifest记录原始文件哈希。跨快照恢复核对归S6。
-- 档位变化复用脚本、废弃当前估算；素材/brief变化使两者失效，历史保留。每次显式估算新读一次Clock，两档位共用时刻；估算不自动替调用方选basic。
-- 调用方提供唯一tool_call_id。工具失败留观察，不自动重试；Fake只提供显式生成响应，planner与额度归S4。
-- 预算是活动模拟报价；completed只表示本地事务提交。保存、幂等、唯一约束和保存前期限复核归S3，不能把当前工具测试当作这些链路通过。
-- 应用只依赖公开包/标准工具，无Codex运行依赖。DeepSeek官方deepseek-v4-pro接入归S7，密钥只读环境变量；离线测试不联网、不发付费请求。
+## 开发方式与下一步
 
-## 文档与下一步
+用户指出S2流程和证据过量，后续必须按[开发效率约定](docs/08-development-plan.md#开发效率约定s2复盘后生效)推进；原因保留在[复盘](docs/05-retrospective.md#s2开发效率反思2026-10-29用户反馈)。本轮只保留集中阶段报告及最终JUnit，无新增辅助脚本/逐轮证据文件，无安装环境重复验证。
 
-当前维护入口：docs/01需求、02模块设计、06/contracts契约、07状态/存储、08阶段计划、09技能约定。content-planner-spec/是不维护的历史快照；.venv/work/dist不提交，换机器按README重建。
+S4获准后按阶段计划推进薄LangGraph decide/dispatch、显式Fake动作、真实观察与累计额度；先细化规格和测试。当前不提前实现图、CLI、真实模型或恢复引擎。项目只使用公开依赖和普通工具，真实deepseek-v4-pro接入归S7，密钥仅从环境变量读取，离线测试不联网。
 
-下一步仅处理S2验收反馈；获得S3明确授权后，先读其范围、细化存储断言，再用真实临时SQLite验证事务/幂等。未获授权不提前实现。
-
-用户验收/要求修订、阶段自验结束、重要阻塞或中断时更新本文件；详细证据继续写阶段报告，Git保留历史。S2交付时已按handoff和writing-for-agents更新本文，根路径覆盖handoff默认临时目录规则，见docs/09。
+用户验收/修订、阶段自验结束、重要阻塞或中断时更新本文件。docs/与contracts/为维护源，content-planner-spec/为历史快照；.venv/work/dist不提交，换环境按README重建。
 
 ## Suggested skills
 
-接手按[技能约定](docs/09-development-skills.md)读取实际SKILL.md：交接更新用handoff、代理文档用writing-for-agents、业务实现用tdd（含tests.md/mocking.md）、阶段审查用code-review双轴。karpathy-guidelines持续适用。原因不明的已观察故障才用diagnosing-bugs，具体模块接口问题才用codebase-design；本次S2未触发后两者。
+按[技能约定](docs/09-development-skills.md)读取所需SKILL.md：karpathy-guidelines持续适用；实现用tdd，阶段交付用code-review双轴，更新交接用handoff及writing-for-agents；出现具体接口设计问题时用codebase-design，原因不明的观察故障才用diagnosing-bugs。S3实际使用前五项及codebase-design，未触发diagnosing-bugs；根HANDOFF路径覆盖handoff默认临时目录位置。

@@ -72,6 +72,20 @@ operation_id规则：planner为`decide:<checkpoint中的决策序号+1>`；工�
 
 首版实现数据库初始化与 schema_version=1 检查；未知版本拒绝打开，不做通用迁移系统。启用 foreign_keys、WAL、busy_timeout=5000ms。单进程串行执行；不保证并发操作同一任务的 checkpoint 一致性，README 明确不支持这种运行方式。
 
+### S3实现边界与验收入口（2026-10-30，实现前）
+
+公开入口为`Repository(path)`、register/get_request/get_plan/record_event/events/close，以及`LocalTools(..., repository=repo).save_plan(tool_call_id, arguments)`。使用标准库sqlite3和真实临时数据库；连接与SQL由repository持有，工具负责候选依赖及保存前复核。无repository时保留S2纯本地调用。注入repository时构造工具会注册请求；新ID先检查完整输入/期限，已有同输入ID直接读原记录，不因过期修改历史；不同输入报REQUEST_CONFLICT。
+
+使用SQLite PRAGMA user_version=1记录业务版本。未知非零版本报SCHEMA_VERSION_MISMATCH，初始化/读取故障报STORAGE_UNAVAILABLE。register只写请求索引，返回原始注册记录；get_plan无方案时返回null，缺失请求的get_request为REQUEST_NOT_FOUND。事件按event_id读取并还原JSON，唯一键重复写入返回原事件。S3只接通保存动作的started及成功/失败/拒绝事件；其他动作事件、额度、图恢复归S4/S6，不编写空实现。
+
+保存动作先持久started，校验当前候选、匹配脚本和最新estimate引用。缺失依赖为PRECONDITION_FAILED、旧revision为STALE_REVISION、旧估算为STALE_ESTIMATE；不可行估算或保存时重新计算不可行为CONSTRAINT_VIOLATION。拒绝/失败保留原草稿和估算，不能设completed。数据库触发器注入成功事件写入失败时，plan与成功事件一并回滚，started/失败历史可查。
+
+已有提交方案的任务不再执行检索/修订/生成/估算，返回TASK_ALREADY_COMPLETED；保存重放仍读取既有事实。LocalTools接入repository时也核对已有方案以恢复completed标记，完整历史结果导出与checkpoint恢复仍归后续阶段。
+
+content_hash按现行canonical JSON，对`{request, candidate, script, pricing_hash, line_items}`整体SHA-256；request为标准化四字段，candidate为六字段可信候选，script为含程序ID的完整脚本，line_items为锁定报价分项。不含estimate_id、tool_call_id、rationale、保存/估算时刻或派生时间表。相同内容已提交时先读原方案，允许期限过后仍复用历史；不同内容为SAVE_CONFLICT。新方案在当前时刻重报价，以该时刻依序生成四项planned时间表，每项依赖前一项，来源为选中素材。成功ToolResult和`{status:completed,saved_plan_id}`补丁与plan同事务提交，之后才修改内存状态。同operation成功重放读取原成功结果/补丁，新的同内容保存调用记录独立事件但复用原行。
+
+本阶段通过真实行数、唯一约束、触发器故障、关闭重开查询和ToolResult Schema核对A09/A10/A11/A13的存储断言，以及旧估算/超期保存拒绝；不把它们记作CLI幂等或跨进程checkpoint恢复通过。依赖/打包/资源/入口未变时无需重建wheel或新建安装环境。
+
 ## 指纹与重复请求
 
 input_hash = SHA-256(标准化后的 topic、budget_units、deadline_at UTC、固定受众与平台的 canonical JSON)。request_id 不进入 input_hash；canonical JSON 排序键、UTF-8、无多余空白。

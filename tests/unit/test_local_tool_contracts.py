@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from content_planner.contracts import RevisionArgs, RevisePlanArgs, SearchMaterialsArgs
+from content_planner.contracts import RevisionArgs, RevisePlanArgs, SavePlanArgs, SearchMaterialsArgs
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -22,10 +22,10 @@ def semantics(value):
     return value
 
 
-def test_local_argument_schemas_match_four_published_tool_contracts():
+def test_local_argument_schemas_match_five_published_tool_contracts():
     tools = json.loads((ROOT / 'contracts/tools.json').read_text(encoding='utf-8'))
     arguments = {'search_materials': SearchMaterialsArgs, 'revise_plan': RevisePlanArgs,
-                 'generate_script': RevisionArgs, 'estimate_cost': RevisionArgs}
-    for tool in tools[:4]:
+                 'generate_script': RevisionArgs, 'estimate_cost': RevisionArgs, 'save_plan': SavePlanArgs}
+    for tool in tools[:5]:
         function = tool['function']
         assert semantics(arguments[function['name']].model_json_schema()) == semantics(function['parameters'])

@@ -2,15 +2,16 @@
 
 from copy import deepcopy
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 import hashlib
 
 from pydantic import ValidationError
 
 from .catalog import Catalog
-from .contracts import Request, RevisionArgs, RevisePlanArgs, ScriptDraft, SearchMaterialsArgs
-from .domain import AUDIENCE, PLATFORM, Clock, Fault, candidate_hash, parse_script, quote, require_complete, script_input_hash
+from .contracts import Request, RevisionArgs, RevisePlanArgs, SavePlanArgs, ScriptDraft, SearchMaterialsArgs
+from .domain import AUDIENCE, PLATFORM, Clock, Fault, build_saved_plan, candidate_hash, parse_script, quote, require_complete, script_input_hash
 from .model import ModelClient, ModelUnavailable
+from .storage import Repository
 
 
 @dataclass(frozen=True)
@@ -22,11 +23,13 @@ class _QuoteClock:
 
 
 class LocalTools:
-    def __init__(self, request: Request, catalog: Catalog, model: ModelClient, clock: Clock):
-        self._request = require_complete(request, clock)
+    def __init__(self, request: Request, catalog: Catalog, model: ModelClient, clock: Clock,
+                 repository: Repository | None = None):
+        self._request = request if repository is not None else require_complete(request, clock)
         self._catalog = deepcopy(catalog)
         self._model = model
         self._clock = clock
+        self._repository = repository
         self._state = {
             'request': request.model_dump(mode='json'),
             'manifest': {'schema_version': '1.0', 'catalog_sha256': catalog.catalog_hash,
@@ -36,7 +39,14 @@ class LocalTools:
             'seen_material_ids': [], 'tool_results': [], 'last_observation': None,
             'candidate_history': {}, 'current_revision': None, 'script_artifacts': {},
             'estimate_history': {}, 'current_estimate_id': None, 'status': 'running', 'reason': None,
+            'saved_plan_id': None,
         }
+        if repository is not None:
+            repository.register(request, backend='mock' if model.model_id == 'mock' else 'deepseek',
+                                model=model.model_id, manifest=self._state['manifest'], clock=clock)
+            saved = repository.get_plan(request.request_id)
+            if saved is not None:
+                self._state.update(status='completed', saved_plan_id=saved['plan_id'])
 
     def snapshot(self) -> dict:
         return deepcopy(self._state)
@@ -60,7 +70,12 @@ class LocalTools:
     def estimate_cost(self, tool_call_id: str, arguments: dict) -> dict:
         return self._invoke('estimate_cost', tool_call_id, arguments, RevisionArgs, self._estimate)
 
+    def save_plan(self, tool_call_id: str, arguments: dict) -> dict:
+        return self._invoke('save_plan', tool_call_id, arguments, SavePlanArgs, self._save)
+
     def _invoke(self, tool, call_id, arguments, argument_type, operation):
+        if self._state['status'] == 'completed' and tool != 'save_plan':
+            return self._failure(tool, call_id, Fault('TASK_ALREADY_COMPLETED', 'Plan has already been committed'))
         if self._state['status'] == 'incomplete':
             return self._failure(tool, call_id, Fault(self._state['reason'], 'Task has reached its revision limit'))
         try:
@@ -74,9 +89,13 @@ class LocalTools:
         return self._record(tool, call_id, data, reused=reused)
 
     def _failure(self, tool, call_id, fault):
-        retryable = fault.code in {'CATALOG_UNAVAILABLE', 'SCRIPT_MODEL_UNAVAILABLE', 'ESTIMATOR_UNAVAILABLE'}
-        return self._record(tool, call_id, error={'code': fault.code, 'message': fault.message,
-                                                'retryable': retryable, 'details': fault.details})
+        return self._record(tool, call_id, error=self._error(fault))
+
+    @staticmethod
+    def _error(fault):
+        retryable = fault.code in {'CATALOG_UNAVAILABLE', 'SCRIPT_MODEL_UNAVAILABLE', 'ESTIMATOR_UNAVAILABLE',
+                                  'SAVE_FAILED', 'STORAGE_UNAVAILABLE'}
+        return {'code': fault.code, 'message': fault.message, 'retryable': retryable, 'details': fault.details}
 
     def _search(self, args, call_id):
         materials = self._catalog.search(args.query, args.top_k)
@@ -171,3 +190,41 @@ class LocalTools:
         self._state['estimate_history'][estimate_id] = estimate
         self._state['current_estimate_id'] = estimate_id
         return estimate, False
+
+    def _save(self, args, call_id):
+        repo = self._repository
+        if repo is None:
+            raise Fault('STORAGE_UNAVAILABLE', 'Saving requires a repository')
+        for event in repo.events(self._request.request_id):
+            if event['operation_id'] == 'tool:' + call_id and event['phase'] == 'succeeded':
+                self._state.update(event['state_patch'])
+                return event['result']['data'], True
+        instant = self._clock.now().astimezone(timezone.utc)
+        fields = {'kind': 'tool', 'name': 'save_plan', 'args': args.model_dump(mode='json'),
+                  'rationale': args.rationale, 'created_at': instant.isoformat()}
+        repo.record_event(self._request.request_id, 'tool:' + call_id, 'started', **fields)
+        try:
+            candidate = self._current_candidate(args.plan_revision)
+            script = self._state['script_artifacts'].get(candidate['script_input_hash'])
+            if script is None or self._state['current_estimate_id'] is None:
+                raise Fault('PRECONDITION_FAILED', 'A matching script and estimate are required')
+            if args.estimate_id != self._state['current_estimate_id']:
+                raise Fault('STALE_ESTIMATE', 'Only the latest estimate can be saved')
+            estimate = self._state['estimate_history'][args.estimate_id]
+            material = self._material(candidate['material_id'])
+            value = quote(self._request, material, self._catalog.pricing.model_dump(mode='json'),
+                          candidate['production_mode'], _QuoteClock(instant))
+            if repo.get_plan(self._request.request_id) is None and (not estimate['feasible'] or not value['feasible']):
+                gaps = {key: value[key] for key in ('budget_gap_units', 'deadline_gap_minutes')}
+                raise Fault('CONSTRAINT_VIOLATION', 'Current plan does not satisfy the hard constraints', gaps)
+            payload = build_saved_plan(self._request, candidate, script, self._catalog.pricing_hash, value)
+            data, reused = repo.save_plan(payload, call_id, args.model_dump(mode='json'))
+        except Fault as fault:
+            result = {'tool_call_id': call_id, 'tool': 'save_plan', 'ok': False, 'reused': False,
+                      'data': None, 'error': self._error(fault)}
+            phase = 'failed' if fault.code in {'SAVE_FAILED', 'STORAGE_UNAVAILABLE'} else 'rejected'
+            repo.record_event(self._request.request_id, 'tool:' + call_id, phase,
+                              result=result, error_code=fault.code, **fields)
+            raise
+        self._state.update(status='completed', saved_plan_id=data['plan_id'])
+        return data, reused

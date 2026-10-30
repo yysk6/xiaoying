@@ -75,3 +75,7 @@ class RevisePlanArgs(ActionArgs):
 
 class RevisionArgs(ActionArgs):
     plan_revision: Annotated[int, Field(ge=1, le=4)]
+
+
+class SavePlanArgs(RevisionArgs):
+    estimate_id: Annotated[str, Field(min_length=1, max_length=100)]

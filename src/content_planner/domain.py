@@ -118,3 +118,28 @@ def parse_script(raw_json: str, material: dict) -> ScriptDraft:
         raise Fault("SCRIPT_INVALID", "Script JSON or fields are invalid") from error
     validate_script(draft, material)
     return draft
+
+
+def build_saved_plan(request: Request, candidate: dict, script: dict, pricing_hash: str,
+                     quotation: dict) -> dict:
+    """Build the immutable deliverable from a freshly checked quotation."""
+    digest = _hash({'request': request.model_dump(mode='json'), 'candidate': candidate,
+                    'script': script, 'pricing_hash': pricing_hash, 'line_items': quotation['line_items']})
+    start = datetime.fromisoformat(quotation['quoted_at'])
+    cursor = start
+    steps = []
+    descriptions = ['准备选中素材', '定稿当前脚本', '按选中档位剪辑制作', '审核内容与来源']
+    for item, description in zip(quotation['line_items'], descriptions):
+        finish = cursor + timedelta(minutes=item['duration_minutes'])
+        steps.append({'step_id': item['step_id'], 'description': description,
+                      'depends_on': [steps[-1]['step_id']] if steps else [],
+                      'fee_units': item['fee_units'], 'duration_minutes': item['duration_minutes'],
+                      'status': 'planned', 'starts_at': cursor.isoformat(), 'finishes_at': finish.isoformat()})
+        cursor = finish
+    return {'plan_id': 'plan_' + hashlib.sha256(request.request_id.encode('utf-8')).hexdigest(),
+            'request_id': request.request_id, 'topic': request.topic, 'candidate': candidate, 'script': script,
+            'task_plan': steps, 'line_items': quotation['line_items'], 'total_units': quotation['total_units'],
+            'total_minutes': quotation['total_minutes'], 'estimated_start_at': start.isoformat(),
+            'estimated_finish_at': cursor.isoformat(), 'deadline_at': request.deadline_at,
+            'budget_units': request.budget_units, 'saved_at': start.isoformat(), 'content_hash': digest,
+            'source_ids': script['source_ids']}
