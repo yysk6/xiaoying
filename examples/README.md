@@ -22,7 +22,7 @@
 
 E17的[fault-log](live/core20/20261031T110356Z-93ca1d21/E17/fault-log.json)现场记录失败时plan行数0；E18的[followup](live/core20/20261031T110356Z-93ca1d21/E18/followup.json)保存中断前后结果与数据库快照；E19的[followup](live/core20/20261031T110356Z-93ca1d21/E19/followup.json)证明第二次请求前后无新增HTTP/事件/plan。E20另验证同ID改预算的[冲突结果](live/core20/20261031T110356Z-93ca1d21/E20/phases/conflict/output.json)，原任务保持完成。
 
-期限调整、精确边界和其他场景见[20例完整报告](../docs/stages/CORE20.md)、[冻结配置](evaluation/core20-cases.json)、[运行汇总](live/core20/20261031T110356Z-93ca1d21/summary.json)与[最终判定](live/core20/20261031T110356Z-93ca1d21/final-assessment.json)。6个初始状态夹具在scenario与Trace中标为fixture_setup；不能把它们说成全程由模型自主产生初始premium方案。
+期限调整、精确边界和其他场景见[20例完整报告](../docs/03-evaluation.md#核心20场景的预期与实际结果)、[冻结配置](evaluation/core20-cases.json)、[运行汇总](live/core20/20261031T110356Z-93ca1d21/summary.json)与[最终判定](live/core20/20261031T110356Z-93ca1d21/final-assessment.json)。6个初始状态夹具在scenario与Trace中标为fixture_setup；不能把它们说成全程由模型自主产生初始premium方案。
 
 ## Trace应该怎么看
 
@@ -49,17 +49,18 @@ E17的[fault-log](live/core20/20261031T110356Z-93ca1d21/E17/fault-log.json)现�
 - 当前[完整离线JUnit](tests/core20/final-full-junit.xml)408/408通过，[复测汇总](tests/core20/final-verification.json)保存首次异常与后续通过的区别。
 - [产物审计](tests/core20/artifact-audit.json)：23份输出、408条含阶段Trace经Schema与事实核验。
 - [Windows正式包运行](tests/intake/clean-install.json)：公开运行环境、仓库外导入、MockTransport及实际业务/重复保护通过；真实HTTP0。
-- [自然语言终端实际报告](../docs/stages/N3.md)引用三轮全部产物，包含失败与修订后记录。
-- 更早[预算专项](../docs/stages/S7-evaluation.md)、[S7](../docs/stages/S7.md)及tests/stages是历史证据，口径与时间分别标明。
+- [自然语言终端实际报告](../docs/03-evaluation.md#自然语言终端历史验证)引用三轮全部产物，包含失败与修订后记录。
+- 更早[预算专项](../docs/03-evaluation.md#历史专项工程验证与审查)、[S7](../docs/03-evaluation.md#历史专项工程验证与审查)及tests/stages是历史证据，口径与时间分别标明。
 
 ## 复核与数据边界
 
 Git不含runtime.db、密钥、工作目录或虚拟环境，包含可读事件/plan快照。审计已提交JSON/Trace可执行：
 
 ```sh
-python examples/tests/core20/audit_artifacts.py examples/live/core20/20261031T110356Z-93ca1d21
+git worktree add --detach ../xiaoying-evidence-29e 29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f
+python ../xiaoying-evidence-29e/examples/tests/core20/audit_artifacts.py ../xiaoying-evidence-29e/examples/live/core20/20261031T110356Z-93ca1d21
 ```
 
-需先安装开发依赖。物理库复核`python -m scripts.evaluate_core20 --recheck <run目录>`还须原始runtime.db；本机实测已完成，不能声称仅克隆仓库即可读取未提交数据库。离线pytest会重新创建临时数据库验证相同规则。
+需先安装开发依赖，本地Git须有该历史提交；在独立历史工作树核验原来源，当前树已合并原文档，不能直接通过旧来源核验。物理库复核`python -m scripts.evaluate_core20 --recheck <run目录>`还须原始runtime.db；本机实测已完成，不能声称仅克隆仓库即可读取未提交数据库。离线pytest会重新创建临时数据库验证相同规则。
 
-真实评测不会自动启动。显式`python -m scripts.evaluate_core20 --live --key-stdin`会隐藏输入密钥、按当前时间生成20例输入并产生费用，新运行另存新目录。合成资料、预算单位和模拟活动工期均不等同真实业务执行或API账单。
+真实评测不会自动启动。旧专项脚本仍引用历史docs12，新付费运行须进入上述历史工作树，再按该版说明显式执行`python -m scripts.evaluate_core20 --live --key-stdin`；会产生费用，新运行另存新目录。当前文档整理不调整该代码入口。合成资料、预算单位和模拟活动工期均不等同真实业务执行或API账单。

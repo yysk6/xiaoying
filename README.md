@@ -100,14 +100,15 @@ POSIX对应`.venv/bin/python scripts/interactive_planner.py`。Windows如需独�
 普通自动测试为离线运行。20场景实际证据与所有历史失败已经保存，无需重新付费即可阅读[最终判定](examples/live/core20/20261031T110356Z-93ca1d21/final-assessment.json)。
 
 ```powershell
-# 仅审计已提交JSON/Trace、资料及冻结文件；不会调用模型
-.venv/Scripts/python.exe -X utf8 examples/tests/core20/audit_artifacts.py examples/live/core20/20261031T110356Z-93ca1d21
+# 仅审计已提交产物与当时Git来源；需本地有该提交，零HTTP
+git worktree add --detach ../xiaoying-evidence-29e 29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f
+.venv/Scripts/python.exe -X utf8 ../xiaoying-evidence-29e/examples/tests/core20/audit_artifacts.py ../xiaoying-evidence-29e/examples/live/core20/20261031T110356Z-93ca1d21
 
-# 显式进行新的20例真实评测：隐藏输入密钥，会产生API费用
-.venv/Scripts/python.exe -X utf8 -m scripts.evaluate_core20 --live --key-stdin
+# 新的付费20例评测须进入上述历史工作树，按该版README执行
+# 原专项脚本仍引用历史docs12；本轮文档整理不修改代码
 ```
 
-POSIX同样替换解释器路径。实际SQLite库是本地运行产物，不提交Git；仓库的`evidence.json`包含事件、请求及plan的可读快照。`--recheck <run目录>`需要原runtime.db才能重读物理数据库；仅克隆仓库时使用上方产物审计，或离线测试重新创建临时库。
+POSIX同样替换解释器路径。上述命令在独立历史工作树核验原版本；本轮不改审计器，当前树已合并旧来源文档，不能声称仍与冻结版本相同。浅克隆缺少该Git对象时需先取得历史，详见评估文档。实际SQLite库是本地运行产物，不提交Git；仓库的`evidence.json`包含事件、请求及plan的可读快照。`--recheck <run目录>`需要原runtime.db才能重读物理数据库；仅克隆仓库时使用上方产物审计，或离线测试重新创建临时库。
 
 ## 项目结构与数据
 
@@ -120,10 +121,7 @@ contracts/                 JSON Schema与领域数据fixture
 scripts/                   交互入口、真实评测、安装验证
 tests/                     单元与CLI验收测试
 examples/                  输入、实际输出、Trace、评测与测试结果
-docs/01-05                 五篇主文档
-docs/06-12                 契约、存储、开发规则及专项规格
-docs/stages/               历史阶段与专项实际报告
-docs/archive/              整理前文档快照
+docs/                      仅五篇文档：需求、方案、评估、AI使用、复盘
 AGENTS.md / HANDOFF.md      开发协作规则与接手记录，非运行依赖
 ```
 

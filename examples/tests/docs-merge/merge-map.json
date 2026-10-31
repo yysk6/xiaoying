@@ -1,0 +1,260 @@
+{
+  "baseline_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f",
+  "docs_files_before": 35,
+  "docs_files_after": 5,
+  "removed_or_relocated": [
+    {
+      "previous": "docs/00-research-and-decisions.md",
+      "merged_into": [
+        "docs/01-requirements.md",
+        "docs/02-solution.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/06-contracts.md",
+      "merged_into": [
+        "docs/01-requirements.md",
+        "docs/02-solution.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/07-state-and-storage.md",
+      "merged_into": [
+        "docs/01-requirements.md",
+        "docs/02-solution.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/08-development-plan.md",
+      "merged_into": [
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md",
+        "AGENTS.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/09-development-skills.md",
+      "merged_into": [
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md",
+        "AGENTS.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/10-natural-language-intake-plan.md",
+      "merged_into": [
+        "docs/01-requirements.md",
+        "docs/02-solution.md",
+        "docs/03-evaluation.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/11-content-grounding-plan.md",
+      "merged_into": [
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/12-core20-evaluation.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/archive/pre-submission/01-requirements.md",
+      "merged_into": [
+        "docs/01-requirements.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/archive/pre-submission/02-solution.md",
+      "merged_into": [
+        "docs/02-solution.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/archive/pre-submission/03-evaluation.md",
+      "merged_into": [
+        "docs/03-evaluation.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/archive/pre-submission/04-ai-usage.md",
+      "merged_into": [
+        "docs/04-ai-usage.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/archive/pre-submission/05-retrospective.md",
+      "merged_into": [
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/CORE20.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/N1.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/N2.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/N3.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/S0.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/S1.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/S2-review.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/S2.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/S3.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/S4.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/S5.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/S6.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/S7-evaluation.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/S7-manual.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/S7.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/stages/SUBMISSION.md",
+      "merged_into": [
+        "docs/03-evaluation.md",
+        "docs/04-ai-usage.md",
+        "docs/05-retrospective.md"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    },
+    {
+      "previous": "docs/tooling/skills-installation.json",
+      "merged_into": [
+        "examples/tests/tooling/skills-installation.json"
+      ],
+      "original_prose_commit": "29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f"
+    }
+  ]
+}
