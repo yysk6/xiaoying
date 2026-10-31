@@ -30,7 +30,7 @@ E17的[fault-log](live/core20/20261031T110356Z-93ca1d21/E17/fault-log.json)现�
 2. 看output的status、execution_steps、tool_results、total_units和saved_plan。completed只表示plan保存；未来活动仍planned。
 3. 沿trace的event_id、operation_id、phase查看实际动作及结果，使用result_ref回到tool_results、next_decision_event_id找到后续决策。
 4. 对照observations里的必要事实和模型返回动作，验证模型确实看到超限/错误再调整。该记录只有安全事实投影与公开响应，不含内部推理。
-5. evidence保存请求、实际事件/状态补丁、plan快照、资料及故障记录。最终判定与输出一起看，不能只凭一段文案判断成功。
+5. evidence保存请求、实际事件/状态补丁、plan快照、资料及故障记录。最终判定与输出一起看，核对实际状态与工具结果。
 
 例如E04先有12/缺口2的报价，模型改basic后旧估算失效，再得8并保存；E17失败save与新成功save为两个attempt，失败未被重写。
 
@@ -54,13 +54,4 @@ E17的[fault-log](live/core20/20261031T110356Z-93ca1d21/E17/fault-log.json)现�
 
 ## 复核与数据边界
 
-Git不含runtime.db、密钥、工作目录或虚拟环境，包含可读事件/plan快照。审计已提交JSON/Trace可执行：
-
-```sh
-git worktree add --detach ../xiaoying-evidence-29e 29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f
-python ../xiaoying-evidence-29e/examples/tests/core20/audit_artifacts.py ../xiaoying-evidence-29e/examples/live/core20/20261031T110356Z-93ca1d21
-```
-
-需先安装开发依赖，本地Git须有该历史提交；在独立历史工作树核验原来源，当前树已合并原文档，不能直接通过旧来源核验。物理库复核`python -m scripts.evaluate_core20 --recheck <run目录>`还须原始runtime.db；本机实测已完成，不能声称仅克隆仓库即可读取未提交数据库。离线pytest会重新创建临时数据库验证相同规则。
-
-真实评测不会自动启动。新付费运行在当前项目显式执行`python -m scripts.evaluate_core20 --live --key-stdin`；会产生费用，新运行另存新目录并记录当前来源。最新[复测结果和自然语言实测](../docs/03-evaluation.md#当前结论)与历史运行分开保存；历史产物仍按上述历史提交核验。合成资料、预算单位和模拟活动工期均不等同真实业务执行或API账单。
+真实评测不会自动启动；显式执行`python -m scripts.evaluate_core20 --live --key-stdin`会产生API费用。`--recheck <run目录>`需要对应的runtime.db，离线pytest会重新创建临时数据库。合成资料、预算单位和模拟活动工期均不等同真实业务执行或API账单。

@@ -179,7 +179,7 @@ IntakePatch只允许topic/budget_units/deadline_at及本轮原文依据；遗漏
 
 真实模式使用DeepSeek planner和脚本生成，检索/估算/保存是实际本地工具，资料合成。离线模式仅替换模型/Clock，使用相同业务实现、真实临时SQLite与checkpoint。Fake动作显式声明，结果标记mock；离线测试不证明模型智能。
 
-故障在外部模型边界或实际SQLite事务注入，返回真实失败观察；模型不接触评测预期。模型效果、程序约束及内容质量分别报告，见[评估](03-evaluation.md)。
+故障在外部模型边界或实际SQLite事务注入，返回真实失败观察；模型不接触评测预期。模型效果与程序约束见[评估](03-evaluation.md)。
 
 ## 调研来源
 

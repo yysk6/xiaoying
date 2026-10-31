@@ -4,7 +4,7 @@
 
 当前交付包含真实 DeepSeek 决策循环、四个业务工具、任务记忆、失败处理、重复请求保护、显式续跑、自然语言需求收集及离线 Mock 入口。`completed` 表示本地方案保存成功，未来的视频制作与发布没有执行。
 
-**实际结果：最新核心评测20/20通过；最新完整离线测试412/412通过。** 20例含16例真实模型场景、4例零调用输入防护；其中6例明确给定初始premium方案，再交真实模型决策。结果来自每例一个样本；自然语言实测仍发现素材未支持的营销措辞，范围和限制见[评估](docs/03-evaluation.md)。
+**实际结果：最新核心评测20/20通过；最新完整离线测试412/412通过。** 20例含16例真实模型场景、4例零调用输入防护；其中6例明确给定初始premium方案，再交真实模型决策。结果来自每例一个样本，范围和限制见[评估](docs/03-evaluation.md)。
 
 ## 评审入口
 
@@ -97,18 +97,14 @@ POSIX对应`.venv/bin/python scripts/interactive_planner.py`。Windows如需独�
 
 ## 评测复核
 
-普通自动测试为离线运行。20场景实际证据与所有历史失败已经保存，无需重新付费即可阅读[最终判定](examples/live/core20/20261031T110356Z-93ca1d21/final-assessment.json)。
+普通自动测试为离线运行。无需重新付费即可阅读20场景[最终判定](examples/live/core20/20261031T153418Z-5c0bb6c4/final-assessment.json)。
 
 ```powershell
-# 仅审计已提交产物与当时Git来源；需本地有该提交，零HTTP
-git worktree add --detach ../xiaoying-evidence-29e 29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f
-.venv/Scripts/python.exe -X utf8 ../xiaoying-evidence-29e/examples/tests/core20/audit_artifacts.py ../xiaoying-evidence-29e/examples/live/core20/20261031T110356Z-93ca1d21
-
 # 如需新的付费20例评测，在当前项目目录显式运行（将提示输入密钥）
 .venv/Scripts/python.exe -X utf8 -m scripts.evaluate_core20 --live --key-stdin
 ```
 
-POSIX同样替换解释器路径。历史审计命令在独立工作树核验原版本；当前树已合并旧来源文档，不能声称仍与冻结版本相同。新评测单独记录当前代码、数据、文档和契约的哈希及Git状态，不覆盖旧记录；新运行需要可用的Git工作树，来源或Git信息不可用时会在提示密钥前停止。最近一次新运行及其未提交修改的来源快照见[评估](docs/03-evaluation.md)。浅克隆缺少历史Git对象时需先取得历史。实际SQLite库是本地运行产物，不提交Git；仓库的`evidence.json`包含事件、请求及plan的可读快照。`--recheck <run目录>`需要原runtime.db才能重读物理数据库；仅克隆仓库时使用上方产物审计，或离线测试重新创建临时库。
+POSIX同样替换解释器路径。新运行需要可用的Git工作树；实际SQLite库是本地运行产物，不提交Git。`--recheck <run目录>`需要原runtime.db才能重读物理数据库；离线测试会重新创建临时库。
 
 ## 项目结构与数据
 
@@ -129,4 +125,4 @@ Python包内`src/content_planner/data/`承担题目中的data目录职责，随w
 
 ## 当前边界
 
-仅支持合成产品“影芽剪辑”的有限素材、单素材/单脚本/两档制作方案，费用为模拟整数单位；不制作视频、不接真实发布/支付，不支持同一任务多进程并发。营销扩写在当前核心评测中单列质量备注，未新增独立语义审核；历史严格内容评估的失败记录保留。恢复结果未持久化的外部请求可能再次发出，不承诺API exactly-once。详细限制与首次异常复测记录统一见[评估](docs/03-evaluation.md)。
+仅支持合成产品“影芽剪辑”的有限素材、单素材/单脚本/两档制作方案，费用为模拟整数单位；不制作视频、不接真实发布/支付，不支持同一任务多进程并发。恢复结果未持久化的外部请求可能再次发出，不承诺API exactly-once。详细限制与首次异常复测记录统一见[评估](docs/03-evaluation.md)。

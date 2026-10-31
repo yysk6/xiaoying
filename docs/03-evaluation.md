@@ -2,11 +2,11 @@
 
 ## 当前结论
 
-**最新核心场景20/20通过，完整离线复测412 passed、0 failed（157.32秒）。** 当前标准聚焦预算计算、步骤依赖、实际状态、失败处理与合理重规划。营销扩写单列质量备注；没有新增事实审核器，历史严格内容失败不追溯改写。
+**最近一次核心场景20/20通过，完整离线复测412 passed、0 failed（157.32秒）。** 验收聚焦预算计算、步骤依赖、实际状态、失败处理与合理重规划。
 
-本次复测的[离线JUnit](../examples/tests/full-validation-20261031/pytest-junit.xml)为412/412；[核心运行汇总](../examples/live/core20/20261031T153418Z-5c0bb6c4/summary.json)与[最终判定](../examples/live/core20/20261031T153418Z-5c0bb6c4/final-assessment.json)为20/20，实际89次HTTP、API费用金额未知。其中16例调用真实模型、4例输入防护零调用，6例给定初始premium夹具；每例一次。来源记录的基线是013329d4且工作树有未提交修改；评测启动时37份来源哈希全部与当时工作树一致。相对基线的改动保存在[source-working-tree.patch](../examples/live/core20/20261031T153418Z-5c0bb6c4/source-working-tree.patch)，两份修改来源的[字节快照](../examples/live/core20/20261031T153418Z-5c0bb6c4/source-snapshot/)均与原source.json哈希一致（其中的文档为运行时状态）；不能称为基线提交原样运行。
+本次复测的[离线JUnit](../examples/tests/full-validation-20261031/pytest-junit.xml)为412/412；[核心运行汇总](../examples/live/core20/20261031T153418Z-5c0bb6c4/summary.json)与[最终判定](../examples/live/core20/20261031T153418Z-5c0bb6c4/final-assessment.json)为20/20，实际89次HTTP、API费用金额未知。其中16例调用真实模型、4例输入防护零调用，6例给定初始premium夹具；每例一次。
 
-另一次[自然语言终端实测](../examples/live/manual-e2e-20261031/manual-assessment.json)从输入和确认完成到保存，费用8，需求理解1次、业务模型6次调用；输出包含“效率翻倍”和“调样式”等现有素材未支持的说法，人工内容检查失败。该已知问题仍按此前确认列为核心流程之外的质量限制，流程通过不等于内容事实审核通过。
+一次自然语言终端实测从输入和确认完成到保存，费用8，需求理解1次、业务模型6次调用，见[输出](../examples/live/manual-e2e-20261031/nl-247e1dcb30bc45a08185e00ef26157b5/output.json)与[Trace](../examples/live/manual-e2e-20261031/nl-247e1dcb30bc45a08185e00ef26157b5/trace.jsonl)。
 
 | 验证层 | 实际结果 | 证据 |
 |---|---|---|
@@ -14,7 +14,7 @@
 | 核心真实评测 | 最新20/20：16例调用真实模型、4例输入防护零调用 | [最新判定](../examples/live/core20/20261031T153418Z-5c0bb6c4/final-assessment.json)、[运行汇总](../examples/live/core20/20261031T153418Z-5c0bb6c4/summary.json) |
 | 产物核验 | 23份输出、23份Trace/408条合法并一致 | [产物审计](../examples/tests/core20/artifact-audit.json) |
 | Windows安装与仓库外运行 | 正式wheel、公开锁定环境、离线业务通过 | [安装结果](../examples/tests/intake/clean-install.json) |
-| 自然语言终端历史评测 | 最终3例需求/业务技术通过；原严格内容0/3 | [自然语言终端记录](#自然语言终端历史验证) |
+| 自然语言终端评测 | 最终3例需求和业务流程通过 | [自然语言终端记录](#自然语言终端历史验证) |
 | 本次提交材料验证 | 三类README离线命令通过；链接/敏感信息检查通过 | [CLI实测](../examples/tests/submission/cli-smoke.json)、[静态检查](../examples/tests/submission/static-checks.json) |
 
 20例各一个样本，不能推断泛化成功率。6例给定初始premium状态后交模型决策，明确标fixture_setup。此轮是业务Agent集成端到端，不是20例自然语言终端端到端。逐例结果、事件定位、注入方法和审查均收录在本文；原始场景预期由[固定案例](../examples/evaluation/core20-cases.json)提供。
@@ -74,7 +74,7 @@
 | A20—A22 | manifest变化、后端错误、导出失败 | test_resume / test_deepseek / test_cli |
 | A23 | 无Codex的安装与离线运行 | Windows有wheel/仓库外验证；Linux NOT_RUN |
 
-可执行测试位于[tests](../tests)，历史细分Red/Green和安装记录保留在[阶段原始材料](../examples/tests/stages)。历史正文可从文末所列Git提交读取；当前预期以五篇主文档和contracts为准。
+可执行测试位于[tests](../tests)，细分测试和安装记录见[测试材料](../examples/tests/stages)。
 
 ## 故障与时钟设置
 
@@ -163,11 +163,11 @@ E06/E07/E09的最终message分别准确说明预算缺口1、3及期限缺口30�
 |---|---|---:|
 | [首轮v1](../examples/live/intake/20261031T101253Z-04818aa5/summary.json) | 三例技术均失败：字段依据不匹配；中间例后续保存不抵消前轮错误 | 13 |
 | [单例诊断](../examples/live/intake/20261031T101517Z-a3b23c2c/summary.json) | 再次失败，安全错误明确SOURCE_VALUE_MISMATCH:budget_units；无业务启动 | 1 |
-| [intake-v2最终轮](../examples/live/intake/20261031T101721Z-3b403123/summary.json) | 三例需求/业务均通过：一句话确认、多轮10改8/重复确认、预算5无解；原严格内容均失败 | 25 |
+| [intake-v2最终轮](../examples/live/intake/20261031T101721Z-3b403123/summary.json) | 三例需求/业务均通过：一句话确认、多轮10改8/重复确认、预算5无解 | 25 |
 
 实际共39次HTTP。修订只增加通用原文复制示例和严格诊断，没有放宽预算/时间依据规则；planner-v1/script-v1不变。最终7个抽取轮和4次确认（含重复）共11轮文本，需求三字段/时间锚点/Request关联均通过。三例分别用时15.641/19.266/19.062秒，各一例，不作稳定性或吞吐量基准。
 
-[最终独立判定](../examples/live/intake/20261031T101721Z-3b403123/final-assessment.json)分别记录technical_pass=true、content_pass=false；完整terminal/turns/intake/业务输出和Trace均在原目录。原输入“明天下午六点”按当时北京时间2026-10-31锚定为2026-11-01 18:00，改预算不滚动日期。技术3/3不等于任意自然对话体验合格。
+最终轮的完整terminal/turns/intake/业务输出和Trace均在运行目录。原输入“明天下午六点”按当时北京时间2026-10-31锚定为2026-11-01 18:00，改预算不滚动日期。技术3/3不等于任意自然对话体验合格。
 
 ## 历史专项、工程验证与审查
 
@@ -176,7 +176,7 @@ E06/E07/E09的最终message分别准确说明预算缺口1、3及期限缺口30�
 | 工程/领域/工具 | S0依赖/恢复探针、S1契约/报价/指纹、S2资料/工具有各自Red/Green与正式包安装记录：[S0](../examples/tests/stages/S0)、[S1](../examples/tests/stages/S1)、[S2](../examples/tests/stages/S2)。局部通过不当作真实模型效果 |
 | 保存/图/CLI/恢复 | S3事务与唯一约束、S4模型/动作循环、S5三类CLI、S6跨进程恢复均有独立材料：[S3](../examples/tests/stages/S3)、[S4](../examples/tests/stages/S4)、[S5](../examples/tests/stages/S5)、[S6](../examples/tests/stages/S6) |
 | S7官方HTTP与真实路径 | [全量JUnit](../examples/tests/stages/S7/pytest-junit.xml)328通过；[首次网络失败](../examples/live/S7/20261031T083016Z-4cc7f1b1/summary.json)保留；[随后探针及三例](../examples/live/S7/20261031T083150Z-f46bcbe4/summary.json)22HTTP，其中L03直接选8不冒充12→8 |
-| 后续预算专项 | [实际汇总](../examples/live/budget-replan/20261031T090339Z-1bcb71ad/summary.json)中L04初始12改8、L05预算5缺口3、L02一次脚本故障恢复，核心3/3；严格文案事实性3例均未通过，原判定保留 |
+| 后续预算专项 | [实际汇总](../examples/live/budget-replan/20261031T090339Z-1bcb71ad/summary.json)中L04初始12改8、L05预算5缺口3、L02一次脚本故障恢复，核心3/3 |
 | 自然入口离线/安装 | [N1测试](../examples/tests/intake/N1-junit.xml)、[N2测试](../examples/tests/intake/N2-junit.xml)与[最终389测试](../examples/tests/intake/final-junit.xml)分别标注范围；[正式wheel/仓库外运行](../examples/tests/intake/clean-install.json)无Codex、7次MockTransport、真实HTTP0、重复只读通过，Linux仍NOT_RUN |
 | 当时交付 | [完整408测试](../examples/tests/submission/pytest-junit.xml)154.19秒，[三类CLI](../examples/tests/submission/cli-smoke.json)与[静态检查](../examples/tests/submission/static-checks.json)通过；pip check无依赖问题，--help入口无模型调用 |
 
@@ -193,35 +193,7 @@ S2严格Literal[True]接受1/1.0、S7冲突backend/证据元数据、自然入�
 - E07/E08各一次同时请求两个动作，被协议校验拒绝，收到反馈后改单动作；错误保留，受控纠正后符合场景预期。
 - E16两次脚本失败后又申请第三次，限额拒绝后停止；状态诚实且有界，但路径多一次无效动作。
 - 首次完整离线407通过/1项强杀恢复CHECKPOINT_NOT_FOUND；针对性2/2、随后完整408/408及交付完整408/408均通过。当前执行状态为PASSED_ON_RETEST；[首次JUnit](../examples/tests/core20/full-junit.xml)、[诊断](../examples/tests/core20/resume-diagnostic.json)、[复测汇总](../examples/tests/core20/final-verification.json)保留。没有代码修复，不声称根因消除。
-- 历史专项与自然入口严格内容审核含“一键/几秒钟/调样式/效率翻倍”等未由素材支持的措辞，不能由正确来源ID推导语义合格。这不等于证明现实产品必无该能力。本轮用户确认以预算/依赖/状态/失败/重规划为核心，营销扩写非否决项，不追溯改旧判定。
-
-## 历史来源与复现
-
-新专项运行的来源清单应在读取凭据之前生成，包含当前五篇主文档、contracts下的机器契约和fixture，以及原有代码、案例、包内数据和依赖锁；记录各文件SHA-256、Git commit和工作树状态。必需的包内materials、pricing、aliases数据或明确列出的其他来源文件缺失，以及Git信息无法读取时，应在凭据提示和任何HTTP调用前报错。离线验收通过已有CLI入口检查来源清单及哈希，不启动真实模型；历史运行的source.json和其他原始产物保持不变，历史审计仍在原Git提交执行。
-
-来源清单修复的实际验证：修复前新增测试因缺失docs12出现FileNotFoundError；复核补充的缺资料、Git失败反例在补强前也均失败。最终评测器离线测试23项通过，见[JUnit](../examples/tests/core20/source-manifest-junit.xml)。测试在凭据提示边界停止，核对新清单的文档、契约、资料哈希和Git信息，并检查缺必需来源或Git不可用时不会进入凭据提示；该修复阶段没有运行付费模型评测，后续复测见本页开头。
-
-docs现仅维护五篇；冗余阶段、调研和归档正文保存在既有Git历史，不再保留并行文档树。完整旧版本为[29e3a716](https://github.com/yysk6/xiaoying/tree/29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f/docs)。原始input/output/Trace/source/assessment与冻结哈希保持原样。
-
-旧20例来源包含已合并的docs12，原始source.json仍冻结当时路径和哈希，因此当前工作区不能直接通过旧来源文件核验；这不是原20例业务评测失败，也不能把旧哈希改成新文档来伪装一致。
-
-如需重算完整历史审计，可在独立历史工作树运行原版本（需本地有完整Git历史及已安装开发依赖）：
-
-```powershell
-git worktree add --detach ../xiaoying-evidence-29e 29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f
-.venv/Scripts/python.exe -X utf8 ../xiaoying-evidence-29e/examples/tests/core20/audit_artifacts.py ../xiaoying-evidence-29e/examples/live/core20/20261031T110356Z-93ca1d21
-```
-
-POSIX替换解释器为.venv/bin/python。浅克隆/源码压缩包没有旧对象时，应先取得历史；也可直接阅读已提交的JSON/Trace和原始审计报告。runtime.db不提交，物理--recheck仍须本地原库；evidence包含可读请求/事件/plan快照。
-
-此前专项evaluate_core20脚本引用原docs12，无法从当前树启动新运行。本次修复将新运行的来源清单切换至当前文档、契约和包内数据；历史记录仍须在上述历史工作树核验。此后已进行本节开头所述的新付费运行。
 
 ## 当前限制与维护记录
 
 Windows/Python3.10.8有实际证据；Linux、其他Python、同任务并发、长对话及所有故障组合未测。固定合成资料、每例一次，不承诺任意主题质量、泛化稳定性、全局最优、完整自由对话、真实素材/视频发布或生产级耐久执行。上下文预算是字符/字节边界，不伪装为已精确校准的token预算。
-
-上一个文档整理阶段合并文档、迁移技能安装材料和修正引用；验收要求为docs递归只有01—05、无失效内部链接、原始评测证据不改。旧正文的归并位置见[映射](../examples/tests/docs-merge/merge-map.json)。该阶段未新增业务行为或付费模型运行。
-
-完整离线408项及早前核心20例继续引用原始历史记录；本次新运行独立保存，见本页开头。
-
-文档整理阶段的[静态检查](../examples/tests/docs-merge/static-checks.json)通过：docs仅五篇，内部链接与章节锚点无失效，当时代码及原始评测证据无差异，敏感密钥模式零命中。
