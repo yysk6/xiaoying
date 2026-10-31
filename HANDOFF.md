@@ -24,9 +24,9 @@ docs由35文件合为5：01需求/输入/成功标准；02工具契约/状态/�
 
 ## Git、交付与下一步
 
-基线main/29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f，单worktree；起始仅HANDOFF规划记录未提交。2026-10-31已fetch，origin/main仍为29e，无远端新增。用户此前授权全部提交并推送https://github.com/yysk6/xiaoying，本次文档整理延续授权；文档静态检查已通过；最终提交/远端核验待执行，不强推、不改全局safe配置。
+基线main/29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f，单worktree；起始仅HANDOFF规划记录未提交。2026-10-31已fetch，origin/main仍为29e，无远端新增。用户此前授权全部提交并推送https://github.com/yysk6/xiaoying，本次文档整理延续授权；文档静态检查已通过；内容提交49fed7b80315731a95a453c46ac4cfc03b0cb615已push，ls-remote确认远端main一致；随后仅补此交付状态，最终SHA以Git为准，不强推、不改全局safe配置。
 
-文档归并完成，用户验收尚未确认。下一步仅完成静态检查、提交推送并交付，之后等待具体修订；不继续功能开发，不追认历史阶段全部accepted。
+文档归并完成，用户验收尚未确认。静态检查与内容提交推送已完成，交付后等待具体修订；不继续功能开发，不追认历史阶段全部accepted。
 
 ## Suggested skills
 
