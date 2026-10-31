@@ -1,0 +1,41 @@
+{
+  "command": [
+    "C:\\Users\\11250\\Desktop\\xiaoying\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "content_planner",
+    "run",
+    "--input",
+    "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A04\\input.json",
+    "--mock-scenario",
+    "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A04\\scenario.json",
+    "--db",
+    "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s5-evidence\\runtime.db",
+    "--output-dir",
+    "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A04"
+  ],
+  "cwd": "C:\\Users\\11250\\Desktop\\xiaoying",
+  "started_at": "2026-10-31T07:32:34.492402+00:00",
+  "ended_at": "2026-10-31T07:32:36.590088+00:00",
+  "exit_code": 0,
+  "backend": "mock",
+  "model": "mock",
+  "source_baseline": "a45595cbf1a4c13df11956e2916f76b357c7c925",
+  "working_tree_modified": true,
+  "clock_source": "explicit fixed mock scenario",
+  "data_manifest": {
+    "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+    "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+    "model_id": "mock",
+    "planner_prompt_version": "planner-v1",
+    "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+    "schema_version": "1.0",
+    "script_prompt_version": "script-v1",
+    "thinking": "disabled"
+  },
+  "plan_rows_for_request": 1,
+  "events_for_request": 34,
+  "stderr": "",
+  "live_model_calls": 0
+}

@@ -1,0 +1,32 @@
+{
+  "command": [
+    "C:\\Users\\11250\\Desktop\\xiaoying\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "content_planner",
+    "run",
+    "--input",
+    "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A02\\input.json",
+    "--mock-scenario",
+    "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A02\\scenario.json",
+    "--db",
+    "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s5-evidence\\runtime.db",
+    "--output-dir",
+    "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A02"
+  ],
+  "cwd": "C:\\Users\\11250\\Desktop\\xiaoying",
+  "started_at": "2026-10-31T07:32:30.341052+00:00",
+  "ended_at": "2026-10-31T07:32:32.315275+00:00",
+  "exit_code": 2,
+  "backend": "mock",
+  "model": "mock",
+  "source_baseline": "a45595cbf1a4c13df11956e2916f76b357c7c925",
+  "working_tree_modified": true,
+  "clock_source": "explicit fixed mock scenario",
+  "data_manifest": null,
+  "plan_rows_for_request": 0,
+  "events_for_request": 0,
+  "stderr": "NEEDS_INPUT: 请补齐必填字段\n",
+  "live_model_calls": 0
+}

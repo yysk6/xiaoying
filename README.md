@@ -2,13 +2,14 @@
 
 编写日期：2026-10-29（北京时间）。选题：第 2 题。开发方式：SDD（规格驱动开发）+ TDD（测试驱动开发）。
 
-已实现领域规则、本地工具、SQLite保存/幂等及S4离线LangGraph循环；CLI尚未实现。当前阶段、授权与验收状态统一见[HANDOFF](HANDOFF.md)，实际测试与审查见[S4报告](docs/stages/S4.md)。
+已实现领域规则、本地工具、SQLite保存/幂等、LangGraph离线循环及S5的run/show与JSON/Markdown/Trace导出。当前阶段、授权与验收状态统一见[HANDOFF](HANDOFF.md)，实际测试与审查见[S5报告](docs/stages/S5.md)。当前仅Mock；resume与真实DeepSeek后端尚未开放。
 
 接手或恢复开发请先阅读[上下文交接文档](HANDOFF.md)。该文档须在每阶段交付验收前更新，用户验收或修订后同步更新；规则见AGENTS.md与阶段计划。
 
 ## 当前评审入口
 
-- [S4验收报告](docs/stages/S4.md)：离线循环、真实工具反馈、停止/限额、上下文和审查。
+- [S5验收报告](docs/stages/S5.md)：CLI、核心离线案例、导出与安装验证。
+- [S4验收报告](docs/stages/S4.md)：历史离线循环、停止/限额及上下文验证。
 - [S3验收报告](docs/stages/S3.md)：历史存储/保存验证。
 - [S2验收报告](docs/stages/S2.md)：历史工具层测试与wheel验证。
 - [本地工具演示](examples/tests/stages/S2/local-tools-demo.json)：显式调用得到12→8报价，脚本复用；不是Agent决策或保存记录。
@@ -51,6 +52,26 @@ requirements.lock锁定42个运行依赖，requirements-dev.lock增加15个开�
 后续项目根目录由用户指定为 `C:/Users/11250/Desktop/xiaoying/`。该路径只用于本地开发定位，程序、测试和运行命令不得依赖这一绝对路径。根目录下的docs/与contracts/是后续唯一维护版本；现有content-planner-spec/保留为迁入前快照，不要求同步修改。
 
 项目及开发流程采用公开第三方库、Python标准库、Git和通用命令行工具，不依赖Codex内部插件/MCP/账户/宿主运行时。S2支持直接调用本地工具，`python examples/s2_local_tools.py`输出固定Clock下的演示；离线业务CLI在S5交付、真实模型模式在S7验证。
+
+## 离线CLI
+
+下列场景含固定Clock和显式Fake动作，重复运行读取已有任务；它们验证程序流程，不代表模型智能效果。三个必需案例及修订/重复执行证据见[S5报告](docs/stages/S5.md)。
+
+PowerShell（完成上述安装后，在项目根目录）：
+
+```powershell
+.\.venv\Scripts\python.exe -X utf8 -m content_planner run --input examples/mock/A01/input.json --mock-scenario examples/mock/A01/scenario.json --db work/demo.db --output-dir work/demo-output
+.\.venv\Scripts\python.exe -X utf8 -m content_planner show --request-id s5-A01 --db work/demo.db --output-dir work/demo-show
+```
+
+POSIX对应命令（Linux仍未实测）：
+
+```sh
+.venv/bin/python -m content_planner run --input examples/mock/A01/input.json --mock-scenario examples/mock/A01/scenario.json --db work/demo.db --output-dir work/demo-output
+.venv/bin/python -m content_planner show --request-id s5-A01 --db work/demo.db --output-dir work/demo-show
+```
+
+省略`--mock-scenario`时使用包内固定M01/basic演示，采用真实当前时间；自备输入需要提供未来deadline。场景字段、退出码与错误规则见[CLI契约](docs/06-contracts.md)。stdout仅最终JSON，进度/错误在stderr；默认数据库work/runtime.db，默认输出work/runs/<request_id>/的output.json、plan.md、trace.jsonl。completed仅表示方案已保存，四项活动仍为planned。不支持同时运行同一任务的多个进程。
 
 ## 已确定的路线
 

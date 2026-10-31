@@ -35,7 +35,7 @@
     "operation_id": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 200
+      "maxLength": 256
     },
     "phase": {
       "enum": [
@@ -119,6 +119,18 @@
       "type": "string",
       "format": "date-time",
       "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "backend": {
+      "enum": [
+        "mock",
+        "deepseek"
+      ]
+    },
+    "model": {
+      "enum": [
+        "mock",
+        "deepseek-v4-pro"
+      ]
     }
   },
   "required": [
@@ -136,7 +148,9 @@
     "result_ref",
     "task_status",
     "next_decision_event_id",
-    "created_at"
+    "created_at",
+    "backend",
+    "model"
   ],
   "additionalProperties": false
 }

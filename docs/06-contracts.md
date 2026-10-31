@@ -4,7 +4,7 @@
 
 ## CLI
 
-以下是**拟实现命令**，本包阶段尚不可执行：
+S5实现前约定：本阶段开放run/show，resume仍留S6；deepseek后端留S7，选择时明确配置错误，不降级Mock。
 
 ```text
 python -m content_planner run --input <request.json> --backend mock|deepseek --db <runtime.db> --output-dir <directory>
@@ -14,7 +14,21 @@ python -m content_planner resume --request-id <ID> --db <runtime.db> --output-di
 
 `run` 默认 backend=mock、db=`work/runtime.db`、output-dir=`work/runs/<request_id>`；业务资料通过包资源 `content_planner/data/` 读取。`resume` 使用原任务 backend 和配置，不允许借续跑变更模型/资料/预算。`show` 不调用模型或业务工具。live 模式缺少模型环境变量时明确报配置错误，不退回 Mock。
 
-退出码：0=completed；2=needs_input/输入或配置错误/请求冲突；3=incomplete；1=不能构造可信结果的进程/存储故障。`show` 的退出码反映所查任务状态。错误和进度写 stderr，stdout 只写最终 JSON。输出目录创建失败不回滚已提交方案，输出 `EXPORT_FAILED` 警告并允许重新 show。
+### S5离线入口细化（实现前，2026-10-31）
+
+`run --mock-scenario <scenario.json>`可提供显式Fake输入；省略时读取包内mock-scenario.json（固定M01/basic动作示例，不随主题/预算选择答案）。场景对象仅允许decisions、responses、now：前两项为显式planner响应对象/脚本JSON字符串列表，故障项为`{"error":"MODEL_UNAVAILABLE"}`；now可省略，或为带偏移时间，以固定Clock演示。场景不是用户业务输入，不进入request指纹；重复run先比较输入并读取原任务，不重新读取场景或当前资料。未提供now时使用SystemClock，不自动延长用户期限。所有Mock输出明确backend/model=mock，不作为智能效果证据。
+
+公开验收入口为CLI子进程与`service.run_task(raw_input, database=..., model=..., clock=...)`、`service.show_task(request_id, database=...)`。model/clock只作为已有外部依赖的注入点。缺失/非法输入先形成needs_input结果，不初始化数据库；缺失字段顺序沿用Request。已有ID输入冲突返回REQUEST_CONFLICT/退出2，不输出原方案冒充本次请求成功。show与重复run只读取原记录、checkpoint、事件和提交方案；无checkpoint时以已持久状态补丁和提交事实构造视图，不调用模型、工具，不写新的业务事件。S5不把未结束started标成成功或恢复执行。
+
+导出文件固定为output.json、plan.md、trace.jsonl；未完成plan.md明确未保存，保留候选和估算缺口。needs_input无持久事件，trace_path=null，trace.jsonl为空（不编造请求事件）。TaskResult数值取最新有效估算，completed优先使用已提交方案。execution_steps从tool/control的started派生，每次尝试一项；attempt按逻辑键累计（无键时按工具名），status取同operation最后结束事件，未结束保持started；result_index引用tool_results原结果。协议拒绝有ToolResult但未执行动作时不计attempt。
+
+Trace逐行符合trace-event.schema.json，额外显式backend/model；origin=模型选择的动作/协议拒绝时为model，系统模型请求/生命周期为system，明确夹具来源才为fixture_setup。next_decision_event_id指向本事件之后首个planner started事件，无则null。参数只导出公开动作参数（剥去内部logical_key），不导出完整planner响应、状态补丁或模型推理。摘要仅含动作状态、错误码及费用/约束等必要观察；result_ref用`tool_results:<index>`引用原结果。未知token/美元账单为null；业务费用不作为API账单。
+
+operation_id由最长200字符的tool_call_id加`tool:`及`:script`等内部前后缀形成；Trace/ExecutionStep将其上限细化为256，保留原调用ID，不截断或重写模型提供的ID。
+
+导出失败仍在stdout输出可信TaskResult，trace_path=null、warnings含EXPORT_FAILED，同时stderr告警；状态和退出码按业务事实，已提交方案不回滚。show可选新目录重导出。无可信存储结果时仅stderr进程错误、退出1；参数/文件/配置错误可形成needs_input JSON、退出2。帮助输出沿用argparse约定。
+
+退出码：0=completed；2=needs_input/输入或配置错误/请求冲突；3=incomplete；1=不能构造可信结果的进程/存储故障。`show` 的退出码反映所查任务状态。错误和进度写 stderr，stdout 只写最终 JSON；CLI两流及导出文件统一UTF-8，不依赖用户设置Python编码变量。输出目录创建失败不回滚已提交方案，输出 `EXPORT_FAILED` 警告并允许重新 show。
 
 ## 用户输入
 

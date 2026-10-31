@@ -2,6 +2,12 @@
 
 from copy import deepcopy
 from typing import Iterable, Protocol
+import json
+from importlib import resources
+from pathlib import Path
+from pydantic import Field
+
+from .contracts import Deadline, StrictDTO
 
 
 class ModelUnavailable(Exception):
@@ -44,3 +50,29 @@ class FakeModelClient:
         if isinstance(response, ModelUnavailable):
             raise response
         return response
+
+
+class MockScenario(StrictDTO):
+    decisions: list[dict] = Field(default_factory=list)
+    responses: list[str | dict] = Field(default_factory=list)
+    now: Deadline | None = None
+
+
+def load_mock_scenario(path=None):
+    source = Path(path) if path is not None else resources.files('content_planner').joinpath('data/mock-scenario.json')
+    scenario = MockScenario.model_validate(json.loads(source.read_text(encoding='utf-8-sig')))
+
+    def responses(values):
+        for value in values:
+            if value == {'error': 'MODEL_UNAVAILABLE'}:
+                yield ModelUnavailable('Configured offline failure')
+            elif isinstance(value, dict) and 'error' in value:
+                raise ValueError('Unsupported mock error')
+            else:
+                yield value
+
+    # Materialize to reject malformed fixture configuration before creating a task.
+    scripts = list(responses(scenario.responses))
+    if any(not isinstance(item, (str, ModelUnavailable)) for item in scripts):
+        raise ValueError('Mock script responses must be JSON strings or explicit failures')
+    return FakeModelClient(scripts, decisions=list(responses(scenario.decisions))), scenario.now
