@@ -20,7 +20,7 @@ class _Parser(argparse.ArgumentParser):
 
 
 def main(argv=None):
-    parser = _Parser(description='内容活动规划（离线版）')
+    parser = _Parser(description='内容活动规划（mock/deepseek）')
     commands = parser.add_subparsers(dest='command', required=True)
     run = commands.add_parser('run')
     run.add_argument('--input', required=True, type=Path)
@@ -38,13 +38,11 @@ def main(argv=None):
     try:
         args = parser.parse_args(argv)
         if args.command == 'run':
-            if args.backend != 'mock':
-                raise Fault('CONFIG_ERROR', 'DeepSeek后端尚未开放；真实模型接入归S7')
             try:
                 raw = json.loads(args.input.read_text(encoding='utf-8-sig'))
             except (OSError, ValueError) as error:
                 raise Fault('INVALID_ARGUMENT', 'Cannot read a valid input JSON file') from error
-            result = run_task(raw, database=args.db, mock_scenario=args.mock_scenario)
+            result = run_task(raw, database=args.db, mock_scenario=args.mock_scenario, backend=args.backend)
         else:
             request_id = Request(request_id=args.request_id).request_id
             result = (resume_task(request_id, database=args.db, mock_scenario=args.mock_scenario)
@@ -57,7 +55,8 @@ def main(argv=None):
         if code in {'STORAGE_UNAVAILABLE', 'SCHEMA_VERSION_MISMATCH'} or isinstance(error, sqlite3.Error):
             print(f'{code}: {message}', file=sys.stderr)
             return 1
-        result = empty_result(backend=getattr(args, 'backend', 'mock'), reason=code, message=message)
+        backend = error.details.get('backend', getattr(args, 'backend', 'mock')) if isinstance(error, Fault) else getattr(args, 'backend', 'mock')
+        result = empty_result(backend=backend, reason=code, message=message)
     for warning in result['warnings']:
         print(f"{warning['code']}: {warning['message']}", file=sys.stderr)
     if result['reason']:

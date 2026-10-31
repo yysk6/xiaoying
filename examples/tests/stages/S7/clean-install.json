@@ -1,0 +1,98 @@
+{
+  "stage": "S7",
+  "environment": "Reuse S5 public locked runtime venv; wheel force-reinstalled offline before these checks",
+  "install_argv": [
+    "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s5-clean\\Scripts\\python.exe",
+    "-m",
+    "pip",
+    "install",
+    "--no-index",
+    "--no-deps",
+    "--force-reinstall",
+    "C:\\Users\\11250\\Desktop\\xiaoying\\dist\\xiaoying_content_planner-0.1.0-py3-none-any.whl"
+  ],
+  "install_exit_code": 0,
+  "python": "3.10.8",
+  "platform": "Windows",
+  "wheel": "dist\\xiaoying_content_planner-0.1.0-py3-none-any.whl",
+  "wheel_sha256": "3b61b04265b778383d2abe5fa27dde8b75fadcb8a1068e21235951298d06ee58",
+  "source_baseline": "0a8ed602c2e0bd87abb1f02d59815afc77d7eaed",
+  "working_tree_modified": true,
+  "checks": {
+    "isolated_nonrepo_import": true,
+    "mock_cli_utf8_schema": true,
+    "installed_real_adapter_MockTransport_graph": true,
+    "completed_live_resume_without_key": true,
+    "missing_key_config_error_zero_http": true,
+    "pip_check": true
+  },
+  "previous_verification_failure": "Initial harness omitted local common.schema.json registry; verification corrected, application unchanged",
+  "live_http_requests": 0,
+  "full_pytest_in_clean_runtime": "NOT_RUN",
+  "Linux": "NOT_RUN",
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s5-clean\\Scripts\\python.exe",
+        "-I",
+        "-X",
+        "utf8",
+        "-c",
+        "import json,os\nfrom datetime import datetime,timedelta,timezone\nfrom importlib import resources\nimport httpx,content_planner\nfrom content_planner.service import run_task,resume_task\nfrom content_planner import deepseek\nfixture=json.loads(resources.files('content_planner').joinpath('data/mock-scenario.json').read_text(encoding='utf-8'))\ndecisions=iter(fixture['decisions']);calls=[]\ndef handler(request):\n p=json.loads(request.content);calls.append(p)\n m={'role':'assistant','content':fixture['responses'][0]} if 'response_format' in p else next(decisions)\n return httpx.Response(200,json={'choices':[{'message':m,'finish_reason':'stop' if 'response_format' in p else 'tool_calls'}],'usage':{'prompt_tokens':123,'completion_tokens':45}})\noriginal=httpx.Client\nhttpx.Client=lambda **kw:original(transport=httpx.MockTransport(handler),**kw)\nos.environ['DEEPSEEK_API_KEY']='package-test-placeholder'\nraw={'request_id':'installed-live','topic':'字幕推广','budget_units':14,'deadline_at':(datetime.now(timezone.utc)+timedelta(hours=4)).isoformat()}\nr=run_task(raw,database='http.db',backend='deepseek')\nassert r['status']=='completed' and r['backend']=='deepseek' and len(calls)==6 and r['usage']['input_tokens']==738\nos.environ.pop('DEEPSEEK_API_KEY')\nassert resume_task('installed-live',database='http.db')==r\nprint(json.dumps({'result':r,'adapter_path':deepseek.__file__},ensure_ascii=False))\n"
+      ],
+      "cwd": "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s7-wheel-k3p3eps0",
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s5-clean\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "content_planner",
+        "run",
+        "--input",
+        "input.json",
+        "--db",
+        "mock.db",
+        "--output-dir",
+        "mock-output"
+      ],
+      "cwd": "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s7-wheel-k3p3eps0",
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s5-clean\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "content_planner",
+        "run",
+        "--backend",
+        "deepseek",
+        "--input",
+        "input.json",
+        "--db",
+        "missing.db",
+        "--output-dir",
+        "missing-output"
+      ],
+      "cwd": "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s7-wheel-k3p3eps0",
+      "exit_code": 2,
+      "stderr": "CONFIG_ERROR: Configure the official DeepSeek API key, base URL and deepseek-v4-pro model\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s5-clean\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "cwd": "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s7-wheel-k3p3eps0",
+      "exit_code": 0,
+      "stderr": ""
+    }
+  ]
+}

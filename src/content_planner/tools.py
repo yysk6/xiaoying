@@ -222,7 +222,8 @@ class LocalTools:
         try:
             raw = self._model.generate_script(context)
         except ModelUnavailable as error:
-            raise Fault('SCRIPT_MODEL_UNAVAILABLE', 'Script model is unavailable') from error
+            code = 'SCRIPT_MODEL_UNAVAILABLE' if error.code == 'MODEL_UNAVAILABLE' else error.code
+            raise Fault(code, 'Script model is unavailable') from None
         draft = parse_script(raw, material)
         artifact = {'script_id': 'script_' + digest, 'script_input_hash': digest, **draft.model_dump(mode='json')}
         self._state['script_artifacts'][digest] = artifact

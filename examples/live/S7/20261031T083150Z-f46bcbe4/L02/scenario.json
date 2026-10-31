@@ -1,0 +1,10 @@
+{
+  "clock_source": "SystemClock",
+  "fault_injection": {
+    "tool": "generate_script",
+    "attempt": 1,
+    "phase": "before HTTP",
+    "origin": "fixture_setup"
+  },
+  "preset_decisions": false
+}

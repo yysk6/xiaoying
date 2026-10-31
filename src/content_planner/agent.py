@@ -134,17 +134,21 @@ class AgentRuntime:
             if event['phase'] == 'succeeded':
                 return event['result']['response']
             if event['phase'] == 'failed':
-                raise ModelUnavailable('Persisted model failure')
+                code = event['error_code'] or 'MODEL_UNAVAILABLE'
+                raise ModelUnavailable('Persisted model failure', code=code,
+                    retryable=(event['result'] or {}).get('retryable', code in {'MODEL_UNAVAILABLE', 'SCRIPT_MODEL_UNAVAILABLE'}))
         operation_id, fields = self.start_attempt(operation_id, fields, 32)
         try:
             response = execute()
-        except ModelUnavailable:
+        except ModelUnavailable as error:
+            code = 'SCRIPT_MODEL_UNAVAILABLE' if name == 'script' and error.code == 'MODEL_UNAVAILABLE' else error.code
             self.repo.record_event(self.request.request_id, operation_id, 'failed',
-                                   error_code='SCRIPT_MODEL_UNAVAILABLE' if name == 'script' else 'MODEL_UNAVAILABLE', **fields)
+                                   error_code=code, result={'usage': error.usage, 'retryable': error.retryable}, **fields)
             raise
         if name == 'planner' and isinstance(response, dict):
             response = {key: value for key, value in response.items() if key in {'role', 'content', 'tool_calls'}}
-        self.repo.record_event(self.request.request_id, operation_id, 'succeeded', result={'response': response}, **fields)
+        self.repo.record_event(self.request.request_id, operation_id, 'succeeded',
+                               result={'response': response, 'usage': getattr(self.model, 'last_usage', None)}, **fields)
         return response
 
     def decide(self, state):
@@ -161,8 +165,8 @@ class AgentRuntime:
             if error.code != 'MODEL_CALL_LIMIT_REACHED':
                 raise
             return self.halt(error.code)
-        except ModelUnavailable:
-            return {**self.halt('MODEL_UNAVAILABLE'), 'decision_seq': seq}
+        except ModelUnavailable as error:
+            return {**self.halt(error.code), 'decision_seq': seq}
         state = {**state, 'decision_seq': seq}
         if (not isinstance(response, dict) or response.get('role') != 'assistant'
                 or (response.get('content') is not None and not isinstance(response['content'], str))):
@@ -268,6 +272,7 @@ class AgentRuntime:
         messages = state['planner_messages'] + [{'role': 'tool', 'tool_call_id': result['tool_call_id'],
                                                'content': json.dumps(result, ensure_ascii=False)}]
         patch = {**self.tools.snapshot(), 'pending_call': None, 'planner_messages': messages, 'consecutive_protocol_errors': 0}
-        if not result['ok'] and result['error']['code'] == 'MODEL_CALL_LIMIT_REACHED':
-            patch.update(self.halt('MODEL_CALL_LIMIT_REACHED'))
+        if not result['ok'] and result['error']['code'] in {
+                'MODEL_CALL_LIMIT_REACHED', 'AUTH_ERROR', 'MODEL_CONFIG_ERROR', 'MODEL_PROTOCOL_ERROR'}:
+            patch.update(self.halt(result['error']['code']))
         return patch

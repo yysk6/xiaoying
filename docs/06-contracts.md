@@ -4,7 +4,7 @@
 
 ## CLI
 
-S6实现前约定：run/show保持既有语义，本阶段开放显式resume；deepseek后端留S7，选择时明确配置错误，不降级Mock。S5历史范围见阶段报告。
+S7实现前约定：run/show/resume保持既有语义，本阶段开放deepseek后端，使用官方deepseek-v4-pro，不降级Mock。历史阶段边界见阶段报告。
 
 ```text
 python -m content_planner run --input <request.json> --backend mock|deepseek --db <runtime.db> --output-dir <directory>
@@ -50,6 +50,18 @@ operation_id由最长200字符的tool_call_id加`tool:`及`:script`等内部前�
 ```
 
 环境变量：`DEEPSEEK_API_KEY`（仅 live 必需）、`DEEPSEEK_BASE_URL=https://api.deepseek.com`、`DEEPSEEK_MODEL=deepseek-v4-pro`。首版运行仅支持官方 host 与此模型 ID；其他值报配置错误，不暗示兼容任意代理。`.env.example` 只有占位符；环境变量由 shell 设置，本程序首版不自动加载 `.env` 文件。
+
+### S7 HTTP适配与效果验证（实现前，2026-10-31）
+
+公开适配入口`DeepSeekModelClient(client=None)`从环境读取配置；client仅供HTTPX MockTransport替换外部HTTP边界。客户端支持上下文管理/close；由service创建的客户端在请求结束或错误时关闭，调用方注入的客户端由调用方管理。run_task增加backend='mock'，resume按原记录backend创建客户端；重复run/show/completed resume先只读，不要求当前密钥。缺信息仍零调用且不初始化任务；新live任务缺/非法配置为CONFIG_ERROR，不能回退Mock，live不接受mock-scenario。
+
+使用ADR-002固定官方POST /chat/completions、非流式、temperature=0、thinking.disabled、planner max_tokens=2048、script=1536；不发送parallel_tool_calls、不启用Beta strict、无HTTP自动重试、不跟随重定向。planner请求为固定system+当前结构化事实user+完整assistant/tool历史，六工具Schema，tool_choice=auto；工具原调用ID和JSON字符串结果原样配对。script请求不带工具，system明确要求json，response_format=json_object，返回原JSON文本再交领域校验。不接收模型自行声明的总费用或成功状态。
+
+仅支持合法HTTP响应封装和单个choice；不导出HTTP认证头/原错误body/推理字段。401/403为AUTH_ERROR、其他4xx/重定向为MODEL_CONFIG_ERROR，均不可重试；429、5xx及HTTPX超时/连接失败为MODEL_UNAVAILABLE、可恢复；响应封装非法、截断/过滤为MODEL_PROTOCOL_ERROR，不将部分结果当成功。script模型的普通可恢复失败仍映射SCRIPT_MODEL_UNAVAILABLE；AUTH/配置/协议错误保持原错误码并明确停止，不再为同一次错误额外调用planner。模型业务工具参数的严格验证仍由既有runtime完成。
+
+每次HTTP响应只保留安全的assistant消息和真实prompt/completion token usage。模型事件result中usage可为空，响应重放不重复计；请求计数仍以started为准。TaskResult总token只有所有模型尝试均有有效返回用量时才求和，有未知/中断/无用量则null；api_cost_usd没有核对价格数据时保持null。错误不保存provider body或密钥；输入或配置错误的backend标识与用户选择一致。
+
+可复用评估入口`scripts/evaluate_live.py --live`先做工具调用/真实结果回传/脚本JSON探针，探针通过后运行L01正常、L02首次生成故障、L03预算10各一次，明确小样本；不伪造决策序列。L02仅在注入ModelClient边界制造首次可重试错误，其余planner/script均为真实HTTP，scenario明确故障在HTTP前，started表示尝试而非付费次数。保留全部失败/实际Trace、真实用量与manifest；真实模型直接选basic不得说成12→8重规划。不自动运行L04或无限增加付费样本，外部阻塞如实记录。
 
 ## S1 领域接口细化（2026-10-29，先于实现）
 

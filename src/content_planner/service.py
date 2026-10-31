@@ -5,11 +5,13 @@ from pathlib import Path
 import sqlite3
 from dataclasses import dataclass
 from datetime import datetime
+from contextlib import ExitStack
 
 from langgraph.checkpoint.sqlite import SqliteSaver
 
 from .catalog import load_catalog
 from .contracts import Request
+from .deepseek import DeepSeekModelClient
 from .domain import Fault, SystemClock, input_hash, require_complete
 from .graph import PlanningAgent
 from .model import load_mock_scenario
@@ -26,7 +28,23 @@ class _ScenarioClock:
         return self.instant
 
 
-def run_task(raw_input, *, database, model=None, clock=None, mock_scenario=None):
+def _configured_model(backend, mock_scenario, clock, stack):
+    if backend == 'deepseek':
+        if mock_scenario is not None:
+            raise Fault('CONFIG_ERROR', 'Live backend cannot use a mock scenario', {'backend': backend})
+        return stack.enter_context(DeepSeekModelClient()), clock or SystemClock()
+    if backend != 'mock':
+        raise Fault('CONFIG_ERROR', 'Unknown backend')
+    try:
+        model, now = load_mock_scenario(mock_scenario)
+    except (OSError, ValueError, ValidationError) as error:
+        raise Fault('CONFIG_ERROR', 'Cannot load the explicit mock scenario') from error
+    if now is not None and clock is None:
+        clock = _ScenarioClock(datetime.fromisoformat(now))
+    return model, clock or SystemClock()
+
+
+def run_task(raw_input, *, database, model=None, clock=None, mock_scenario=None, backend='mock'):
     try:
         request = Request.model_validate(raw_input)
     except ValidationError as error:
@@ -34,10 +52,10 @@ def run_task(raw_input, *, database, model=None, clock=None, mock_scenario=None)
             request_id = Request(request_id=raw_input.get('request_id')).request_id if isinstance(raw_input, dict) else None
         except ValidationError:
             request_id = None
-        return empty_result(request_id, message='; '.join('.'.join(map(str, e['loc'])) + ': ' + e['msg']
+        return empty_result(request_id, backend=backend, message='; '.join('.'.join(map(str, e['loc'])) + ': ' + e['msg']
                                                          for e in error.errors())[:1000])
     if request.missing_fields:
-        return empty_result(request.request_id, reason='NEEDS_INPUT', message='请补齐必填字段',
+        return empty_result(request.request_id, backend=backend, reason='NEEDS_INPUT', message='请补齐必填字段',
                             missing_fields=request.missing_fields)
     database = Path(database)
     if database.is_file():
@@ -49,26 +67,22 @@ def run_task(raw_input, *, database, model=None, clock=None, mock_scenario=None)
                     raise
             else:
                 if record['input_hash'] != input_hash(request):
-                    return empty_result(request.request_id, reason='REQUEST_CONFLICT', message='该ID已用于不同业务输入')
+                    return empty_result(request.request_id, backend=backend, reason='REQUEST_CONFLICT', message='该ID已用于不同业务输入')
                 return _read_result(repo, database, record)
-    if model is None:
+    with ExitStack() as stack:
+        if model is None:
+            model, clock = _configured_model(backend, mock_scenario, clock, stack)
+        clock = clock or SystemClock()
         try:
-            model, now = load_mock_scenario(mock_scenario)
-        except (OSError, ValueError, ValidationError) as error:
-            raise Fault('CONFIG_ERROR', 'Cannot load the explicit mock scenario') from error
-        if now is not None and clock is None:
-            clock = _ScenarioClock(datetime.fromisoformat(now))
-    clock = clock or SystemClock()
-    try:
-        require_complete(request, clock)
-    except Fault as error:
-        return empty_result(request.request_id, reason=error.code, message=error.message)
-    database.parent.mkdir(parents=True, exist_ok=True)
-    with Repository(database) as repo:
-        with SqliteSaver.from_conn_string(str(database)) as saver:
-            state = PlanningAgent(request, load_catalog(), model, clock, repo, saver).run()
-        return task_result(repo.get_request(request.request_id), state, repo.events(request.request_id),
-                           repo.get_plan(request.request_id))
+            require_complete(request, clock)
+        except Fault as error:
+            return empty_result(request.request_id, backend=backend, reason=error.code, message=error.message)
+        database.parent.mkdir(parents=True, exist_ok=True)
+        with Repository(database) as repo:
+            with SqliteSaver.from_conn_string(str(database)) as saver:
+                state = PlanningAgent(request, load_catalog(), model, clock, repo, saver).run()
+            return task_result(repo.get_request(request.request_id), state, repo.events(request.request_id),
+                               repo.get_plan(request.request_id))
 
 
 def _read_result(repo, database, record):
@@ -104,7 +118,7 @@ def resume_task(request_id, *, database, model=None, clock=None, mock_scenario=N
     database = Path(database)
     if not database.is_file():
         raise Fault('REQUEST_NOT_FOUND', 'Request does not exist')
-    with Repository(database) as repo:
+    with Repository(database) as repo, ExitStack() as stack:
         record = repo.get_request(request_id)
         current = _read_result(repo, database, record)
         if current['status'] == 'completed':
@@ -114,14 +128,9 @@ def resume_task(request_id, *, database, model=None, clock=None, mock_scenario=N
             if current['limits'][field] == 0:
                 return {**current, 'status': 'incomplete', 'reason': code, 'message': code}
         if model is None:
-            if mock_scenario is None:
+            if record['backend'] == 'mock' and mock_scenario is None:
                 raise Fault('CONFIG_ERROR', 'Mock resume requires an explicit continuation scenario')
-            try:
-                model, now = load_mock_scenario(mock_scenario)
-            except (OSError, ValueError, ValidationError) as error:
-                raise Fault('CONFIG_ERROR', 'Cannot load the explicit mock scenario') from error
-            if now is not None and clock is None:
-                clock = _ScenarioClock(datetime.fromisoformat(now))
+            model, clock = _configured_model(record['backend'], mock_scenario, clock, stack)
         clock = clock or SystemClock()
         catalog = catalog or load_catalog()
         if (manifest_for(catalog, model.model_id) != record['manifest']

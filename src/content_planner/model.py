@@ -11,7 +11,9 @@ from .contracts import Deadline, StrictDTO
 
 
 class ModelUnavailable(Exception):
-    pass
+    def __init__(self, message, *, code='MODEL_UNAVAILABLE', retryable=True, usage=None):
+        super().__init__(message)
+        self.code, self.retryable, self.usage = code, retryable, usage
 
 
 class ModelClient(Protocol):

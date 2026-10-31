@@ -32,6 +32,8 @@
 
 首版固定参数：`temperature=0`（不承诺确定性），决策 `max_tokens=2048`，脚本 `max_tokens=1536`，`stream=false`。HTTPX 超时：connect=5s、read=45s、write=10s、pool=5s；这些是分项超时，不是严格的总耗时 SLA。
 
+2026-10-31 S7实现前重新核对上述官方Chat Completions/Tool Calls/JSON Output文档：指定模型、非思考工具调用、json_object及usage字段仍支持；parallel_tool_calls不在官方当前请求字段中，继续不发送。保持薄HTTPX适配、不新增SDK或依赖。用户明确授权测试直接使用提供的密钥；仅在外部测试进程内注入环境，不落盘、不回显，应用仍只读环境变量。
+
 ## ADR-003：SQLite 是本地状态后端
 
 使用 Python `sqlite3`，本地单写者 CLI。LangGraph checkpointer 表与业务表共用一个数据库文件、不同连接；应用不访问框架内部表。

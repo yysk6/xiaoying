@@ -2,11 +2,11 @@
 
 更新日期：2026-10-31。项目根目录为用户指定的xiaoying；目标仓库为 https://github.com/yysk6/xiaoying 。
 
-用户要求：分阶段开发、分阶段验收，开发使用karpathy-guidelines。当前S6实现、自验与双轴审查完成，结果见[阶段报告](stages/S6.md)；实时授权与用户验收统一见[HANDOFF](../HANDOFF.md)。
+用户要求：分阶段开发、分阶段验收，开发使用karpathy-guidelines。当前S7实现、自验与双轴审查完成，结果见[阶段报告](stages/S7.md)；实时授权与用户验收统一见[HANDOFF](../HANDOFF.md)。
 
 前阶段技术自验事实保留；没有用户单独验收表述时保持pending，显式授权下一阶段不伪记为前阶段accepted。
 
-2026-10-30用户明确决定不引入Deep Agents，路线保持。2026-10-31明确授权S6，起始HEAD为feb17bc，单worktree且工作区干净。S6结束于自己的验收包，S7未获授权。
+2026-10-30用户明确决定不引入Deep Agents，路线保持。2026-10-31明确授权S7，起始HEAD为0a8ed60，单worktree且工作区干净。用户授权真实测试使用所提供密钥；仅临时进程环境注入。S7结束于自己的验收包，S8未开始。
 
 ## 1. 阶段执行规则
 
@@ -41,7 +41,7 @@ SDD指规格驱动开发，TDD指测试驱动开发，不额外引入方法论�
 | 项目 | 当前状态 |
 |---|---|
 | 规格 | S2实现前补充包内资料、公开入口、资料快照、工具错误及估算时钟语义；计划与实际结果分开 |
-| Git | S6起始feb17bc、main单worktree；远端同步状态见HANDOFF |
+| Git | S7起始0a8ed60、main单worktree；远端同步状态见HANDOFF |
 | 依赖 | 两份锁文件已生成，在开发环境及干净环境完成安装/依赖检查 |
 | S0测试 | 四项工程测试在开发环境和正式wheel干净环境各通过一次 |
 | S1测试 | 草稿已审阅迁入test_contracts.py/test_domain.py；111项S1与4项S0回归在开发/正式wheel环境各115 passed |
@@ -50,9 +50,10 @@ SDD指规格驱动开发，TDD指测试驱动开发，不额外引入方法论�
 | S4测试 | 离线业务循环及回归结果集中见S4报告；保持单份最终JUnit |
 | S5测试 | CLI核心断言及回归260项通过、正式wheel安装/CLI验证；证据集中见S5报告 |
 | S6测试 | 离线恢复及回归288项通过，最终wheel恢复验证；集中见S6报告 |
-| 业务代码 | LangGraph循环、SQLite checkpoint、run/show/resume与完整导出；无真实HTTP |
-| 模型 | 尚未真实验证；聊天里给出密钥不等于运行环境已配置 |
-| 阶段验收 | 当前阶段与用户验收以HANDOFF为准；S6待验收，S7/S8未开始 |
+| S7测试 | 离线HTTP协议与真实L01—L03各一次；完整结果及限制见S7报告 |
+| 业务代码 | LangGraph循环、SQLite checkpoint、run/show/resume、完整导出与DeepSeek HTTP适配 |
+| 模型 | 官方deepseek-v4-pro真实探针及三个单次样本通过；不是稳定性/成功率结论 |
+| 阶段验收 | 当前阶段与用户验收以HANDOFF为准；S7待验收，S8未开始 |
 
 接手先检查中断遗留状态，不重复创建环境、不覆盖已有文件、不假定此前命令成功。S0期间曾将S1草稿保留为tests/planned/domain_cases.py，不计入S0通过或跳过数量；S1现已审阅迁入正式单测并保留真实Red。默认pytest只收集已开展阶段。尚未实现的CLI入口不声明为可运行命令。
 
@@ -166,4 +167,4 @@ ready_for_review不等于accepted；blocked不抹掉已有成果；静态Schema�
 
 不承诺九阶段能在3小时全部完成。记录调研、规格、编码、测试、验收与修复的实际用时；题目建议投入与实际投入分开。
 
-当前执行至S6验收包，实际结果见docs/stages/S6.md；下一步处理S6反馈，S7等待明确授权。
+当前执行至S7验收包，实际结果见docs/stages/S7.md；下一步处理S7反馈，S8等待明确授权。

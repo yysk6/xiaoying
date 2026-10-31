@@ -2,12 +2,13 @@
 
 编写日期：2026-10-29（北京时间）。选题：第 2 题。开发方式：SDD（规格驱动开发）+ TDD（测试驱动开发）。
 
-已实现领域规则、本地工具、SQLite保存/幂等、LangGraph离线循环、run/show/resume及JSON/Markdown/Trace导出。当前阶段、授权与验收状态统一见[HANDOFF](HANDOFF.md)，实际测试与审查见[S6报告](docs/stages/S6.md)。当前仅Mock；真实DeepSeek后端尚未开放。
+已实现领域规则、本地工具、SQLite保存/幂等、LangGraph循环、run/show/resume及JSON/Markdown/Trace导出，并接通DeepSeek官方HTTP API。当前阶段、授权与验收状态统一见[HANDOFF](HANDOFF.md)，实际测试、真实样本与限制见[S7报告](docs/stages/S7.md)。
 
 接手或恢复开发请先阅读[上下文交接文档](HANDOFF.md)。该文档须在每阶段交付验收前更新，用户验收或修订后同步更新；规则见AGENTS.md与阶段计划。
 
 ## 当前评审入口
 
+- [S7验收报告](docs/stages/S7.md)：真实HTTP适配、协议测试及L01—L03单次真实样本。
 - [S6验收报告](docs/stages/S6.md)：显式续跑、跨进程恢复、重放及累计限额。
 - [S5验收报告](docs/stages/S5.md)：历史CLI核心案例、导出与安装验证。
 - [S4验收报告](docs/stages/S4.md)：历史离线循环、停止/限额及上下文验证。
@@ -87,6 +88,27 @@ POSIX对应命令（Linux仍未实测）：
 ```
 
 上述两流固定UTF-8，无需Python编码参数；POSIX/Linux仍未实测。Mock未完成任务的resume需提供后续显式响应；已完成任务resume直接返回原方案，无需场景。资料/提示/模型配置变化、不可恢复停止或额度耗尽会明确拒绝，不修改原任务，也不重置额度。已持久成功产物/响应会复用；外部返回但未持久的请求结果未知，恢复可能再请求，不承诺API exactly-once。普通重复run始终只读。详细边界见[恢复规格](docs/07-state-and-storage.md#s6接通细化实现前2026-10-31)。
+
+## 真实DeepSeek后端
+
+应用仅从环境变量读取密钥，不自动加载.env。使用未来的带时区deadline及新request_id；以下命令会产生真实API费用。
+
+```powershell
+$env:DEEPSEEK_API_KEY = '<your-key>'
+.\.venv\Scripts\python.exe -m content_planner run --backend deepseek --input examples/inputs/live-input.json --db work/live.db --output-dir work/live-output
+.\.venv\Scripts\python.exe -m content_planner resume --request-id <request-id> --db work/live.db
+# 按当前时间生成输入，探针后各运行L01—L03一次：
+.\.venv\Scripts\python.exe scripts/evaluate_live.py --live
+```
+
+```sh
+export DEEPSEEK_API_KEY='<your-key>'
+.venv/bin/python -m content_planner run --backend deepseek --input examples/inputs/live-input.json --db work/live.db --output-dir work/live-output
+.venv/bin/python -m content_planner resume --request-id <request-id> --db work/live.db
+.venv/bin/python scripts/evaluate_live.py --live
+```
+
+`live-input.json`由使用者按[Request Schema](contracts/request.schema.json)准备，示例目录不含固定未来日期文件。默认官方地址https://api.deepseek.com及模型deepseek-v4-pro，thinking关闭；不接受其他地址/模型。live不接受mock场景，不自动回退；缺配置返回CONFIG_ERROR。历史查询及已完成任务resume无需当前密钥。真实token按响应记录，未知为null；模拟报价units与API美元费用分开。S7只测各一个样本；L03直接选basic8，不是12→8重规划；L04和Linux未测。详细证据见S7报告。
 
 ## 已确定的路线
 

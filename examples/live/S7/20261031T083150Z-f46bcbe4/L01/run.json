@@ -1,0 +1,46 @@
+{
+  "case": "L01",
+  "passed": true,
+  "status": "completed",
+  "reason": null,
+  "started_at": "2026-10-31T08:31:56.540321+00:00",
+  "ended_at": "2026-10-31T08:32:12.366478+00:00",
+  "http_attempts": 6,
+  "usage": {
+    "model_requests": 6,
+    "action_calls": 5,
+    "input_tokens": 14998,
+    "output_tokens": 809,
+    "api_cost_usd": null
+  },
+  "failure_observed": null,
+  "manifest": {
+    "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+    "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+    "model_id": "deepseek-v4-pro",
+    "planner_prompt_version": "planner-v1",
+    "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+    "schema_version": "1.0",
+    "script_prompt_version": "script-v1",
+    "thinking": "disabled"
+  },
+  "output": "examples\\live\\S7\\20261031T083150Z-f46bcbe4\\L01\\output.json",
+  "source": {
+    "commit": "0a8ed602c2e0bd87abb1f02d59815afc77d7eaed",
+    "working_tree_modified": true
+  },
+  "entrypoint_argv": [
+    "scripts/evaluate_live.py",
+    "--live"
+  ],
+  "model_parameters": {
+    "thinking": "disabled",
+    "temperature": 0,
+    "stream": false,
+    "planner_max_tokens": 2048,
+    "script_max_tokens": 1536
+  },
+  "metadata_note": "Source/invocation metadata supplemented after the run; the baseline and argv were unchanged. Application results and traces were not rewritten.",
+  "backend": "deepseek",
+  "model": "deepseek-v4-pro"
+}

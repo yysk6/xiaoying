@@ -56,6 +56,15 @@ def task_result(record, state, events, saved):
                   total_units=plan['total_units'] if plan else (estimate['total_units'] if estimate else None),
                   manifest=record['manifest'])
     result['usage'].update(model_requests=model_count, action_calls=action_count)
+    model_usage = []
+    for event in events:
+        if event['kind'] == 'model' and event['phase'] == 'started':
+            ended = next((e for e in reversed(events) if e['operation_id'] == event['operation_id']), event)
+            model_usage.append((ended['result'] or {}).get('usage') or {})
+    for field in ('input_tokens', 'output_tokens'):
+        values = [usage.get(field) for usage in model_usage]
+        if values and all(type(value) is int and value >= 0 for value in values):
+            result['usage'][field] = sum(values)
     result['limits'].update(remaining_model_requests=max(0, 32 - model_count),
                             remaining_action_calls=max(0, 24 - action_count))
     return result

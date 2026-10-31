@@ -1,0 +1,5 @@
+{
+  "clock_source": "SystemClock",
+  "fault_injection": null,
+  "preset_decisions": false
+}

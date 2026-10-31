@@ -1,0 +1,34 @@
+{
+  "backend": "deepseek",
+  "model": "deepseek-v4-pro",
+  "run_id": "20261031T083016Z-4cc7f1b1",
+  "started_at": "2026-10-31T08:30:16.747465+00:00",
+  "cases": [],
+  "http_attempts": 1,
+  "api_cost_usd": null,
+  "samples_per_case": 1,
+  "L04": "NOT_RUN",
+  "error": {
+    "code": "MODEL_UNAVAILABLE",
+    "message": "DeepSeek connection or timeout failure"
+  },
+  "probe": "failed",
+  "ended_at": "2026-10-31T08:30:16.913130+00:00",
+  "passed": false,
+  "source": {
+    "commit": "0a8ed602c2e0bd87abb1f02d59815afc77d7eaed",
+    "working_tree_modified": true
+  },
+  "entrypoint_argv": [
+    "scripts/evaluate_live.py",
+    "--live"
+  ],
+  "model_parameters": {
+    "thinking": "disabled",
+    "temperature": 0,
+    "stream": false,
+    "planner_max_tokens": 2048,
+    "script_max_tokens": 1536
+  },
+  "metadata_note": "Source/invocation metadata supplemented after the run; the baseline and argv were unchanged. Application results and traces were not rewritten."
+}
