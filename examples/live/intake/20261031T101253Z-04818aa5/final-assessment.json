@@ -1,0 +1,121 @@
+{
+  "run_id": "20261031T101253Z-04818aa5",
+  "original_summary_sha256": "b9e6682e3113c9265e254d04bf49e54fff39b3697c0c58ab5949570c59fa02f8",
+  "assessment_origin": "offline independent artifact/schema/SQLite check plus recorded semantic content review; no new model calls",
+  "cases": [
+    {
+      "case": "N-A01",
+      "technical_pass": false,
+      "http_attempts": 1,
+      "elapsed_seconds": 3.39,
+      "dialog": {
+        "passed": false,
+        "errors": [
+          "turn_0:state",
+          "turn_0:fields",
+          "turn_1:state",
+          "turn_1:fields",
+          "confirmation_identity"
+        ],
+        "turns": 2,
+        "extraction_turns": 1,
+        "request_id": null
+      },
+      "intake_usage": {
+        "model_requests": 1,
+        "api_cost_usd": null,
+        "input_tokens": 553,
+        "output_tokens": 98
+      },
+      "content_pass": null,
+      "content_review": "NOT_RUN",
+      "unsupported_claims": [],
+      "business_usage": null,
+      "passed": false
+    },
+    {
+      "case": "N-A02-03",
+      "technical_pass": false,
+      "http_attempts": 10,
+      "elapsed_seconds": 22.5,
+      "dialog": {
+        "passed": false,
+        "errors": [
+          "turn_1:state",
+          "turn_1:fields",
+          "turn_2:state",
+          "turn_2:fields"
+        ],
+        "turns": 6,
+        "extraction_turns": 4,
+        "request_id": "nl-6db15482cd3d4abfae23a9d7d6f18f07"
+      },
+      "intake_usage": {
+        "model_requests": 4,
+        "api_cost_usd": null,
+        "input_tokens": 2187,
+        "output_tokens": 106
+      },
+      "content_pass": false,
+      "content_review": "FAIL: development-agent semantic review against M01 facts",
+      "unsupported_claims": [
+        "一键",
+        "瞬间完成"
+      ],
+      "business_usage": {
+        "model_requests": 6,
+        "action_calls": 5,
+        "input_tokens": 14920,
+        "output_tokens": 732,
+        "api_cost_usd": null
+      },
+      "status": "completed",
+      "reason": null,
+      "total_units": 8,
+      "plan_rows": 1,
+      "schema_pass": true,
+      "sqlite_snapshot_match": true,
+      "request_id": "nl-6db15482cd3d4abfae23a9d7d6f18f07",
+      "source_facts": [
+        "影芽剪辑支持自动生成字幕。",
+        "自动生成的字幕文本可以编辑。"
+      ],
+      "passed": false
+    },
+    {
+      "case": "N-A05-09",
+      "technical_pass": false,
+      "http_attempts": 2,
+      "elapsed_seconds": 5.188,
+      "dialog": {
+        "passed": false,
+        "errors": [
+          "turn_0:state",
+          "turn_0:fields",
+          "turn_1:state",
+          "turn_1:fields",
+          "turn_2:state",
+          "turn_2:fields",
+          "confirmation_identity"
+        ],
+        "turns": 3,
+        "extraction_turns": 2,
+        "request_id": null
+      },
+      "intake_usage": {
+        "model_requests": 2,
+        "api_cost_usd": null,
+        "input_tokens": 1088,
+        "output_tokens": 122
+      },
+      "content_pass": null,
+      "content_review": "NOT_RUN",
+      "unsupported_claims": [],
+      "business_usage": null,
+      "passed": false
+    }
+  ],
+  "technical_pass": false,
+  "content_pass": false,
+  "passed": false
+}

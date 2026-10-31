@@ -1,0 +1,22 @@
+[
+  {"case_id":"E01","label":"正常字幕方案","budget":10},
+  {"case_id":"E02","label":"另一素材且预算恰好8","budget":8,"topic":"影芽剪辑片段裁剪与拼接推广","material_id":"M02"},
+  {"case_id":"E03","label":"初始premium12恰好符合预算","budget":12,"seed_premium":true,"allowed_units":[8,12]},
+  {"case_id":"E04","label":"参考实例预算10初始12改选8","budget":10,"seed_premium":true,"replan":"budget"},
+  {"case_id":"E05","label":"预算8初始12改选8边界","budget":8,"seed_premium":true,"replan":"budget"},
+  {"case_id":"E06","label":"初始12且最低8仍超预算7","budget":7,"seed_premium":true,"expected_status":"incomplete","expected_reason":"constraints_unsatisfied","budget_gap":1},
+  {"case_id":"E07","label":"预算5无可行方案缺口3","budget":5,"expected_status":"incomplete","expected_reason":"constraints_unsatisfied","budget_gap":3},
+  {"case_id":"E08","label":"135分钟超120分钟期限改选90分钟","budget":12,"deadline_minutes":120,"seed_premium":true,"replan":"deadline"},
+  {"case_id":"E09","label":"期限60分钟最低90分钟仍不可行","budget":10,"deadline_minutes":60,"expected_status":"incomplete","expected_reason":"constraints_unsatisfied","deadline_gap":30},
+  {"case_id":"E10","label":"期限恰好90分钟的重规划边界","budget":12,"deadline_minutes":90,"seed_premium":true,"replan":"deadline","exact_deadline":true},
+  {"case_id":"E11","label":"缺预算","omit":["budget_units"],"expected_status":"needs_input","expected_reason":"NEEDS_INPUT"},
+  {"case_id":"E12","label":"缺截止时间","omit":["deadline_at"],"expected_status":"needs_input","expected_reason":"NEEDS_INPUT"},
+  {"case_id":"E13","label":"同时缺预算和截止时间","omit":["budget_units","deadline_at"],"expected_status":"needs_input","expected_reason":"NEEDS_INPUT"},
+  {"case_id":"E14","label":"截止时间已经过去","deadline_minutes":-1,"expected_status":"needs_input","expected_reason":"INVALID_ARGUMENT"},
+  {"case_id":"E15","label":"脚本首次失败后自主恢复","fault":"script_once"},
+  {"case_id":"E16","label":"脚本持续失败后诚实停止","fault":"script_always","expected_status":"incomplete","expected_reason":"tool_failure"},
+  {"case_id":"E17","label":"保存事务首次失败后自主恢复","fault":"save_once"},
+  {"case_id":"E18","label":"部分成功后模型中断并显式续跑","fault":"planner_once","followup":"resume"},
+  {"case_id":"E19","label":"成功后重复执行保持只读","followup":"duplicate"},
+  {"case_id":"E20","label":"相同ID修改预算拒绝冲突","followup":"conflict"}
+]

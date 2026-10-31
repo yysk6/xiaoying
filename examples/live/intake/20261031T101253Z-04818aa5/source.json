@@ -1,0 +1,16 @@
+{
+  "baseline_commit": "6885d85e6da9a6b4e8e4fe2af5b39ad6cb429711",
+  "working_tree": "uncommitted development; see source hashes",
+  "python": "3.10.8 (tags/v3.10.8:aaaf517, Oct 11 2022, 16:50:30) [MSC v.1933 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "model": "deepseek-v4-pro",
+  "sha256": {
+    "src/content_planner/intake.py": "1620f2a53a08a6192622e1455ad5e1a0971fd3aa8990fb39c611228c66388406",
+    "src/content_planner/deepseek.py": "6e84de48a9071763a2896f36d867e39261402fe5dba6622f5bbe3cf8cbd597f3",
+    "src/content_planner/prompts.py": "c669295c76b439df8ba1da5ca84a7cce2ccd7fe2ea1280233cbd7ffaf3527907",
+    "scripts/interactive_planner.py": "071f1c750b0e62b2bbaebe02e98ba3c6282d7ce76ac9e3104a402d3e248ca5ca",
+    "scripts/evaluate_intake.py": "c4822256b0d97f2bdbcdd914bb8f418630907607b2f93df4f661fa8268a5f1dd",
+    "scripts/evaluate_budget.py": "b997c3ab0d5bf6b0edb49228fe9f3aa7d95a61d5a99e18693af4e8aaebf4b98d",
+    "requirements.lock": "165f241926f9c4093702eae9c00d1f0cba81b375a882a4596366cd6b0d6973b7"
+  }
+}

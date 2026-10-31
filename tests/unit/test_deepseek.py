@@ -24,6 +24,14 @@ def completion(message=None, *, reason='tool_calls', usage=None):
         'finish_reason': reason}], 'usage': usage if usage is not None else {'prompt_tokens': 123, 'completion_tokens': 45}}
 
 
+def test_explicit_evaluation_key_does_not_require_an_environment_key(monkeypatch):
+    from content_planner.deepseek import DeepSeekModelClient
+
+    monkeypatch.delenv('DEEPSEEK_API_KEY', raising=False)
+    with DeepSeekModelClient(api_key='evaluation-key') as model:
+        assert model.model_id == 'deepseek-v4-pro'
+
+
 def test_planner_uses_official_http_protocol_and_keeps_tool_result_pair():
     from content_planner.deepseek import DeepSeekModelClient
 
@@ -75,6 +83,25 @@ def test_script_requests_json_without_tools_and_discards_private_reasoning():
     assert calls[0]['max_tokens'] == 1536 and 'json' in calls[0]['messages'][0]['content'].lower()
     assert json.loads(calls[0]['messages'][1]['content']) == script_context
     assert 'PRIVATE_REASONING' not in raw
+
+
+def test_intake_uses_a_separate_json_prompt_with_no_business_tools():
+    from content_planner.deepseek import DeepSeekModelClient
+    calls = []
+    patch = {'budget_units': {'value': '预算10', 'source': '预算10'}}
+    def handler(request):
+        calls.append(json.loads(request.content))
+        return httpx.Response(200, json=completion({'role': 'assistant', 'content': json.dumps(patch),
+                                                  'reasoning_content': 'PRIVATE_REASONING'}, reason='stop'))
+    context = {'text': '预算10', 'draft': {}, 'now': '2026-10-31T10:00:00+08:00', 'output_schema': {}}
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        model = DeepSeekModelClient(client=client)
+        assert json.loads(model.extract_intake(context)) == patch
+    assert len(calls) == 1 and calls[0]['max_tokens'] == 1024
+    assert 'tools' not in calls[0] and calls[0]['response_format'] == {'type': 'json_object'}
+    assert 'intake-v2' in calls[0]['messages'][0]['content']
+    assert json.loads(calls[0]['messages'][1]['content']) == context
+    assert model.last_usage == {'input_tokens': 123, 'output_tokens': 45}
 
 
 @pytest.mark.parametrize('status,code,retryable', [(401, 'AUTH_ERROR', False), (403, 'AUTH_ERROR', False),

@@ -1,0 +1,4307 @@
+{
+  "input": {
+    "request_id": "E02-0efc82e1e8e0",
+    "topic": "影芽剪辑片段裁剪与拼接推广",
+    "budget_units": 8,
+    "deadline_at": "2026-10-31T15:04:32.847053+00:00"
+  },
+  "scenario": {
+    "case_id": "E02",
+    "label": "另一素材且预算恰好8",
+    "budget": 8,
+    "deadline_minutes": 240,
+    "topic": "影芽剪辑片段裁剪与拼接推广",
+    "material_id": "M02",
+    "seed_premium": false,
+    "allowed_units": [
+      8
+    ],
+    "expected_status": "completed",
+    "expected_reason": null,
+    "budget_gap": null,
+    "deadline_gap": null,
+    "omit": [],
+    "replan": null,
+    "exact_deadline": false,
+    "fault": null,
+    "followup": null,
+    "clock_at": "2026-10-31T11:04:32.847053+00:00",
+    "entry": "service.run_task",
+    "fixture_origin": null
+  },
+  "output": {
+    "schema_version": "1.0",
+    "request_id": "E02-0efc82e1e8e0",
+    "backend": "deepseek",
+    "model": "deepseek-v4-pro",
+    "status": "completed",
+    "reason": null,
+    "message": "方案已保存（活动尚未执行）",
+    "missing_fields": [],
+    "task_plan": [
+      {
+        "depends_on": [],
+        "description": "准备选中素材",
+        "duration_minutes": 10,
+        "fee_units": 1,
+        "finishes_at": "2026-10-31T11:14:32.847053+00:00",
+        "starts_at": "2026-10-31T11:04:32.847053+00:00",
+        "status": "planned",
+        "step_id": "material_prepare"
+      },
+      {
+        "depends_on": [
+          "material_prepare"
+        ],
+        "description": "定稿当前脚本",
+        "duration_minutes": 20,
+        "fee_units": 2,
+        "finishes_at": "2026-10-31T11:34:32.847053+00:00",
+        "starts_at": "2026-10-31T11:14:32.847053+00:00",
+        "status": "planned",
+        "step_id": "script_finalize"
+      },
+      {
+        "depends_on": [
+          "script_finalize"
+        ],
+        "description": "按选中档位剪辑制作",
+        "duration_minutes": 45,
+        "fee_units": 4,
+        "finishes_at": "2026-10-31T12:19:32.847053+00:00",
+        "starts_at": "2026-10-31T11:34:32.847053+00:00",
+        "status": "planned",
+        "step_id": "video_edit"
+      },
+      {
+        "depends_on": [
+          "video_edit"
+        ],
+        "description": "审核内容与来源",
+        "duration_minutes": 15,
+        "fee_units": 1,
+        "finishes_at": "2026-10-31T12:34:32.847053+00:00",
+        "starts_at": "2026-10-31T12:19:32.847053+00:00",
+        "status": "planned",
+        "step_id": "review"
+      }
+    ],
+    "execution_steps": [
+      {
+        "event_id": 3,
+        "operation_id": "tool:call_00_fcR9czoeJddoCDzNCVvu0535",
+        "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535",
+        "tool": "search_materials",
+        "attempt": 1,
+        "status": "succeeded",
+        "reused": false,
+        "result_index": 0,
+        "error_code": null
+      },
+      {
+        "event_id": 7,
+        "operation_id": "tool:call_00_Ay4mN3gQdMG6V5LAXiBF0894",
+        "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894",
+        "tool": "revise_plan",
+        "attempt": 1,
+        "status": "succeeded",
+        "reused": false,
+        "result_index": 1,
+        "error_code": null
+      },
+      {
+        "event_id": 11,
+        "operation_id": "tool:call_00_aGA5yvWCbfJ6zm5oZtuS2998",
+        "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998",
+        "tool": "generate_script",
+        "attempt": 1,
+        "status": "succeeded",
+        "reused": false,
+        "result_index": 2,
+        "error_code": null
+      },
+      {
+        "event_id": 17,
+        "operation_id": "tool:call_00_r7sarJFspXALPphfoDgG2649",
+        "tool_call_id": "call_00_r7sarJFspXALPphfoDgG2649",
+        "tool": "estimate_cost",
+        "attempt": 1,
+        "status": "succeeded",
+        "reused": false,
+        "result_index": 3,
+        "error_code": null
+      },
+      {
+        "event_id": 21,
+        "operation_id": "tool:call_00_H4NkmgZZygrJKquORyRY6597",
+        "tool_call_id": "call_00_H4NkmgZZygrJKquORyRY6597",
+        "tool": "save_plan",
+        "attempt": 1,
+        "status": "succeeded",
+        "reused": false,
+        "result_index": 4,
+        "error_code": null
+      }
+    ],
+    "tool_results": [
+      {
+        "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535",
+        "tool": "search_materials",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "query": "影芽剪辑 片段裁剪 拼接 推广",
+          "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+          "materials": [
+            {
+              "material_id": "M02",
+              "version": "2026-10-29",
+              "title": "影芽剪辑片段编辑",
+              "tags": [
+                "裁剪",
+                "拼接",
+                "剪辑入门"
+              ],
+              "facts": [
+                "影芽剪辑支持裁剪视频片段。",
+                "影芽剪辑支持拼接视频片段。"
+              ],
+              "fee_units": 1,
+              "lead_minutes": 10,
+              "score": 2
+            }
+          ]
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894",
+        "tool": "revise_plan",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "revision": 1,
+          "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+          "material_id": "M02",
+          "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+          "production_mode": "basic",
+          "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+          "script_reused": false,
+          "invalidated": []
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998",
+        "tool": "generate_script",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+          "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+          "title": "新手必学：影芽剪辑快速裁剪与无缝拼接",
+          "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+          "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+          "cta": "立即下载影芽剪辑，体验高效剪辑！",
+          "source_ids": [
+            "M02"
+          ]
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "call_00_r7sarJFspXALPphfoDgG2649",
+        "tool": "estimate_cost",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+          "revision": 1,
+          "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+          "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+          "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "line_items": [
+            {
+              "step_id": "material_prepare",
+              "catalog_item_id": "M02",
+              "fee_units": 1,
+              "duration_minutes": 10
+            },
+            {
+              "step_id": "script_finalize",
+              "catalog_item_id": "script_finalize",
+              "fee_units": 2,
+              "duration_minutes": 20
+            },
+            {
+              "step_id": "video_edit",
+              "catalog_item_id": "video_edit:basic",
+              "fee_units": 4,
+              "duration_minutes": 45
+            },
+            {
+              "step_id": "review",
+              "catalog_item_id": "review",
+              "fee_units": 1,
+              "duration_minutes": 15
+            }
+          ],
+          "quoted_at": "2026-10-31T11:04:32.847053+00:00",
+          "total_units": 8,
+          "total_minutes": 90,
+          "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+          "within_budget": true,
+          "within_deadline": true,
+          "feasible": true,
+          "budget_gap_units": 0,
+          "deadline_gap_minutes": 0,
+          "alternatives": [
+            {
+              "total_units": 12,
+              "total_minutes": 135,
+              "estimated_finish_at": "2026-10-31T13:19:32.847053+00:00",
+              "within_budget": false,
+              "within_deadline": true,
+              "feasible": false,
+              "budget_gap_units": 4,
+              "deadline_gap_minutes": 0,
+              "production_mode": "premium"
+            }
+          ]
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "call_00_H4NkmgZZygrJKquORyRY6597",
+        "tool": "save_plan",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "plan_id": "plan_c0cdef286cd6ad60b25814c8d291524aef69df6a392d3fb66b88843e8da6e8b9",
+          "request_id": "E02-0efc82e1e8e0",
+          "content_hash": "957eb12a1ccf6cf869cb1c29085e6280aacb52cd4d6f379d35bcbfa44787f1a5",
+          "saved_at": "2026-10-31T11:04:32.847053+00:00",
+          "saved_plan": {
+            "budget_units": 8,
+            "candidate": {
+              "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+              "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+              "material_id": "M02",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+            },
+            "content_hash": "957eb12a1ccf6cf869cb1c29085e6280aacb52cd4d6f379d35bcbfa44787f1a5",
+            "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+            "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+            "estimated_start_at": "2026-10-31T11:04:32.847053+00:00",
+            "line_items": [
+              {
+                "catalog_item_id": "M02",
+                "duration_minutes": 10,
+                "fee_units": 1,
+                "step_id": "material_prepare"
+              },
+              {
+                "catalog_item_id": "script_finalize",
+                "duration_minutes": 20,
+                "fee_units": 2,
+                "step_id": "script_finalize"
+              },
+              {
+                "catalog_item_id": "video_edit:basic",
+                "duration_minutes": 45,
+                "fee_units": 4,
+                "step_id": "video_edit"
+              },
+              {
+                "catalog_item_id": "review",
+                "duration_minutes": 15,
+                "fee_units": 1,
+                "step_id": "review"
+              }
+            ],
+            "plan_id": "plan_c0cdef286cd6ad60b25814c8d291524aef69df6a392d3fb66b88843e8da6e8b9",
+            "request_id": "E02-0efc82e1e8e0",
+            "saved_at": "2026-10-31T11:04:32.847053+00:00",
+            "script": {
+              "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+              "cta": "立即下载影芽剪辑，体验高效剪辑！",
+              "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+              "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "source_ids": [
+                "M02"
+              ],
+              "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+            },
+            "source_ids": [
+              "M02"
+            ],
+            "task_plan": [
+              {
+                "depends_on": [],
+                "description": "准备选中素材",
+                "duration_minutes": 10,
+                "fee_units": 1,
+                "finishes_at": "2026-10-31T11:14:32.847053+00:00",
+                "starts_at": "2026-10-31T11:04:32.847053+00:00",
+                "status": "planned",
+                "step_id": "material_prepare"
+              },
+              {
+                "depends_on": [
+                  "material_prepare"
+                ],
+                "description": "定稿当前脚本",
+                "duration_minutes": 20,
+                "fee_units": 2,
+                "finishes_at": "2026-10-31T11:34:32.847053+00:00",
+                "starts_at": "2026-10-31T11:14:32.847053+00:00",
+                "status": "planned",
+                "step_id": "script_finalize"
+              },
+              {
+                "depends_on": [
+                  "script_finalize"
+                ],
+                "description": "按选中档位剪辑制作",
+                "duration_minutes": 45,
+                "fee_units": 4,
+                "finishes_at": "2026-10-31T12:19:32.847053+00:00",
+                "starts_at": "2026-10-31T11:34:32.847053+00:00",
+                "status": "planned",
+                "step_id": "video_edit"
+              },
+              {
+                "depends_on": [
+                  "video_edit"
+                ],
+                "description": "审核内容与来源",
+                "duration_minutes": 15,
+                "fee_units": 1,
+                "finishes_at": "2026-10-31T12:34:32.847053+00:00",
+                "starts_at": "2026-10-31T12:19:32.847053+00:00",
+                "status": "planned",
+                "step_id": "review"
+              }
+            ],
+            "topic": "影芽剪辑片段裁剪与拼接推广",
+            "total_minutes": 90,
+            "total_units": 8
+          }
+        },
+        "error": null
+      }
+    ],
+    "current_revision": 1,
+    "candidate": {
+      "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+      "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+      "material_id": "M02",
+      "production_mode": "basic",
+      "revision": 1,
+      "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+    },
+    "total_units": 8,
+    "saved_plan": {
+      "budget_units": 8,
+      "candidate": {
+        "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+        "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+        "material_id": "M02",
+        "production_mode": "basic",
+        "revision": 1,
+        "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+      },
+      "content_hash": "957eb12a1ccf6cf869cb1c29085e6280aacb52cd4d6f379d35bcbfa44787f1a5",
+      "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+      "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+      "estimated_start_at": "2026-10-31T11:04:32.847053+00:00",
+      "line_items": [
+        {
+          "catalog_item_id": "M02",
+          "duration_minutes": 10,
+          "fee_units": 1,
+          "step_id": "material_prepare"
+        },
+        {
+          "catalog_item_id": "script_finalize",
+          "duration_minutes": 20,
+          "fee_units": 2,
+          "step_id": "script_finalize"
+        },
+        {
+          "catalog_item_id": "video_edit:basic",
+          "duration_minutes": 45,
+          "fee_units": 4,
+          "step_id": "video_edit"
+        },
+        {
+          "catalog_item_id": "review",
+          "duration_minutes": 15,
+          "fee_units": 1,
+          "step_id": "review"
+        }
+      ],
+      "plan_id": "plan_c0cdef286cd6ad60b25814c8d291524aef69df6a392d3fb66b88843e8da6e8b9",
+      "request_id": "E02-0efc82e1e8e0",
+      "saved_at": "2026-10-31T11:04:32.847053+00:00",
+      "script": {
+        "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+        "cta": "立即下载影芽剪辑，体验高效剪辑！",
+        "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+        "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+        "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+        "source_ids": [
+          "M02"
+        ],
+        "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+      },
+      "source_ids": [
+        "M02"
+      ],
+      "task_plan": [
+        {
+          "depends_on": [],
+          "description": "准备选中素材",
+          "duration_minutes": 10,
+          "fee_units": 1,
+          "finishes_at": "2026-10-31T11:14:32.847053+00:00",
+          "starts_at": "2026-10-31T11:04:32.847053+00:00",
+          "status": "planned",
+          "step_id": "material_prepare"
+        },
+        {
+          "depends_on": [
+            "material_prepare"
+          ],
+          "description": "定稿当前脚本",
+          "duration_minutes": 20,
+          "fee_units": 2,
+          "finishes_at": "2026-10-31T11:34:32.847053+00:00",
+          "starts_at": "2026-10-31T11:14:32.847053+00:00",
+          "status": "planned",
+          "step_id": "script_finalize"
+        },
+        {
+          "depends_on": [
+            "script_finalize"
+          ],
+          "description": "按选中档位剪辑制作",
+          "duration_minutes": 45,
+          "fee_units": 4,
+          "finishes_at": "2026-10-31T12:19:32.847053+00:00",
+          "starts_at": "2026-10-31T11:34:32.847053+00:00",
+          "status": "planned",
+          "step_id": "video_edit"
+        },
+        {
+          "depends_on": [
+            "video_edit"
+          ],
+          "description": "审核内容与来源",
+          "duration_minutes": 15,
+          "fee_units": 1,
+          "finishes_at": "2026-10-31T12:34:32.847053+00:00",
+          "starts_at": "2026-10-31T12:19:32.847053+00:00",
+          "status": "planned",
+          "step_id": "review"
+        }
+      ],
+      "topic": "影芽剪辑片段裁剪与拼接推广",
+      "total_minutes": 90,
+      "total_units": 8
+    },
+    "usage": {
+      "model_requests": 6,
+      "action_calls": 5,
+      "input_tokens": 14662,
+      "output_tokens": 709,
+      "api_cost_usd": null
+    },
+    "limits": {
+      "max_model_requests": 32,
+      "max_action_calls": 24,
+      "max_revisions": 4,
+      "remaining_model_requests": 26,
+      "remaining_action_calls": 19
+    },
+    "warnings": [],
+    "trace_path": "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\live\\core20\\20261031T110356Z-93ca1d21\\E02\\trace.jsonl",
+    "manifest": {
+      "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+      "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+      "model_id": "deepseek-v4-pro",
+      "planner_prompt_version": "planner-v1",
+      "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+      "schema_version": "1.0",
+      "script_prompt_version": "script-v1",
+      "thinking": "disabled"
+    }
+  },
+  "database": {
+    "exists": true,
+    "request": {
+      "budget_units": 8,
+      "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+      "request_id": "E02-0efc82e1e8e0",
+      "topic": "影芽剪辑片段裁剪与拼接推广"
+    },
+    "events": [
+      {
+        "event_id": 1,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "model",
+        "operation_id": "decide:1",
+        "phase": "started",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {},
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 2,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "model",
+        "operation_id": "decide:1",
+        "phase": "succeeded",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {},
+        "result": {
+          "response": {
+            "content": "I'll start by searching for relevant materials for this video editing promotion task.",
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": "{\"rationale\": \"检索与影芽剪辑片段裁剪与拼接推广相关的素材\", \"query\": \"影芽剪辑 片段裁剪 拼接 推广\", \"top_k\": 5}",
+                  "name": "search_materials"
+                },
+                "id": "call_00_fcR9czoeJddoCDzNCVvu0535",
+                "index": 0,
+                "type": "function"
+              }
+            ]
+          },
+          "usage": {
+            "input_tokens": 1552,
+            "output_tokens": 112
+          }
+        },
+        "state_patch": null
+      },
+      {
+        "event_id": 3,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "tool",
+        "operation_id": "tool:call_00_fcR9czoeJddoCDzNCVvu0535",
+        "phase": "started",
+        "name": "search_materials",
+        "error_code": null,
+        "rationale": "检索与影芽剪辑片段裁剪与拼接推广相关的素材",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {
+          "arguments": {
+            "query": "影芽剪辑 片段裁剪 拼接 推广",
+            "rationale": "检索与影芽剪辑片段裁剪与拼接推广相关的素材",
+            "top_k": 5
+          },
+          "logical_key": "search_materials:26f14ff4d214356caf6b5ed2499a1625e353e02aefce4ede7f1bb5937af58140",
+          "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+        },
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 4,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "tool",
+        "operation_id": "tool:call_00_fcR9czoeJddoCDzNCVvu0535",
+        "phase": "succeeded",
+        "name": "search_materials",
+        "error_code": null,
+        "rationale": "检索与影芽剪辑片段裁剪与拼接推广相关的素材",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {
+          "arguments": {
+            "query": "影芽剪辑 片段裁剪 拼接 推广",
+            "rationale": "检索与影芽剪辑片段裁剪与拼接推广相关的素材",
+            "top_k": 5
+          },
+          "logical_key": "search_materials:26f14ff4d214356caf6b5ed2499a1625e353e02aefce4ede7f1bb5937af58140",
+          "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+        },
+        "result": {
+          "data": {
+            "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+            "materials": [
+              {
+                "facts": [
+                  "影芽剪辑支持裁剪视频片段。",
+                  "影芽剪辑支持拼接视频片段。"
+                ],
+                "fee_units": 1,
+                "lead_minutes": 10,
+                "material_id": "M02",
+                "score": 2,
+                "tags": [
+                  "裁剪",
+                  "拼接",
+                  "剪辑入门"
+                ],
+                "title": "影芽剪辑片段编辑",
+                "version": "2026-10-29"
+              }
+            ],
+            "query": "影芽剪辑 片段裁剪 拼接 推广"
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "search_materials",
+          "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+        },
+        "state_patch": {
+          "candidate_history": {},
+          "current_estimate_id": null,
+          "current_revision": null,
+          "estimate_history": {},
+          "last_observation": {
+            "data": {
+              "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+              "materials": [
+                {
+                  "facts": [
+                    "影芽剪辑支持裁剪视频片段。",
+                    "影芽剪辑支持拼接视频片段。"
+                  ],
+                  "fee_units": 1,
+                  "lead_minutes": 10,
+                  "material_id": "M02",
+                  "score": 2,
+                  "tags": [
+                    "裁剪",
+                    "拼接",
+                    "剪辑入门"
+                  ],
+                  "title": "影芽剪辑片段编辑",
+                  "version": "2026-10-29"
+                }
+              ],
+              "query": "影芽剪辑 片段裁剪 拼接 推广"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "search_materials",
+            "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+          },
+          "manifest": {
+            "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+            "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+            "model_id": "deepseek-v4-pro",
+            "planner_prompt_version": "planner-v1",
+            "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+            "schema_version": "1.0",
+            "script_prompt_version": "script-v1",
+            "thinking": "disabled"
+          },
+          "message": "",
+          "reason": null,
+          "request": {
+            "budget_units": 8,
+            "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+            "request_id": "E02-0efc82e1e8e0",
+            "topic": "影芽剪辑片段裁剪与拼接推广"
+          },
+          "saved_plan_id": null,
+          "script_artifacts": {},
+          "seen_material_ids": [
+            "M02"
+          ],
+          "status": "running",
+          "tool_results": [
+            {
+              "data": {
+                "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+                "materials": [
+                  {
+                    "facts": [
+                      "影芽剪辑支持裁剪视频片段。",
+                      "影芽剪辑支持拼接视频片段。"
+                    ],
+                    "fee_units": 1,
+                    "lead_minutes": 10,
+                    "material_id": "M02",
+                    "score": 2,
+                    "tags": [
+                      "裁剪",
+                      "拼接",
+                      "剪辑入门"
+                    ],
+                    "title": "影芽剪辑片段编辑",
+                    "version": "2026-10-29"
+                  }
+                ],
+                "query": "影芽剪辑 片段裁剪 拼接 推广"
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "search_materials",
+              "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+            }
+          ],
+          "unresolved_failures": {}
+        }
+      },
+      {
+        "event_id": 5,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "model",
+        "operation_id": "decide:2",
+        "phase": "started",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {},
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 6,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "model",
+        "operation_id": "decide:2",
+        "phase": "succeeded",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {},
+        "result": {
+          "response": {
+            "content": "I found material M02 which matches the topic. Let me create a plan for this material.",
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": "{\"rationale\": \"基于影芽剪辑片段编辑素材制定推广方案\", \"material_id\": \"M02\", \"creative_brief\": \"推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。\", \"production_mode\": \"basic\"}",
+                  "name": "revise_plan"
+                },
+                "id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894",
+                "index": 0,
+                "type": "function"
+              }
+            ]
+          },
+          "usage": {
+            "input_tokens": 2092,
+            "output_tokens": 158
+          }
+        },
+        "state_patch": null
+      },
+      {
+        "event_id": 7,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "control",
+        "operation_id": "tool:call_00_Ay4mN3gQdMG6V5LAXiBF0894",
+        "phase": "started",
+        "name": "revise_plan",
+        "error_code": null,
+        "rationale": "基于影芽剪辑片段编辑素材制定推广方案",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {
+          "arguments": {
+            "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+            "material_id": "M02",
+            "production_mode": "basic",
+            "rationale": "基于影芽剪辑片段编辑素材制定推广方案"
+          },
+          "logical_key": "revise_plan:1f4c0b056ca41f12e8f4ae577594b425426148e44c10c09ebd477ec1a74c0223",
+          "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894"
+        },
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 8,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "control",
+        "operation_id": "tool:call_00_Ay4mN3gQdMG6V5LAXiBF0894",
+        "phase": "succeeded",
+        "name": "revise_plan",
+        "error_code": null,
+        "rationale": "基于影芽剪辑片段编辑素材制定推广方案",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {
+          "arguments": {
+            "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+            "material_id": "M02",
+            "production_mode": "basic",
+            "rationale": "基于影芽剪辑片段编辑素材制定推广方案"
+          },
+          "logical_key": "revise_plan:1f4c0b056ca41f12e8f4ae577594b425426148e44c10c09ebd477ec1a74c0223",
+          "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894"
+        },
+        "result": {
+          "data": {
+            "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+            "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+            "invalidated": [],
+            "material_id": "M02",
+            "production_mode": "basic",
+            "revision": 1,
+            "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+            "script_reused": false
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "revise_plan",
+          "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894"
+        },
+        "state_patch": {
+          "candidate_history": {
+            "1": {
+              "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+              "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+              "material_id": "M02",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+            }
+          },
+          "current_estimate_id": null,
+          "current_revision": 1,
+          "estimate_history": {},
+          "last_observation": {
+            "data": {
+              "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+              "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+              "invalidated": [],
+              "material_id": "M02",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "script_reused": false
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "revise_plan",
+            "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894"
+          },
+          "manifest": {
+            "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+            "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+            "model_id": "deepseek-v4-pro",
+            "planner_prompt_version": "planner-v1",
+            "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+            "schema_version": "1.0",
+            "script_prompt_version": "script-v1",
+            "thinking": "disabled"
+          },
+          "message": "",
+          "reason": null,
+          "request": {
+            "budget_units": 8,
+            "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+            "request_id": "E02-0efc82e1e8e0",
+            "topic": "影芽剪辑片段裁剪与拼接推广"
+          },
+          "saved_plan_id": null,
+          "script_artifacts": {},
+          "seen_material_ids": [
+            "M02"
+          ],
+          "status": "running",
+          "tool_results": [
+            {
+              "data": {
+                "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+                "materials": [
+                  {
+                    "facts": [
+                      "影芽剪辑支持裁剪视频片段。",
+                      "影芽剪辑支持拼接视频片段。"
+                    ],
+                    "fee_units": 1,
+                    "lead_minutes": 10,
+                    "material_id": "M02",
+                    "score": 2,
+                    "tags": [
+                      "裁剪",
+                      "拼接",
+                      "剪辑入门"
+                    ],
+                    "title": "影芽剪辑片段编辑",
+                    "version": "2026-10-29"
+                  }
+                ],
+                "query": "影芽剪辑 片段裁剪 拼接 推广"
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "search_materials",
+              "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+            },
+            {
+              "data": {
+                "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+                "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+                "invalidated": [],
+                "material_id": "M02",
+                "production_mode": "basic",
+                "revision": 1,
+                "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+                "script_reused": false
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "revise_plan",
+              "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894"
+            }
+          ],
+          "unresolved_failures": {}
+        }
+      },
+      {
+        "event_id": 9,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "model",
+        "operation_id": "decide:3",
+        "phase": "started",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {},
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 10,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "model",
+        "operation_id": "decide:3",
+        "phase": "succeeded",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {},
+        "result": {
+          "response": {
+            "content": "Now let me generate the script for this plan.",
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": "{\"rationale\": \"为影芽剪辑裁剪与拼接推广生成脚本\", \"plan_revision\": 1}",
+                  "name": "generate_script"
+                },
+                "id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998",
+                "index": 0,
+                "type": "function"
+              }
+            ]
+          },
+          "usage": {
+            "input_tokens": 2648,
+            "output_tokens": 81
+          }
+        },
+        "state_patch": null
+      },
+      {
+        "event_id": 11,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "tool",
+        "operation_id": "tool:call_00_aGA5yvWCbfJ6zm5oZtuS2998",
+        "phase": "started",
+        "name": "generate_script",
+        "error_code": null,
+        "rationale": "为影芽剪辑裁剪与拼接推广生成脚本",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {
+          "arguments": {
+            "plan_revision": 1,
+            "rationale": "为影芽剪辑裁剪与拼接推广生成脚本"
+          },
+          "logical_key": "generate_script:bef0752b4cb62b680ce16e7e919ed1fe401b1effd8f189a54e4d1f4c5c4018fe",
+          "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998"
+        },
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 12,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "model",
+        "operation_id": "tool:call_00_aGA5yvWCbfJ6zm5oZtuS2998:script",
+        "phase": "started",
+        "name": "script",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {},
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 13,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "model",
+        "operation_id": "tool:call_00_aGA5yvWCbfJ6zm5oZtuS2998:script",
+        "phase": "succeeded",
+        "name": "script",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {},
+        "result": {
+          "response": "{\n  \"title\": \"新手必学：影芽剪辑快速裁剪与无缝拼接\",\n  \"hook\": \"还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！\",\n  \"body\": \"打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。\",\n  \"cta\": \"立即下载影芽剪辑，体验高效剪辑！\",\n  \"source_ids\": [\"M02\"]\n}",
+          "usage": {
+            "input_tokens": 439,
+            "output_tokens": 140
+          }
+        },
+        "state_patch": null
+      },
+      {
+        "event_id": 14,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "tool",
+        "operation_id": "tool:call_00_aGA5yvWCbfJ6zm5oZtuS2998",
+        "phase": "succeeded",
+        "name": "generate_script",
+        "error_code": null,
+        "rationale": "为影芽剪辑裁剪与拼接推广生成脚本",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {
+          "arguments": {
+            "plan_revision": 1,
+            "rationale": "为影芽剪辑裁剪与拼接推广生成脚本"
+          },
+          "logical_key": "generate_script:bef0752b4cb62b680ce16e7e919ed1fe401b1effd8f189a54e4d1f4c5c4018fe",
+          "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998"
+        },
+        "result": {
+          "data": {
+            "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+            "cta": "立即下载影芽剪辑，体验高效剪辑！",
+            "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+            "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+            "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+            "source_ids": [
+              "M02"
+            ],
+            "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "generate_script",
+          "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998"
+        },
+        "state_patch": {
+          "candidate_history": {
+            "1": {
+              "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+              "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+              "material_id": "M02",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+            }
+          },
+          "current_estimate_id": null,
+          "current_revision": 1,
+          "estimate_history": {},
+          "last_observation": {
+            "data": {
+              "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+              "cta": "立即下载影芽剪辑，体验高效剪辑！",
+              "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+              "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "source_ids": [
+                "M02"
+              ],
+              "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "generate_script",
+            "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998"
+          },
+          "manifest": {
+            "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+            "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+            "model_id": "deepseek-v4-pro",
+            "planner_prompt_version": "planner-v1",
+            "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+            "schema_version": "1.0",
+            "script_prompt_version": "script-v1",
+            "thinking": "disabled"
+          },
+          "message": "",
+          "reason": null,
+          "request": {
+            "budget_units": 8,
+            "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+            "request_id": "E02-0efc82e1e8e0",
+            "topic": "影芽剪辑片段裁剪与拼接推广"
+          },
+          "saved_plan_id": null,
+          "script_artifacts": {
+            "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38": {
+              "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+              "cta": "立即下载影芽剪辑，体验高效剪辑！",
+              "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+              "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "source_ids": [
+                "M02"
+              ],
+              "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+            }
+          },
+          "seen_material_ids": [
+            "M02"
+          ],
+          "status": "running",
+          "tool_results": [
+            {
+              "data": {
+                "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+                "materials": [
+                  {
+                    "facts": [
+                      "影芽剪辑支持裁剪视频片段。",
+                      "影芽剪辑支持拼接视频片段。"
+                    ],
+                    "fee_units": 1,
+                    "lead_minutes": 10,
+                    "material_id": "M02",
+                    "score": 2,
+                    "tags": [
+                      "裁剪",
+                      "拼接",
+                      "剪辑入门"
+                    ],
+                    "title": "影芽剪辑片段编辑",
+                    "version": "2026-10-29"
+                  }
+                ],
+                "query": "影芽剪辑 片段裁剪 拼接 推广"
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "search_materials",
+              "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+            },
+            {
+              "data": {
+                "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+                "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+                "invalidated": [],
+                "material_id": "M02",
+                "production_mode": "basic",
+                "revision": 1,
+                "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+                "script_reused": false
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "revise_plan",
+              "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894"
+            },
+            {
+              "data": {
+                "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+                "cta": "立即下载影芽剪辑，体验高效剪辑！",
+                "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+                "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+                "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+                "source_ids": [
+                  "M02"
+                ],
+                "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "generate_script",
+              "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998"
+            }
+          ],
+          "unresolved_failures": {}
+        }
+      },
+      {
+        "event_id": 15,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "model",
+        "operation_id": "decide:4",
+        "phase": "started",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {},
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 16,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "model",
+        "operation_id": "decide:4",
+        "phase": "succeeded",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {},
+        "result": {
+          "response": {
+            "content": "Now let me estimate the cost for this plan.",
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": "{\"plan_revision\": 1, \"rationale\": \"估算影芽剪辑推广方案的制作成本\"}",
+                  "name": "estimate_cost"
+                },
+                "id": "call_00_r7sarJFspXALPphfoDgG2649",
+                "index": 0,
+                "type": "function"
+              }
+            ]
+          },
+          "usage": {
+            "input_tokens": 3144,
+            "output_tokens": 78
+          }
+        },
+        "state_patch": null
+      },
+      {
+        "event_id": 17,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "tool",
+        "operation_id": "tool:call_00_r7sarJFspXALPphfoDgG2649",
+        "phase": "started",
+        "name": "estimate_cost",
+        "error_code": null,
+        "rationale": "估算影芽剪辑推广方案的制作成本",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {
+          "arguments": {
+            "plan_revision": 1,
+            "rationale": "估算影芽剪辑推广方案的制作成本"
+          },
+          "logical_key": "estimate_cost:589d61bcc357bee37c9d54fe305529254c1a8bf4e6870ed2cba6c8576dafb35f",
+          "tool_call_id": "call_00_r7sarJFspXALPphfoDgG2649"
+        },
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 18,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "tool",
+        "operation_id": "tool:call_00_r7sarJFspXALPphfoDgG2649",
+        "phase": "succeeded",
+        "name": "estimate_cost",
+        "error_code": null,
+        "rationale": "估算影芽剪辑推广方案的制作成本",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {
+          "arguments": {
+            "plan_revision": 1,
+            "rationale": "估算影芽剪辑推广方案的制作成本"
+          },
+          "logical_key": "estimate_cost:589d61bcc357bee37c9d54fe305529254c1a8bf4e6870ed2cba6c8576dafb35f",
+          "tool_call_id": "call_00_r7sarJFspXALPphfoDgG2649"
+        },
+        "result": {
+          "data": {
+            "alternatives": [
+              {
+                "budget_gap_units": 4,
+                "deadline_gap_minutes": 0,
+                "estimated_finish_at": "2026-10-31T13:19:32.847053+00:00",
+                "feasible": false,
+                "production_mode": "premium",
+                "total_minutes": 135,
+                "total_units": 12,
+                "within_budget": false,
+                "within_deadline": true
+              }
+            ],
+            "budget_gap_units": 0,
+            "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+            "deadline_gap_minutes": 0,
+            "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+            "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+            "feasible": true,
+            "line_items": [
+              {
+                "catalog_item_id": "M02",
+                "duration_minutes": 10,
+                "fee_units": 1,
+                "step_id": "material_prepare"
+              },
+              {
+                "catalog_item_id": "script_finalize",
+                "duration_minutes": 20,
+                "fee_units": 2,
+                "step_id": "script_finalize"
+              },
+              {
+                "catalog_item_id": "video_edit:basic",
+                "duration_minutes": 45,
+                "fee_units": 4,
+                "step_id": "video_edit"
+              },
+              {
+                "catalog_item_id": "review",
+                "duration_minutes": 15,
+                "fee_units": 1,
+                "step_id": "review"
+              }
+            ],
+            "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+            "quoted_at": "2026-10-31T11:04:32.847053+00:00",
+            "revision": 1,
+            "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+            "total_minutes": 90,
+            "total_units": 8,
+            "within_budget": true,
+            "within_deadline": true
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "estimate_cost",
+          "tool_call_id": "call_00_r7sarJFspXALPphfoDgG2649"
+        },
+        "state_patch": {
+          "candidate_history": {
+            "1": {
+              "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+              "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+              "material_id": "M02",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+            }
+          },
+          "current_estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+          "current_revision": 1,
+          "estimate_history": {
+            "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba": {
+              "alternatives": [
+                {
+                  "budget_gap_units": 4,
+                  "deadline_gap_minutes": 0,
+                  "estimated_finish_at": "2026-10-31T13:19:32.847053+00:00",
+                  "feasible": false,
+                  "production_mode": "premium",
+                  "total_minutes": 135,
+                  "total_units": 12,
+                  "within_budget": false,
+                  "within_deadline": true
+                }
+              ],
+              "budget_gap_units": 0,
+              "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+              "deadline_gap_minutes": 0,
+              "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+              "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+              "feasible": true,
+              "line_items": [
+                {
+                  "catalog_item_id": "M02",
+                  "duration_minutes": 10,
+                  "fee_units": 1,
+                  "step_id": "material_prepare"
+                },
+                {
+                  "catalog_item_id": "script_finalize",
+                  "duration_minutes": 20,
+                  "fee_units": 2,
+                  "step_id": "script_finalize"
+                },
+                {
+                  "catalog_item_id": "video_edit:basic",
+                  "duration_minutes": 45,
+                  "fee_units": 4,
+                  "step_id": "video_edit"
+                },
+                {
+                  "catalog_item_id": "review",
+                  "duration_minutes": 15,
+                  "fee_units": 1,
+                  "step_id": "review"
+                }
+              ],
+              "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+              "quoted_at": "2026-10-31T11:04:32.847053+00:00",
+              "revision": 1,
+              "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "total_minutes": 90,
+              "total_units": 8,
+              "within_budget": true,
+              "within_deadline": true
+            }
+          },
+          "last_observation": {
+            "data": {
+              "alternatives": [
+                {
+                  "budget_gap_units": 4,
+                  "deadline_gap_minutes": 0,
+                  "estimated_finish_at": "2026-10-31T13:19:32.847053+00:00",
+                  "feasible": false,
+                  "production_mode": "premium",
+                  "total_minutes": 135,
+                  "total_units": 12,
+                  "within_budget": false,
+                  "within_deadline": true
+                }
+              ],
+              "budget_gap_units": 0,
+              "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+              "deadline_gap_minutes": 0,
+              "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+              "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+              "feasible": true,
+              "line_items": [
+                {
+                  "catalog_item_id": "M02",
+                  "duration_minutes": 10,
+                  "fee_units": 1,
+                  "step_id": "material_prepare"
+                },
+                {
+                  "catalog_item_id": "script_finalize",
+                  "duration_minutes": 20,
+                  "fee_units": 2,
+                  "step_id": "script_finalize"
+                },
+                {
+                  "catalog_item_id": "video_edit:basic",
+                  "duration_minutes": 45,
+                  "fee_units": 4,
+                  "step_id": "video_edit"
+                },
+                {
+                  "catalog_item_id": "review",
+                  "duration_minutes": 15,
+                  "fee_units": 1,
+                  "step_id": "review"
+                }
+              ],
+              "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+              "quoted_at": "2026-10-31T11:04:32.847053+00:00",
+              "revision": 1,
+              "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "total_minutes": 90,
+              "total_units": 8,
+              "within_budget": true,
+              "within_deadline": true
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "estimate_cost",
+            "tool_call_id": "call_00_r7sarJFspXALPphfoDgG2649"
+          },
+          "manifest": {
+            "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+            "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+            "model_id": "deepseek-v4-pro",
+            "planner_prompt_version": "planner-v1",
+            "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+            "schema_version": "1.0",
+            "script_prompt_version": "script-v1",
+            "thinking": "disabled"
+          },
+          "message": "",
+          "reason": null,
+          "request": {
+            "budget_units": 8,
+            "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+            "request_id": "E02-0efc82e1e8e0",
+            "topic": "影芽剪辑片段裁剪与拼接推广"
+          },
+          "saved_plan_id": null,
+          "script_artifacts": {
+            "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38": {
+              "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+              "cta": "立即下载影芽剪辑，体验高效剪辑！",
+              "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+              "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "source_ids": [
+                "M02"
+              ],
+              "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+            }
+          },
+          "seen_material_ids": [
+            "M02"
+          ],
+          "status": "running",
+          "tool_results": [
+            {
+              "data": {
+                "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+                "materials": [
+                  {
+                    "facts": [
+                      "影芽剪辑支持裁剪视频片段。",
+                      "影芽剪辑支持拼接视频片段。"
+                    ],
+                    "fee_units": 1,
+                    "lead_minutes": 10,
+                    "material_id": "M02",
+                    "score": 2,
+                    "tags": [
+                      "裁剪",
+                      "拼接",
+                      "剪辑入门"
+                    ],
+                    "title": "影芽剪辑片段编辑",
+                    "version": "2026-10-29"
+                  }
+                ],
+                "query": "影芽剪辑 片段裁剪 拼接 推广"
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "search_materials",
+              "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+            },
+            {
+              "data": {
+                "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+                "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+                "invalidated": [],
+                "material_id": "M02",
+                "production_mode": "basic",
+                "revision": 1,
+                "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+                "script_reused": false
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "revise_plan",
+              "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894"
+            },
+            {
+              "data": {
+                "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+                "cta": "立即下载影芽剪辑，体验高效剪辑！",
+                "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+                "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+                "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+                "source_ids": [
+                  "M02"
+                ],
+                "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "generate_script",
+              "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998"
+            },
+            {
+              "data": {
+                "alternatives": [
+                  {
+                    "budget_gap_units": 4,
+                    "deadline_gap_minutes": 0,
+                    "estimated_finish_at": "2026-10-31T13:19:32.847053+00:00",
+                    "feasible": false,
+                    "production_mode": "premium",
+                    "total_minutes": 135,
+                    "total_units": 12,
+                    "within_budget": false,
+                    "within_deadline": true
+                  }
+                ],
+                "budget_gap_units": 0,
+                "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+                "deadline_gap_minutes": 0,
+                "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+                "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+                "feasible": true,
+                "line_items": [
+                  {
+                    "catalog_item_id": "M02",
+                    "duration_minutes": 10,
+                    "fee_units": 1,
+                    "step_id": "material_prepare"
+                  },
+                  {
+                    "catalog_item_id": "script_finalize",
+                    "duration_minutes": 20,
+                    "fee_units": 2,
+                    "step_id": "script_finalize"
+                  },
+                  {
+                    "catalog_item_id": "video_edit:basic",
+                    "duration_minutes": 45,
+                    "fee_units": 4,
+                    "step_id": "video_edit"
+                  },
+                  {
+                    "catalog_item_id": "review",
+                    "duration_minutes": 15,
+                    "fee_units": 1,
+                    "step_id": "review"
+                  }
+                ],
+                "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+                "quoted_at": "2026-10-31T11:04:32.847053+00:00",
+                "revision": 1,
+                "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+                "total_minutes": 90,
+                "total_units": 8,
+                "within_budget": true,
+                "within_deadline": true
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "estimate_cost",
+              "tool_call_id": "call_00_r7sarJFspXALPphfoDgG2649"
+            }
+          ],
+          "unresolved_failures": {}
+        }
+      },
+      {
+        "event_id": 19,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "model",
+        "operation_id": "decide:5",
+        "phase": "started",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {},
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 20,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "model",
+        "operation_id": "decide:5",
+        "phase": "succeeded",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {},
+        "result": {
+          "response": {
+            "content": "The estimate is feasible (8 units, within budget and deadline). Now let me save the plan.",
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": "{\"rationale\": \"方案成本在预算内且符合期限，提交保存\", \"plan_revision\": 1, \"estimate_id\": \"estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba\"}",
+                  "name": "save_plan"
+                },
+                "id": "call_00_H4NkmgZZygrJKquORyRY6597",
+                "index": 0,
+                "type": "function"
+              }
+            ]
+          },
+          "usage": {
+            "input_tokens": 4787,
+            "output_tokens": 140
+          }
+        },
+        "state_patch": null
+      },
+      {
+        "event_id": 21,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "tool",
+        "operation_id": "tool:call_00_H4NkmgZZygrJKquORyRY6597",
+        "phase": "started",
+        "name": "save_plan",
+        "error_code": null,
+        "rationale": "方案成本在预算内且符合期限，提交保存",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {
+          "arguments": {
+            "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+            "plan_revision": 1,
+            "rationale": "方案成本在预算内且符合期限，提交保存"
+          },
+          "logical_key": "save_plan:4ded1764db7a8dd83cef99694ba21b64d41698816ea4fe50da98616ef3818625",
+          "tool_call_id": "call_00_H4NkmgZZygrJKquORyRY6597"
+        },
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 22,
+        "request_id": "E02-0efc82e1e8e0",
+        "kind": "tool",
+        "operation_id": "tool:call_00_H4NkmgZZygrJKquORyRY6597",
+        "phase": "succeeded",
+        "name": "save_plan",
+        "error_code": null,
+        "rationale": "方案成本在预算内且符合期限，提交保存",
+        "created_at": "2026-10-31T11:04:32.847053+00:00",
+        "args": {
+          "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+          "plan_revision": 1,
+          "rationale": "方案成本在预算内且符合期限，提交保存"
+        },
+        "result": {
+          "data": {
+            "content_hash": "957eb12a1ccf6cf869cb1c29085e6280aacb52cd4d6f379d35bcbfa44787f1a5",
+            "plan_id": "plan_c0cdef286cd6ad60b25814c8d291524aef69df6a392d3fb66b88843e8da6e8b9",
+            "request_id": "E02-0efc82e1e8e0",
+            "saved_at": "2026-10-31T11:04:32.847053+00:00",
+            "saved_plan": {
+              "budget_units": 8,
+              "candidate": {
+                "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+                "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+                "material_id": "M02",
+                "production_mode": "basic",
+                "revision": 1,
+                "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+              },
+              "content_hash": "957eb12a1ccf6cf869cb1c29085e6280aacb52cd4d6f379d35bcbfa44787f1a5",
+              "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+              "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+              "estimated_start_at": "2026-10-31T11:04:32.847053+00:00",
+              "line_items": [
+                {
+                  "catalog_item_id": "M02",
+                  "duration_minutes": 10,
+                  "fee_units": 1,
+                  "step_id": "material_prepare"
+                },
+                {
+                  "catalog_item_id": "script_finalize",
+                  "duration_minutes": 20,
+                  "fee_units": 2,
+                  "step_id": "script_finalize"
+                },
+                {
+                  "catalog_item_id": "video_edit:basic",
+                  "duration_minutes": 45,
+                  "fee_units": 4,
+                  "step_id": "video_edit"
+                },
+                {
+                  "catalog_item_id": "review",
+                  "duration_minutes": 15,
+                  "fee_units": 1,
+                  "step_id": "review"
+                }
+              ],
+              "plan_id": "plan_c0cdef286cd6ad60b25814c8d291524aef69df6a392d3fb66b88843e8da6e8b9",
+              "request_id": "E02-0efc82e1e8e0",
+              "saved_at": "2026-10-31T11:04:32.847053+00:00",
+              "script": {
+                "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+                "cta": "立即下载影芽剪辑，体验高效剪辑！",
+                "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+                "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+                "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+                "source_ids": [
+                  "M02"
+                ],
+                "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+              },
+              "source_ids": [
+                "M02"
+              ],
+              "task_plan": [
+                {
+                  "depends_on": [],
+                  "description": "准备选中素材",
+                  "duration_minutes": 10,
+                  "fee_units": 1,
+                  "finishes_at": "2026-10-31T11:14:32.847053+00:00",
+                  "starts_at": "2026-10-31T11:04:32.847053+00:00",
+                  "status": "planned",
+                  "step_id": "material_prepare"
+                },
+                {
+                  "depends_on": [
+                    "material_prepare"
+                  ],
+                  "description": "定稿当前脚本",
+                  "duration_minutes": 20,
+                  "fee_units": 2,
+                  "finishes_at": "2026-10-31T11:34:32.847053+00:00",
+                  "starts_at": "2026-10-31T11:14:32.847053+00:00",
+                  "status": "planned",
+                  "step_id": "script_finalize"
+                },
+                {
+                  "depends_on": [
+                    "script_finalize"
+                  ],
+                  "description": "按选中档位剪辑制作",
+                  "duration_minutes": 45,
+                  "fee_units": 4,
+                  "finishes_at": "2026-10-31T12:19:32.847053+00:00",
+                  "starts_at": "2026-10-31T11:34:32.847053+00:00",
+                  "status": "planned",
+                  "step_id": "video_edit"
+                },
+                {
+                  "depends_on": [
+                    "video_edit"
+                  ],
+                  "description": "审核内容与来源",
+                  "duration_minutes": 15,
+                  "fee_units": 1,
+                  "finishes_at": "2026-10-31T12:34:32.847053+00:00",
+                  "starts_at": "2026-10-31T12:19:32.847053+00:00",
+                  "status": "planned",
+                  "step_id": "review"
+                }
+              ],
+              "topic": "影芽剪辑片段裁剪与拼接推广",
+              "total_minutes": 90,
+              "total_units": 8
+            }
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "save_plan",
+          "tool_call_id": "call_00_H4NkmgZZygrJKquORyRY6597"
+        },
+        "state_patch": {
+          "saved_plan_id": "plan_c0cdef286cd6ad60b25814c8d291524aef69df6a392d3fb66b88843e8da6e8b9",
+          "status": "completed"
+        }
+      }
+    ],
+    "plans": [
+      {
+        "budget_units": 8,
+        "candidate": {
+          "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+          "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+          "material_id": "M02",
+          "production_mode": "basic",
+          "revision": 1,
+          "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+        },
+        "content_hash": "957eb12a1ccf6cf869cb1c29085e6280aacb52cd4d6f379d35bcbfa44787f1a5",
+        "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+        "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+        "estimated_start_at": "2026-10-31T11:04:32.847053+00:00",
+        "line_items": [
+          {
+            "catalog_item_id": "M02",
+            "duration_minutes": 10,
+            "fee_units": 1,
+            "step_id": "material_prepare"
+          },
+          {
+            "catalog_item_id": "script_finalize",
+            "duration_minutes": 20,
+            "fee_units": 2,
+            "step_id": "script_finalize"
+          },
+          {
+            "catalog_item_id": "video_edit:basic",
+            "duration_minutes": 45,
+            "fee_units": 4,
+            "step_id": "video_edit"
+          },
+          {
+            "catalog_item_id": "review",
+            "duration_minutes": 15,
+            "fee_units": 1,
+            "step_id": "review"
+          }
+        ],
+        "plan_id": "plan_c0cdef286cd6ad60b25814c8d291524aef69df6a392d3fb66b88843e8da6e8b9",
+        "request_id": "E02-0efc82e1e8e0",
+        "saved_at": "2026-10-31T11:04:32.847053+00:00",
+        "script": {
+          "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+          "cta": "立即下载影芽剪辑，体验高效剪辑！",
+          "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+          "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+          "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+          "source_ids": [
+            "M02"
+          ],
+          "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+        },
+        "source_ids": [
+          "M02"
+        ],
+        "task_plan": [
+          {
+            "depends_on": [],
+            "description": "准备选中素材",
+            "duration_minutes": 10,
+            "fee_units": 1,
+            "finishes_at": "2026-10-31T11:14:32.847053+00:00",
+            "starts_at": "2026-10-31T11:04:32.847053+00:00",
+            "status": "planned",
+            "step_id": "material_prepare"
+          },
+          {
+            "depends_on": [
+              "material_prepare"
+            ],
+            "description": "定稿当前脚本",
+            "duration_minutes": 20,
+            "fee_units": 2,
+            "finishes_at": "2026-10-31T11:34:32.847053+00:00",
+            "starts_at": "2026-10-31T11:14:32.847053+00:00",
+            "status": "planned",
+            "step_id": "script_finalize"
+          },
+          {
+            "depends_on": [
+              "script_finalize"
+            ],
+            "description": "按选中档位剪辑制作",
+            "duration_minutes": 45,
+            "fee_units": 4,
+            "finishes_at": "2026-10-31T12:19:32.847053+00:00",
+            "starts_at": "2026-10-31T11:34:32.847053+00:00",
+            "status": "planned",
+            "step_id": "video_edit"
+          },
+          {
+            "depends_on": [
+              "video_edit"
+            ],
+            "description": "审核内容与来源",
+            "duration_minutes": 15,
+            "fee_units": 1,
+            "finishes_at": "2026-10-31T12:34:32.847053+00:00",
+            "starts_at": "2026-10-31T12:19:32.847053+00:00",
+            "status": "planned",
+            "step_id": "review"
+          }
+        ],
+        "topic": "影芽剪辑片段裁剪与拼接推广",
+        "total_minutes": 90,
+        "total_units": 8
+      }
+    ]
+  },
+  "events": [
+    {
+      "event_id": 1,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "model",
+      "operation_id": "decide:1",
+      "phase": "started",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {},
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 2,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "model",
+      "operation_id": "decide:1",
+      "phase": "succeeded",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {},
+      "result": {
+        "response": {
+          "content": "I'll start by searching for relevant materials for this video editing promotion task.",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"rationale\": \"检索与影芽剪辑片段裁剪与拼接推广相关的素材\", \"query\": \"影芽剪辑 片段裁剪 拼接 推广\", \"top_k\": 5}",
+                "name": "search_materials"
+              },
+              "id": "call_00_fcR9czoeJddoCDzNCVvu0535",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        },
+        "usage": {
+          "input_tokens": 1552,
+          "output_tokens": 112
+        }
+      },
+      "state_patch": null
+    },
+    {
+      "event_id": 3,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "tool",
+      "operation_id": "tool:call_00_fcR9czoeJddoCDzNCVvu0535",
+      "phase": "started",
+      "name": "search_materials",
+      "error_code": null,
+      "rationale": "检索与影芽剪辑片段裁剪与拼接推广相关的素材",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {
+        "arguments": {
+          "query": "影芽剪辑 片段裁剪 拼接 推广",
+          "rationale": "检索与影芽剪辑片段裁剪与拼接推广相关的素材",
+          "top_k": 5
+        },
+        "logical_key": "search_materials:26f14ff4d214356caf6b5ed2499a1625e353e02aefce4ede7f1bb5937af58140",
+        "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+      },
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 4,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "tool",
+      "operation_id": "tool:call_00_fcR9czoeJddoCDzNCVvu0535",
+      "phase": "succeeded",
+      "name": "search_materials",
+      "error_code": null,
+      "rationale": "检索与影芽剪辑片段裁剪与拼接推广相关的素材",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {
+        "arguments": {
+          "query": "影芽剪辑 片段裁剪 拼接 推广",
+          "rationale": "检索与影芽剪辑片段裁剪与拼接推广相关的素材",
+          "top_k": 5
+        },
+        "logical_key": "search_materials:26f14ff4d214356caf6b5ed2499a1625e353e02aefce4ede7f1bb5937af58140",
+        "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+      },
+      "result": {
+        "data": {
+          "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+          "materials": [
+            {
+              "facts": [
+                "影芽剪辑支持裁剪视频片段。",
+                "影芽剪辑支持拼接视频片段。"
+              ],
+              "fee_units": 1,
+              "lead_minutes": 10,
+              "material_id": "M02",
+              "score": 2,
+              "tags": [
+                "裁剪",
+                "拼接",
+                "剪辑入门"
+              ],
+              "title": "影芽剪辑片段编辑",
+              "version": "2026-10-29"
+            }
+          ],
+          "query": "影芽剪辑 片段裁剪 拼接 推广"
+        },
+        "error": null,
+        "ok": true,
+        "reused": false,
+        "tool": "search_materials",
+        "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+      },
+      "state_patch": {
+        "candidate_history": {},
+        "current_estimate_id": null,
+        "current_revision": null,
+        "estimate_history": {},
+        "last_observation": {
+          "data": {
+            "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+            "materials": [
+              {
+                "facts": [
+                  "影芽剪辑支持裁剪视频片段。",
+                  "影芽剪辑支持拼接视频片段。"
+                ],
+                "fee_units": 1,
+                "lead_minutes": 10,
+                "material_id": "M02",
+                "score": 2,
+                "tags": [
+                  "裁剪",
+                  "拼接",
+                  "剪辑入门"
+                ],
+                "title": "影芽剪辑片段编辑",
+                "version": "2026-10-29"
+              }
+            ],
+            "query": "影芽剪辑 片段裁剪 拼接 推广"
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "search_materials",
+          "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+        },
+        "manifest": {
+          "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+          "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+          "model_id": "deepseek-v4-pro",
+          "planner_prompt_version": "planner-v1",
+          "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "schema_version": "1.0",
+          "script_prompt_version": "script-v1",
+          "thinking": "disabled"
+        },
+        "message": "",
+        "reason": null,
+        "request": {
+          "budget_units": 8,
+          "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+          "request_id": "E02-0efc82e1e8e0",
+          "topic": "影芽剪辑片段裁剪与拼接推广"
+        },
+        "saved_plan_id": null,
+        "script_artifacts": {},
+        "seen_material_ids": [
+          "M02"
+        ],
+        "status": "running",
+        "tool_results": [
+          {
+            "data": {
+              "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+              "materials": [
+                {
+                  "facts": [
+                    "影芽剪辑支持裁剪视频片段。",
+                    "影芽剪辑支持拼接视频片段。"
+                  ],
+                  "fee_units": 1,
+                  "lead_minutes": 10,
+                  "material_id": "M02",
+                  "score": 2,
+                  "tags": [
+                    "裁剪",
+                    "拼接",
+                    "剪辑入门"
+                  ],
+                  "title": "影芽剪辑片段编辑",
+                  "version": "2026-10-29"
+                }
+              ],
+              "query": "影芽剪辑 片段裁剪 拼接 推广"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "search_materials",
+            "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+          }
+        ],
+        "unresolved_failures": {}
+      }
+    },
+    {
+      "event_id": 5,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "model",
+      "operation_id": "decide:2",
+      "phase": "started",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {},
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 6,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "model",
+      "operation_id": "decide:2",
+      "phase": "succeeded",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {},
+      "result": {
+        "response": {
+          "content": "I found material M02 which matches the topic. Let me create a plan for this material.",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"rationale\": \"基于影芽剪辑片段编辑素材制定推广方案\", \"material_id\": \"M02\", \"creative_brief\": \"推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。\", \"production_mode\": \"basic\"}",
+                "name": "revise_plan"
+              },
+              "id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        },
+        "usage": {
+          "input_tokens": 2092,
+          "output_tokens": 158
+        }
+      },
+      "state_patch": null
+    },
+    {
+      "event_id": 7,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "control",
+      "operation_id": "tool:call_00_Ay4mN3gQdMG6V5LAXiBF0894",
+      "phase": "started",
+      "name": "revise_plan",
+      "error_code": null,
+      "rationale": "基于影芽剪辑片段编辑素材制定推广方案",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {
+        "arguments": {
+          "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+          "material_id": "M02",
+          "production_mode": "basic",
+          "rationale": "基于影芽剪辑片段编辑素材制定推广方案"
+        },
+        "logical_key": "revise_plan:1f4c0b056ca41f12e8f4ae577594b425426148e44c10c09ebd477ec1a74c0223",
+        "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894"
+      },
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 8,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "control",
+      "operation_id": "tool:call_00_Ay4mN3gQdMG6V5LAXiBF0894",
+      "phase": "succeeded",
+      "name": "revise_plan",
+      "error_code": null,
+      "rationale": "基于影芽剪辑片段编辑素材制定推广方案",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {
+        "arguments": {
+          "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+          "material_id": "M02",
+          "production_mode": "basic",
+          "rationale": "基于影芽剪辑片段编辑素材制定推广方案"
+        },
+        "logical_key": "revise_plan:1f4c0b056ca41f12e8f4ae577594b425426148e44c10c09ebd477ec1a74c0223",
+        "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894"
+      },
+      "result": {
+        "data": {
+          "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+          "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+          "invalidated": [],
+          "material_id": "M02",
+          "production_mode": "basic",
+          "revision": 1,
+          "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+          "script_reused": false
+        },
+        "error": null,
+        "ok": true,
+        "reused": false,
+        "tool": "revise_plan",
+        "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894"
+      },
+      "state_patch": {
+        "candidate_history": {
+          "1": {
+            "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+            "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+            "material_id": "M02",
+            "production_mode": "basic",
+            "revision": 1,
+            "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+          }
+        },
+        "current_estimate_id": null,
+        "current_revision": 1,
+        "estimate_history": {},
+        "last_observation": {
+          "data": {
+            "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+            "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+            "invalidated": [],
+            "material_id": "M02",
+            "production_mode": "basic",
+            "revision": 1,
+            "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+            "script_reused": false
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "revise_plan",
+          "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894"
+        },
+        "manifest": {
+          "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+          "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+          "model_id": "deepseek-v4-pro",
+          "planner_prompt_version": "planner-v1",
+          "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "schema_version": "1.0",
+          "script_prompt_version": "script-v1",
+          "thinking": "disabled"
+        },
+        "message": "",
+        "reason": null,
+        "request": {
+          "budget_units": 8,
+          "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+          "request_id": "E02-0efc82e1e8e0",
+          "topic": "影芽剪辑片段裁剪与拼接推广"
+        },
+        "saved_plan_id": null,
+        "script_artifacts": {},
+        "seen_material_ids": [
+          "M02"
+        ],
+        "status": "running",
+        "tool_results": [
+          {
+            "data": {
+              "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+              "materials": [
+                {
+                  "facts": [
+                    "影芽剪辑支持裁剪视频片段。",
+                    "影芽剪辑支持拼接视频片段。"
+                  ],
+                  "fee_units": 1,
+                  "lead_minutes": 10,
+                  "material_id": "M02",
+                  "score": 2,
+                  "tags": [
+                    "裁剪",
+                    "拼接",
+                    "剪辑入门"
+                  ],
+                  "title": "影芽剪辑片段编辑",
+                  "version": "2026-10-29"
+                }
+              ],
+              "query": "影芽剪辑 片段裁剪 拼接 推广"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "search_materials",
+            "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+          },
+          {
+            "data": {
+              "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+              "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+              "invalidated": [],
+              "material_id": "M02",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "script_reused": false
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "revise_plan",
+            "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894"
+          }
+        ],
+        "unresolved_failures": {}
+      }
+    },
+    {
+      "event_id": 9,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "model",
+      "operation_id": "decide:3",
+      "phase": "started",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {},
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 10,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "model",
+      "operation_id": "decide:3",
+      "phase": "succeeded",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {},
+      "result": {
+        "response": {
+          "content": "Now let me generate the script for this plan.",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"rationale\": \"为影芽剪辑裁剪与拼接推广生成脚本\", \"plan_revision\": 1}",
+                "name": "generate_script"
+              },
+              "id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        },
+        "usage": {
+          "input_tokens": 2648,
+          "output_tokens": 81
+        }
+      },
+      "state_patch": null
+    },
+    {
+      "event_id": 11,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "tool",
+      "operation_id": "tool:call_00_aGA5yvWCbfJ6zm5oZtuS2998",
+      "phase": "started",
+      "name": "generate_script",
+      "error_code": null,
+      "rationale": "为影芽剪辑裁剪与拼接推广生成脚本",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {
+        "arguments": {
+          "plan_revision": 1,
+          "rationale": "为影芽剪辑裁剪与拼接推广生成脚本"
+        },
+        "logical_key": "generate_script:bef0752b4cb62b680ce16e7e919ed1fe401b1effd8f189a54e4d1f4c5c4018fe",
+        "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998"
+      },
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 12,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "model",
+      "operation_id": "tool:call_00_aGA5yvWCbfJ6zm5oZtuS2998:script",
+      "phase": "started",
+      "name": "script",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {},
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 13,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "model",
+      "operation_id": "tool:call_00_aGA5yvWCbfJ6zm5oZtuS2998:script",
+      "phase": "succeeded",
+      "name": "script",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {},
+      "result": {
+        "response": "{\n  \"title\": \"新手必学：影芽剪辑快速裁剪与无缝拼接\",\n  \"hook\": \"还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！\",\n  \"body\": \"打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。\",\n  \"cta\": \"立即下载影芽剪辑，体验高效剪辑！\",\n  \"source_ids\": [\"M02\"]\n}",
+        "usage": {
+          "input_tokens": 439,
+          "output_tokens": 140
+        }
+      },
+      "state_patch": null
+    },
+    {
+      "event_id": 14,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "tool",
+      "operation_id": "tool:call_00_aGA5yvWCbfJ6zm5oZtuS2998",
+      "phase": "succeeded",
+      "name": "generate_script",
+      "error_code": null,
+      "rationale": "为影芽剪辑裁剪与拼接推广生成脚本",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {
+        "arguments": {
+          "plan_revision": 1,
+          "rationale": "为影芽剪辑裁剪与拼接推广生成脚本"
+        },
+        "logical_key": "generate_script:bef0752b4cb62b680ce16e7e919ed1fe401b1effd8f189a54e4d1f4c5c4018fe",
+        "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998"
+      },
+      "result": {
+        "data": {
+          "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+          "cta": "立即下载影芽剪辑，体验高效剪辑！",
+          "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+          "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+          "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+          "source_ids": [
+            "M02"
+          ],
+          "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+        },
+        "error": null,
+        "ok": true,
+        "reused": false,
+        "tool": "generate_script",
+        "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998"
+      },
+      "state_patch": {
+        "candidate_history": {
+          "1": {
+            "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+            "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+            "material_id": "M02",
+            "production_mode": "basic",
+            "revision": 1,
+            "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+          }
+        },
+        "current_estimate_id": null,
+        "current_revision": 1,
+        "estimate_history": {},
+        "last_observation": {
+          "data": {
+            "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+            "cta": "立即下载影芽剪辑，体验高效剪辑！",
+            "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+            "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+            "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+            "source_ids": [
+              "M02"
+            ],
+            "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "generate_script",
+          "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998"
+        },
+        "manifest": {
+          "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+          "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+          "model_id": "deepseek-v4-pro",
+          "planner_prompt_version": "planner-v1",
+          "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "schema_version": "1.0",
+          "script_prompt_version": "script-v1",
+          "thinking": "disabled"
+        },
+        "message": "",
+        "reason": null,
+        "request": {
+          "budget_units": 8,
+          "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+          "request_id": "E02-0efc82e1e8e0",
+          "topic": "影芽剪辑片段裁剪与拼接推广"
+        },
+        "saved_plan_id": null,
+        "script_artifacts": {
+          "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38": {
+            "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+            "cta": "立即下载影芽剪辑，体验高效剪辑！",
+            "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+            "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+            "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+            "source_ids": [
+              "M02"
+            ],
+            "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+          }
+        },
+        "seen_material_ids": [
+          "M02"
+        ],
+        "status": "running",
+        "tool_results": [
+          {
+            "data": {
+              "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+              "materials": [
+                {
+                  "facts": [
+                    "影芽剪辑支持裁剪视频片段。",
+                    "影芽剪辑支持拼接视频片段。"
+                  ],
+                  "fee_units": 1,
+                  "lead_minutes": 10,
+                  "material_id": "M02",
+                  "score": 2,
+                  "tags": [
+                    "裁剪",
+                    "拼接",
+                    "剪辑入门"
+                  ],
+                  "title": "影芽剪辑片段编辑",
+                  "version": "2026-10-29"
+                }
+              ],
+              "query": "影芽剪辑 片段裁剪 拼接 推广"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "search_materials",
+            "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+          },
+          {
+            "data": {
+              "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+              "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+              "invalidated": [],
+              "material_id": "M02",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "script_reused": false
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "revise_plan",
+            "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894"
+          },
+          {
+            "data": {
+              "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+              "cta": "立即下载影芽剪辑，体验高效剪辑！",
+              "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+              "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "source_ids": [
+                "M02"
+              ],
+              "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "generate_script",
+            "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998"
+          }
+        ],
+        "unresolved_failures": {}
+      }
+    },
+    {
+      "event_id": 15,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "model",
+      "operation_id": "decide:4",
+      "phase": "started",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {},
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 16,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "model",
+      "operation_id": "decide:4",
+      "phase": "succeeded",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {},
+      "result": {
+        "response": {
+          "content": "Now let me estimate the cost for this plan.",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"plan_revision\": 1, \"rationale\": \"估算影芽剪辑推广方案的制作成本\"}",
+                "name": "estimate_cost"
+              },
+              "id": "call_00_r7sarJFspXALPphfoDgG2649",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        },
+        "usage": {
+          "input_tokens": 3144,
+          "output_tokens": 78
+        }
+      },
+      "state_patch": null
+    },
+    {
+      "event_id": 17,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "tool",
+      "operation_id": "tool:call_00_r7sarJFspXALPphfoDgG2649",
+      "phase": "started",
+      "name": "estimate_cost",
+      "error_code": null,
+      "rationale": "估算影芽剪辑推广方案的制作成本",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {
+        "arguments": {
+          "plan_revision": 1,
+          "rationale": "估算影芽剪辑推广方案的制作成本"
+        },
+        "logical_key": "estimate_cost:589d61bcc357bee37c9d54fe305529254c1a8bf4e6870ed2cba6c8576dafb35f",
+        "tool_call_id": "call_00_r7sarJFspXALPphfoDgG2649"
+      },
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 18,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "tool",
+      "operation_id": "tool:call_00_r7sarJFspXALPphfoDgG2649",
+      "phase": "succeeded",
+      "name": "estimate_cost",
+      "error_code": null,
+      "rationale": "估算影芽剪辑推广方案的制作成本",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {
+        "arguments": {
+          "plan_revision": 1,
+          "rationale": "估算影芽剪辑推广方案的制作成本"
+        },
+        "logical_key": "estimate_cost:589d61bcc357bee37c9d54fe305529254c1a8bf4e6870ed2cba6c8576dafb35f",
+        "tool_call_id": "call_00_r7sarJFspXALPphfoDgG2649"
+      },
+      "result": {
+        "data": {
+          "alternatives": [
+            {
+              "budget_gap_units": 4,
+              "deadline_gap_minutes": 0,
+              "estimated_finish_at": "2026-10-31T13:19:32.847053+00:00",
+              "feasible": false,
+              "production_mode": "premium",
+              "total_minutes": 135,
+              "total_units": 12,
+              "within_budget": false,
+              "within_deadline": true
+            }
+          ],
+          "budget_gap_units": 0,
+          "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+          "deadline_gap_minutes": 0,
+          "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+          "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+          "feasible": true,
+          "line_items": [
+            {
+              "catalog_item_id": "M02",
+              "duration_minutes": 10,
+              "fee_units": 1,
+              "step_id": "material_prepare"
+            },
+            {
+              "catalog_item_id": "script_finalize",
+              "duration_minutes": 20,
+              "fee_units": 2,
+              "step_id": "script_finalize"
+            },
+            {
+              "catalog_item_id": "video_edit:basic",
+              "duration_minutes": 45,
+              "fee_units": 4,
+              "step_id": "video_edit"
+            },
+            {
+              "catalog_item_id": "review",
+              "duration_minutes": 15,
+              "fee_units": 1,
+              "step_id": "review"
+            }
+          ],
+          "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "quoted_at": "2026-10-31T11:04:32.847053+00:00",
+          "revision": 1,
+          "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+          "total_minutes": 90,
+          "total_units": 8,
+          "within_budget": true,
+          "within_deadline": true
+        },
+        "error": null,
+        "ok": true,
+        "reused": false,
+        "tool": "estimate_cost",
+        "tool_call_id": "call_00_r7sarJFspXALPphfoDgG2649"
+      },
+      "state_patch": {
+        "candidate_history": {
+          "1": {
+            "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+            "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+            "material_id": "M02",
+            "production_mode": "basic",
+            "revision": 1,
+            "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+          }
+        },
+        "current_estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+        "current_revision": 1,
+        "estimate_history": {
+          "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba": {
+            "alternatives": [
+              {
+                "budget_gap_units": 4,
+                "deadline_gap_minutes": 0,
+                "estimated_finish_at": "2026-10-31T13:19:32.847053+00:00",
+                "feasible": false,
+                "production_mode": "premium",
+                "total_minutes": 135,
+                "total_units": 12,
+                "within_budget": false,
+                "within_deadline": true
+              }
+            ],
+            "budget_gap_units": 0,
+            "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+            "deadline_gap_minutes": 0,
+            "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+            "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+            "feasible": true,
+            "line_items": [
+              {
+                "catalog_item_id": "M02",
+                "duration_minutes": 10,
+                "fee_units": 1,
+                "step_id": "material_prepare"
+              },
+              {
+                "catalog_item_id": "script_finalize",
+                "duration_minutes": 20,
+                "fee_units": 2,
+                "step_id": "script_finalize"
+              },
+              {
+                "catalog_item_id": "video_edit:basic",
+                "duration_minutes": 45,
+                "fee_units": 4,
+                "step_id": "video_edit"
+              },
+              {
+                "catalog_item_id": "review",
+                "duration_minutes": 15,
+                "fee_units": 1,
+                "step_id": "review"
+              }
+            ],
+            "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+            "quoted_at": "2026-10-31T11:04:32.847053+00:00",
+            "revision": 1,
+            "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+            "total_minutes": 90,
+            "total_units": 8,
+            "within_budget": true,
+            "within_deadline": true
+          }
+        },
+        "last_observation": {
+          "data": {
+            "alternatives": [
+              {
+                "budget_gap_units": 4,
+                "deadline_gap_minutes": 0,
+                "estimated_finish_at": "2026-10-31T13:19:32.847053+00:00",
+                "feasible": false,
+                "production_mode": "premium",
+                "total_minutes": 135,
+                "total_units": 12,
+                "within_budget": false,
+                "within_deadline": true
+              }
+            ],
+            "budget_gap_units": 0,
+            "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+            "deadline_gap_minutes": 0,
+            "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+            "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+            "feasible": true,
+            "line_items": [
+              {
+                "catalog_item_id": "M02",
+                "duration_minutes": 10,
+                "fee_units": 1,
+                "step_id": "material_prepare"
+              },
+              {
+                "catalog_item_id": "script_finalize",
+                "duration_minutes": 20,
+                "fee_units": 2,
+                "step_id": "script_finalize"
+              },
+              {
+                "catalog_item_id": "video_edit:basic",
+                "duration_minutes": 45,
+                "fee_units": 4,
+                "step_id": "video_edit"
+              },
+              {
+                "catalog_item_id": "review",
+                "duration_minutes": 15,
+                "fee_units": 1,
+                "step_id": "review"
+              }
+            ],
+            "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+            "quoted_at": "2026-10-31T11:04:32.847053+00:00",
+            "revision": 1,
+            "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+            "total_minutes": 90,
+            "total_units": 8,
+            "within_budget": true,
+            "within_deadline": true
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "estimate_cost",
+          "tool_call_id": "call_00_r7sarJFspXALPphfoDgG2649"
+        },
+        "manifest": {
+          "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+          "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+          "model_id": "deepseek-v4-pro",
+          "planner_prompt_version": "planner-v1",
+          "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "schema_version": "1.0",
+          "script_prompt_version": "script-v1",
+          "thinking": "disabled"
+        },
+        "message": "",
+        "reason": null,
+        "request": {
+          "budget_units": 8,
+          "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+          "request_id": "E02-0efc82e1e8e0",
+          "topic": "影芽剪辑片段裁剪与拼接推广"
+        },
+        "saved_plan_id": null,
+        "script_artifacts": {
+          "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38": {
+            "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+            "cta": "立即下载影芽剪辑，体验高效剪辑！",
+            "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+            "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+            "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+            "source_ids": [
+              "M02"
+            ],
+            "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+          }
+        },
+        "seen_material_ids": [
+          "M02"
+        ],
+        "status": "running",
+        "tool_results": [
+          {
+            "data": {
+              "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+              "materials": [
+                {
+                  "facts": [
+                    "影芽剪辑支持裁剪视频片段。",
+                    "影芽剪辑支持拼接视频片段。"
+                  ],
+                  "fee_units": 1,
+                  "lead_minutes": 10,
+                  "material_id": "M02",
+                  "score": 2,
+                  "tags": [
+                    "裁剪",
+                    "拼接",
+                    "剪辑入门"
+                  ],
+                  "title": "影芽剪辑片段编辑",
+                  "version": "2026-10-29"
+                }
+              ],
+              "query": "影芽剪辑 片段裁剪 拼接 推广"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "search_materials",
+            "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535"
+          },
+          {
+            "data": {
+              "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+              "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+              "invalidated": [],
+              "material_id": "M02",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "script_reused": false
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "revise_plan",
+            "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894"
+          },
+          {
+            "data": {
+              "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+              "cta": "立即下载影芽剪辑，体验高效剪辑！",
+              "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+              "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "source_ids": [
+                "M02"
+              ],
+              "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "generate_script",
+            "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998"
+          },
+          {
+            "data": {
+              "alternatives": [
+                {
+                  "budget_gap_units": 4,
+                  "deadline_gap_minutes": 0,
+                  "estimated_finish_at": "2026-10-31T13:19:32.847053+00:00",
+                  "feasible": false,
+                  "production_mode": "premium",
+                  "total_minutes": 135,
+                  "total_units": 12,
+                  "within_budget": false,
+                  "within_deadline": true
+                }
+              ],
+              "budget_gap_units": 0,
+              "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+              "deadline_gap_minutes": 0,
+              "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+              "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+              "feasible": true,
+              "line_items": [
+                {
+                  "catalog_item_id": "M02",
+                  "duration_minutes": 10,
+                  "fee_units": 1,
+                  "step_id": "material_prepare"
+                },
+                {
+                  "catalog_item_id": "script_finalize",
+                  "duration_minutes": 20,
+                  "fee_units": 2,
+                  "step_id": "script_finalize"
+                },
+                {
+                  "catalog_item_id": "video_edit:basic",
+                  "duration_minutes": 45,
+                  "fee_units": 4,
+                  "step_id": "video_edit"
+                },
+                {
+                  "catalog_item_id": "review",
+                  "duration_minutes": 15,
+                  "fee_units": 1,
+                  "step_id": "review"
+                }
+              ],
+              "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+              "quoted_at": "2026-10-31T11:04:32.847053+00:00",
+              "revision": 1,
+              "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "total_minutes": 90,
+              "total_units": 8,
+              "within_budget": true,
+              "within_deadline": true
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "estimate_cost",
+            "tool_call_id": "call_00_r7sarJFspXALPphfoDgG2649"
+          }
+        ],
+        "unresolved_failures": {}
+      }
+    },
+    {
+      "event_id": 19,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "model",
+      "operation_id": "decide:5",
+      "phase": "started",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {},
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 20,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "model",
+      "operation_id": "decide:5",
+      "phase": "succeeded",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {},
+      "result": {
+        "response": {
+          "content": "The estimate is feasible (8 units, within budget and deadline). Now let me save the plan.",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"rationale\": \"方案成本在预算内且符合期限，提交保存\", \"plan_revision\": 1, \"estimate_id\": \"estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba\"}",
+                "name": "save_plan"
+              },
+              "id": "call_00_H4NkmgZZygrJKquORyRY6597",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        },
+        "usage": {
+          "input_tokens": 4787,
+          "output_tokens": 140
+        }
+      },
+      "state_patch": null
+    },
+    {
+      "event_id": 21,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "tool",
+      "operation_id": "tool:call_00_H4NkmgZZygrJKquORyRY6597",
+      "phase": "started",
+      "name": "save_plan",
+      "error_code": null,
+      "rationale": "方案成本在预算内且符合期限，提交保存",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {
+        "arguments": {
+          "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+          "plan_revision": 1,
+          "rationale": "方案成本在预算内且符合期限，提交保存"
+        },
+        "logical_key": "save_plan:4ded1764db7a8dd83cef99694ba21b64d41698816ea4fe50da98616ef3818625",
+        "tool_call_id": "call_00_H4NkmgZZygrJKquORyRY6597"
+      },
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 22,
+      "request_id": "E02-0efc82e1e8e0",
+      "kind": "tool",
+      "operation_id": "tool:call_00_H4NkmgZZygrJKquORyRY6597",
+      "phase": "succeeded",
+      "name": "save_plan",
+      "error_code": null,
+      "rationale": "方案成本在预算内且符合期限，提交保存",
+      "created_at": "2026-10-31T11:04:32.847053+00:00",
+      "args": {
+        "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+        "plan_revision": 1,
+        "rationale": "方案成本在预算内且符合期限，提交保存"
+      },
+      "result": {
+        "data": {
+          "content_hash": "957eb12a1ccf6cf869cb1c29085e6280aacb52cd4d6f379d35bcbfa44787f1a5",
+          "plan_id": "plan_c0cdef286cd6ad60b25814c8d291524aef69df6a392d3fb66b88843e8da6e8b9",
+          "request_id": "E02-0efc82e1e8e0",
+          "saved_at": "2026-10-31T11:04:32.847053+00:00",
+          "saved_plan": {
+            "budget_units": 8,
+            "candidate": {
+              "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+              "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+              "material_id": "M02",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+            },
+            "content_hash": "957eb12a1ccf6cf869cb1c29085e6280aacb52cd4d6f379d35bcbfa44787f1a5",
+            "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+            "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+            "estimated_start_at": "2026-10-31T11:04:32.847053+00:00",
+            "line_items": [
+              {
+                "catalog_item_id": "M02",
+                "duration_minutes": 10,
+                "fee_units": 1,
+                "step_id": "material_prepare"
+              },
+              {
+                "catalog_item_id": "script_finalize",
+                "duration_minutes": 20,
+                "fee_units": 2,
+                "step_id": "script_finalize"
+              },
+              {
+                "catalog_item_id": "video_edit:basic",
+                "duration_minutes": 45,
+                "fee_units": 4,
+                "step_id": "video_edit"
+              },
+              {
+                "catalog_item_id": "review",
+                "duration_minutes": 15,
+                "fee_units": 1,
+                "step_id": "review"
+              }
+            ],
+            "plan_id": "plan_c0cdef286cd6ad60b25814c8d291524aef69df6a392d3fb66b88843e8da6e8b9",
+            "request_id": "E02-0efc82e1e8e0",
+            "saved_at": "2026-10-31T11:04:32.847053+00:00",
+            "script": {
+              "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+              "cta": "立即下载影芽剪辑，体验高效剪辑！",
+              "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+              "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+              "source_ids": [
+                "M02"
+              ],
+              "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+            },
+            "source_ids": [
+              "M02"
+            ],
+            "task_plan": [
+              {
+                "depends_on": [],
+                "description": "准备选中素材",
+                "duration_minutes": 10,
+                "fee_units": 1,
+                "finishes_at": "2026-10-31T11:14:32.847053+00:00",
+                "starts_at": "2026-10-31T11:04:32.847053+00:00",
+                "status": "planned",
+                "step_id": "material_prepare"
+              },
+              {
+                "depends_on": [
+                  "material_prepare"
+                ],
+                "description": "定稿当前脚本",
+                "duration_minutes": 20,
+                "fee_units": 2,
+                "finishes_at": "2026-10-31T11:34:32.847053+00:00",
+                "starts_at": "2026-10-31T11:14:32.847053+00:00",
+                "status": "planned",
+                "step_id": "script_finalize"
+              },
+              {
+                "depends_on": [
+                  "script_finalize"
+                ],
+                "description": "按选中档位剪辑制作",
+                "duration_minutes": 45,
+                "fee_units": 4,
+                "finishes_at": "2026-10-31T12:19:32.847053+00:00",
+                "starts_at": "2026-10-31T11:34:32.847053+00:00",
+                "status": "planned",
+                "step_id": "video_edit"
+              },
+              {
+                "depends_on": [
+                  "video_edit"
+                ],
+                "description": "审核内容与来源",
+                "duration_minutes": 15,
+                "fee_units": 1,
+                "finishes_at": "2026-10-31T12:34:32.847053+00:00",
+                "starts_at": "2026-10-31T12:19:32.847053+00:00",
+                "status": "planned",
+                "step_id": "review"
+              }
+            ],
+            "topic": "影芽剪辑片段裁剪与拼接推广",
+            "total_minutes": 90,
+            "total_units": 8
+          }
+        },
+        "error": null,
+        "ok": true,
+        "reused": false,
+        "tool": "save_plan",
+        "tool_call_id": "call_00_H4NkmgZZygrJKquORyRY6597"
+      },
+      "state_patch": {
+        "saved_plan_id": "plan_c0cdef286cd6ad60b25814c8d291524aef69df6a392d3fb66b88843e8da6e8b9",
+        "status": "completed"
+      }
+    }
+  ],
+  "plans": [
+    {
+      "budget_units": 8,
+      "candidate": {
+        "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+        "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+        "material_id": "M02",
+        "production_mode": "basic",
+        "revision": 1,
+        "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+      },
+      "content_hash": "957eb12a1ccf6cf869cb1c29085e6280aacb52cd4d6f379d35bcbfa44787f1a5",
+      "deadline_at": "2026-10-31T15:04:32.847053+00:00",
+      "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+      "estimated_start_at": "2026-10-31T11:04:32.847053+00:00",
+      "line_items": [
+        {
+          "catalog_item_id": "M02",
+          "duration_minutes": 10,
+          "fee_units": 1,
+          "step_id": "material_prepare"
+        },
+        {
+          "catalog_item_id": "script_finalize",
+          "duration_minutes": 20,
+          "fee_units": 2,
+          "step_id": "script_finalize"
+        },
+        {
+          "catalog_item_id": "video_edit:basic",
+          "duration_minutes": 45,
+          "fee_units": 4,
+          "step_id": "video_edit"
+        },
+        {
+          "catalog_item_id": "review",
+          "duration_minutes": 15,
+          "fee_units": 1,
+          "step_id": "review"
+        }
+      ],
+      "plan_id": "plan_c0cdef286cd6ad60b25814c8d291524aef69df6a392d3fb66b88843e8da6e8b9",
+      "request_id": "E02-0efc82e1e8e0",
+      "saved_at": "2026-10-31T11:04:32.847053+00:00",
+      "script": {
+        "body": "打开影芽剪辑，导入你的视频片段。想要去掉多余部分？只需拖动裁剪框，轻松裁剪出精彩瞬间。多个片段想合并？按顺序排列，影芽剪辑自动无缝拼接，过渡流畅自然。无需复杂操作，新手也能快速上手，让你的视频更紧凑、更专业。",
+        "cta": "立即下载影芽剪辑，体验高效剪辑！",
+        "hook": "还在为视频片段太长或拼接不自然发愁？影芽剪辑帮你一键搞定！",
+        "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+        "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+        "source_ids": [
+          "M02"
+        ],
+        "title": "新手必学：影芽剪辑快速裁剪与无缝拼接"
+      },
+      "source_ids": [
+        "M02"
+      ],
+      "task_plan": [
+        {
+          "depends_on": [],
+          "description": "准备选中素材",
+          "duration_minutes": 10,
+          "fee_units": 1,
+          "finishes_at": "2026-10-31T11:14:32.847053+00:00",
+          "starts_at": "2026-10-31T11:04:32.847053+00:00",
+          "status": "planned",
+          "step_id": "material_prepare"
+        },
+        {
+          "depends_on": [
+            "material_prepare"
+          ],
+          "description": "定稿当前脚本",
+          "duration_minutes": 20,
+          "fee_units": 2,
+          "finishes_at": "2026-10-31T11:34:32.847053+00:00",
+          "starts_at": "2026-10-31T11:14:32.847053+00:00",
+          "status": "planned",
+          "step_id": "script_finalize"
+        },
+        {
+          "depends_on": [
+            "script_finalize"
+          ],
+          "description": "按选中档位剪辑制作",
+          "duration_minutes": 45,
+          "fee_units": 4,
+          "finishes_at": "2026-10-31T12:19:32.847053+00:00",
+          "starts_at": "2026-10-31T11:34:32.847053+00:00",
+          "status": "planned",
+          "step_id": "video_edit"
+        },
+        {
+          "depends_on": [
+            "video_edit"
+          ],
+          "description": "审核内容与来源",
+          "duration_minutes": 15,
+          "fee_units": 1,
+          "finishes_at": "2026-10-31T12:34:32.847053+00:00",
+          "starts_at": "2026-10-31T12:19:32.847053+00:00",
+          "status": "planned",
+          "step_id": "review"
+        }
+      ],
+      "topic": "影芽剪辑片段裁剪与拼接推广",
+      "total_minutes": 90,
+      "total_units": 8
+    }
+  ],
+  "trace": [
+    {
+      "schema_version": "1.0",
+      "event_id": 1,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:1",
+      "phase": "started",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 5,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 2,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:1",
+      "phase": "succeeded",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"succeeded\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 5,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 3,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_fcR9czoeJddoCDzNCVvu0535",
+      "phase": "started",
+      "name": "search_materials",
+      "args": {
+        "query": "影芽剪辑 片段裁剪 拼接 推广",
+        "rationale": "检索与影芽剪辑片段裁剪与拼接推广相关的素材",
+        "top_k": 5
+      },
+      "rationale": "检索与影芽剪辑片段裁剪与拼接推广相关的素材",
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 5,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 4,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_fcR9czoeJddoCDzNCVvu0535",
+      "phase": "succeeded",
+      "name": "search_materials",
+      "args": {
+        "query": "影芽剪辑 片段裁剪 拼接 推广",
+        "rationale": "检索与影芽剪辑片段裁剪与拼接推广相关的素材",
+        "top_k": 5
+      },
+      "rationale": "检索与影芽剪辑片段裁剪与拼接推广相关的素材",
+      "observation_summary": "{\"phase\": \"succeeded\", \"ok\": true, \"reused\": false}",
+      "result_ref": "tool_results:0",
+      "task_status": "running",
+      "next_decision_event_id": 5,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 5,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:2",
+      "phase": "started",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 9,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 6,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:2",
+      "phase": "succeeded",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"succeeded\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 9,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 7,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "control",
+      "operation_id": "tool:call_00_Ay4mN3gQdMG6V5LAXiBF0894",
+      "phase": "started",
+      "name": "revise_plan",
+      "args": {
+        "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+        "material_id": "M02",
+        "production_mode": "basic",
+        "rationale": "基于影芽剪辑片段编辑素材制定推广方案"
+      },
+      "rationale": "基于影芽剪辑片段编辑素材制定推广方案",
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 9,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 8,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "control",
+      "operation_id": "tool:call_00_Ay4mN3gQdMG6V5LAXiBF0894",
+      "phase": "succeeded",
+      "name": "revise_plan",
+      "args": {
+        "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+        "material_id": "M02",
+        "production_mode": "basic",
+        "rationale": "基于影芽剪辑片段编辑素材制定推广方案"
+      },
+      "rationale": "基于影芽剪辑片段编辑素材制定推广方案",
+      "observation_summary": "{\"phase\": \"succeeded\", \"ok\": true, \"reused\": false}",
+      "result_ref": "tool_results:1",
+      "task_status": "running",
+      "next_decision_event_id": 9,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 9,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:3",
+      "phase": "started",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 15,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 10,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:3",
+      "phase": "succeeded",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"succeeded\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 15,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 11,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_aGA5yvWCbfJ6zm5oZtuS2998",
+      "phase": "started",
+      "name": "generate_script",
+      "args": {
+        "plan_revision": 1,
+        "rationale": "为影芽剪辑裁剪与拼接推广生成脚本"
+      },
+      "rationale": "为影芽剪辑裁剪与拼接推广生成脚本",
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 15,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 12,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "tool:call_00_aGA5yvWCbfJ6zm5oZtuS2998:script",
+      "phase": "started",
+      "name": "script",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 15,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 13,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "tool:call_00_aGA5yvWCbfJ6zm5oZtuS2998:script",
+      "phase": "succeeded",
+      "name": "script",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"succeeded\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 15,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 14,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_aGA5yvWCbfJ6zm5oZtuS2998",
+      "phase": "succeeded",
+      "name": "generate_script",
+      "args": {
+        "plan_revision": 1,
+        "rationale": "为影芽剪辑裁剪与拼接推广生成脚本"
+      },
+      "rationale": "为影芽剪辑裁剪与拼接推广生成脚本",
+      "observation_summary": "{\"phase\": \"succeeded\", \"ok\": true, \"reused\": false}",
+      "result_ref": "tool_results:2",
+      "task_status": "running",
+      "next_decision_event_id": 15,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 15,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:4",
+      "phase": "started",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 19,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 16,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:4",
+      "phase": "succeeded",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"succeeded\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 19,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 17,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_r7sarJFspXALPphfoDgG2649",
+      "phase": "started",
+      "name": "estimate_cost",
+      "args": {
+        "plan_revision": 1,
+        "rationale": "估算影芽剪辑推广方案的制作成本"
+      },
+      "rationale": "估算影芽剪辑推广方案的制作成本",
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 19,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 18,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_r7sarJFspXALPphfoDgG2649",
+      "phase": "succeeded",
+      "name": "estimate_cost",
+      "args": {
+        "plan_revision": 1,
+        "rationale": "估算影芽剪辑推广方案的制作成本"
+      },
+      "rationale": "估算影芽剪辑推广方案的制作成本",
+      "observation_summary": "{\"phase\": \"succeeded\", \"ok\": true, \"reused\": false, \"total_units\": 8, \"feasible\": true, \"budget_gap_units\": 0, \"deadline_gap_minutes\": 0}",
+      "result_ref": "tool_results:3",
+      "task_status": "running",
+      "next_decision_event_id": 19,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 19,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:5",
+      "phase": "started",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": null,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 20,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:5",
+      "phase": "succeeded",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"succeeded\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": null,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 21,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_H4NkmgZZygrJKquORyRY6597",
+      "phase": "started",
+      "name": "save_plan",
+      "args": {
+        "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+        "plan_revision": 1,
+        "rationale": "方案成本在预算内且符合期限，提交保存"
+      },
+      "rationale": "方案成本在预算内且符合期限，提交保存",
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": null,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 22,
+      "request_id": "E02-0efc82e1e8e0",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_H4NkmgZZygrJKquORyRY6597",
+      "phase": "succeeded",
+      "name": "save_plan",
+      "args": {
+        "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+        "plan_revision": 1,
+        "rationale": "方案成本在预算内且符合期限，提交保存"
+      },
+      "rationale": "方案成本在预算内且符合期限，提交保存",
+      "observation_summary": "{\"phase\": \"succeeded\", \"ok\": true, \"reused\": false}",
+      "result_ref": "tool_results:4",
+      "task_status": "completed",
+      "next_decision_event_id": null,
+      "created_at": "2026-10-31T11:04:32.847053+00:00"
+    }
+  ],
+  "decisions": [
+    {
+      "event_id": 1,
+      "operation_id": "decide:1",
+      "memory": {
+        "candidate": null,
+        "latest_estimate": null,
+        "seen_material_ids": [],
+        "script": null,
+        "evaluated_quotes": [],
+        "budget_units": 8,
+        "last_observation": {
+          "tool_call_id": null,
+          "tool": null,
+          "ok": null,
+          "error": null
+        },
+        "deadline_at": "2026-10-31T15:04:32.847053+00:00"
+      },
+      "response": {
+        "role": "assistant",
+        "content": "I'll start by searching for relevant materials for this video editing promotion task.",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_fcR9czoeJddoCDzNCVvu0535",
+            "type": "function",
+            "function": {
+              "name": "search_materials",
+              "arguments": "{\"rationale\": \"检索与影芽剪辑片段裁剪与拼接推广相关的素材\", \"query\": \"影芽剪辑 片段裁剪 拼接 推广\", \"top_k\": 5}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": 5,
+      "operation_id": "decide:2",
+      "memory": {
+        "candidate": null,
+        "latest_estimate": null,
+        "seen_material_ids": [
+          "M02"
+        ],
+        "script": null,
+        "evaluated_quotes": [],
+        "budget_units": 8,
+        "last_observation": {
+          "tool_call_id": "call_00_fcR9czoeJddoCDzNCVvu0535",
+          "tool": "search_materials",
+          "ok": true,
+          "error": null
+        },
+        "deadline_at": "2026-10-31T15:04:32.847053+00:00"
+      },
+      "response": {
+        "role": "assistant",
+        "content": "I found material M02 which matches the topic. Let me create a plan for this material.",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894",
+            "type": "function",
+            "function": {
+              "name": "revise_plan",
+              "arguments": "{\"rationale\": \"基于影芽剪辑片段编辑素材制定推广方案\", \"material_id\": \"M02\", \"creative_brief\": \"推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。\", \"production_mode\": \"basic\"}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": 9,
+      "operation_id": "decide:3",
+      "memory": {
+        "candidate": {
+          "revision": 1,
+          "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+          "material_id": "M02",
+          "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+          "production_mode": "basic",
+          "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+        },
+        "latest_estimate": null,
+        "seen_material_ids": [
+          "M02"
+        ],
+        "script": null,
+        "evaluated_quotes": [],
+        "budget_units": 8,
+        "last_observation": {
+          "tool_call_id": "call_00_Ay4mN3gQdMG6V5LAXiBF0894",
+          "tool": "revise_plan",
+          "ok": true,
+          "error": null
+        },
+        "deadline_at": "2026-10-31T15:04:32.847053+00:00"
+      },
+      "response": {
+        "role": "assistant",
+        "content": "Now let me generate the script for this plan.",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998",
+            "type": "function",
+            "function": {
+              "name": "generate_script",
+              "arguments": "{\"rationale\": \"为影芽剪辑裁剪与拼接推广生成脚本\", \"plan_revision\": 1}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": 15,
+      "operation_id": "decide:4",
+      "memory": {
+        "candidate": {
+          "revision": 1,
+          "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+          "material_id": "M02",
+          "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+          "production_mode": "basic",
+          "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+        },
+        "latest_estimate": null,
+        "seen_material_ids": [
+          "M02"
+        ],
+        "script": {
+          "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+          "title": "新手必学：影芽剪辑快速裁剪与无缝拼接",
+          "source_ids": [
+            "M02"
+          ]
+        },
+        "evaluated_quotes": [],
+        "budget_units": 8,
+        "last_observation": {
+          "tool_call_id": "call_00_aGA5yvWCbfJ6zm5oZtuS2998",
+          "tool": "generate_script",
+          "ok": true,
+          "error": null
+        },
+        "deadline_at": "2026-10-31T15:04:32.847053+00:00"
+      },
+      "response": {
+        "role": "assistant",
+        "content": "Now let me estimate the cost for this plan.",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_r7sarJFspXALPphfoDgG2649",
+            "type": "function",
+            "function": {
+              "name": "estimate_cost",
+              "arguments": "{\"plan_revision\": 1, \"rationale\": \"估算影芽剪辑推广方案的制作成本\"}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": 19,
+      "operation_id": "decide:5",
+      "memory": {
+        "candidate": {
+          "revision": 1,
+          "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+          "material_id": "M02",
+          "creative_brief": "推广影芽剪辑的片段裁剪与拼接功能，面向剪辑入门用户，展示快速裁剪与无缝拼接的核心卖点，突出操作简单、效率高的特点。",
+          "production_mode": "basic",
+          "script_input_hash": "0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38"
+        },
+        "latest_estimate": {
+          "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+          "revision": 1,
+          "candidate_hash": "adf335d6cbbe48cfb5cf59960aa39c60b7f8fb674abcfd28cc2f7dbb844eb75c",
+          "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+          "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "line_items": [
+            {
+              "step_id": "material_prepare",
+              "catalog_item_id": "M02",
+              "fee_units": 1,
+              "duration_minutes": 10
+            },
+            {
+              "step_id": "script_finalize",
+              "catalog_item_id": "script_finalize",
+              "fee_units": 2,
+              "duration_minutes": 20
+            },
+            {
+              "step_id": "video_edit",
+              "catalog_item_id": "video_edit:basic",
+              "fee_units": 4,
+              "duration_minutes": 45
+            },
+            {
+              "step_id": "review",
+              "catalog_item_id": "review",
+              "fee_units": 1,
+              "duration_minutes": 15
+            }
+          ],
+          "quoted_at": "2026-10-31T11:04:32.847053+00:00",
+          "total_units": 8,
+          "total_minutes": 90,
+          "estimated_finish_at": "2026-10-31T12:34:32.847053+00:00",
+          "within_budget": true,
+          "within_deadline": true,
+          "feasible": true,
+          "budget_gap_units": 0,
+          "deadline_gap_minutes": 0,
+          "alternatives": [
+            {
+              "total_units": 12,
+              "total_minutes": 135,
+              "estimated_finish_at": "2026-10-31T13:19:32.847053+00:00",
+              "within_budget": false,
+              "within_deadline": true,
+              "feasible": false,
+              "budget_gap_units": 4,
+              "deadline_gap_minutes": 0,
+              "production_mode": "premium"
+            }
+          ]
+        },
+        "seen_material_ids": [
+          "M02"
+        ],
+        "script": {
+          "script_id": "script_0238f1792ad11f12de90b58db4d3d1f60bbe20a8c4a34c452bb251121a75eb38",
+          "title": "新手必学：影芽剪辑快速裁剪与无缝拼接",
+          "source_ids": [
+            "M02"
+          ]
+        },
+        "evaluated_quotes": [
+          {
+            "estimate_id": "estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba",
+            "revision": 1,
+            "total_units": 8,
+            "total_minutes": 90,
+            "feasible": true,
+            "budget_gap_units": 0,
+            "deadline_gap_minutes": 0
+          }
+        ],
+        "budget_units": 8,
+        "last_observation": {
+          "tool_call_id": "call_00_r7sarJFspXALPphfoDgG2649",
+          "tool": "estimate_cost",
+          "ok": true,
+          "error": null
+        },
+        "deadline_at": "2026-10-31T15:04:32.847053+00:00"
+      },
+      "response": {
+        "role": "assistant",
+        "content": "The estimate is feasible (8 units, within budget and deadline). Now let me save the plan.",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_H4NkmgZZygrJKquORyRY6597",
+            "type": "function",
+            "function": {
+              "name": "save_plan",
+              "arguments": "{\"rationale\": \"方案成本在预算内且符合期限，提交保存\", \"plan_revision\": 1, \"estimate_id\": \"estimate_3686477706c0447ece805905590fb896ec27a217822142053d74b76e4036d5ba\"}"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "script_attempts": 1,
+  "fault_log": [],
+  "followup": null,
+  "catalog": {
+    "materials": [
+      {
+        "material_id": "M01",
+        "version": "2026-10-29",
+        "title": "影芽剪辑字幕功能",
+        "tags": [
+          "字幕",
+          "自动字幕",
+          "字幕编辑"
+        ],
+        "facts": [
+          "影芽剪辑支持自动生成字幕。",
+          "自动生成的字幕文本可以编辑。"
+        ],
+        "fee_units": 1,
+        "lead_minutes": 10
+      },
+      {
+        "material_id": "M02",
+        "version": "2026-10-29",
+        "title": "影芽剪辑片段编辑",
+        "tags": [
+          "裁剪",
+          "拼接",
+          "剪辑入门"
+        ],
+        "facts": [
+          "影芽剪辑支持裁剪视频片段。",
+          "影芽剪辑支持拼接视频片段。"
+        ],
+        "fee_units": 1,
+        "lead_minutes": 10
+      }
+    ],
+    "pricing": {
+      "version": "pricing-v1",
+      "currency": "simulated_unit",
+      "execution": "sequential",
+      "script_finalize": {
+        "fee_units": 2,
+        "duration_minutes": 20
+      },
+      "video_edit": {
+        "basic": {
+          "fee_units": 4,
+          "duration_minutes": 45
+        },
+        "premium": {
+          "fee_units": 8,
+          "duration_minutes": 90
+        }
+      },
+      "review": {
+        "fee_units": 1,
+        "duration_minutes": 15
+      }
+    }
+  }
+}

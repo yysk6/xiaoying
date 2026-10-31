@@ -1,0 +1,8 @@
+{
+  "outputs": 4,
+  "trace_rows": 88,
+  "schema_pass": true,
+  "sqlite_snapshots_match": true,
+  "total_http_attempts": 39,
+  "api_cost_usd": null
+}

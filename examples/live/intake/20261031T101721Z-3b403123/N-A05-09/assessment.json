@@ -1,0 +1,43 @@
+{
+  "case": "N-A05-09",
+  "dialog": {
+    "passed": true,
+    "errors": [],
+    "turns": 3,
+    "extraction_turns": 2,
+    "request_id": "nl-67db1ac711ee472a83d287cd3c7e2f11"
+  },
+  "business": {
+    "case": "N-A05-09",
+    "invariants_pass": true,
+    "errors": [],
+    "behavior_pass": true,
+    "failure_handling_pass": null,
+    "recovery_pass": null,
+    "content_pass": null,
+    "passed": null,
+    "content_review": "PENDING",
+    "minimum_budget_gap_units": 3,
+    "plan_rows": 0,
+    "decision_event_ids": [],
+    "confirmed_request_match": true,
+    "decision_observation_audit": "NOT_RUN; no live ModelClient observer; persisted events retained"
+  },
+  "error": null,
+  "elapsed_seconds": 19.062,
+  "session": {
+    "pid": 13264,
+    "status": "stopped",
+    "launch_id": null,
+    "model": "deepseek-v4-pro",
+    "input_mode": "natural",
+    "api_key_configured": true,
+    "http_attempts": 8,
+    "database": "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\live\\intake\\20261031T101721Z-3b403123\\N-A05-09\\runtime.db",
+    "output_root": "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\live\\intake\\20261031T101721Z-3b403123\\N-A05-09\\runs"
+  },
+  "technical_pass": true,
+  "content_pass": null,
+  "passed": null,
+  "content_review": "PENDING"
+}

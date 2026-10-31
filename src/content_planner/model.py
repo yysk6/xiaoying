@@ -27,11 +27,24 @@ class ModelClient(Protocol):
 class FakeModelClient:
     model_id = 'mock'
 
-    def __init__(self, responses: Iterable[str | ModelUnavailable], *, decisions: Iterable[dict | ModelUnavailable] = ()):
+    def __init__(self, responses: Iterable[str | ModelUnavailable], *, decisions: Iterable[dict | ModelUnavailable] = (),
+                 intake_responses: Iterable[str | ModelUnavailable] = ()):
         self._responses = iter(responses)
         self._decisions = iter(decisions)
         self.requests = []
         self.decision_requests = []
+        self._intake_responses = iter(intake_responses)
+        self.intake_requests = []
+
+    def extract_intake(self, context: dict) -> str:
+        self.intake_requests.append(deepcopy(context))
+        try:
+            response = next(self._intake_responses)
+        except StopIteration as error:
+            raise ModelUnavailable('No configured fake intake response remains') from error
+        if isinstance(response, ModelUnavailable):
+            raise response
+        return response
 
     def decide(self, context: dict) -> dict:
         self.decision_requests.append(deepcopy(context))

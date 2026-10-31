@@ -1,0 +1,28 @@
+{
+  "case": "N-A01",
+  "turns": [
+    "主题是影芽剪辑字幕功能推广，预算10个模拟单位，明天下午六点前完成。",
+    "确认"
+  ],
+  "expected": [
+    {
+      "state": "ready",
+      "draft": {
+        "topic": "影芽剪辑字幕功能推广",
+        "budget_units": 10,
+        "deadline_at": "2026-11-01T10:00:00+00:00"
+      }
+    },
+    {
+      "state": "submitted",
+      "draft": {
+        "topic": "影芽剪辑字幕功能推广",
+        "budget_units": 10,
+        "deadline_at": "2026-11-01T10:00:00+00:00"
+      }
+    }
+  ],
+  "fixture": "synthetic evaluation inputs only",
+  "fault_injection": null,
+  "entrypoint": "scripts/interactive_planner.py (ordinary subprocess stdin/stdout)"
+}

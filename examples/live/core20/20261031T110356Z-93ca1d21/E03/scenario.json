@@ -1,0 +1,25 @@
+{
+  "case_id": "E03",
+  "label": "初始premium12恰好符合预算",
+  "budget": 12,
+  "deadline_minutes": 240,
+  "topic": "影芽剪辑字幕功能推广",
+  "material_id": "M01",
+  "seed_premium": true,
+  "allowed_units": [
+    8,
+    12
+  ],
+  "expected_status": "completed",
+  "expected_reason": null,
+  "budget_gap": null,
+  "deadline_gap": null,
+  "omit": [],
+  "replan": null,
+  "exact_deadline": false,
+  "fault": null,
+  "followup": null,
+  "clock_at": "2026-10-31T11:04:46.236790+00:00",
+  "entry": "given_initial_state",
+  "fixture_origin": "fixture_setup"
+}

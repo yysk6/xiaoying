@@ -1,0 +1,28 @@
+{
+  "case_id": "E10",
+  "label": "期限恰好90分钟的重规划边界",
+  "invariants_pass": true,
+  "behavior_pass": true,
+  "errors": [],
+  "behavior_errors": [],
+  "passed": true,
+  "status": "completed",
+  "reason": null,
+  "total_units": 8,
+  "plan_rows": 1,
+  "trace_rows": 22,
+  "decision_count": 3,
+  "content_review": "NON_BLOCKING: marketing copy outside this core rubric",
+  "request_id": "E10-6f7c186d8d7a",
+  "usage": {
+    "model_requests": 4,
+    "action_calls": 7,
+    "input_tokens": 9862,
+    "output_tokens": 492,
+    "api_cost_usd": null
+  },
+  "fault_count": 0,
+  "entry": "given_initial_state",
+  "http_attempts": 4,
+  "elapsed_seconds": 9.734
+}

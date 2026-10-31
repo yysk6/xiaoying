@@ -1,0 +1,20 @@
+{
+  "observed_at": "2026-10-31T18:25:47.6617318+08:00",
+  "session": {
+    "pid": 29364,
+    "status": "ready",
+    "launch_id": "0694ad4f16284f448923378fa8ccce58",
+    "model": "deepseek-v4-pro",
+    "input_mode": "natural",
+    "api_key_configured": true,
+    "http_attempts": 0,
+    "database": "C:\\Users\\11250\\Desktop\\xiaoying\\work\\natural\\runtime.db",
+    "output_root": "C:\\Users\\11250\\Desktop\\xiaoying\\work\\natural\\runs"
+  },
+  "process_exists": true,
+  "configured_title": "内容活动规划 - DeepSeek 自然语言预测",
+  "database_exists": false,
+  "parent_launcher_exit_code": 0,
+  "old_json_process_exists": true,
+  "usage_note": "Ready-file usage is a startup snapshot, not live metering"
+}

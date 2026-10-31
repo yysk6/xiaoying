@@ -1,0 +1,5 @@
+{
+  "clock_source": "SystemClock",
+  "fixture_setup": false,
+  "fault_injection": "first script request before HTTP"
+}

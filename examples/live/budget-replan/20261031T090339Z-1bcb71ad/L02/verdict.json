@@ -1,0 +1,16 @@
+{
+  "case": "L02",
+  "invariants_pass": true,
+  "errors": [],
+  "behavior_pass": false,
+  "failure_handling_pass": false,
+  "recovery_pass": false,
+  "content_pass": null,
+  "passed": null,
+  "content_review": "PENDING",
+  "minimum_budget_gap_units": null,
+  "plan_rows": 0,
+  "decision_event_ids": [
+    11
+  ]
+}

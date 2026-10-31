@@ -1,0 +1,56 @@
+{
+  "case": "L04",
+  "started_at": "2026-10-31T09:04:01.909943+00:00",
+  "ended_at": "2026-10-31T09:04:01.966181+00:00",
+  "source": {
+    "commit": "6885d85e6da9a6b4e8e4fe2af5b39ad6cb429711",
+    "status": "M HANDOFF.md\n M docs/03-evaluation.md\n M docs/06-contracts.md\n M src/content_planner/deepseek.py\n M tests/unit/test_deepseek.py\n?? scripts/evaluate_budget.py\n?? tests/unit/test_evaluation.py"
+  },
+  "backend": "deepseek",
+  "model": "deepseek-v4-pro",
+  "parameters": {
+    "temperature": 0,
+    "thinking": "disabled",
+    "planner_max_tokens": 2048,
+    "script_max_tokens": 1536
+  },
+  "argv": [
+    "scripts/evaluate_budget.py",
+    "--live",
+    "--key-stdin"
+  ],
+  "status": "incomplete",
+  "reason": "SCRIPT_MODEL_UNAVAILABLE",
+  "http_attempts": 1,
+  "usage": {
+    "model_requests": 1,
+    "action_calls": 3,
+    "input_tokens": null,
+    "output_tokens": null,
+    "api_cost_usd": null
+  },
+  "manifest": {
+    "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+    "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+    "model_id": "deepseek-v4-pro",
+    "planner_prompt_version": "planner-v1",
+    "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+    "schema_version": "1.0",
+    "script_prompt_version": "script-v1",
+    "thinking": "disabled"
+  },
+  "verdict": {
+    "case": "L04",
+    "invariants_pass": true,
+    "errors": [],
+    "behavior_pass": false,
+    "failure_handling_pass": null,
+    "recovery_pass": null,
+    "content_pass": null,
+    "passed": null,
+    "content_review": "PENDING",
+    "minimum_budget_gap_units": null,
+    "plan_rows": 0,
+    "decision_event_ids": []
+  }
+}

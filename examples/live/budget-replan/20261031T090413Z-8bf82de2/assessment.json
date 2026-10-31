@@ -1,0 +1,93 @@
+{
+  "run_id": "20261031T090413Z-8bf82de2",
+  "technical_pass": true,
+  "content_pass": false,
+  "passed": false,
+  "samples_per_case": 1,
+  "cases": [
+    {
+      "case": "L04",
+      "invariants_pass": true,
+      "errors": [],
+      "behavior_pass": true,
+      "failure_handling_pass": null,
+      "recovery_pass": null,
+      "content_pass": false,
+      "passed": false,
+      "content_review": "COMPLETED",
+      "minimum_budget_gap_units": 0,
+      "plan_rows": 1,
+      "decision_event_ids": [
+        23,
+        27,
+        31
+      ],
+      "content_review_path": "content-review.json",
+      "evaluated_at": "2026-10-31T09:09:32.438217+00:00",
+      "checker_sha256": "b997c3ab0d5bf6b0edb49228fe9f3aa7d95a61d5a99e18693af4e8aaebf4b98d",
+      "database_snapshot_verified": true,
+      "result_and_trace_schema_pass": true,
+      "note": "最终检查器基于未改写的实际证据离线复判；原run.json/verdict.json仍保留运行时判定。"
+    },
+    {
+      "case": "L05",
+      "invariants_pass": true,
+      "errors": [],
+      "behavior_pass": true,
+      "failure_handling_pass": null,
+      "recovery_pass": null,
+      "content_pass": false,
+      "passed": false,
+      "content_review": "COMPLETED",
+      "minimum_budget_gap_units": 3,
+      "plan_rows": 0,
+      "decision_event_ids": [
+        35,
+        39,
+        43,
+        49,
+        53
+      ],
+      "content_review_path": "content-review.json",
+      "evaluated_at": "2026-10-31T09:09:32.468217+00:00",
+      "checker_sha256": "b997c3ab0d5bf6b0edb49228fe9f3aa7d95a61d5a99e18693af4e8aaebf4b98d",
+      "database_snapshot_verified": true,
+      "result_and_trace_schema_pass": true,
+      "note": "最终检查器基于未改写的实际证据离线复判；原run.json/verdict.json仍保留运行时判定。"
+    },
+    {
+      "case": "L02",
+      "invariants_pass": true,
+      "errors": [],
+      "behavior_pass": true,
+      "failure_handling_pass": true,
+      "recovery_pass": true,
+      "content_pass": false,
+      "passed": false,
+      "content_review": "COMPLETED",
+      "minimum_budget_gap_units": 0,
+      "plan_rows": 1,
+      "decision_event_ids": [
+        57,
+        61,
+        65,
+        71,
+        77,
+        81
+      ],
+      "content_review_path": "content-review.json",
+      "evaluated_at": "2026-10-31T09:09:32.499217+00:00",
+      "checker_sha256": "b997c3ab0d5bf6b0edb49228fe9f3aa7d95a61d5a99e18693af4e8aaebf4b98d",
+      "database_snapshot_verified": true,
+      "result_and_trace_schema_pass": true,
+      "note": "最终检查器基于未改写的实际证据离线复判；原run.json/verdict.json仍保留运行时判定。"
+    }
+  ],
+  "schema_checked_trace_events": 72,
+  "http_attempts": 17,
+  "api_cost_usd": null,
+  "initial_sandbox_run": "../20261031T090339Z-1bcb71ad/summary.json",
+  "initial_sandbox_http_attempts": 3,
+  "total_http_attempts_both_runs": 20,
+  "extra_http_during_final_assessment": 0
+}

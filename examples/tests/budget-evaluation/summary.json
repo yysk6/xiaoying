@@ -1,0 +1,12 @@
+{
+  "tests": 342,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "time": "146.939",
+  "pytest_exit_code": 0,
+  "command": ".venv/Scripts/python.exe -X utf8 -m pytest -q --junitxml=examples/tests/budget-evaluation/pytest-junit.xml",
+  "baseline_commit": "6885d85e6da9a6b4e8e4fe2af5b39ad6cb429711",
+  "working_tree_modified": true,
+  "note": "最终检查器修复后完整离线回归；普通pytest禁网络。此前339项中间回归不作为最终结果。"
+}

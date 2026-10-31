@@ -4,6 +4,26 @@
 
 ## CLI
 
+### 自然语言入口契约（N1—N3）
+
+开发方案及验收范围见[自然语言入口](10-natural-language-intake-plan.md)。入口默认natural，显式`--input-mode json`沿用原JSON模式；父/子启动传递模式。现有`python -m content_planner`业务命令保持原契约。
+
+N3实际修订：intake-v1真实返回预算value/source不一致，被程序正确拒绝；升级intake-v2，加入通用原文复制示例。下述Patch/严格校验/工具边界不变，不把规范化值当原文接收。历史v1失败证据保留。
+
+抽取方法`extract_intake(context)->JSON字符串`，使用intake-v2、无tools、json_object、max_tokens=1024。IntakePatch最多包含topic/budget_units/deadline_at三个可省略键，每项为`{value:string|null, source:string}`；source必须是本轮输入中的原文片段，预算/时间的非空value必须等于source，由程序解释原文，模型不能剥去货币、小数、范围或模糊词后伪造有效值。省略键保持原值；清除值需原文含明确的未定/清空/删除等表达。额外字段、根字段null、无原文依据均拒绝并保留草稿。
+
+预算支持一个阿拉伯整数字面量或常用中文整数，范围1—100000；小数（含10.0）、多个数/范围、货币单位及模糊词要求澄清。时间首版支持ISO时间、YYYY-MM-DD或YYYY年M月D日加明确时刻、今天/明天/后天加时刻。数字时刻为24小时；中文数字小时/分钟、上午/下午/晚上/凌晨/中午及“半”按明确规则解析，晚上12点/上午12点等歧义表达追问。只有日期、周几、月底、尽快均追问。明确无偏移日期时间按固定UTC+08解释并在摘要标明；ISO显式偏移尊重原偏移；不可静默归一化非法日期/时区偏移。时间锚点在该字段提供时记录，确认/其他字段修改不重算。
+
+每草稿最多8次抽取、每轮最多1次、单条上限2000字符，控制指令不调用抽取。确认/确认开始只在完整有效且deadline仍未来时生成稳定Request；重复确认返回同一Request，新字段修改使确认失效；取消/新建清空草稿。错误字段清为空待补充，其余合法字段可保留；协议/网络错误保持整份旧草稿。确认前业务调用和业务数据库写入均为0，需求理解本身可能有付费请求，独立计usage。草稿仅内存，不承诺跨进程对话恢复；已提交任务沿用SQLite恢复。
+
+### 用户手工交互入口（2026-10-31）
+
+用户要求启动并注入密钥，随后自行输入需求做端到端预测。沿用CLI路线，`scripts/interactive_planner.py`默认自然语言模式，经需求整理与确认后调用既有run_task及export_task；`--input-mode json`兼容逐行Request JSON直接执行。支持`show <request_id>`、`resume <request_id>`、`exit`。JSON输入错误不调用模型、不退出会话；重复JSON沿用原幂等规则，修改输入须新ID。输出摘要、步骤状态和实际导出目录；默认独立数据库work/manual/runtime.db与结果work/manual/runs，历史评测库不变。
+
+启动通过隐藏输入直接内存传入密钥，不使用环境变量/参数/文件保存密钥；启动不发模型请求。在Windows可打开独立可见终端，由父进程通过匿名stdin管道交给子进程，随后子进程恢复控制台输入。仅保存PID/就绪状态/输入模式等无密钥会话信息；自然语言按回车后可能抽取，明确确认后才业务执行。非Windows可在已有终端直接运行。关闭/exit释放客户端。自然语言安全事件写output-root/intake.jsonl，含独立会话ID、序号、版本、规范化字段、时间锚点、确认关联和用量，不保存完整自由对话。无故障注入或强制premium初始方案。
+
+N3评测补充：自动化终端驱动可用--key-stdin从匿名stdin读取第一行密钥，其余行仍为普通交互输入；由父评测器隐藏读取并传入，不进入参数/env/文件，也不回显。评测器必须显式--live才启动子CLI，不自动重试案例。仅评测预先定义的合成输入，单独保存这些已知测试轮次、程序安全事件、终端输出、确认前后实际SQLite快照及独立判定；应用默认仍不记录完整自由对话。普通用户优先使用隐藏提示输入。
+
 S7实现前约定：run/show/resume保持既有语义，本阶段开放deepseek后端，使用官方deepseek-v4-pro，不降级Mock。历史阶段边界见阶段报告。
 
 ```text
@@ -52,6 +72,8 @@ operation_id由最长200字符的tool_call_id加`tool:`及`:script`等内部前�
 环境变量：`DEEPSEEK_API_KEY`（仅 live 必需）、`DEEPSEEK_BASE_URL=https://api.deepseek.com`、`DEEPSEEK_MODEL=deepseek-v4-pro`。首版运行仅支持官方 host 与此模型 ID；其他值报配置错误，不暗示兼容任意代理。`.env.example` 只有占位符；环境变量由 shell 设置，本程序首版不自动加载 `.env` 文件。
 
 ### S7 HTTP适配与效果验证（实现前，2026-10-31）
+
+2026-10-31专项评测授权补充：用户明确要求本轮使用提供的密钥且不用环境变量。`DeepSeekModelClient(client=None, *, api_key=None)`允许调用者在内存中显式注入密钥；未传入时保持原环境变量读取行为。专项脚本以隐藏终端输入接收密钥，不将它写入参数、文件、证据或异常。该补充不增加第三方依赖。
 
 公开适配入口`DeepSeekModelClient(client=None)`从环境读取配置；client仅供HTTPX MockTransport替换外部HTTP边界。客户端支持上下文管理/close；由service创建的客户端在请求结束或错误时关闭，调用方注入的客户端由调用方管理。run_task增加backend='mock'，resume按原记录backend创建客户端；重复run/show/completed resume先只读，不要求当前密钥。缺信息仍零调用且不初始化任务；新live任务缺/非法配置为CONFIG_ERROR，不能回退Mock，live不接受mock-scenario。
 

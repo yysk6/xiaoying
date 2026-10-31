@@ -1,0 +1,26 @@
+{
+  "case": "L05",
+  "invariants_pass": true,
+  "errors": [],
+  "behavior_pass": true,
+  "failure_handling_pass": null,
+  "recovery_pass": null,
+  "content_pass": false,
+  "passed": false,
+  "content_review": "COMPLETED",
+  "minimum_budget_gap_units": 3,
+  "plan_rows": 0,
+  "decision_event_ids": [
+    35,
+    39,
+    43,
+    49,
+    53
+  ],
+  "content_review_path": "content-review.json",
+  "evaluated_at": "2026-10-31T09:09:32.468217+00:00",
+  "checker_sha256": "b997c3ab0d5bf6b0edb49228fe9f3aa7d95a61d5a99e18693af4e8aaebf4b98d",
+  "database_snapshot_verified": true,
+  "result_and_trace_schema_pass": true,
+  "note": "最终检查器基于未改写的实际证据离线复判；原run.json/verdict.json仍保留运行时判定。"
+}

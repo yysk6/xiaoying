@@ -1,0 +1,12 @@
+[
+  {
+    "kind": "script_failure",
+    "attempt": 1,
+    "before_http": true
+  },
+  {
+    "kind": "script_failure",
+    "attempt": 2,
+    "before_http": true
+  }
+]

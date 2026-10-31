@@ -1,0 +1,28 @@
+{
+  "method": "agent_manual_source_comparison_no_extra_model_call",
+  "content_pass": false,
+  "source_material_id": "M01",
+  "allowed_facts": [
+    "影芽剪辑支持自动生成字幕。",
+    "自动生成的字幕文本可以编辑。"
+  ],
+  "supported": [
+    "自动生成字幕",
+    "自动生成的字幕文本可编辑"
+  ],
+  "findings": [
+    {
+      "field": "body",
+      "excerpt": "自动生成字幕只需一键",
+      "verdict": "UNSUPPORTED",
+      "reason": "素材未提供操作步骤或一键触发的依据"
+    },
+    {
+      "field": "body",
+      "excerpt": "准确又专业",
+      "verdict": "UNSUPPORTED",
+      "reason": "素材未提供准确性或专业质量保证"
+    }
+  ],
+  "note": "检查包括未保存的成功草稿；这是源事实支持性判定，不是营销效果评分。"
+}

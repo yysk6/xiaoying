@@ -1,0 +1,16 @@
+{
+  "checked_markdown_files": 6,
+  "local_links": 91,
+  "broken_links": [],
+  "secret_pattern_files": [],
+  "evaluated_source_secret_files": [],
+  "git_diff_check_exit_code": 0,
+  "implementation_review": {
+    "standards_hard_violations": 0,
+    "standards_judgement_findings": 0,
+    "spec_initial_p2": 3,
+    "spec_unresolved_after_recheck": 0
+  },
+  "additional_final_document_subagent_review": "NOT_RUN: reviewer usage limit; primary document/evidence checks completed",
+  "latest_full_suite": "408 passed, 0 failed; final-full-junit.xml"
+}

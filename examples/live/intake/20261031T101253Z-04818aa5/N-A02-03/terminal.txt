@@ -1,0 +1,113 @@
+内容活动规划｜真实模型手工预测
+请用自然语言描述主题、整数模拟预算和截止时间；确认后启动业务。
+确认前的需求理解也可能产生API费用；草稿只存当前进程，重启丢失。
+“确认”提交，“取消/新建”清空草稿。show <ID>查看；resume <ID>续跑；exit退出。
+每个新任务会调用真实模型；重复相同ID及输入只读。
+
+需求 > 主题：影芽剪辑字幕功能推广
+预算上限：待补充 个模拟单位
+截止时间：待补充
+请补充或明确：预算、截止时间
+需求理解用量：{"model_requests": 1, "api_cost_usd": null, "input_tokens": 540, "output_tokens": 28}
+
+需求 > 主题：影芽剪辑字幕功能推广
+预算上限：待补充 个模拟单位
+截止时间：待补充
+需求理解结果无效，原草稿保留，请明确重述。
+需求理解用量：{"model_requests": 2, "api_cost_usd": null, "input_tokens": 1083, "output_tokens": 54}
+
+需求 > 主题：影芽剪辑字幕功能推广
+预算上限：待补充 个模拟单位
+截止时间：2026-11-01 18:00:00 北京时间 UTC+08:00
+请补充或明确：预算
+需求理解用量：{"model_requests": 3, "api_cost_usd": null, "input_tokens": 1627, "output_tokens": 80}
+
+需求 > 主题：影芽剪辑字幕功能推广
+预算上限：8 个模拟单位
+截止时间：2026-11-01 18:00:00 北京时间 UTC+08:00
+请输入“确认”开始，或描述修改内容；“取消”清空草稿。
+需求理解用量：{"model_requests": 4, "api_cost_usd": null, "input_tokens": 2187, "output_tokens": 106}
+
+需求 > 主题：影芽剪辑字幕功能推广
+预算上限：8 个模拟单位
+截止时间：2026-11-01 18:00:00 北京时间 UTC+08:00
+需求已确认。
+需求理解用量：{"model_requests": 4, "api_cost_usd": null, "input_tokens": 2187, "output_tokens": 106}
+正在执行，请等待……
+# 内容活动方案：nl-6db15482cd3d4abfae23a9d7d6f18f07
+
+状态：completed；backend=deepseek；model=deepseek-v4-pro
+
+方案已保存（活动尚未执行）
+
+方案ID：plan_3dff4dc83fb753494a7e064ac82bf3e8f5393df2f27ab659b411b906587c184b
+素材来源：M01
+总费用：8 units
+
+## 脚本草稿
+
+影芽剪辑：一键字幕，精准可控
+还在手动打字幕？影芽剪辑一键自动生成，省时又省力！
+打开影芽剪辑，导入视频，点击自动生成字幕，瞬间完成。字幕文本可自由编辑，错别字、断句都能轻松修正，精准掌控每一句。新手也能快速上手，让剪辑更高效。
+立即下载影芽剪辑，体验智能字幕新方式！
+
+## 活动计划（planned，尚未执行；北京时间 UTC+08:00）
+
+| 活动 | 费用 units | 分钟 | 开始 | 结束 | 状态 |
+|---|---:|---:|---|---|---|
+| 准备选中素材 | 1 | 10 | 2026-10-31T18:13:19.304790+08:00 | 2026-10-31T18:23:19.304790+08:00 | planned |
+| 定稿当前脚本 | 2 | 20 | 2026-10-31T18:23:19.304790+08:00 | 2026-10-31T18:43:19.304790+08:00 | planned |
+| 按选中档位剪辑制作 | 4 | 45 | 2026-10-31T18:43:19.304790+08:00 | 2026-10-31T19:28:19.304790+08:00 | planned |
+| 审核内容与来源 | 1 | 15 | 2026-10-31T19:28:19.304790+08:00 | 2026-10-31T19:43:19.304790+08:00 | planned |
+
+实际执行步骤：
+  search_materials attempt=1 succeeded reused=False
+  revise_plan attempt=1 succeeded reused=False
+  generate_script attempt=1 succeeded reused=False
+  estimate_cost attempt=1 succeeded reused=False
+  save_plan attempt=1 succeeded reused=False
+业务用量：{"model_requests": 6, "action_calls": 5, "input_tokens": 14920, "output_tokens": 732, "api_cost_usd": null}
+结果目录：C:\Users\11250\Desktop\xiaoying\examples\live\intake\20261031T101253Z-04818aa5\N-A02-03\runs\nl-6db15482cd3d4abfae23a9d7d6f18f07
+
+需求 > 主题：影芽剪辑字幕功能推广
+预算上限：8 个模拟单位
+截止时间：2026-11-01 18:00:00 北京时间 UTC+08:00
+读取已确认任务。
+需求理解用量：{"model_requests": 4, "api_cost_usd": null, "input_tokens": 2187, "output_tokens": 106}
+正在执行，请等待……
+# 内容活动方案：nl-6db15482cd3d4abfae23a9d7d6f18f07
+
+状态：completed；backend=deepseek；model=deepseek-v4-pro
+
+方案已保存（活动尚未执行）
+
+方案ID：plan_3dff4dc83fb753494a7e064ac82bf3e8f5393df2f27ab659b411b906587c184b
+素材来源：M01
+总费用：8 units
+
+## 脚本草稿
+
+影芽剪辑：一键字幕，精准可控
+还在手动打字幕？影芽剪辑一键自动生成，省时又省力！
+打开影芽剪辑，导入视频，点击自动生成字幕，瞬间完成。字幕文本可自由编辑，错别字、断句都能轻松修正，精准掌控每一句。新手也能快速上手，让剪辑更高效。
+立即下载影芽剪辑，体验智能字幕新方式！
+
+## 活动计划（planned，尚未执行；北京时间 UTC+08:00）
+
+| 活动 | 费用 units | 分钟 | 开始 | 结束 | 状态 |
+|---|---:|---:|---|---|---|
+| 准备选中素材 | 1 | 10 | 2026-10-31T18:13:19.304790+08:00 | 2026-10-31T18:23:19.304790+08:00 | planned |
+| 定稿当前脚本 | 2 | 20 | 2026-10-31T18:23:19.304790+08:00 | 2026-10-31T18:43:19.304790+08:00 | planned |
+| 按选中档位剪辑制作 | 4 | 45 | 2026-10-31T18:43:19.304790+08:00 | 2026-10-31T19:28:19.304790+08:00 | planned |
+| 审核内容与来源 | 1 | 15 | 2026-10-31T19:28:19.304790+08:00 | 2026-10-31T19:43:19.304790+08:00 | planned |
+
+实际执行步骤：
+  search_materials attempt=1 succeeded reused=False
+  revise_plan attempt=1 succeeded reused=False
+  generate_script attempt=1 succeeded reused=False
+  estimate_cost attempt=1 succeeded reused=False
+  save_plan attempt=1 succeeded reused=False
+业务用量：{"model_requests": 6, "action_calls": 5, "input_tokens": 14920, "output_tokens": 732, "api_cost_usd": null}
+结果目录：C:\Users\11250\Desktop\xiaoying\examples\live\intake\20261031T101253Z-04818aa5\N-A02-03\runs\nl-6db15482cd3d4abfae23a9d7d6f18f07
+
+需求 > 

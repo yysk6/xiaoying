@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.0",
+  "request_id": "L04-655ce79b4ce0",
+  "backend": "deepseek",
+  "model": "deepseek-v4-pro",
+  "status": "incomplete",
+  "reason": "SCRIPT_MODEL_UNAVAILABLE",
+  "message": "Declared fixture setup failed before planner handover",
+  "missing_fields": [],
+  "task_plan": [],
+  "execution_steps": [
+    {
+      "event_id": 1,
+      "operation_id": "tool:fixture-0",
+      "tool_call_id": "fixture-0",
+      "tool": "search_materials",
+      "attempt": 1,
+      "status": "succeeded",
+      "reused": false,
+      "result_index": 0,
+      "error_code": null
+    },
+    {
+      "event_id": 3,
+      "operation_id": "tool:fixture-1",
+      "tool_call_id": "fixture-1",
+      "tool": "revise_plan",
+      "attempt": 1,
+      "status": "succeeded",
+      "reused": false,
+      "result_index": 1,
+      "error_code": null
+    },
+    {
+      "event_id": 5,
+      "operation_id": "tool:fixture-2",
+      "tool_call_id": "fixture-2",
+      "tool": "generate_script",
+      "attempt": 1,
+      "status": "failed",
+      "reused": false,
+      "result_index": 2,
+      "error_code": "SCRIPT_MODEL_UNAVAILABLE"
+    }
+  ],
+  "tool_results": [
+    {
+      "tool_call_id": "fixture-0",
+      "tool": "search_materials",
+      "ok": true,
+      "reused": false,
+      "data": {
+        "query": "字幕",
+        "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+        "materials": [
+          {
+            "material_id": "M01",
+            "version": "2026-10-29",
+            "title": "影芽剪辑字幕功能",
+            "tags": [
+              "字幕",
+              "自动字幕",
+              "字幕编辑"
+            ],
+            "facts": [
+              "影芽剪辑支持自动生成字幕。",
+              "自动生成的字幕文本可以编辑。"
+            ],
+            "fee_units": 1,
+            "lead_minutes": 10,
+            "score": 1
+          }
+        ]
+      },
+      "error": null
+    },
+    {
+      "tool_call_id": "fixture-1",
+      "tool": "revise_plan",
+      "ok": true,
+      "reused": false,
+      "data": {
+        "revision": 1,
+        "candidate_hash": "e573d4a2c44ad38ef5d73fb4fe700f7d44b1229f6815d031c70349e75f85cc51",
+        "material_id": "M01",
+        "creative_brief": "展示字幕编辑",
+        "production_mode": "premium",
+        "script_input_hash": "38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "script_reused": false,
+        "invalidated": []
+      },
+      "error": null
+    },
+    {
+      "tool_call_id": "fixture-2",
+      "tool": "generate_script",
+      "ok": false,
+      "reused": false,
+      "data": null,
+      "error": {
+        "code": "SCRIPT_MODEL_UNAVAILABLE",
+        "message": "Script model is unavailable",
+        "retryable": true,
+        "details": {}
+      }
+    }
+  ],
+  "current_revision": 1,
+  "candidate": {
+    "revision": 1,
+    "candidate_hash": "e573d4a2c44ad38ef5d73fb4fe700f7d44b1229f6815d031c70349e75f85cc51",
+    "material_id": "M01",
+    "creative_brief": "展示字幕编辑",
+    "production_mode": "premium",
+    "script_input_hash": "38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e"
+  },
+  "total_units": null,
+  "saved_plan": null,
+  "usage": {
+    "model_requests": 1,
+    "action_calls": 3,
+    "input_tokens": null,
+    "output_tokens": null,
+    "api_cost_usd": null
+  },
+  "limits": {
+    "max_model_requests": 32,
+    "max_action_calls": 24,
+    "max_revisions": 4,
+    "remaining_model_requests": 31,
+    "remaining_action_calls": 21
+  },
+  "warnings": [],
+  "trace_path": "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\live\\budget-replan\\20261031T090339Z-1bcb71ad\\L04\\trace.jsonl",
+  "manifest": {
+    "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+    "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+    "model_id": "deepseek-v4-pro",
+    "planner_prompt_version": "planner-v1",
+    "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+    "schema_version": "1.0",
+    "script_prompt_version": "script-v1",
+    "thinking": "disabled"
+  }
+}

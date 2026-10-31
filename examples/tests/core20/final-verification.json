@@ -1,0 +1,38 @@
+{
+  "updated_at": "2026-10-31T14:15:56.880408+00:00",
+  "latest_status": "PASSED_ON_RETEST",
+  "final_full_suite_passed": true,
+  "final_console_seconds": 155.1,
+  "http_requests": 0,
+  "business_code_changed": false,
+  "root_cause_fix_claimed": false,
+  "runs": [
+    {
+      "file": "full-junit.xml",
+      "tests": 408,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "junit_seconds": 159.451,
+      "passed": 407
+    },
+    {
+      "file": "resume-diagnostic-junit.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_seconds": 7.423,
+      "passed": 2
+    },
+    {
+      "file": "final-full-junit.xml",
+      "tests": 408,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_seconds": 155.061,
+      "passed": 408
+    }
+  ]
+}

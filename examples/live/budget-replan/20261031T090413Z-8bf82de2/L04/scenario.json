@@ -1,0 +1,5 @@
+{
+  "clock_source": "SystemClock",
+  "fixture_setup": true,
+  "fault_injection": null
+}

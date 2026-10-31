@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "http_requests": 0,
+  "cases": [
+    {
+      "case": "normal",
+      "input": "examples/mock/A01/input.json",
+      "scenario": "examples/mock/A01/scenario.json",
+      "exit_code": 0,
+      "status": "completed",
+      "reason": null,
+      "total_units": 8,
+      "saved_plan": true,
+      "exported_files": [
+        "output.json",
+        "plan.md",
+        "trace.jsonl"
+      ],
+      "passed": true
+    },
+    {
+      "case": "missing",
+      "input": "examples/mock/A02/input.json",
+      "scenario": "examples/mock/A02/scenario.json",
+      "exit_code": 2,
+      "status": "needs_input",
+      "reason": "NEEDS_INPUT",
+      "total_units": null,
+      "saved_plan": false,
+      "exported_files": [
+        "output.json",
+        "plan.md",
+        "trace.jsonl"
+      ],
+      "passed": true
+    },
+    {
+      "case": "tool-failure",
+      "input": "examples/mock/A08/input.json",
+      "scenario": "examples/mock/A08/scenario.json",
+      "exit_code": 3,
+      "status": "incomplete",
+      "reason": "tool_failure",
+      "total_units": null,
+      "saved_plan": false,
+      "exported_files": [
+        "output.json",
+        "plan.md",
+        "trace.jsonl"
+      ],
+      "passed": true
+    }
+  ],
+  "work_directory": "work/submission-smoke-43a4e7f2"
+}

@@ -1,0 +1,166 @@
+{
+  "input": {
+    "request_id": "L02-6afdabb34f4b",
+    "topic": "影芽剪辑字幕功能推广",
+    "budget_units": 10,
+    "deadline_at": "2026-10-31T13:04:02.080270+00:00"
+  },
+  "output": {
+    "schema_version": "1.0",
+    "request_id": "L02-6afdabb34f4b",
+    "backend": "deepseek",
+    "model": "deepseek-v4-pro",
+    "status": "incomplete",
+    "reason": "MODEL_UNAVAILABLE",
+    "message": "MODEL_UNAVAILABLE",
+    "missing_fields": [],
+    "task_plan": [],
+    "execution_steps": [],
+    "tool_results": [],
+    "current_revision": null,
+    "candidate": null,
+    "total_units": null,
+    "saved_plan": null,
+    "usage": {
+      "model_requests": 1,
+      "action_calls": 0,
+      "input_tokens": null,
+      "output_tokens": null,
+      "api_cost_usd": null
+    },
+    "limits": {
+      "max_model_requests": 32,
+      "max_action_calls": 24,
+      "max_revisions": 4,
+      "remaining_model_requests": 31,
+      "remaining_action_calls": 24
+    },
+    "warnings": [],
+    "trace_path": "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\live\\budget-replan\\20261031T090339Z-1bcb71ad\\L02\\trace.jsonl",
+    "manifest": {
+      "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+      "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+      "model_id": "deepseek-v4-pro",
+      "planner_prompt_version": "planner-v1",
+      "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+      "schema_version": "1.0",
+      "script_prompt_version": "script-v1",
+      "thinking": "disabled"
+    }
+  },
+  "events": [
+    {
+      "event_id": 11,
+      "request_id": "L02-6afdabb34f4b",
+      "kind": "model",
+      "operation_id": "decide:1",
+      "phase": "started",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T09:04:02.110960+00:00",
+      "args": {},
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 12,
+      "request_id": "L02-6afdabb34f4b",
+      "kind": "model",
+      "operation_id": "decide:1",
+      "phase": "failed",
+      "name": "planner",
+      "error_code": "MODEL_UNAVAILABLE",
+      "rationale": "",
+      "created_at": "2026-10-31T09:04:02.110960+00:00",
+      "args": {},
+      "result": {
+        "retryable": true,
+        "usage": null
+      },
+      "state_patch": null
+    }
+  ],
+  "plans": [],
+  "decisions": [
+    {
+      "event_id": 11,
+      "operation_id": "decide:1",
+      "memory": {
+        "candidate": null,
+        "latest_estimate": null,
+        "seen_material_ids": [],
+        "script": null,
+        "evaluated_quotes": [],
+        "budget_units": 10,
+        "last_observation": {
+          "tool_call_id": null,
+          "tool": null,
+          "ok": null,
+          "error": null
+        }
+      },
+      "response": null
+    }
+  ],
+  "script_attempts": 0,
+  "catalog": {
+    "materials": [
+      {
+        "material_id": "M01",
+        "version": "2026-10-29",
+        "title": "影芽剪辑字幕功能",
+        "tags": [
+          "字幕",
+          "自动字幕",
+          "字幕编辑"
+        ],
+        "facts": [
+          "影芽剪辑支持自动生成字幕。",
+          "自动生成的字幕文本可以编辑。"
+        ],
+        "fee_units": 1,
+        "lead_minutes": 10
+      },
+      {
+        "material_id": "M02",
+        "version": "2026-10-29",
+        "title": "影芽剪辑片段编辑",
+        "tags": [
+          "裁剪",
+          "拼接",
+          "剪辑入门"
+        ],
+        "facts": [
+          "影芽剪辑支持裁剪视频片段。",
+          "影芽剪辑支持拼接视频片段。"
+        ],
+        "fee_units": 1,
+        "lead_minutes": 10
+      }
+    ],
+    "pricing": {
+      "version": "pricing-v1",
+      "currency": "simulated_unit",
+      "execution": "sequential",
+      "script_finalize": {
+        "fee_units": 2,
+        "duration_minutes": 20
+      },
+      "video_edit": {
+        "basic": {
+          "fee_units": 4,
+          "duration_minutes": 45
+        },
+        "premium": {
+          "fee_units": 8,
+          "duration_minutes": 90
+        }
+      },
+      "review": {
+        "fee_units": 1,
+        "duration_minutes": 15
+      }
+    }
+  }
+}

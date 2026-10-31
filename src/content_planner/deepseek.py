@@ -7,14 +7,14 @@ import httpx
 
 from .domain import Fault
 from .model import ModelUnavailable
-from .prompts import SCRIPT
+from .prompts import INTAKE, SCRIPT
 
 
 class DeepSeekModelClient:
     model_id = 'deepseek-v4-pro'
 
-    def __init__(self, client=None):
-        key = os.environ.get('DEEPSEEK_API_KEY', '').strip()
+    def __init__(self, client=None, *, api_key=None):
+        key = (api_key if api_key is not None else os.environ.get('DEEPSEEK_API_KEY', '')).strip()
         base = os.environ.get('DEEPSEEK_BASE_URL', 'https://api.deepseek.com').strip().rstrip('/')
         model = os.environ.get('DEEPSEEK_MODEL', self.model_id).strip()
         if not key or base != 'https://api.deepseek.com' or model != self.model_id:
@@ -90,6 +90,14 @@ class DeepSeekModelClient:
     def generate_script(self, context):
         message = self._complete([{'role': 'system', 'content': SCRIPT},
             {'role': 'user', 'content': json.dumps(context, ensure_ascii=False)}], 1536,
+            response_format={'type': 'json_object'})
+        if not isinstance(message.get('content'), str) or not message['content'].strip():
+            raise self._protocol_error()
+        return message['content']
+
+    def extract_intake(self, context):
+        message = self._complete([{'role': 'system', 'content': INTAKE},
+            {'role': 'user', 'content': json.dumps(context, ensure_ascii=False)}], 1024,
             response_format={'type': 'json_object'})
         if not isinstance(message.get('content'), str) or not message['content'].strip():
             raise self._protocol_error()

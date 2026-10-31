@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "request_id": "E18-a4a114107cf7",
+  "backend": "deepseek",
+  "model": "deepseek-v4-pro",
+  "status": "incomplete",
+  "reason": "MODEL_UNAVAILABLE",
+  "message": "MODEL_UNAVAILABLE",
+  "missing_fields": [],
+  "task_plan": [],
+  "execution_steps": [
+    {
+      "event_id": 3,
+      "operation_id": "tool:call_00_RPq8aSFUYsJWrQxUfNsY9465",
+      "tool_call_id": "call_00_RPq8aSFUYsJWrQxUfNsY9465",
+      "tool": "search_materials",
+      "attempt": 1,
+      "status": "succeeded",
+      "reused": false,
+      "result_index": 0,
+      "error_code": null
+    },
+    {
+      "event_id": 7,
+      "operation_id": "tool:call_00_Q3d6ncppsLEdjdXEpALL7669",
+      "tool_call_id": "call_00_Q3d6ncppsLEdjdXEpALL7669",
+      "tool": "revise_plan",
+      "attempt": 1,
+      "status": "succeeded",
+      "reused": false,
+      "result_index": 1,
+      "error_code": null
+    }
+  ],
+  "tool_results": [
+    {
+      "tool_call_id": "call_00_RPq8aSFUYsJWrQxUfNsY9465",
+      "tool": "search_materials",
+      "ok": true,
+      "reused": false,
+      "data": {
+        "query": "影芽剪辑 字幕功能 推广",
+        "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+        "materials": [
+          {
+            "material_id": "M01",
+            "version": "2026-10-29",
+            "title": "影芽剪辑字幕功能",
+            "tags": [
+              "字幕",
+              "自动字幕",
+              "字幕编辑"
+            ],
+            "facts": [
+              "影芽剪辑支持自动生成字幕。",
+              "自动生成的字幕文本可以编辑。"
+            ],
+            "fee_units": 1,
+            "lead_minutes": 10,
+            "score": 1
+          }
+        ]
+      },
+      "error": null
+    },
+    {
+      "tool_call_id": "call_00_Q3d6ncppsLEdjdXEpALL7669",
+      "tool": "revise_plan",
+      "ok": true,
+      "reused": false,
+      "data": {
+        "revision": 1,
+        "candidate_hash": "4ef00d146e1876eb53c6729525b986c458e77c873abe88237e310e299c785736",
+        "material_id": "M01",
+        "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频，展示影芽剪辑一键生成字幕并快速修改错别字的便捷体验，突出省时省力的剪辑效率提升。",
+        "production_mode": "basic",
+        "script_input_hash": "6f0ec3b0476bcdc23298d08b9339b9194866e894346ace279afbd1d90ddc7d7c",
+        "script_reused": false,
+        "invalidated": []
+      },
+      "error": null
+    }
+  ],
+  "current_revision": 1,
+  "candidate": {
+    "revision": 1,
+    "candidate_hash": "4ef00d146e1876eb53c6729525b986c458e77c873abe88237e310e299c785736",
+    "material_id": "M01",
+    "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频，展示影芽剪辑一键生成字幕并快速修改错别字的便捷体验，突出省时省力的剪辑效率提升。",
+    "production_mode": "basic",
+    "script_input_hash": "6f0ec3b0476bcdc23298d08b9339b9194866e894346ace279afbd1d90ddc7d7c"
+  },
+  "total_units": null,
+  "saved_plan": null,
+  "usage": {
+    "model_requests": 3,
+    "action_calls": 2,
+    "input_tokens": null,
+    "output_tokens": null,
+    "api_cost_usd": null
+  },
+  "limits": {
+    "max_model_requests": 32,
+    "max_action_calls": 24,
+    "max_revisions": 4,
+    "remaining_model_requests": 29,
+    "remaining_action_calls": 22
+  },
+  "warnings": [],
+  "trace_path": "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\live\\core20\\20261031T110356Z-93ca1d21\\E18\\phases\\initial\\trace.jsonl",
+  "manifest": {
+    "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+    "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+    "model_id": "deepseek-v4-pro",
+    "planner_prompt_version": "planner-v1",
+    "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+    "schema_version": "1.0",
+    "script_prompt_version": "script-v1",
+    "thinking": "disabled"
+  }
+}

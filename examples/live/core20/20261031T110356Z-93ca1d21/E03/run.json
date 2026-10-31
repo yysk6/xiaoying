@@ -1,0 +1,28 @@
+{
+  "case_id": "E03",
+  "label": "初始premium12恰好符合预算",
+  "invariants_pass": true,
+  "behavior_pass": true,
+  "errors": [],
+  "behavior_errors": [],
+  "passed": true,
+  "status": "completed",
+  "reason": null,
+  "total_units": 12,
+  "plan_rows": 1,
+  "trace_rows": 14,
+  "decision_count": 1,
+  "content_review": "NON_BLOCKING: marketing copy outside this core rubric",
+  "request_id": "E03-69cf7108cb40",
+  "usage": {
+    "model_requests": 2,
+    "action_calls": 5,
+    "input_tokens": 3392,
+    "output_tokens": 296,
+    "api_cost_usd": null
+  },
+  "fault_count": 0,
+  "entry": "given_initial_state",
+  "http_attempts": 2,
+  "elapsed_seconds": 4.86
+}

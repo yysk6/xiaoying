@@ -1,47 +1,41 @@
 # 项目上下文交接
 
-更新：2026-10-31（UTC+08）。接手先读AGENTS.md、本文件、[S7报告](docs/stages/S7.md)及[阶段计划](docs/08-development-plan.md)，再核对git status --short --branch、git log -3 --oneline、git worktree list、git remote -v；保留已有改动，以实际状态和最新用户授权为准。
+更新：2026-10-31（UTC+08）。开始或恢复先读AGENTS.md、本文件和当前[提交整理记录](docs/stages/SUBMISSION.md)，再核对git status --short --branch、git log -3 --oneline、git worktree list和git remote -v。权威需求/设计/评估为docs01—05与contracts；技术细节在docs06—12。content-planner-spec是忽略的历史快照，docs/archive/pre-submission是整理前归档。
 
-## 当前授权与进展
+## 当前授权与状态
 
-**S7 ready_for_review，用户验收pending。** 用户授权“进行s7”及测试直接使用提供的密钥；实现、自验、双轴审查和安装验证完成。前阶段不代填accepted，S8未开始。Python3.10.8/LangGraph路线保持，无Deep Agents、依赖锁未变。
+用户已授权“开始改造，然后全部提交到GitHub”，并再次明确目标https://github.com/yysk6/xiaoying 。本轮材料整理与自验完成，ready_for_review；不得把用户要求提交当成所有历史阶段的accepted。按授权将此前未提交的自然需求入口、评测器、测试、原始证据和本次文档一起提交，随后核对远端；不是另开自然对话/事实审核开发。
 
-完整范围、Red/Green、审查修复、真实样本与限制集中见[S7](docs/stages/S7.md)，历史恢复实现见[S6](docs/stages/S6.md)。本文件保存接手必要事实，不是应用记忆。
+主评审入口为README、docs01—05及examples/README。五篇原稿归档但未删历史；包内data仍是唯一运行资料源，新增说明；原始Trace/输出路径保留。AI贡献记录基于需求/开发/评测会话，强调本人选题/架构取舍、阶段约束、过程纠偏、真实体验反馈及验收设计，代码/提示/测试的AI辅助如实说明，不编造独立手写或开发工时。
 
-## 当前实现与关键决定
+## 当前结果
 
-- CLI run/show/resume及JSON/Markdown/Trace已接通。run默认mock，--backend deepseek使用官方HTTP；不回退、不自动重试、不跟随重定向。应用只读环境变量，固定deepseek-v4-pro、thinking关闭。
-- HTTP保留工具配对与usage，脚本JSON交领域校验；错误不记录认证头/provider body/推理。AUTH/配置/协议错误停止；瞬时script失败交planner决定后续。任一未知用量令相应总token为null，美元费用未知null；报价units独立。
-- 重复run/show/已完成resume只读，无需当前密钥。冲突输入返回本次选择backend；未完成live resume按原backend读取配置。服务关闭自己创建的HTTP客户端，外部注入由调用者管理。
-- S6恢复检查next或tasks；持久结果重放不重复执行/计数。未知started标interrupted，新尝试累计额度；提交plan优先，不承诺API exactly-once。准入、额度、manifest和失效规则见docs/07及S6报告。
+核心20/20通过：16例真实DeepSeek、4例零调用防护，6例明确给定初始premium12夹具；12完成、4正确未完成、4needs_input，88次HTTP。业务集成端到端，不是20例自然终端端到端。每例一个样本，不推断泛化率。
 
-权威规格在docs/和contracts/；content-planner-spec/是历史快照。应用不依赖Codex/MCP/账户/开发机目录。
+本次提交完整离线复测408 passed、0 failed、154.19秒，examples/tests/submission/pytest-junit.xml；README正常/缺预算/持续失败三条CLI实测通过，cli-smoke.json；pip check通过。23份输出/408条含阶段Trace离线审计通过，21个冻结文件哈希未变。静态链接、当前Git候选文件和8个未推送历史提交的密钥模式扫描零命中，证据在examples/tests/submission/static-checks.json。纯整理不新增业务行为，未再调用付费API或重复业务双轴审查。
 
-## 验证与真实证据
+此前核心阶段完整复测408/408、155.10秒及最初407/1的原始记录均保留。强杀恢复unknown_planner最初CHECKPOINT_NOT_FOUND，后针对性及两轮完整复测都已通过；当前执行成功，根因未确认，不写成已修复。CORE20评测器三项P2假通过均Red/Green修复并复核，Standards硬违反0，详情docs/stages/CORE20.md。
 
-最终**328 passed、0 failed、0 skipped，143.44秒**，见[JUnit](examples/tests/stages/S7/pytest-junit.xml)。40项S7新增+288项既有回归；普通pytest禁网络。Standards硬违反0/判断项0；Spec两项P2均修复复核，最终未解决0。
+## Git与发布
 
-```powershell
-.\.venv\Scripts\python.exe -X utf8 -m pytest -q tests/unit/test_deepseek.py
-.\.venv\Scripts\python.exe -X utf8 -m pytest -q --junitxml=examples/tests/stages/S7/pytest-junit.xml
-# 下列评估需要自行配置环境密钥，会发真实付费请求：
-.\.venv\Scripts\python.exe scripts/evaluate_live.py --live
-```
+本轮起始main/6885d85e6da9a6b4e8e4fe2af5b39ad6cb429711、单worktree；已fetch到origin/main=48874f6，原本ahead8，无远端分叉。已明确授权commit/push到上述仓库，不强推或改写历史。本记录写入时待执行最终commit/push及SHA核对，后续补记实际结果。Git在沙箱中写.git受限；经批准提升执行，命令用-c safe.directory指向当前仓库，不改全局配置。
 
-用户提供的密钥仅隐藏输入到临时测试进程环境，两个进程均已结束；未落盘/回显、未配置持久环境，主shell无密钥。后续live评估由用户自行配置，不从文档找密钥。
+真实密钥、env文件、虚拟环境、work/build/dist/cache及*.db不提交。evidence.json包含可读持久快照；仅克隆仓库没有runtime.db，物理--recheck须原库。产物审计可只用已提交JSON/Trace，离线pytest重建临时库。
 
-[成功真实运行](examples/live/S7/20261031T083150Z-f46bcbe4/summary.json)：工具/回传/JSON探针通过；L01正常保存，L02观察首次script注入失败后自主重试，L03预算10直接选basic8，均completed。每例仅1样本，L03不是12→8重规划；L04 NOT_RUN。成功运行22次HTTP尝试；L02为8逻辑尝试/7 HTTP，包含一次HTTP前注入失败，token未知null；美元费用全部null。初次沙箱socket权限失败另保留[记录](examples/live/S7/20261031T083016Z-4cc7f1b1/summary.json)，1次尝试；保留全部结果。元数据事后补齐已注明，业务Trace未改写，不代表最终提交经过重复付费运行。
+## 运行与复现
 
-最终wheel在原S5公开运行环境离线重装、非仓库cwd/python -I验证安装后的Mock CLI、DeepSeek适配器离线完整图、配置缺失/历史恢复、Schema/UTF-8和pip check；[安装记录](examples/tests/stages/S7/clean-install.json)保留hash/命令。验证器漏本地Schema registry的初次失败修正后通过，应用未变。未重复干净运行环境全套pytest或付费调用，Linux/其他Python及S8收尾仍NOT_RUN。
+PowerShell按README创建.venv、从requirements-dev.lock安装并pip install --no-deps --no-build-isolation -e .，POSIX替换解释器路径，Linux未实测。离线入口python -m content_planner run/show/resume；三类无密钥命令见README，固定scenario Clock可重放历史输入。pytest默认禁网络。
 
-## Git、同步与下一步
+真实交互python scripts/interactive_planner.py，隐藏输入自己的密钥后整理需求并“确认”；Windows可--launch-window。原结构化CLI使用环境变量，交互/专项评测沿用用户明确授权的隐藏stdin/内存注入，无密钥写入env/argv/源码/日志。勿提取其他进程密钥、自动替用户提交真实预测。
 
-仓库[yysk6/xiaoying](https://github.com/yysk6/xiaoying)，main单worktree；S7起始HEAD为0a8ed602c2e0bd87abb1f02d59815afc77d7eaed且工作区干净。阶段提交用git log -1 --format=%H -- docs/stages/S7.md定位，不猜本文自身SHA。已知本地origin/main为48874f6，本轮未fetch/推送，不代表最新远端事实。
+新的20例真实运行必须显式python -m scripts.evaluate_core20 --live --key-stdin，会产生费用；本次不追加。历史手工终端上次PID35380，本轮未核查或重启，不当实时状态。
 
-下一步仅处理S7验收/反馈；收到S8明确授权才做完整交付归档、覆盖缺口与平台限制核对。无已知技术阻塞。沿用[效率约定](docs/08-development-plan.md#开发效率约定s2复盘后生效)：按行为TDD、集中报告、一份最终JUnit、按变化补验，不新建重复环境或付费样本。work/s7-live.db为本地案例库，dist/环境不提交；遗留.venv-deepagents不参与运行，不删除旧环境。
+## 已知边界与下一步
 
-用户验收/修订、阶段自验结束、重要阻塞或中断时更新本文件，历史留在阶段报告/Git。
+自然入口已完成字段抽取/修改/确认，仍是固定模板，不具备结合运行任务自由对话的意图路由；重构未实施。事实审核方案DEFERRED，营销扩写本轮非核心否决项，旧严格内容失败不改写。E07/E08协议拒绝后纠正、E16多余一次已达上限请求保留；程序保证真实状态，不承诺模型路径最短。
+
+Windows正式wheel/仓库外运行有既有证据，Linux/其他Python/并发未测。本次完成交付整理范围，不把S8全部平台验证写成完成。原S7/N阶段验收pending照实保留，不因后续授权伪记accepted。下一步用户审阅交付或提出具体修订；未获新范围不继续功能开发。
 
 ## Suggested skills
 
-按[技能约定](docs/09-development-skills.md)读取实际SKILL.md：karpathy-guidelines持续适用；业务实现用tdd，接口选择用codebase-design，阶段交付用code-review双轴，原因不明故障用diagnosing-bugs，交接用handoff/writing-for-agents。S7实际用了除diagnosing-bugs之外的上述技能；根HANDOFF路径覆盖handoff默认临时目录规则。
+用karpathy-guidelines控制范围，文档/交接用writing-for-agents/handoff（根HANDOFF覆盖技能临时目录位置）；业务行为才用tdd/tests/mocking，实际缺陷用diagnosing-bugs，接口设计才用codebase-design，业务阶段审查按docs/09做code-review双轴。本轮仅材料整理和验证，没有新业务实现。

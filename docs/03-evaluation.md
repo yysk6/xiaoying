@@ -1,119 +1,97 @@
-# 测试与效果验证规格
+# 测试预期、实际结果与限制
 
-**A01—A23尚未全部验收。** S7真实探针与L01—L03各一个样本通过，L04仍NOT_RUN；实际结果、初次网络失败与限制见[S7报告](stages/S7.md)。S6离线恢复见[S6报告](stages/S6.md)，S5核心CLI见[S5报告](stages/S5.md)。下表仍是完整业务验收设计，不代表完整项目通过或模型稳定性结论。
+## 当前结论
 
-历史分层证据见[S2报告](stages/S2.md)及后续阶段报告。A23的Windows公开运行环境/正式wheel CLI已在S5—S7验证；Linux仍NOT_RUN。工具层断言、离线循环、真实模型效果分别记录，不能互相代替。
+**核心场景20/20通过；本次交付完整离线复测408 passed、0 failed（154.19秒）。** 当前标准聚焦预算计算、步骤依赖、实际状态、失败处理与合理重规划。营销扩写单列质量备注；没有新增事实审核器，历史严格内容失败不追溯改写。
+
+| 验证层 | 实际结果 | 证据 |
+|---|---|---|
+| 离线自动测试 | 408/408通过；包括原强杀恢复项 | [交付JUnit](../examples/tests/submission/pytest-junit.xml)、[此前复测汇总](../examples/tests/core20/final-verification.json) |
+| 核心真实评测 | 20/20：16例调用真实模型、4例输入防护零调用 | [最终判定](../examples/live/core20/20261031T110356Z-93ca1d21/final-assessment.json)、[运行汇总](../examples/live/core20/20261031T110356Z-93ca1d21/summary.json) |
+| 产物核验 | 23份输出、23份Trace/408条合法并一致 | [产物审计](../examples/tests/core20/artifact-audit.json) |
+| Windows安装与仓库外运行 | 正式wheel、公开锁定环境、离线业务通过 | [安装结果](../examples/tests/intake/clean-install.json) |
+| 自然语言终端历史评测 | 最终3例需求/业务技术通过；原严格内容0/3 | [N3报告](stages/N3.md) |
+| 本次提交材料验证 | 三类README离线命令通过；链接/敏感信息检查通过 | [CLI实测](../examples/tests/submission/cli-smoke.json)、[静态检查](../examples/tests/submission/static-checks.json)、[交付记录](stages/SUBMISSION.md) |
+
+20例各一个样本，不能推断泛化成功率。6例给定初始premium状态后交模型决策，明确标fixture_setup。此轮是业务Agent集成端到端，不是20例自然语言终端端到端。完整逐例结果、事件定位、注入方法及审查见[CORE20报告](stages/CORE20.md)，先行预期见[20场景规格](12-core20-evaluation.md)。
 
 ## 测试分层
 
-### S7验收预期（实现前，2026-10-31）
+1. 单元：费用/时间边界、契约、指纹、产物失效和状态转换，固定Clock、零网络。
+2. 业务集成：真实本地工具、SQLite、checkpoint，替换外部ModelClient/Clock，验证事务、依赖与保留结果。
+3. CLI验收：真实子进程、退出码、JSON/Trace和数据库事实，使用显式Mock场景。
+4. 真实效果：官方DeepSeek实际选择动作并生成脚本，记录进入模型的观察及后续动作，不能用预设Fake路径替代。
 
-按docs/06新增HTTP入口逐行为TDD，HTTPX MockTransport检查官方URL/认证/固定参数、工具回传配对、脚本json模式、本地输出校验、超时与401/403/429/4xx/5xx错误、非法封装/截断、无自动重试、无推理/认证泄漏、真实token累计与未知null、live不降级及重复查询无需密钥。普通pytest保持零网络。离线协议通过后才显式运行真实探针及L01—L03，建议重复3次不是本轮强制；先各一次并保留所有结果，至少两条真实路径。阶段报告区分离线断言、实际模型效果及外部阻塞，不把MockTransport当Live通过。
+普通pytest通过fixture禁网络，数据库写到临时目录。真实API仅在显式live入口运行；无隐藏整例重跑。模拟活动报价与HTTP次数/真实token分开，未知API金额为null。
 
-### S6验收预期（实现前，2026-10-31）
+## 必验要求与直接证据
 
-通过CLI新进程及resume_task公开入口验证A12生成失败后的显式续跑、原失败历史/素材保留、同档位脚本复用与换brief失效、A13真实保存事务提交后崩溃且零重复调用、pending节点的成功模型/工具日志复用、结果未持久的started标记interrupted并累计新尝试、A20同版本资料内容变化拒绝（历史show不变）、A16额度/重试/版本上限不重置。无素材/约束停止/非法脚本/协议停止不可恢复，completed无需新场景。先逐业务行为Red/Green，最终双轴审查及全量回归；CLI入口变化需最终wheel安装验证。实际结果另记S6报告，不提前标S7真实模型或Linux通过。
+[案例索引](../examples/README.md)提供每组输入、实际输出、Trace、模型观察及判定的链接；不只引用截图或一句“测试通过”。
 
-### S5验收预期（实现前，2026-10-31）
+| 验收点 | 预期 | 实际 |
+|---|---|---|
+| 正常完成 | 来源/脚本/估算合法，约束满足，实际保存1份 | E01/E02完成，费用8；E03预算12保留合法premium12 |
+| 缺预算或截止时间 | 准确列缺项，业务模型0、plan0 | E11—E13通过；E14过期输入拒绝 |
+| 工具失败 | 模型看到错误后重试或停止，成功结果与失败记录均保留 | E15一次脚本失败后完成；E16持续失败停止；E17真实保存回滚后完成 |
+| 预算超限 | 观察12后合理改8、重估再保存；无解说明缺口 | E04/E05改8保存；E06/E07无解缺口1/3、plan0 |
+| 重复执行 | 同ID同输入只读，不再调用模型，不增加plan | E19额外HTTP0、数据库不变；E20冲突拒绝 |
+| 加分续跑 | 显式恢复保留成功前缀及累计额度 | E18初次未完成，resume后完成，原10条事件保留 |
+| 期限约束 | 超期重规划/停止，恰好满足允许 | E08/E10改90分钟完成，E09缺口30分钟未完成 |
 
-按docs/06的run/show及service入口逐行为TDD。验证完整TaskResult/Trace Schema、正常保存与Markdown、缺失/非法输入零任务、12→8修订与脚本复用、持续失败/重试、预算和期限不足、重复run过期仍只读、请求冲突、show不依赖当前资料、导出失败后show重导出；真实SQLite触发器验证提交前失败，注入Clock验证保存前过期。CLI以子进程验证，Fake动作配置显式，不按案例内置分支。至少保存正常、缺信息、工具失败，加修订和重复执行的实际证据；新增入口/包内场景后重建wheel并从干净环境/非仓库cwd运行离线命令。不提前标S6恢复、S7真实HTTP或Linux验证通过，实际结果集中另记S5报告。
+结果中12个completed、4个正确incomplete、4个needs_input；通过不等于全部任务都保存。无解和持续工具失败时正确停止才符合预期。
 
-### S4验收预期（实现前，2026-10-30）
+## 核心断言与效果判断
 
-通过PlanningAgent.run、LocalTools.stop_task与Repository公开入口，替换ModelClient/Clock，其余用真实工具、SQLite及SqliteSaver。验证显式Fake选择premium得到12后改basic得到8并保存；生成失败的真实反馈进入下一次决策，模型选择重试/停止且保留成功结果；无素材/无可行方案停止；不支持的停止原因、非法参数/未知工具/多调用/缺ID/自由文本；第三次同键可重试尝试、24动作/32模型/4候选/图限额；消息配对、紧凑上下文和原始历史保留。局部通过不提前标A04等完整CLI/Live用例通过。先逐行为Red/Green，最终审查后全量回归，集中报告及一份JUnit。
+**预算与期限：** 从公开资料独立相加四分项，核对当前/替代报价、合计、预计结束、feasible及两个缺口，保存时重新核对。检查器不调用业务quote函数生成预期。
 
-### S3验收预期（实现前，2026-10-30）
+**步骤依赖：** 素材必须先检索；脚本匹配当前输入；估算匹配当前候选和有效脚本；修订后旧估算失效；保存必须使用当前版本与新估算。未来活动的planned状态与已执行动作分开。
 
-通过docs/07规定的Repository与save_plan入口，使用真实临时SQLite验证请求去重/冲突及不可变记录、版本/连接设置、事件顺序/唯一键、保存行与成功事件同事务、提交前故障零方案、同内容复用/异内容冲突、重开数据库查到已提交事实。保存需核对最新revision/estimate/脚本，重读Clock拒绝新超期，失败不置completed；成功输出符合现行Schema且四个活动均为planned。先逐行为取得Red/Green，集中记录命令与关键失败，最终全量回归一次；实际结果另记S3报告，不回填本段为已通过。
+**真实状态：** 输出步骤完整、有序对应实际工具/控制尝试，终态、错误码及返回值一致。成功必须有SQLite已提交plan；失败时plan0；新成功不能覆盖旧failed，素材/候选/脚本/历史估算不能静默丢失。
 
-### S2验收预期（实现前）
+**动态决策：** 记录每次planner调用前的事实投影，从此前持久状态独立重建素材、候选、脚本、当前/历史报价及最近观察；核对模型实际看到了超限或错误，再检查它选择的动作和公开理由。E04含“12/缺口2/basic8”观察→修订→新估算→保存；E15/E17含真实失败观察→模型重试。仅有最终8或串行调用不算重规划证据。
 
-逐个行为增加测试：包内三份数据与fixture一致且可在仓库外导入；资料加载失败/非法报价不补默认值；别名NFC/lower/trim、长别名优先、不同tag计分与稳定排序；空检索后改写命中且seen集合累加；未见/未知素材拒绝；候选重复不增版本、第五版拒绝；无候选/旧revision拒绝；脚本严格校验及失败保留已有结果；相同输入复用脚本、换档位复用脚本但估算失效、换素材/brief生成新脚本；超预算/超期仍为成功估算并列同素材另一档位；每次重新读取Clock且同次alternatives共享时刻；所有结果符合common.ToolResult及四个输入Schema。状态snapshot可JSON往返。
+**Trace与重复/恢复：** 逐行校验Schema、事件ID/operation/phase、参数、理由、摘要、结果引用、下一决策及任务状态；对照物理导出与SQLite快照。重复/冲突前后持久数据和HTTP计数不变；resume保留原事件、累计限额。
 
-测试优先通过上述公开入口及返回状态观察；仅ModelClient、Clock和资料目录属于可替换边界。完整CLI案例、模型观察后自主重试/重规划、保存及跨进程恢复不属于S2通过结论。实际Red/Green单独保存在examples/tests/stages/S2/及阶段报告。
+检查器也做反向验证：删步骤、改DB预算、清空成功结果观察、篡改费用/状态、缺plan却completed、损坏Trace等均应失败。相关32项聚焦测试实际通过，见[JUnit](../examples/tests/core20/target-junit.xml)。
 
-### S1验收预期（实现前补充）
+## 原验收矩阵的覆盖位置
 
-- 输入：逐个/组合缺失与null、非法ID/额外字段/类型/长度、budget=10.0和上限、空白/NFC、非法真实日期/无偏移时间；固定Clock下过去/等于now拒绝，未来允许。
-- 指纹：固定已知SHA-256向量、跨子进程一致、等价时区/Unicode/键顺序一致，request_id不参与；候选受档位/报价/素材/brief影响，脚本不受档位影响但受素材/brief/模型/提示版本影响。
-- 报价：从contracts/fixtures读取M01/M02与pricing-v1，核对四分项、basic=8/90、premium=12/135，精确预算/期限、秒与微秒缺口向上取整、换时间重新计算、调整测试报价数据后结果随之变化。
-- 脚本：JSON、必填/类型/长度/额外字段、来源恰好一个、所有文本字段的禁用语/百分比，小数与空白支持、80%不能误匹配180%；不验证任意自然语言命题。
-- 契约：导出Request与ScriptDraft的Pydantic Schema，与现行请求Schema及common.Script的模型生成字段投影比较字段/必填/类型/范围/额外字段语义（忽略title/default等注释）。
+原A01—A23编号保留用于定位历史需求，不能把过去的“未来证据目录”当成已运行的案例。
 
-以上是S1单元断言，不意味着A02/A03/A19端到端通过。Red/Green实际结果另记docs/stages/S1.md和examples/tests/stages/S1/，不能回填计划为通过。
+| 编号 | 范围 | 当前验证位置 |
+|---|---|---|
+| A01—A03 | 正常、缺项、非法输入 | test_cli / test_contracts / test_intake；E01/E02/E11—E14 |
+| A04—A06 | 超预算、无解、期限重规划 | test_agent / test_domain / test_cli；E04—E10 |
+| A07—A09 | 脚本与保存故障 | test_tools / test_save_plan / test_agent；E15—E17 |
+| A10—A11 | 重复和请求冲突 | test_storage / test_cli；E19/E20 |
+| A12—A13 | 显式续跑与提交后恢复 | test_resume；E18；[S6](stages/S6.md) |
+| A14—A16 | 失效、保存前超期、累计上限 | test_tools / test_save_plan / test_agent / test_resume |
+| A17—A19 | 资料不足、协议错误、脚本校验 | test_catalog / test_local_tool_contracts / test_agent / test_deepseek；[S5](stages/S5.md) |
+| A20—A22 | manifest变化、后端错误、导出失败 | test_resume / test_deepseek / test_cli |
+| A23 | 无Codex的安装与离线运行 | Windows有wheel/仓库外验证；Linux NOT_RUN |
 
-1. Unit：预算/时间边界、Pydantic 契约、指纹、依赖失效、状态转换；固定 Clock，零网络。
-2. Integration：真实本地工具 + 临时 SQLite + Fake ModelClient；检查事务、checkpoint、重复请求和跨进程恢复。不得 Mock 掉需要验证的保存函数。
-3. Acceptance：从 CLI 子进程执行固定场景，核对退出码、JSON、数据库 plan 数量与 Trace；普通执行默认 Mock。
-4. Live eval：同一业务实现、真实 DeepSeek、实际工具观察；单独启用、记录所有失败，不把离线动作脚本当真实模型。
+可执行测试位于[tests](../tests)。逐阶段的实施前规格和历史验证保存在[整理前评测快照](archive/pre-submission/03-evaluation.md)及[阶段报告](stages/CORE20.md)，当前预期以主文档与contracts为准。
 
-默认测试使用临时数据库与输出目录；禁止覆盖用户数据库。网络在普通 pytest 中通过 fixture 禁用；只有显式 live marker 可以访问官方 API。
+## 故障与时钟设置
 
-## 需求—测试—证据矩阵
+E15/E16在ModelClient边界分别注入第一次/持续脚本失败；E18在成功检索和候选之后注入一次planner失败，均发生在HTTP前。E17在独立SQLite库使用BEFORE INSERT触发器制造真实事务失败，现场核对plan0，模型看到SAVE_FAILED后解除单次故障，让其自行决定重试。
 
-案例基准时间为注入 Clock `2026-10-29T10:00:00+08:00`；live 案例由运行器按实际当前时间生成 deadline，不使用已经过期的固定日期。预算10/basic8、premium12为 pricing-v1 的预期值，不硬编码在业务分支。
+每例模拟业务Clock固定在该例实际启动时刻，用于精确边界；HTTP墙钟时间真实。6例初始状态使用实际检索/脚本/报价，不给模型预制assistant消息或“下一步选basic”指令。
 
-| Case ID | 输入/故障条件 | 核心断言 | 覆盖 | 未来证据目录 |
-|---|---|---|---|---|
-| A01 | 预算14，截止+180分钟，正常工具 | 有脚本、来源和四项 planned 活动；报价合计正确且可行；保存1行；completed | R02—R06 | examples/mock/A01/ |
-| A02 | 分别缺预算、缺截止时间、缺主题 | needs_input；missing_fields准确；模型0调用；plan0行 | R01 | examples/mock/A02/ |
-| A03 | budget=0/-1/true/10.5/字符串；非法/无偏移/过去时间 | 明确字段错误；不创建任务、不调用模型 | R01 | examples/mock/A03/ |
-| A04 | Fake先选premium，预算10，后改basic | 真实估算12 -> 8；中间稿不保存；脚本复用；最终1行 | R04/R05/R08 | examples/mock/A04/ |
-| A05 | 预算5，两个档位都不满足 | incomplete；列出已评估报价与缺口；不宣称全局最优；plan0行 | R08 | examples/mock/A05/ |
-| A06 | 截止+100分钟，premium135超期，basic90可行 | 模型调整后再次估算；只能保存满足deadline的版本 | R04/R08 | examples/mock/A06/ |
-| A07 | generate_script首次瞬时失败，下一次成功 | 失败观察真实进入下一次决策；模型选择重试；检索不重做；失败attempt保留 | R05/R07 | examples/mock/A07/ |
-| A08 | generate_script持续失败 | 每逻辑参数最多2次；模型可停止；不得记录草稿成功或保存 | R07/R10 | examples/mock/A08/ |
-| A09 | save_plan事务提交前故障 | plan0行；incomplete或模型重试成功；失败时不返回已保存 | R06/R07 | examples/mock/A09/ |
-| A10 | 成功后原ID原输入重复run | 第二次模型/工具0调用；相同plan_id；数据库仍1行 | R09 | examples/mock/A10/ |
-| A11 | 原ID不同预算/主题/截止时间 | REQUEST_CONFLICT；原行与状态不变 | R09 | examples/mock/A11/ |
-| A12 | 检索成功后生成失败并停止；新进程resume | 从已存状态续跑；保留素材；恢复成功且不超累计限额 | R07/R11 | examples/mock/A12/ |
-| A13 | save提交后、checkpoint前注入崩溃；新进程恢复 | 读到已提交plan即completed；不再调用模型；只有1行 | R09/R11 | examples/mock/A13/ |
-| A14 | 候选换素材/brief；或仅换档位 | 前者旧脚本/估算失效；后者脚本复用、估算失效；旧estimate不能保存 | R04/R08 | examples/mock/A14/ |
-| A15 | 估算后Clock前进到无法按期 | save拒绝；包含新缺口；plan0行 | R04/R08 | examples/mock/A15/ |
-| A16 | 无意义重复动作、候选5次、调用额度耗尽 | 在约定上限停止；明确reason；resume不能重置 | R10/R11 | examples/mock/A16/ |
-| A17 | 首次空检索，改写命中；以及持续无素材 | 第一条继续完成，第二条说明资料不足；不造素材 | R02/R05 | examples/mock/A17/ |
-| A18 | 非法参数/未知工具/多调用/无工具自由文本 | 无越权执行；协议错误按规格处理；自由文本不产生完成状态 | R05/R10 | examples/mock/A18/ |
-| A19 | JSON非法/错误source_id/明确无依据效果数字 | SCRIPT_INVALID；无成功草稿；模型可调整或停止 | R03/R07 | examples/mock/A19/ |
-| A20 | 报价或素材内容变化 | 新ID按新数据计算；旧任务resume拒绝manifest变化；历史show不变 | R04/R08/R11 | examples/mock/A20/ |
-| A21 | 无密钥离线运行；live缺配置/401/429/5xx | mock明确标识；live不降级；错误映射准确 | R07/R13 | examples/mock/A21/ |
-| A22 | 方案已保存但Markdown导出失败 | completed + EXPORT_FAILED；show可重导出；不会重复保存 | R06/R09/R12 | examples/mock/A22/ |
-| A23 | 无Codex、无项目专用宿主环境变量的干净虚拟环境；Windows与Linux | 按锁文件安装；从非仓库cwd用显式路径运行离线CLI与测试；不访问Codex目录/内部接口；结果Schema一致 | R15 | examples/tests/portability/ |
+实际共88次HTTP（planner73、脚本15），92次逻辑模型尝试（4次注入不访问HTTP）、95次动作、74份决策观察；主Trace376条，含后续阶段导出408条。
 
-边界单测还要覆盖：预算恰等合计、完成时间恰等deadline、相同绝对时间的不同偏移得到相同输入指纹、rationale改变不影响缓存键。
+## 失败、修订与复测记录
 
-## 真实模型评估
+- E07、E08各一次同时请求两个动作，被协议校验拒绝；模型收到反馈后改为单动作并完成预期。错误留在Trace，当前核心标准允许受控纠正。
+- E16两次脚本失败后又请求第三次，触发重试上限拒绝，随后停止。状态诚实且有界，但多了一次无效动作。
+- 首次完整离线测试407通过、1项强杀恢复出现CHECKPOINT_NOT_FOUND；针对性复测2/2、最新完整复测408/408均通过。最新执行状态为PASSED_ON_RETEST，首次[原JUnit](../examples/tests/core20/full-junit.xml)保留；未改业务代码，不声称已完成根因修复。
+- 自然语言入口首轮有字段依据不匹配；收紧并示例化intake-v2抽取后，最终三例需求/业务通过。失败、诊断、修订后运行均保留，见[N3](stages/N3.md)。
+- 历史[S7专项](stages/S7-evaluation.md)和N3严格内容评估未通过，包含未经素材支持的营销措辞。本轮用户确认以预算/状态/重规划为核心，营销扩写非否决项；旧结论不更名为成功，也不新增付费自评裁判。
 
-至少执行 L01 正常、L02 工具失败、L03 预算受限三类场景。L01/L02 必须来自普通入口的完整 live 调用，不使用预制决策日志。每个场景建议运行3次，样本很小，只报告次数，不报告泛化成功率。
+## 复现与提交边界
 
-- L01：约束可行，检查真实调用参数、估算和最终提交；不强求模型选择premium。
-- L02：检索成功后令脚本生成工具第一次返回可重试失败，模型必须观察后自己选择重试或说明未完成。仅由程序自动重试不算通过“动态调整”检查。
-- L03：预算10。模型可能直接选择basic，这是合理行为，不能为了演示强迫它先犯错。若没有出现12->8轨迹，不写“已验证超预算后的模型重规划”。
+安装、三类无密钥CLI和真实交互命令见[README](../README.md)。真实模型需显式启动并使用自己的密钥；不会为了重写文档再发付费请求。
 
-若需要专门验证“观察12后调整”，增加 L04 **显式状态夹具**：测试setup使用真实本地工具建立premium候选与12-unit估算，记录origin=fixture_setup；不伪造模型消息、工具调用或决策理由。随后把该事实状态交给真实模型，让其选择修订/估算/保存或停止。它验证给定状态下的真实模型决策，不能标注为从空输入开始的完整live路径，也不能替代L01/L02。
+仓库包含输入/输出/Trace/观察和事件/plan快照。runtime.db不提交；`python -m scripts.evaluate_core20 --recheck <run>`须有本地原库才可做物理库对齐。仅克隆仓库可执行`examples/tests/core20/audit_artifacts.py <run>`审计已提交产物，或跑离线测试创建新库。冻结源文件哈希只覆盖运行时列出的文件，不宣称覆盖后续文档改动。
 
-Live断言按性质判断，不要求固定措辞/严格工具顺序：完成时约束与保存事实必须正确；无依据内容为失败；失败时保留结果且不虚报；响应工具观察的动作与理由可核查。工具改变前后对照使用新request_id，明确保留两边运行记录。
-
-## 每组实际证据的内容
-
-```text
-examples/<backend>/<case>/
-  input.json             # 实际输入
-  scenario.json          # 数据哈希、故障注入、Clock来源、是否fixture_setup
-  output.json            # 程序实际最终输出
-  plan.md                # 若成功，实际导出方案
-  trace.jsonl            # 实际执行事件
-  run.json               # 命令、开始/结束时间、退出码、commit、backend、模型参数
-```
-
-Trace事件至少含schema_version、event_id、request_id、origin(model/fixture_setup/system)、阶段、动作、参数、公开rationale、观察摘要、结果引用和状态。后续模型动作通过next_decision_event_id关联；最后事件该字段为null。此关联由导出器根据实际事件顺序构建，不事先编造。Token用量记录真实返回值；未知为null；禁止写入密钥、认证头或reasoning_content。
-
-测试结果：`examples/tests/pytest-junit.xml`、`summary.json`；summary保留总数/失败/跳过及pytest退出码。评估文档必须在实现后逐项填写实际路径和结果，不只写“测试通过”。
-
-## 交付门槛
-
-- 必做验收点全部有可执行测试；关键不变量零失败。
-- 至少3组实际输入/输出/Trace，覆盖正常、信息不足、工具失败；建议保存上述全部确定性案例。
-- 至少2条真实模型路径，能查到模型依据不同观察改变动作的证据；Mock路径另列。
-- 预算与时限算错、失败记成功、重复保存、无真实模型闭环属于发布阻塞。
-- 真实模型偶发失败如实报告，不能用成功样本覆盖失败记录；若模型不可用，标记未完成真实效果验证。
-- 可移植性须保留无Codex干净环境的实际安装/离线运行日志，Windows与Linux分别标注结果；未执行的平台写NOT_RUN。
+已验证Windows/Python3.10.8；未测Linux、其他Python版本、同任务并发、长对话及所有故障组合。未验证任意主题的生成质量、完整自然对话、真实素材/视频制作/发布或生产级恢复。每例一个样本，不作统计稳定性或全局最优结论。

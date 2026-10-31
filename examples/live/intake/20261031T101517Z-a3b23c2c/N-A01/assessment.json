@@ -1,0 +1,34 @@
+{
+  "case": "N-A01",
+  "dialog": {
+    "passed": false,
+    "errors": [
+      "turn_0:state",
+      "turn_0:fields",
+      "turn_1:state",
+      "turn_1:fields",
+      "confirmation_identity"
+    ],
+    "turns": 2,
+    "extraction_turns": 1,
+    "request_id": null
+  },
+  "business": null,
+  "error": null,
+  "elapsed_seconds": 3.984,
+  "session": {
+    "pid": 34684,
+    "status": "stopped",
+    "launch_id": null,
+    "model": "deepseek-v4-pro",
+    "input_mode": "natural",
+    "api_key_configured": true,
+    "http_attempts": 1,
+    "database": "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\live\\intake\\20261031T101517Z-a3b23c2c\\N-A01\\runtime.db",
+    "output_root": "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\live\\intake\\20261031T101517Z-a3b23c2c\\N-A01\\runs"
+  },
+  "technical_pass": false,
+  "content_pass": null,
+  "passed": null,
+  "content_review": "PENDING"
+}

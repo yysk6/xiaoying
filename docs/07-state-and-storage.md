@@ -2,6 +2,8 @@
 
 ## 状态权威
 
+N1—N3自然语言入口新增的IntakeDraft/版本/确认Request只在交互进程内存；确认之前不注册requests、不启动graph、不写plans。输入整理事件与usage可导出到独立intake.jsonl，限制为字段变更、时间锚点、状态和确认关联，不保存完整自由对话、认证或推理。业务状态/限额/manifest继续以本文件原有规则为权威，抽取用量独立统计。重复确认沿同一Request调用run_task只读；业务输入变更生成新Request，不修改已提交任务。
+
 - 用户要求：`requests` 的标准化不可变输入。
 - 正在执行的候选、有效产物和合法消息：LangGraph checkpoint。
 - 工具尝试事实与累计调用数：应用事件表；模型不得直接写这些字段。

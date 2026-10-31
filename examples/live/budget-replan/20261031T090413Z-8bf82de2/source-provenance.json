@@ -1,0 +1,8 @@
+{
+  "baseline_commit": "6885d85e6da9a6b4e8e4fe2af5b39ad6cb429711",
+  "working_tree_modified_at_run": true,
+  "live_evaluator_sha256": "565DE64B8FCFFAE10DA7D8D7AC216EE2B9CC9544DE15B99E5C089EF7EE72EEF0",
+  "deepseek_adapter_sha256": "D15FBD5ACFEE21C34BEDBF2A1FC5013C0B110F8EDE2E0A5A6A0DE7F681A2464D",
+  "final_checker_sha256": "b997c3ab0d5bf6b0edb49228fe9f3aa7d95a61d5a99e18693af4e8aaebf4b98d",
+  "metadata_note": "运行时Git子进程未通过safe.directory检查，原source字段保留null。此文件事后补充会话已核对的基线与运行时源码哈希。最终checker修复两处判定缺口并离线复判；应用结果、Trace及原metadata未改写，未重复付费调用。"
+}

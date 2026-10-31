@@ -1,0 +1,40 @@
+{
+  "run_id": "20261031T101517Z-a3b23c2c",
+  "original_summary_sha256": "04024d70679c7c9c77950c7f8f7416f5abb93b8a479b19e146cd0bc21e8d0d17",
+  "assessment_origin": "offline independent artifact/schema/SQLite check plus recorded semantic content review; no new model calls",
+  "cases": [
+    {
+      "case": "N-A01",
+      "technical_pass": false,
+      "http_attempts": 1,
+      "elapsed_seconds": 3.984,
+      "dialog": {
+        "passed": false,
+        "errors": [
+          "turn_0:state",
+          "turn_0:fields",
+          "turn_1:state",
+          "turn_1:fields",
+          "confirmation_identity"
+        ],
+        "turns": 2,
+        "extraction_turns": 1,
+        "request_id": null
+      },
+      "intake_usage": {
+        "model_requests": 1,
+        "api_cost_usd": null,
+        "input_tokens": 553,
+        "output_tokens": 98
+      },
+      "content_pass": null,
+      "content_review": "NOT_RUN",
+      "unsupported_claims": [],
+      "business_usage": null,
+      "passed": false
+    }
+  ],
+  "technical_pass": false,
+  "content_pass": null,
+  "passed": false
+}

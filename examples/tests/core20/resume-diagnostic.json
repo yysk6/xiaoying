@@ -1,0 +1,20 @@
+{
+  "original_failure": "CHECKPOINT_NOT_FOUND",
+  "database_present": true,
+  "targeted_rerun": "2 passed, 26 deselected; 7.44s; zero HTTP",
+  "resolution": "OPEN: intermittent hard-crash checkpoint timing; application unchanged",
+  "table_counts": {
+    "requests": 1,
+    "events": 1,
+    "plans": 0,
+    "checkpoints": 1,
+    "writes": 0
+  },
+  "event_phases": [
+    [
+      "planner",
+      "started",
+      null
+    ]
+  ]
+}

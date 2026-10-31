@@ -1,0 +1,74 @@
+[
+  {
+    "sent_at": "2026-10-31T10:15:19.611358+00:00",
+    "elapsed_seconds": 1.953,
+    "reply": {
+      "session_id": "978c66d1d28847ba89bf10eff37bb539",
+      "sequence": 2,
+      "at": "2026-10-31T10:15:21.554912+00:00",
+      "prompt_version": "intake-v1",
+      "kind": "reply",
+      "state": "error",
+      "version": 0,
+      "draft": {
+        "topic": null,
+        "budget_units": null,
+        "deadline_at": null
+      },
+      "deadline_anchor": null,
+      "request_id": null,
+      "intake_usage": {
+        "model_requests": 1,
+        "api_cost_usd": null,
+        "input_tokens": 553,
+        "output_tokens": 98
+      }
+    },
+    "database_before": {
+      "requests": 0,
+      "events": 0,
+      "plans": 0
+    },
+    "database": {
+      "requests": 0,
+      "events": 0,
+      "plans": 0
+    }
+  },
+  {
+    "sent_at": "2026-10-31T10:15:21.564849+00:00",
+    "elapsed_seconds": 0.016,
+    "reply": {
+      "session_id": "978c66d1d28847ba89bf10eff37bb539",
+      "sequence": 3,
+      "at": "2026-10-31T10:15:21.565952+00:00",
+      "prompt_version": "intake-v1",
+      "kind": "reply",
+      "state": "collecting",
+      "version": 0,
+      "draft": {
+        "topic": null,
+        "budget_units": null,
+        "deadline_at": null
+      },
+      "deadline_anchor": null,
+      "request_id": null,
+      "intake_usage": {
+        "model_requests": 1,
+        "api_cost_usd": null,
+        "input_tokens": 553,
+        "output_tokens": 98
+      }
+    },
+    "database_before": {
+      "requests": 0,
+      "events": 0,
+      "plans": 0
+    },
+    "database": {
+      "requests": 0,
+      "events": 0,
+      "plans": 0
+    }
+  }
+]

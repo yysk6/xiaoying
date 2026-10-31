@@ -1,0 +1,15 @@
+{
+  "pytest": {
+    "tests": 408,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "console_seconds": 154.19,
+  "cli_smoke_passed": true,
+  "pip_check_exit_code": 0,
+  "artifact_audit_passed": true,
+  "http_requests": 0,
+  "business_behavior_changed": false,
+  "static_checks_passed": true
+}

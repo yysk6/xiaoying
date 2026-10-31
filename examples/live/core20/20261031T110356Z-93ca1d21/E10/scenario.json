@@ -1,0 +1,24 @@
+{
+  "case_id": "E10",
+  "label": "期限恰好90分钟的重规划边界",
+  "budget": 12,
+  "deadline_minutes": 90,
+  "topic": "影芽剪辑字幕功能推广",
+  "material_id": "M01",
+  "seed_premium": true,
+  "allowed_units": [
+    8
+  ],
+  "expected_status": "completed",
+  "expected_reason": null,
+  "budget_gap": null,
+  "deadline_gap": null,
+  "omit": [],
+  "replan": "deadline",
+  "exact_deadline": true,
+  "fault": null,
+  "followup": null,
+  "clock_at": "2026-10-31T11:06:11.874959+00:00",
+  "entry": "given_initial_state",
+  "fixture_origin": "fixture_setup"
+}

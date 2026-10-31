@@ -1,0 +1,27 @@
+{
+  "sha256": {
+    "src/content_planner/agent.py": "1b4bea3f111c453a807d0c15e8d3a3a9c781d0ec5d17eb0807a8000336ea7e89",
+    "src/content_planner/catalog.py": "968fb4e91c96d5b1d8f1101e104ac0415125ba501754a1fb11e16a23132b5348",
+    "src/content_planner/cli.py": "be33969bad62a265904b925dca3616e6275801c7d948327ad4c1cc0c3804e029",
+    "src/content_planner/contracts.py": "a79c18b4d536601575a4cf7ad3bbf02568af64265ea7eff5d0083cc68fc482fc",
+    "src/content_planner/deepseek.py": "6e84de48a9071763a2896f36d867e39261402fe5dba6622f5bbe3cf8cbd597f3",
+    "src/content_planner/domain.py": "beb2d41b0bede1c602ffdb3c2480b3086b6ab147ef20ee2c0d8368d42bd2d898",
+    "src/content_planner/graph.py": "e72a52070c5c1d2568b7e4b25e252b5e01125526ffa339ec1999e1aa7e4efcc2",
+    "src/content_planner/intake.py": "c399c48a1501334f1ff0f546a5b8aa3810acdd834cc98fb06392d4fe5fd691b4",
+    "src/content_planner/model.py": "16fc6ccb4aa7d5ee43aa88b908ab84e209195c8f4f36c0ced716fac96acda405",
+    "src/content_planner/prompts.py": "cae598cf64c7e68ffaf304322db9f8d42575938853005c772b00a7443368e620",
+    "src/content_planner/reporting.py": "2e0b8c5fa091d1a229e45bbb800d9c60acac7f996c13182720fa6d23bb03f745",
+    "src/content_planner/service.py": "5e1218aa521f41b3c98eed28cbdec4df3a4d223e93f2ed65c0868feb0e688a2d",
+    "src/content_planner/storage.py": "628bcc2c0c2a83dbb081e53de726c6eaa047bc2494a873592644bb68cbfbd36a",
+    "src/content_planner/tools.py": "e5180a89960df74fb9a0ad1e4280dc07ee6079cd2348a86fe5903d03f619cfb3",
+    "src/content_planner/__init__.py": "da31c8f52532ee4ec34769a4461b2e85847b01433ea6ce84e555a1ff99879171",
+    "src/content_planner/__main__.py": "cf42487b6898eb7381915fe5575b1a31dc5ddcbec38045fd4281073029b31df2",
+    "scripts/evaluate_core20.py": "a86852ca00e8d85decd3be4339a2895846c956ed2615f0d5e8842d22bdc9be20",
+    "scripts/evaluate_budget.py": "e9720b2d4f6688c5ee3172ece613f2d26ad6dda72c1115ac1d024aad11b3d93f",
+    "examples/evaluation/core20-cases.json": "1f3a52f4f5a76f66c22fc9334ce49e95cd061592346b25186107457b6ea6ffbd",
+    "requirements.lock": "165f241926f9c4093702eae9c00d1f0cba81b375a882a4596366cd6b0d6973b7",
+    "docs/12-core20-evaluation.md": "799ed8d996a951b780852839d8465f8e6e5c7873b870895eeb330348d95616b8"
+  },
+  "commit": "6885d85e6da9a6b4e8e4fe2af5b39ad6cb429711",
+  "status": "M HANDOFF.md\n M README.md\n M docs/01-requirements.md\n M docs/02-solution.md\n M docs/03-evaluation.md\n M docs/06-contracts.md\n M docs/07-state-and-storage.md\n M docs/08-development-plan.md\n M src/content_planner/deepseek.py\n M src/content_planner/model.py\n M src/content_planner/prompts.py\n M tests/unit/test_deepseek.py\n?? docs/10-natural-language-intake-plan.md\n?? docs/11-content-grounding-plan.md\n?? docs/12-core20-evaluation.md\n?? docs/stages/N1.md\n?? docs/stages/N2.md\n?? docs/stages/N3.md\n?? docs/stages/S7-evaluation.md\n?? docs/stages/S7-manual.md\n?? examples/evaluation/\n?? examples/live/budget-replan/\n?? examples/live/intake/\n?? examples/tests/budget-evaluation/\n?? examples/tests/core20/\n?? examples/tests/intake/\n?? examples/tests/manual-interactive/\n?? scripts/evaluate_budget.py\n?? scripts/evaluate_core20.py\n?? scripts/evaluate_intake.py\n?? scripts/interactive_planner.py\n?? src/content_planner/intake.py\n?? tests/acceptance/test_interactive.py\n?? tests/unit/test_core20_evaluation.py\n?? tests/unit/test_evaluation.py\n?? tests/unit/test_intake.py\n?? tests/unit/test_intake_evaluation.py"
+}

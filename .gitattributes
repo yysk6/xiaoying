@@ -1,3 +1,5 @@
 * text=auto eol=lf
+# Captured terminal prompts include meaningful trailing spaces.
+examples/live/**/terminal.txt -text -whitespace
 # Preserve captured evidence bytes and allow whitespace emitted by pytest/pip.
 examples/tests/** -text -whitespace

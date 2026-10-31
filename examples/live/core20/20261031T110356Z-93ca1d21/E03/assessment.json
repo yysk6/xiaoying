@@ -1,0 +1,16 @@
+{
+  "case_id": "E03",
+  "label": "初始premium12恰好符合预算",
+  "invariants_pass": true,
+  "behavior_pass": true,
+  "errors": [],
+  "behavior_errors": [],
+  "passed": true,
+  "status": "completed",
+  "reason": null,
+  "total_units": 12,
+  "plan_rows": 1,
+  "trace_rows": 14,
+  "decision_count": 1,
+  "content_review": "NON_BLOCKING: marketing copy outside this core rubric"
+}

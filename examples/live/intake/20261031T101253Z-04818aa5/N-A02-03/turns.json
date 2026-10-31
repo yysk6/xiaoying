@@ -1,0 +1,218 @@
+[
+  {
+    "sent_at": "2026-10-31T10:12:59.040185+00:00",
+    "elapsed_seconds": 2.343,
+    "reply": {
+      "session_id": "786f11f2592e4892bd2010bd46609868",
+      "sequence": 2,
+      "at": "2026-10-31T10:13:01.386383+00:00",
+      "prompt_version": "intake-v1",
+      "kind": "reply",
+      "state": "collecting",
+      "version": 1,
+      "draft": {
+        "topic": "影芽剪辑字幕功能推广",
+        "budget_units": null,
+        "deadline_at": null
+      },
+      "deadline_anchor": null,
+      "request_id": null,
+      "intake_usage": {
+        "model_requests": 1,
+        "api_cost_usd": null,
+        "input_tokens": 540,
+        "output_tokens": 28
+      }
+    },
+    "database_before": {
+      "requests": 0,
+      "events": 0,
+      "plans": 0
+    },
+    "database": {
+      "requests": 0,
+      "events": 0,
+      "plans": 0
+    }
+  },
+  {
+    "sent_at": "2026-10-31T10:13:01.395383+00:00",
+    "elapsed_seconds": 1.422,
+    "reply": {
+      "session_id": "786f11f2592e4892bd2010bd46609868",
+      "sequence": 4,
+      "at": "2026-10-31T10:13:02.798069+00:00",
+      "prompt_version": "intake-v1",
+      "kind": "reply",
+      "state": "error",
+      "version": 1,
+      "draft": {
+        "topic": "影芽剪辑字幕功能推广",
+        "budget_units": null,
+        "deadline_at": null
+      },
+      "deadline_anchor": null,
+      "request_id": null,
+      "intake_usage": {
+        "model_requests": 2,
+        "api_cost_usd": null,
+        "input_tokens": 1083,
+        "output_tokens": 54
+      }
+    },
+    "database_before": {
+      "requests": 0,
+      "events": 0,
+      "plans": 0
+    },
+    "database": {
+      "requests": 0,
+      "events": 0,
+      "plans": 0
+    }
+  },
+  {
+    "sent_at": "2026-10-31T10:13:02.818140+00:00",
+    "elapsed_seconds": 1.391,
+    "reply": {
+      "session_id": "786f11f2592e4892bd2010bd46609868",
+      "sequence": 6,
+      "at": "2026-10-31T10:13:04.164136+00:00",
+      "prompt_version": "intake-v1",
+      "kind": "reply",
+      "state": "collecting",
+      "version": 2,
+      "draft": {
+        "topic": "影芽剪辑字幕功能推广",
+        "budget_units": null,
+        "deadline_at": "2026-11-01T10:00:00+00:00"
+      },
+      "deadline_anchor": "2026-10-31T10:13:02.819140+00:00",
+      "request_id": null,
+      "intake_usage": {
+        "model_requests": 3,
+        "api_cost_usd": null,
+        "input_tokens": 1627,
+        "output_tokens": 80
+      }
+    },
+    "database_before": {
+      "requests": 0,
+      "events": 0,
+      "plans": 0
+    },
+    "database": {
+      "requests": 0,
+      "events": 0,
+      "plans": 0
+    }
+  },
+  {
+    "sent_at": "2026-10-31T10:13:04.198199+00:00",
+    "elapsed_seconds": 1.5,
+    "reply": {
+      "session_id": "786f11f2592e4892bd2010bd46609868",
+      "sequence": 8,
+      "at": "2026-10-31T10:13:05.685879+00:00",
+      "prompt_version": "intake-v1",
+      "kind": "reply",
+      "state": "ready",
+      "version": 3,
+      "draft": {
+        "topic": "影芽剪辑字幕功能推广",
+        "budget_units": 8,
+        "deadline_at": "2026-11-01T10:00:00+00:00"
+      },
+      "deadline_anchor": "2026-10-31T10:13:02.819140+00:00",
+      "request_id": null,
+      "intake_usage": {
+        "model_requests": 4,
+        "api_cost_usd": null,
+        "input_tokens": 2187,
+        "output_tokens": 106
+      }
+    },
+    "database_before": {
+      "requests": 0,
+      "events": 0,
+      "plans": 0
+    },
+    "database": {
+      "requests": 0,
+      "events": 0,
+      "plans": 0
+    }
+  },
+  {
+    "sent_at": "2026-10-31T10:13:05.694912+00:00",
+    "elapsed_seconds": 13.641,
+    "reply": {
+      "session_id": "786f11f2592e4892bd2010bd46609868",
+      "sequence": 10,
+      "at": "2026-10-31T10:13:05.696918+00:00",
+      "prompt_version": "intake-v1",
+      "kind": "reply",
+      "state": "submitted",
+      "version": 3,
+      "draft": {
+        "topic": "影芽剪辑字幕功能推广",
+        "budget_units": 8,
+        "deadline_at": "2026-11-01T10:00:00+00:00"
+      },
+      "deadline_anchor": "2026-10-31T10:13:02.819140+00:00",
+      "request_id": "nl-6db15482cd3d4abfae23a9d7d6f18f07",
+      "intake_usage": {
+        "model_requests": 4,
+        "api_cost_usd": null,
+        "input_tokens": 2187,
+        "output_tokens": 106
+      }
+    },
+    "database_before": {
+      "requests": 0,
+      "events": 0,
+      "plans": 0
+    },
+    "database": {
+      "requests": 1,
+      "events": 22,
+      "plans": 1
+    }
+  },
+  {
+    "sent_at": "2026-10-31T10:13:19.353598+00:00",
+    "elapsed_seconds": 0.047,
+    "reply": {
+      "session_id": "786f11f2592e4892bd2010bd46609868",
+      "sequence": 12,
+      "at": "2026-10-31T10:13:19.354599+00:00",
+      "prompt_version": "intake-v1",
+      "kind": "reply",
+      "state": "submitted",
+      "version": 3,
+      "draft": {
+        "topic": "影芽剪辑字幕功能推广",
+        "budget_units": 8,
+        "deadline_at": "2026-11-01T10:00:00+00:00"
+      },
+      "deadline_anchor": "2026-10-31T10:13:02.819140+00:00",
+      "request_id": "nl-6db15482cd3d4abfae23a9d7d6f18f07",
+      "intake_usage": {
+        "model_requests": 4,
+        "api_cost_usd": null,
+        "input_tokens": 2187,
+        "output_tokens": 106
+      }
+    },
+    "database_before": {
+      "requests": 1,
+      "events": 22,
+      "plans": 1
+    },
+    "database": {
+      "requests": 1,
+      "events": 22,
+      "plans": 1
+    }
+  }
+]

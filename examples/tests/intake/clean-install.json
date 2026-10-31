@@ -1,0 +1,22 @@
+{
+  "environment": "Reuse S5 public locked runtime; final wheel force-reinstalled --no-index --no-deps",
+  "wheel_sha256": "955637773d5ae0fdcdf4481cde7cbbcb50c955de87a60181ac47b7f60b37c209",
+  "argv": [
+    "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s5-clean\\Scripts\\python.exe",
+    "-I",
+    "-X",
+    "utf8",
+    "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\tests\\intake\\install_smoke.py"
+  ],
+  "cwd": "C:\\Users\\11250\\AppData\\Local\\Temp",
+  "exit_code": 0,
+  "stdout": "{\"passed\": true, \"import_path\": \"C:\\\\Users\\\\11250\\\\Desktop\\\\xiaoying\\\\work\\\\s5-clean\\\\lib\\\\site-packages\\\\content_planner\\\\__init__.py\", \"http_transport\": \"MockTransport\", \"live_http_requests\": 0, \"adapter_calls\": 7, \"status\": \"completed\", \"total_units\": 8, \"repeat_read_only\": true, \"intake_prompt\": \"intake-v2\", \"python\": \"3.10.8 (tags/v3.10.8:aaaf517, Oct 11 2022, 16:50:30) [MSC v.1933 64 bit (AMD64)]\"}\n",
+  "stderr": "",
+  "pip_check": {
+    "exit_code": 0,
+    "stdout": "No broken requirements found.\n",
+    "stderr": ""
+  },
+  "full_pytest_in_clean_runtime": "NOT_RUN",
+  "Linux": "NOT_RUN"
+}

@@ -1,0 +1,4307 @@
+{
+  "input": {
+    "request_id": "E01-2934d851a7c5",
+    "topic": "影芽剪辑字幕功能推广",
+    "budget_units": 10,
+    "deadline_at": "2026-10-31T15:04:19.685321+00:00"
+  },
+  "scenario": {
+    "case_id": "E01",
+    "label": "正常字幕方案",
+    "budget": 10,
+    "deadline_minutes": 240,
+    "topic": "影芽剪辑字幕功能推广",
+    "material_id": "M01",
+    "seed_premium": false,
+    "allowed_units": [
+      8
+    ],
+    "expected_status": "completed",
+    "expected_reason": null,
+    "budget_gap": null,
+    "deadline_gap": null,
+    "omit": [],
+    "replan": null,
+    "exact_deadline": false,
+    "fault": null,
+    "followup": null,
+    "clock_at": "2026-10-31T11:04:19.685321+00:00",
+    "entry": "service.run_task",
+    "fixture_origin": null
+  },
+  "output": {
+    "schema_version": "1.0",
+    "request_id": "E01-2934d851a7c5",
+    "backend": "deepseek",
+    "model": "deepseek-v4-pro",
+    "status": "completed",
+    "reason": null,
+    "message": "方案已保存（活动尚未执行）",
+    "missing_fields": [],
+    "task_plan": [
+      {
+        "depends_on": [],
+        "description": "准备选中素材",
+        "duration_minutes": 10,
+        "fee_units": 1,
+        "finishes_at": "2026-10-31T11:14:19.685321+00:00",
+        "starts_at": "2026-10-31T11:04:19.685321+00:00",
+        "status": "planned",
+        "step_id": "material_prepare"
+      },
+      {
+        "depends_on": [
+          "material_prepare"
+        ],
+        "description": "定稿当前脚本",
+        "duration_minutes": 20,
+        "fee_units": 2,
+        "finishes_at": "2026-10-31T11:34:19.685321+00:00",
+        "starts_at": "2026-10-31T11:14:19.685321+00:00",
+        "status": "planned",
+        "step_id": "script_finalize"
+      },
+      {
+        "depends_on": [
+          "script_finalize"
+        ],
+        "description": "按选中档位剪辑制作",
+        "duration_minutes": 45,
+        "fee_units": 4,
+        "finishes_at": "2026-10-31T12:19:19.685321+00:00",
+        "starts_at": "2026-10-31T11:34:19.685321+00:00",
+        "status": "planned",
+        "step_id": "video_edit"
+      },
+      {
+        "depends_on": [
+          "video_edit"
+        ],
+        "description": "审核内容与来源",
+        "duration_minutes": 15,
+        "fee_units": 1,
+        "finishes_at": "2026-10-31T12:34:19.685321+00:00",
+        "starts_at": "2026-10-31T12:19:19.685321+00:00",
+        "status": "planned",
+        "step_id": "review"
+      }
+    ],
+    "execution_steps": [
+      {
+        "event_id": 3,
+        "operation_id": "tool:call_00_2Mye9cxHVU1HVkxMgqhm5465",
+        "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465",
+        "tool": "search_materials",
+        "attempt": 1,
+        "status": "succeeded",
+        "reused": false,
+        "result_index": 0,
+        "error_code": null
+      },
+      {
+        "event_id": 7,
+        "operation_id": "tool:call_00_Zziez9XkgLM939hLHyZy4727",
+        "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727",
+        "tool": "revise_plan",
+        "attempt": 1,
+        "status": "succeeded",
+        "reused": false,
+        "result_index": 1,
+        "error_code": null
+      },
+      {
+        "event_id": 11,
+        "operation_id": "tool:call_00_oeUID62aTWYLKiWHPhp39509",
+        "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509",
+        "tool": "generate_script",
+        "attempt": 1,
+        "status": "succeeded",
+        "reused": false,
+        "result_index": 2,
+        "error_code": null
+      },
+      {
+        "event_id": 17,
+        "operation_id": "tool:call_00_xBsx9uZlL30tnzTRIuqp3811",
+        "tool_call_id": "call_00_xBsx9uZlL30tnzTRIuqp3811",
+        "tool": "estimate_cost",
+        "attempt": 1,
+        "status": "succeeded",
+        "reused": false,
+        "result_index": 3,
+        "error_code": null
+      },
+      {
+        "event_id": 21,
+        "operation_id": "tool:call_00_4QcY2M6Y51WDVJVo82lI9538",
+        "tool_call_id": "call_00_4QcY2M6Y51WDVJVo82lI9538",
+        "tool": "save_plan",
+        "attempt": 1,
+        "status": "succeeded",
+        "reused": false,
+        "result_index": 4,
+        "error_code": null
+      }
+    ],
+    "tool_results": [
+      {
+        "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465",
+        "tool": "search_materials",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "query": "影芽剪辑 字幕功能 推广",
+          "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+          "materials": [
+            {
+              "material_id": "M01",
+              "version": "2026-10-29",
+              "title": "影芽剪辑字幕功能",
+              "tags": [
+                "字幕",
+                "自动字幕",
+                "字幕编辑"
+              ],
+              "facts": [
+                "影芽剪辑支持自动生成字幕。",
+                "自动生成的字幕文本可以编辑。"
+              ],
+              "fee_units": 1,
+              "lead_minutes": 10,
+              "score": 1
+            }
+          ]
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727",
+        "tool": "revise_plan",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "revision": 1,
+          "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+          "material_id": "M01",
+          "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+          "production_mode": "basic",
+          "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+          "script_reused": false,
+          "invalidated": []
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509",
+        "tool": "generate_script",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+          "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+          "title": "一键字幕，自由编辑",
+          "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+          "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+          "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+          "source_ids": [
+            "M01"
+          ]
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "call_00_xBsx9uZlL30tnzTRIuqp3811",
+        "tool": "estimate_cost",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+          "revision": 1,
+          "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+          "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+          "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "line_items": [
+            {
+              "step_id": "material_prepare",
+              "catalog_item_id": "M01",
+              "fee_units": 1,
+              "duration_minutes": 10
+            },
+            {
+              "step_id": "script_finalize",
+              "catalog_item_id": "script_finalize",
+              "fee_units": 2,
+              "duration_minutes": 20
+            },
+            {
+              "step_id": "video_edit",
+              "catalog_item_id": "video_edit:basic",
+              "fee_units": 4,
+              "duration_minutes": 45
+            },
+            {
+              "step_id": "review",
+              "catalog_item_id": "review",
+              "fee_units": 1,
+              "duration_minutes": 15
+            }
+          ],
+          "quoted_at": "2026-10-31T11:04:19.685321+00:00",
+          "total_units": 8,
+          "total_minutes": 90,
+          "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+          "within_budget": true,
+          "within_deadline": true,
+          "feasible": true,
+          "budget_gap_units": 0,
+          "deadline_gap_minutes": 0,
+          "alternatives": [
+            {
+              "total_units": 12,
+              "total_minutes": 135,
+              "estimated_finish_at": "2026-10-31T13:19:19.685321+00:00",
+              "within_budget": false,
+              "within_deadline": true,
+              "feasible": false,
+              "budget_gap_units": 2,
+              "deadline_gap_minutes": 0,
+              "production_mode": "premium"
+            }
+          ]
+        },
+        "error": null
+      },
+      {
+        "tool_call_id": "call_00_4QcY2M6Y51WDVJVo82lI9538",
+        "tool": "save_plan",
+        "ok": true,
+        "reused": false,
+        "data": {
+          "plan_id": "plan_ada4d8071f1571c8cd1af4939f95e7d98c5da9e1deae30341985beff6a02c998",
+          "request_id": "E01-2934d851a7c5",
+          "content_hash": "7440bcba89ae8c36a3db28cb180de31c1ad94b88c37a357056484621a441933f",
+          "saved_at": "2026-10-31T11:04:19.685321+00:00",
+          "saved_plan": {
+            "budget_units": 10,
+            "candidate": {
+              "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+              "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+              "material_id": "M01",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+            },
+            "content_hash": "7440bcba89ae8c36a3db28cb180de31c1ad94b88c37a357056484621a441933f",
+            "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+            "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+            "estimated_start_at": "2026-10-31T11:04:19.685321+00:00",
+            "line_items": [
+              {
+                "catalog_item_id": "M01",
+                "duration_minutes": 10,
+                "fee_units": 1,
+                "step_id": "material_prepare"
+              },
+              {
+                "catalog_item_id": "script_finalize",
+                "duration_minutes": 20,
+                "fee_units": 2,
+                "step_id": "script_finalize"
+              },
+              {
+                "catalog_item_id": "video_edit:basic",
+                "duration_minutes": 45,
+                "fee_units": 4,
+                "step_id": "video_edit"
+              },
+              {
+                "catalog_item_id": "review",
+                "duration_minutes": 15,
+                "fee_units": 1,
+                "step_id": "review"
+              }
+            ],
+            "plan_id": "plan_ada4d8071f1571c8cd1af4939f95e7d98c5da9e1deae30341985beff6a02c998",
+            "request_id": "E01-2934d851a7c5",
+            "saved_at": "2026-10-31T11:04:19.685321+00:00",
+            "script": {
+              "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+              "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+              "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+              "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "source_ids": [
+                "M01"
+              ],
+              "title": "一键字幕，自由编辑"
+            },
+            "source_ids": [
+              "M01"
+            ],
+            "task_plan": [
+              {
+                "depends_on": [],
+                "description": "准备选中素材",
+                "duration_minutes": 10,
+                "fee_units": 1,
+                "finishes_at": "2026-10-31T11:14:19.685321+00:00",
+                "starts_at": "2026-10-31T11:04:19.685321+00:00",
+                "status": "planned",
+                "step_id": "material_prepare"
+              },
+              {
+                "depends_on": [
+                  "material_prepare"
+                ],
+                "description": "定稿当前脚本",
+                "duration_minutes": 20,
+                "fee_units": 2,
+                "finishes_at": "2026-10-31T11:34:19.685321+00:00",
+                "starts_at": "2026-10-31T11:14:19.685321+00:00",
+                "status": "planned",
+                "step_id": "script_finalize"
+              },
+              {
+                "depends_on": [
+                  "script_finalize"
+                ],
+                "description": "按选中档位剪辑制作",
+                "duration_minutes": 45,
+                "fee_units": 4,
+                "finishes_at": "2026-10-31T12:19:19.685321+00:00",
+                "starts_at": "2026-10-31T11:34:19.685321+00:00",
+                "status": "planned",
+                "step_id": "video_edit"
+              },
+              {
+                "depends_on": [
+                  "video_edit"
+                ],
+                "description": "审核内容与来源",
+                "duration_minutes": 15,
+                "fee_units": 1,
+                "finishes_at": "2026-10-31T12:34:19.685321+00:00",
+                "starts_at": "2026-10-31T12:19:19.685321+00:00",
+                "status": "planned",
+                "step_id": "review"
+              }
+            ],
+            "topic": "影芽剪辑字幕功能推广",
+            "total_minutes": 90,
+            "total_units": 8
+          }
+        },
+        "error": null
+      }
+    ],
+    "current_revision": 1,
+    "candidate": {
+      "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+      "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+      "material_id": "M01",
+      "production_mode": "basic",
+      "revision": 1,
+      "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+    },
+    "total_units": 8,
+    "saved_plan": {
+      "budget_units": 10,
+      "candidate": {
+        "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+        "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+        "material_id": "M01",
+        "production_mode": "basic",
+        "revision": 1,
+        "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+      },
+      "content_hash": "7440bcba89ae8c36a3db28cb180de31c1ad94b88c37a357056484621a441933f",
+      "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+      "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+      "estimated_start_at": "2026-10-31T11:04:19.685321+00:00",
+      "line_items": [
+        {
+          "catalog_item_id": "M01",
+          "duration_minutes": 10,
+          "fee_units": 1,
+          "step_id": "material_prepare"
+        },
+        {
+          "catalog_item_id": "script_finalize",
+          "duration_minutes": 20,
+          "fee_units": 2,
+          "step_id": "script_finalize"
+        },
+        {
+          "catalog_item_id": "video_edit:basic",
+          "duration_minutes": 45,
+          "fee_units": 4,
+          "step_id": "video_edit"
+        },
+        {
+          "catalog_item_id": "review",
+          "duration_minutes": 15,
+          "fee_units": 1,
+          "step_id": "review"
+        }
+      ],
+      "plan_id": "plan_ada4d8071f1571c8cd1af4939f95e7d98c5da9e1deae30341985beff6a02c998",
+      "request_id": "E01-2934d851a7c5",
+      "saved_at": "2026-10-31T11:04:19.685321+00:00",
+      "script": {
+        "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+        "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+        "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+        "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+        "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+        "source_ids": [
+          "M01"
+        ],
+        "title": "一键字幕，自由编辑"
+      },
+      "source_ids": [
+        "M01"
+      ],
+      "task_plan": [
+        {
+          "depends_on": [],
+          "description": "准备选中素材",
+          "duration_minutes": 10,
+          "fee_units": 1,
+          "finishes_at": "2026-10-31T11:14:19.685321+00:00",
+          "starts_at": "2026-10-31T11:04:19.685321+00:00",
+          "status": "planned",
+          "step_id": "material_prepare"
+        },
+        {
+          "depends_on": [
+            "material_prepare"
+          ],
+          "description": "定稿当前脚本",
+          "duration_minutes": 20,
+          "fee_units": 2,
+          "finishes_at": "2026-10-31T11:34:19.685321+00:00",
+          "starts_at": "2026-10-31T11:14:19.685321+00:00",
+          "status": "planned",
+          "step_id": "script_finalize"
+        },
+        {
+          "depends_on": [
+            "script_finalize"
+          ],
+          "description": "按选中档位剪辑制作",
+          "duration_minutes": 45,
+          "fee_units": 4,
+          "finishes_at": "2026-10-31T12:19:19.685321+00:00",
+          "starts_at": "2026-10-31T11:34:19.685321+00:00",
+          "status": "planned",
+          "step_id": "video_edit"
+        },
+        {
+          "depends_on": [
+            "video_edit"
+          ],
+          "description": "审核内容与来源",
+          "duration_minutes": 15,
+          "fee_units": 1,
+          "finishes_at": "2026-10-31T12:34:19.685321+00:00",
+          "starts_at": "2026-10-31T12:19:19.685321+00:00",
+          "status": "planned",
+          "step_id": "review"
+        }
+      ],
+      "topic": "影芽剪辑字幕功能推广",
+      "total_minutes": 90,
+      "total_units": 8
+    },
+    "usage": {
+      "model_requests": 6,
+      "action_calls": 5,
+      "input_tokens": 14693,
+      "output_tokens": 688,
+      "api_cost_usd": null
+    },
+    "limits": {
+      "max_model_requests": 32,
+      "max_action_calls": 24,
+      "max_revisions": 4,
+      "remaining_model_requests": 26,
+      "remaining_action_calls": 19
+    },
+    "warnings": [],
+    "trace_path": "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\live\\core20\\20261031T110356Z-93ca1d21\\E01\\trace.jsonl",
+    "manifest": {
+      "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+      "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+      "model_id": "deepseek-v4-pro",
+      "planner_prompt_version": "planner-v1",
+      "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+      "schema_version": "1.0",
+      "script_prompt_version": "script-v1",
+      "thinking": "disabled"
+    }
+  },
+  "database": {
+    "exists": true,
+    "request": {
+      "budget_units": 10,
+      "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+      "request_id": "E01-2934d851a7c5",
+      "topic": "影芽剪辑字幕功能推广"
+    },
+    "events": [
+      {
+        "event_id": 1,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "model",
+        "operation_id": "decide:1",
+        "phase": "started",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {},
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 2,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "model",
+        "operation_id": "decide:1",
+        "phase": "succeeded",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {},
+        "result": {
+          "response": {
+            "content": "I'll start by searching for relevant materials for this video campaign.",
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": "{\"rationale\": \"检索与影芽剪辑字幕功能相关的可用素材\", \"query\": \"影芽剪辑 字幕功能 推广\", \"top_k\": 5}",
+                  "name": "search_materials"
+                },
+                "id": "call_00_2Mye9cxHVU1HVkxMgqhm5465",
+                "index": 0,
+                "type": "function"
+              }
+            ]
+          },
+          "usage": {
+            "input_tokens": 1548,
+            "output_tokens": 106
+          }
+        },
+        "state_patch": null
+      },
+      {
+        "event_id": 3,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "tool",
+        "operation_id": "tool:call_00_2Mye9cxHVU1HVkxMgqhm5465",
+        "phase": "started",
+        "name": "search_materials",
+        "error_code": null,
+        "rationale": "检索与影芽剪辑字幕功能相关的可用素材",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {
+          "arguments": {
+            "query": "影芽剪辑 字幕功能 推广",
+            "rationale": "检索与影芽剪辑字幕功能相关的可用素材",
+            "top_k": 5
+          },
+          "logical_key": "search_materials:549fef6892e962cf91284c1e28c823a06c70e5cd1b92840de76dc054931211cc",
+          "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+        },
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 4,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "tool",
+        "operation_id": "tool:call_00_2Mye9cxHVU1HVkxMgqhm5465",
+        "phase": "succeeded",
+        "name": "search_materials",
+        "error_code": null,
+        "rationale": "检索与影芽剪辑字幕功能相关的可用素材",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {
+          "arguments": {
+            "query": "影芽剪辑 字幕功能 推广",
+            "rationale": "检索与影芽剪辑字幕功能相关的可用素材",
+            "top_k": 5
+          },
+          "logical_key": "search_materials:549fef6892e962cf91284c1e28c823a06c70e5cd1b92840de76dc054931211cc",
+          "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+        },
+        "result": {
+          "data": {
+            "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+            "materials": [
+              {
+                "facts": [
+                  "影芽剪辑支持自动生成字幕。",
+                  "自动生成的字幕文本可以编辑。"
+                ],
+                "fee_units": 1,
+                "lead_minutes": 10,
+                "material_id": "M01",
+                "score": 1,
+                "tags": [
+                  "字幕",
+                  "自动字幕",
+                  "字幕编辑"
+                ],
+                "title": "影芽剪辑字幕功能",
+                "version": "2026-10-29"
+              }
+            ],
+            "query": "影芽剪辑 字幕功能 推广"
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "search_materials",
+          "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+        },
+        "state_patch": {
+          "candidate_history": {},
+          "current_estimate_id": null,
+          "current_revision": null,
+          "estimate_history": {},
+          "last_observation": {
+            "data": {
+              "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+              "materials": [
+                {
+                  "facts": [
+                    "影芽剪辑支持自动生成字幕。",
+                    "自动生成的字幕文本可以编辑。"
+                  ],
+                  "fee_units": 1,
+                  "lead_minutes": 10,
+                  "material_id": "M01",
+                  "score": 1,
+                  "tags": [
+                    "字幕",
+                    "自动字幕",
+                    "字幕编辑"
+                  ],
+                  "title": "影芽剪辑字幕功能",
+                  "version": "2026-10-29"
+                }
+              ],
+              "query": "影芽剪辑 字幕功能 推广"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "search_materials",
+            "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+          },
+          "manifest": {
+            "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+            "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+            "model_id": "deepseek-v4-pro",
+            "planner_prompt_version": "planner-v1",
+            "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+            "schema_version": "1.0",
+            "script_prompt_version": "script-v1",
+            "thinking": "disabled"
+          },
+          "message": "",
+          "reason": null,
+          "request": {
+            "budget_units": 10,
+            "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+            "request_id": "E01-2934d851a7c5",
+            "topic": "影芽剪辑字幕功能推广"
+          },
+          "saved_plan_id": null,
+          "script_artifacts": {},
+          "seen_material_ids": [
+            "M01"
+          ],
+          "status": "running",
+          "tool_results": [
+            {
+              "data": {
+                "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+                "materials": [
+                  {
+                    "facts": [
+                      "影芽剪辑支持自动生成字幕。",
+                      "自动生成的字幕文本可以编辑。"
+                    ],
+                    "fee_units": 1,
+                    "lead_minutes": 10,
+                    "material_id": "M01",
+                    "score": 1,
+                    "tags": [
+                      "字幕",
+                      "自动字幕",
+                      "字幕编辑"
+                    ],
+                    "title": "影芽剪辑字幕功能",
+                    "version": "2026-10-29"
+                  }
+                ],
+                "query": "影芽剪辑 字幕功能 推广"
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "search_materials",
+              "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+            }
+          ],
+          "unresolved_failures": {}
+        }
+      },
+      {
+        "event_id": 5,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "model",
+        "operation_id": "decide:2",
+        "phase": "started",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {},
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 6,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "model",
+        "operation_id": "decide:2",
+        "phase": "succeeded",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {},
+        "result": {
+          "response": {
+            "content": "I found material M01. Let me revise the plan with a creative brief for this campaign.",
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": "{\"rationale\": \"基于影芽剪辑字幕功能素材制定推广创意方案\", \"material_id\": \"M01\", \"creative_brief\": \"以\\\"自动字幕+可编辑\\\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。\", \"production_mode\": \"basic\"}",
+                  "name": "revise_plan"
+                },
+                "id": "call_00_Zziez9XkgLM939hLHyZy4727",
+                "index": 0,
+                "type": "function"
+              }
+            ]
+          },
+          "usage": {
+            "input_tokens": 2080,
+            "output_tokens": 180
+          }
+        },
+        "state_patch": null
+      },
+      {
+        "event_id": 7,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "control",
+        "operation_id": "tool:call_00_Zziez9XkgLM939hLHyZy4727",
+        "phase": "started",
+        "name": "revise_plan",
+        "error_code": null,
+        "rationale": "基于影芽剪辑字幕功能素材制定推广创意方案",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {
+          "arguments": {
+            "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+            "material_id": "M01",
+            "production_mode": "basic",
+            "rationale": "基于影芽剪辑字幕功能素材制定推广创意方案"
+          },
+          "logical_key": "revise_plan:fd5e7117b56ffe4cde614afbe1b296b3f85ba7a230a7e6fd0b20db8d8e1af98e",
+          "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727"
+        },
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 8,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "control",
+        "operation_id": "tool:call_00_Zziez9XkgLM939hLHyZy4727",
+        "phase": "succeeded",
+        "name": "revise_plan",
+        "error_code": null,
+        "rationale": "基于影芽剪辑字幕功能素材制定推广创意方案",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {
+          "arguments": {
+            "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+            "material_id": "M01",
+            "production_mode": "basic",
+            "rationale": "基于影芽剪辑字幕功能素材制定推广创意方案"
+          },
+          "logical_key": "revise_plan:fd5e7117b56ffe4cde614afbe1b296b3f85ba7a230a7e6fd0b20db8d8e1af98e",
+          "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727"
+        },
+        "result": {
+          "data": {
+            "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+            "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+            "invalidated": [],
+            "material_id": "M01",
+            "production_mode": "basic",
+            "revision": 1,
+            "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+            "script_reused": false
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "revise_plan",
+          "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727"
+        },
+        "state_patch": {
+          "candidate_history": {
+            "1": {
+              "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+              "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+              "material_id": "M01",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+            }
+          },
+          "current_estimate_id": null,
+          "current_revision": 1,
+          "estimate_history": {},
+          "last_observation": {
+            "data": {
+              "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+              "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+              "invalidated": [],
+              "material_id": "M01",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "script_reused": false
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "revise_plan",
+            "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727"
+          },
+          "manifest": {
+            "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+            "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+            "model_id": "deepseek-v4-pro",
+            "planner_prompt_version": "planner-v1",
+            "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+            "schema_version": "1.0",
+            "script_prompt_version": "script-v1",
+            "thinking": "disabled"
+          },
+          "message": "",
+          "reason": null,
+          "request": {
+            "budget_units": 10,
+            "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+            "request_id": "E01-2934d851a7c5",
+            "topic": "影芽剪辑字幕功能推广"
+          },
+          "saved_plan_id": null,
+          "script_artifacts": {},
+          "seen_material_ids": [
+            "M01"
+          ],
+          "status": "running",
+          "tool_results": [
+            {
+              "data": {
+                "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+                "materials": [
+                  {
+                    "facts": [
+                      "影芽剪辑支持自动生成字幕。",
+                      "自动生成的字幕文本可以编辑。"
+                    ],
+                    "fee_units": 1,
+                    "lead_minutes": 10,
+                    "material_id": "M01",
+                    "score": 1,
+                    "tags": [
+                      "字幕",
+                      "自动字幕",
+                      "字幕编辑"
+                    ],
+                    "title": "影芽剪辑字幕功能",
+                    "version": "2026-10-29"
+                  }
+                ],
+                "query": "影芽剪辑 字幕功能 推广"
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "search_materials",
+              "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+            },
+            {
+              "data": {
+                "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+                "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+                "invalidated": [],
+                "material_id": "M01",
+                "production_mode": "basic",
+                "revision": 1,
+                "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+                "script_reused": false
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "revise_plan",
+              "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727"
+            }
+          ],
+          "unresolved_failures": {}
+        }
+      },
+      {
+        "event_id": 9,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "model",
+        "operation_id": "decide:3",
+        "phase": "started",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {},
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 10,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "model",
+        "operation_id": "decide:3",
+        "phase": "succeeded",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {},
+        "result": {
+          "response": {
+            "content": "Now let me generate the script for this plan.",
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": "{\"rationale\": \"为字幕功能推广短视频生成脚本\", \"plan_revision\": 1}",
+                  "name": "generate_script"
+                },
+                "id": "call_00_oeUID62aTWYLKiWHPhp39509",
+                "index": 0,
+                "type": "function"
+              }
+            ]
+          },
+          "usage": {
+            "input_tokens": 2711,
+            "output_tokens": 78
+          }
+        },
+        "state_patch": null
+      },
+      {
+        "event_id": 11,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "tool",
+        "operation_id": "tool:call_00_oeUID62aTWYLKiWHPhp39509",
+        "phase": "started",
+        "name": "generate_script",
+        "error_code": null,
+        "rationale": "为字幕功能推广短视频生成脚本",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {
+          "arguments": {
+            "plan_revision": 1,
+            "rationale": "为字幕功能推广短视频生成脚本"
+          },
+          "logical_key": "generate_script:6913eaedbe31ee386b9110ac340cbbc13908f0b131fb35bcfb7e333304a8ae92",
+          "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509"
+        },
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 12,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "model",
+        "operation_id": "tool:call_00_oeUID62aTWYLKiWHPhp39509:script",
+        "phase": "started",
+        "name": "script",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {},
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 13,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "model",
+        "operation_id": "tool:call_00_oeUID62aTWYLKiWHPhp39509:script",
+        "phase": "succeeded",
+        "name": "script",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {},
+        "result": {
+          "response": "{\n  \"title\": \"一键字幕，自由编辑\",\n  \"hook\": \"还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！\",\n  \"body\": \"导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。\",\n  \"cta\": \"立即下载影芽剪辑，告别字幕烦恼！\",\n  \"source_ids\": [\"M01\"]\n}",
+          "usage": {
+            "input_tokens": 458,
+            "output_tokens": 101
+          }
+        },
+        "state_patch": null
+      },
+      {
+        "event_id": 14,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "tool",
+        "operation_id": "tool:call_00_oeUID62aTWYLKiWHPhp39509",
+        "phase": "succeeded",
+        "name": "generate_script",
+        "error_code": null,
+        "rationale": "为字幕功能推广短视频生成脚本",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {
+          "arguments": {
+            "plan_revision": 1,
+            "rationale": "为字幕功能推广短视频生成脚本"
+          },
+          "logical_key": "generate_script:6913eaedbe31ee386b9110ac340cbbc13908f0b131fb35bcfb7e333304a8ae92",
+          "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509"
+        },
+        "result": {
+          "data": {
+            "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+            "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+            "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+            "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+            "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+            "source_ids": [
+              "M01"
+            ],
+            "title": "一键字幕，自由编辑"
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "generate_script",
+          "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509"
+        },
+        "state_patch": {
+          "candidate_history": {
+            "1": {
+              "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+              "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+              "material_id": "M01",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+            }
+          },
+          "current_estimate_id": null,
+          "current_revision": 1,
+          "estimate_history": {},
+          "last_observation": {
+            "data": {
+              "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+              "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+              "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+              "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "source_ids": [
+                "M01"
+              ],
+              "title": "一键字幕，自由编辑"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "generate_script",
+            "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509"
+          },
+          "manifest": {
+            "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+            "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+            "model_id": "deepseek-v4-pro",
+            "planner_prompt_version": "planner-v1",
+            "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+            "schema_version": "1.0",
+            "script_prompt_version": "script-v1",
+            "thinking": "disabled"
+          },
+          "message": "",
+          "reason": null,
+          "request": {
+            "budget_units": 10,
+            "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+            "request_id": "E01-2934d851a7c5",
+            "topic": "影芽剪辑字幕功能推广"
+          },
+          "saved_plan_id": null,
+          "script_artifacts": {
+            "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6": {
+              "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+              "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+              "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+              "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "source_ids": [
+                "M01"
+              ],
+              "title": "一键字幕，自由编辑"
+            }
+          },
+          "seen_material_ids": [
+            "M01"
+          ],
+          "status": "running",
+          "tool_results": [
+            {
+              "data": {
+                "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+                "materials": [
+                  {
+                    "facts": [
+                      "影芽剪辑支持自动生成字幕。",
+                      "自动生成的字幕文本可以编辑。"
+                    ],
+                    "fee_units": 1,
+                    "lead_minutes": 10,
+                    "material_id": "M01",
+                    "score": 1,
+                    "tags": [
+                      "字幕",
+                      "自动字幕",
+                      "字幕编辑"
+                    ],
+                    "title": "影芽剪辑字幕功能",
+                    "version": "2026-10-29"
+                  }
+                ],
+                "query": "影芽剪辑 字幕功能 推广"
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "search_materials",
+              "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+            },
+            {
+              "data": {
+                "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+                "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+                "invalidated": [],
+                "material_id": "M01",
+                "production_mode": "basic",
+                "revision": 1,
+                "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+                "script_reused": false
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "revise_plan",
+              "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727"
+            },
+            {
+              "data": {
+                "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+                "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+                "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+                "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+                "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+                "source_ids": [
+                  "M01"
+                ],
+                "title": "一键字幕，自由编辑"
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "generate_script",
+              "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509"
+            }
+          ],
+          "unresolved_failures": {}
+        }
+      },
+      {
+        "event_id": 15,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "model",
+        "operation_id": "decide:4",
+        "phase": "started",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {},
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 16,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "model",
+        "operation_id": "decide:4",
+        "phase": "succeeded",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {},
+        "result": {
+          "response": {
+            "content": "Now let me estimate the cost for this plan.",
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": "{\"plan_revision\": 1, \"rationale\": \"估算字幕推广短视频的制作成本\"}",
+                  "name": "estimate_cost"
+                },
+                "id": "call_00_xBsx9uZlL30tnzTRIuqp3811",
+                "index": 0,
+                "type": "function"
+              }
+            ]
+          },
+          "usage": {
+            "input_tokens": 3097,
+            "output_tokens": 76
+          }
+        },
+        "state_patch": null
+      },
+      {
+        "event_id": 17,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "tool",
+        "operation_id": "tool:call_00_xBsx9uZlL30tnzTRIuqp3811",
+        "phase": "started",
+        "name": "estimate_cost",
+        "error_code": null,
+        "rationale": "估算字幕推广短视频的制作成本",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {
+          "arguments": {
+            "plan_revision": 1,
+            "rationale": "估算字幕推广短视频的制作成本"
+          },
+          "logical_key": "estimate_cost:d65a41e834518591be7383e3ee46b85194ff2bb315c5f095aa47c1ddec8b34c3",
+          "tool_call_id": "call_00_xBsx9uZlL30tnzTRIuqp3811"
+        },
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 18,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "tool",
+        "operation_id": "tool:call_00_xBsx9uZlL30tnzTRIuqp3811",
+        "phase": "succeeded",
+        "name": "estimate_cost",
+        "error_code": null,
+        "rationale": "估算字幕推广短视频的制作成本",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {
+          "arguments": {
+            "plan_revision": 1,
+            "rationale": "估算字幕推广短视频的制作成本"
+          },
+          "logical_key": "estimate_cost:d65a41e834518591be7383e3ee46b85194ff2bb315c5f095aa47c1ddec8b34c3",
+          "tool_call_id": "call_00_xBsx9uZlL30tnzTRIuqp3811"
+        },
+        "result": {
+          "data": {
+            "alternatives": [
+              {
+                "budget_gap_units": 2,
+                "deadline_gap_minutes": 0,
+                "estimated_finish_at": "2026-10-31T13:19:19.685321+00:00",
+                "feasible": false,
+                "production_mode": "premium",
+                "total_minutes": 135,
+                "total_units": 12,
+                "within_budget": false,
+                "within_deadline": true
+              }
+            ],
+            "budget_gap_units": 0,
+            "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+            "deadline_gap_minutes": 0,
+            "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+            "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+            "feasible": true,
+            "line_items": [
+              {
+                "catalog_item_id": "M01",
+                "duration_minutes": 10,
+                "fee_units": 1,
+                "step_id": "material_prepare"
+              },
+              {
+                "catalog_item_id": "script_finalize",
+                "duration_minutes": 20,
+                "fee_units": 2,
+                "step_id": "script_finalize"
+              },
+              {
+                "catalog_item_id": "video_edit:basic",
+                "duration_minutes": 45,
+                "fee_units": 4,
+                "step_id": "video_edit"
+              },
+              {
+                "catalog_item_id": "review",
+                "duration_minutes": 15,
+                "fee_units": 1,
+                "step_id": "review"
+              }
+            ],
+            "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+            "quoted_at": "2026-10-31T11:04:19.685321+00:00",
+            "revision": 1,
+            "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+            "total_minutes": 90,
+            "total_units": 8,
+            "within_budget": true,
+            "within_deadline": true
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "estimate_cost",
+          "tool_call_id": "call_00_xBsx9uZlL30tnzTRIuqp3811"
+        },
+        "state_patch": {
+          "candidate_history": {
+            "1": {
+              "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+              "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+              "material_id": "M01",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+            }
+          },
+          "current_estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+          "current_revision": 1,
+          "estimate_history": {
+            "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040": {
+              "alternatives": [
+                {
+                  "budget_gap_units": 2,
+                  "deadline_gap_minutes": 0,
+                  "estimated_finish_at": "2026-10-31T13:19:19.685321+00:00",
+                  "feasible": false,
+                  "production_mode": "premium",
+                  "total_minutes": 135,
+                  "total_units": 12,
+                  "within_budget": false,
+                  "within_deadline": true
+                }
+              ],
+              "budget_gap_units": 0,
+              "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+              "deadline_gap_minutes": 0,
+              "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+              "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+              "feasible": true,
+              "line_items": [
+                {
+                  "catalog_item_id": "M01",
+                  "duration_minutes": 10,
+                  "fee_units": 1,
+                  "step_id": "material_prepare"
+                },
+                {
+                  "catalog_item_id": "script_finalize",
+                  "duration_minutes": 20,
+                  "fee_units": 2,
+                  "step_id": "script_finalize"
+                },
+                {
+                  "catalog_item_id": "video_edit:basic",
+                  "duration_minutes": 45,
+                  "fee_units": 4,
+                  "step_id": "video_edit"
+                },
+                {
+                  "catalog_item_id": "review",
+                  "duration_minutes": 15,
+                  "fee_units": 1,
+                  "step_id": "review"
+                }
+              ],
+              "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+              "quoted_at": "2026-10-31T11:04:19.685321+00:00",
+              "revision": 1,
+              "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "total_minutes": 90,
+              "total_units": 8,
+              "within_budget": true,
+              "within_deadline": true
+            }
+          },
+          "last_observation": {
+            "data": {
+              "alternatives": [
+                {
+                  "budget_gap_units": 2,
+                  "deadline_gap_minutes": 0,
+                  "estimated_finish_at": "2026-10-31T13:19:19.685321+00:00",
+                  "feasible": false,
+                  "production_mode": "premium",
+                  "total_minutes": 135,
+                  "total_units": 12,
+                  "within_budget": false,
+                  "within_deadline": true
+                }
+              ],
+              "budget_gap_units": 0,
+              "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+              "deadline_gap_minutes": 0,
+              "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+              "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+              "feasible": true,
+              "line_items": [
+                {
+                  "catalog_item_id": "M01",
+                  "duration_minutes": 10,
+                  "fee_units": 1,
+                  "step_id": "material_prepare"
+                },
+                {
+                  "catalog_item_id": "script_finalize",
+                  "duration_minutes": 20,
+                  "fee_units": 2,
+                  "step_id": "script_finalize"
+                },
+                {
+                  "catalog_item_id": "video_edit:basic",
+                  "duration_minutes": 45,
+                  "fee_units": 4,
+                  "step_id": "video_edit"
+                },
+                {
+                  "catalog_item_id": "review",
+                  "duration_minutes": 15,
+                  "fee_units": 1,
+                  "step_id": "review"
+                }
+              ],
+              "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+              "quoted_at": "2026-10-31T11:04:19.685321+00:00",
+              "revision": 1,
+              "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "total_minutes": 90,
+              "total_units": 8,
+              "within_budget": true,
+              "within_deadline": true
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "estimate_cost",
+            "tool_call_id": "call_00_xBsx9uZlL30tnzTRIuqp3811"
+          },
+          "manifest": {
+            "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+            "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+            "model_id": "deepseek-v4-pro",
+            "planner_prompt_version": "planner-v1",
+            "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+            "schema_version": "1.0",
+            "script_prompt_version": "script-v1",
+            "thinking": "disabled"
+          },
+          "message": "",
+          "reason": null,
+          "request": {
+            "budget_units": 10,
+            "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+            "request_id": "E01-2934d851a7c5",
+            "topic": "影芽剪辑字幕功能推广"
+          },
+          "saved_plan_id": null,
+          "script_artifacts": {
+            "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6": {
+              "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+              "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+              "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+              "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "source_ids": [
+                "M01"
+              ],
+              "title": "一键字幕，自由编辑"
+            }
+          },
+          "seen_material_ids": [
+            "M01"
+          ],
+          "status": "running",
+          "tool_results": [
+            {
+              "data": {
+                "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+                "materials": [
+                  {
+                    "facts": [
+                      "影芽剪辑支持自动生成字幕。",
+                      "自动生成的字幕文本可以编辑。"
+                    ],
+                    "fee_units": 1,
+                    "lead_minutes": 10,
+                    "material_id": "M01",
+                    "score": 1,
+                    "tags": [
+                      "字幕",
+                      "自动字幕",
+                      "字幕编辑"
+                    ],
+                    "title": "影芽剪辑字幕功能",
+                    "version": "2026-10-29"
+                  }
+                ],
+                "query": "影芽剪辑 字幕功能 推广"
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "search_materials",
+              "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+            },
+            {
+              "data": {
+                "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+                "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+                "invalidated": [],
+                "material_id": "M01",
+                "production_mode": "basic",
+                "revision": 1,
+                "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+                "script_reused": false
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "revise_plan",
+              "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727"
+            },
+            {
+              "data": {
+                "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+                "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+                "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+                "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+                "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+                "source_ids": [
+                  "M01"
+                ],
+                "title": "一键字幕，自由编辑"
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "generate_script",
+              "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509"
+            },
+            {
+              "data": {
+                "alternatives": [
+                  {
+                    "budget_gap_units": 2,
+                    "deadline_gap_minutes": 0,
+                    "estimated_finish_at": "2026-10-31T13:19:19.685321+00:00",
+                    "feasible": false,
+                    "production_mode": "premium",
+                    "total_minutes": 135,
+                    "total_units": 12,
+                    "within_budget": false,
+                    "within_deadline": true
+                  }
+                ],
+                "budget_gap_units": 0,
+                "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+                "deadline_gap_minutes": 0,
+                "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+                "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+                "feasible": true,
+                "line_items": [
+                  {
+                    "catalog_item_id": "M01",
+                    "duration_minutes": 10,
+                    "fee_units": 1,
+                    "step_id": "material_prepare"
+                  },
+                  {
+                    "catalog_item_id": "script_finalize",
+                    "duration_minutes": 20,
+                    "fee_units": 2,
+                    "step_id": "script_finalize"
+                  },
+                  {
+                    "catalog_item_id": "video_edit:basic",
+                    "duration_minutes": 45,
+                    "fee_units": 4,
+                    "step_id": "video_edit"
+                  },
+                  {
+                    "catalog_item_id": "review",
+                    "duration_minutes": 15,
+                    "fee_units": 1,
+                    "step_id": "review"
+                  }
+                ],
+                "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+                "quoted_at": "2026-10-31T11:04:19.685321+00:00",
+                "revision": 1,
+                "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+                "total_minutes": 90,
+                "total_units": 8,
+                "within_budget": true,
+                "within_deadline": true
+              },
+              "error": null,
+              "ok": true,
+              "reused": false,
+              "tool": "estimate_cost",
+              "tool_call_id": "call_00_xBsx9uZlL30tnzTRIuqp3811"
+            }
+          ],
+          "unresolved_failures": {}
+        }
+      },
+      {
+        "event_id": 19,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "model",
+        "operation_id": "decide:5",
+        "phase": "started",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {},
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 20,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "model",
+        "operation_id": "decide:5",
+        "phase": "succeeded",
+        "name": "planner",
+        "error_code": null,
+        "rationale": "",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {},
+        "result": {
+          "response": {
+            "content": "The estimate is feasible (8 units, within budget of 10, within deadline). Let me save the plan.",
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": "{\"rationale\": \"方案成本与期限均满足要求，提交保存\", \"plan_revision\": 1, \"estimate_id\": \"estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040\"}",
+                  "name": "save_plan"
+                },
+                "id": "call_00_4QcY2M6Y51WDVJVo82lI9538",
+                "index": 0,
+                "type": "function"
+              }
+            ]
+          },
+          "usage": {
+            "input_tokens": 4799,
+            "output_tokens": 147
+          }
+        },
+        "state_patch": null
+      },
+      {
+        "event_id": 21,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "tool",
+        "operation_id": "tool:call_00_4QcY2M6Y51WDVJVo82lI9538",
+        "phase": "started",
+        "name": "save_plan",
+        "error_code": null,
+        "rationale": "方案成本与期限均满足要求，提交保存",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {
+          "arguments": {
+            "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+            "plan_revision": 1,
+            "rationale": "方案成本与期限均满足要求，提交保存"
+          },
+          "logical_key": "save_plan:780ac89aec7cb3a38d1673518932a17747557d1acc498ab35ec09759f63f258b",
+          "tool_call_id": "call_00_4QcY2M6Y51WDVJVo82lI9538"
+        },
+        "result": null,
+        "state_patch": null
+      },
+      {
+        "event_id": 22,
+        "request_id": "E01-2934d851a7c5",
+        "kind": "tool",
+        "operation_id": "tool:call_00_4QcY2M6Y51WDVJVo82lI9538",
+        "phase": "succeeded",
+        "name": "save_plan",
+        "error_code": null,
+        "rationale": "方案成本与期限均满足要求，提交保存",
+        "created_at": "2026-10-31T11:04:19.685321+00:00",
+        "args": {
+          "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+          "plan_revision": 1,
+          "rationale": "方案成本与期限均满足要求，提交保存"
+        },
+        "result": {
+          "data": {
+            "content_hash": "7440bcba89ae8c36a3db28cb180de31c1ad94b88c37a357056484621a441933f",
+            "plan_id": "plan_ada4d8071f1571c8cd1af4939f95e7d98c5da9e1deae30341985beff6a02c998",
+            "request_id": "E01-2934d851a7c5",
+            "saved_at": "2026-10-31T11:04:19.685321+00:00",
+            "saved_plan": {
+              "budget_units": 10,
+              "candidate": {
+                "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+                "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+                "material_id": "M01",
+                "production_mode": "basic",
+                "revision": 1,
+                "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+              },
+              "content_hash": "7440bcba89ae8c36a3db28cb180de31c1ad94b88c37a357056484621a441933f",
+              "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+              "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+              "estimated_start_at": "2026-10-31T11:04:19.685321+00:00",
+              "line_items": [
+                {
+                  "catalog_item_id": "M01",
+                  "duration_minutes": 10,
+                  "fee_units": 1,
+                  "step_id": "material_prepare"
+                },
+                {
+                  "catalog_item_id": "script_finalize",
+                  "duration_minutes": 20,
+                  "fee_units": 2,
+                  "step_id": "script_finalize"
+                },
+                {
+                  "catalog_item_id": "video_edit:basic",
+                  "duration_minutes": 45,
+                  "fee_units": 4,
+                  "step_id": "video_edit"
+                },
+                {
+                  "catalog_item_id": "review",
+                  "duration_minutes": 15,
+                  "fee_units": 1,
+                  "step_id": "review"
+                }
+              ],
+              "plan_id": "plan_ada4d8071f1571c8cd1af4939f95e7d98c5da9e1deae30341985beff6a02c998",
+              "request_id": "E01-2934d851a7c5",
+              "saved_at": "2026-10-31T11:04:19.685321+00:00",
+              "script": {
+                "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+                "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+                "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+                "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+                "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+                "source_ids": [
+                  "M01"
+                ],
+                "title": "一键字幕，自由编辑"
+              },
+              "source_ids": [
+                "M01"
+              ],
+              "task_plan": [
+                {
+                  "depends_on": [],
+                  "description": "准备选中素材",
+                  "duration_minutes": 10,
+                  "fee_units": 1,
+                  "finishes_at": "2026-10-31T11:14:19.685321+00:00",
+                  "starts_at": "2026-10-31T11:04:19.685321+00:00",
+                  "status": "planned",
+                  "step_id": "material_prepare"
+                },
+                {
+                  "depends_on": [
+                    "material_prepare"
+                  ],
+                  "description": "定稿当前脚本",
+                  "duration_minutes": 20,
+                  "fee_units": 2,
+                  "finishes_at": "2026-10-31T11:34:19.685321+00:00",
+                  "starts_at": "2026-10-31T11:14:19.685321+00:00",
+                  "status": "planned",
+                  "step_id": "script_finalize"
+                },
+                {
+                  "depends_on": [
+                    "script_finalize"
+                  ],
+                  "description": "按选中档位剪辑制作",
+                  "duration_minutes": 45,
+                  "fee_units": 4,
+                  "finishes_at": "2026-10-31T12:19:19.685321+00:00",
+                  "starts_at": "2026-10-31T11:34:19.685321+00:00",
+                  "status": "planned",
+                  "step_id": "video_edit"
+                },
+                {
+                  "depends_on": [
+                    "video_edit"
+                  ],
+                  "description": "审核内容与来源",
+                  "duration_minutes": 15,
+                  "fee_units": 1,
+                  "finishes_at": "2026-10-31T12:34:19.685321+00:00",
+                  "starts_at": "2026-10-31T12:19:19.685321+00:00",
+                  "status": "planned",
+                  "step_id": "review"
+                }
+              ],
+              "topic": "影芽剪辑字幕功能推广",
+              "total_minutes": 90,
+              "total_units": 8
+            }
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "save_plan",
+          "tool_call_id": "call_00_4QcY2M6Y51WDVJVo82lI9538"
+        },
+        "state_patch": {
+          "saved_plan_id": "plan_ada4d8071f1571c8cd1af4939f95e7d98c5da9e1deae30341985beff6a02c998",
+          "status": "completed"
+        }
+      }
+    ],
+    "plans": [
+      {
+        "budget_units": 10,
+        "candidate": {
+          "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+          "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+          "material_id": "M01",
+          "production_mode": "basic",
+          "revision": 1,
+          "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+        },
+        "content_hash": "7440bcba89ae8c36a3db28cb180de31c1ad94b88c37a357056484621a441933f",
+        "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+        "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+        "estimated_start_at": "2026-10-31T11:04:19.685321+00:00",
+        "line_items": [
+          {
+            "catalog_item_id": "M01",
+            "duration_minutes": 10,
+            "fee_units": 1,
+            "step_id": "material_prepare"
+          },
+          {
+            "catalog_item_id": "script_finalize",
+            "duration_minutes": 20,
+            "fee_units": 2,
+            "step_id": "script_finalize"
+          },
+          {
+            "catalog_item_id": "video_edit:basic",
+            "duration_minutes": 45,
+            "fee_units": 4,
+            "step_id": "video_edit"
+          },
+          {
+            "catalog_item_id": "review",
+            "duration_minutes": 15,
+            "fee_units": 1,
+            "step_id": "review"
+          }
+        ],
+        "plan_id": "plan_ada4d8071f1571c8cd1af4939f95e7d98c5da9e1deae30341985beff6a02c998",
+        "request_id": "E01-2934d851a7c5",
+        "saved_at": "2026-10-31T11:04:19.685321+00:00",
+        "script": {
+          "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+          "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+          "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+          "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+          "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+          "source_ids": [
+            "M01"
+          ],
+          "title": "一键字幕，自由编辑"
+        },
+        "source_ids": [
+          "M01"
+        ],
+        "task_plan": [
+          {
+            "depends_on": [],
+            "description": "准备选中素材",
+            "duration_minutes": 10,
+            "fee_units": 1,
+            "finishes_at": "2026-10-31T11:14:19.685321+00:00",
+            "starts_at": "2026-10-31T11:04:19.685321+00:00",
+            "status": "planned",
+            "step_id": "material_prepare"
+          },
+          {
+            "depends_on": [
+              "material_prepare"
+            ],
+            "description": "定稿当前脚本",
+            "duration_minutes": 20,
+            "fee_units": 2,
+            "finishes_at": "2026-10-31T11:34:19.685321+00:00",
+            "starts_at": "2026-10-31T11:14:19.685321+00:00",
+            "status": "planned",
+            "step_id": "script_finalize"
+          },
+          {
+            "depends_on": [
+              "script_finalize"
+            ],
+            "description": "按选中档位剪辑制作",
+            "duration_minutes": 45,
+            "fee_units": 4,
+            "finishes_at": "2026-10-31T12:19:19.685321+00:00",
+            "starts_at": "2026-10-31T11:34:19.685321+00:00",
+            "status": "planned",
+            "step_id": "video_edit"
+          },
+          {
+            "depends_on": [
+              "video_edit"
+            ],
+            "description": "审核内容与来源",
+            "duration_minutes": 15,
+            "fee_units": 1,
+            "finishes_at": "2026-10-31T12:34:19.685321+00:00",
+            "starts_at": "2026-10-31T12:19:19.685321+00:00",
+            "status": "planned",
+            "step_id": "review"
+          }
+        ],
+        "topic": "影芽剪辑字幕功能推广",
+        "total_minutes": 90,
+        "total_units": 8
+      }
+    ]
+  },
+  "events": [
+    {
+      "event_id": 1,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "model",
+      "operation_id": "decide:1",
+      "phase": "started",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {},
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 2,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "model",
+      "operation_id": "decide:1",
+      "phase": "succeeded",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {},
+      "result": {
+        "response": {
+          "content": "I'll start by searching for relevant materials for this video campaign.",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"rationale\": \"检索与影芽剪辑字幕功能相关的可用素材\", \"query\": \"影芽剪辑 字幕功能 推广\", \"top_k\": 5}",
+                "name": "search_materials"
+              },
+              "id": "call_00_2Mye9cxHVU1HVkxMgqhm5465",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        },
+        "usage": {
+          "input_tokens": 1548,
+          "output_tokens": 106
+        }
+      },
+      "state_patch": null
+    },
+    {
+      "event_id": 3,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "tool",
+      "operation_id": "tool:call_00_2Mye9cxHVU1HVkxMgqhm5465",
+      "phase": "started",
+      "name": "search_materials",
+      "error_code": null,
+      "rationale": "检索与影芽剪辑字幕功能相关的可用素材",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {
+        "arguments": {
+          "query": "影芽剪辑 字幕功能 推广",
+          "rationale": "检索与影芽剪辑字幕功能相关的可用素材",
+          "top_k": 5
+        },
+        "logical_key": "search_materials:549fef6892e962cf91284c1e28c823a06c70e5cd1b92840de76dc054931211cc",
+        "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+      },
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 4,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "tool",
+      "operation_id": "tool:call_00_2Mye9cxHVU1HVkxMgqhm5465",
+      "phase": "succeeded",
+      "name": "search_materials",
+      "error_code": null,
+      "rationale": "检索与影芽剪辑字幕功能相关的可用素材",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {
+        "arguments": {
+          "query": "影芽剪辑 字幕功能 推广",
+          "rationale": "检索与影芽剪辑字幕功能相关的可用素材",
+          "top_k": 5
+        },
+        "logical_key": "search_materials:549fef6892e962cf91284c1e28c823a06c70e5cd1b92840de76dc054931211cc",
+        "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+      },
+      "result": {
+        "data": {
+          "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+          "materials": [
+            {
+              "facts": [
+                "影芽剪辑支持自动生成字幕。",
+                "自动生成的字幕文本可以编辑。"
+              ],
+              "fee_units": 1,
+              "lead_minutes": 10,
+              "material_id": "M01",
+              "score": 1,
+              "tags": [
+                "字幕",
+                "自动字幕",
+                "字幕编辑"
+              ],
+              "title": "影芽剪辑字幕功能",
+              "version": "2026-10-29"
+            }
+          ],
+          "query": "影芽剪辑 字幕功能 推广"
+        },
+        "error": null,
+        "ok": true,
+        "reused": false,
+        "tool": "search_materials",
+        "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+      },
+      "state_patch": {
+        "candidate_history": {},
+        "current_estimate_id": null,
+        "current_revision": null,
+        "estimate_history": {},
+        "last_observation": {
+          "data": {
+            "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+            "materials": [
+              {
+                "facts": [
+                  "影芽剪辑支持自动生成字幕。",
+                  "自动生成的字幕文本可以编辑。"
+                ],
+                "fee_units": 1,
+                "lead_minutes": 10,
+                "material_id": "M01",
+                "score": 1,
+                "tags": [
+                  "字幕",
+                  "自动字幕",
+                  "字幕编辑"
+                ],
+                "title": "影芽剪辑字幕功能",
+                "version": "2026-10-29"
+              }
+            ],
+            "query": "影芽剪辑 字幕功能 推广"
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "search_materials",
+          "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+        },
+        "manifest": {
+          "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+          "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+          "model_id": "deepseek-v4-pro",
+          "planner_prompt_version": "planner-v1",
+          "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "schema_version": "1.0",
+          "script_prompt_version": "script-v1",
+          "thinking": "disabled"
+        },
+        "message": "",
+        "reason": null,
+        "request": {
+          "budget_units": 10,
+          "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+          "request_id": "E01-2934d851a7c5",
+          "topic": "影芽剪辑字幕功能推广"
+        },
+        "saved_plan_id": null,
+        "script_artifacts": {},
+        "seen_material_ids": [
+          "M01"
+        ],
+        "status": "running",
+        "tool_results": [
+          {
+            "data": {
+              "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+              "materials": [
+                {
+                  "facts": [
+                    "影芽剪辑支持自动生成字幕。",
+                    "自动生成的字幕文本可以编辑。"
+                  ],
+                  "fee_units": 1,
+                  "lead_minutes": 10,
+                  "material_id": "M01",
+                  "score": 1,
+                  "tags": [
+                    "字幕",
+                    "自动字幕",
+                    "字幕编辑"
+                  ],
+                  "title": "影芽剪辑字幕功能",
+                  "version": "2026-10-29"
+                }
+              ],
+              "query": "影芽剪辑 字幕功能 推广"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "search_materials",
+            "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+          }
+        ],
+        "unresolved_failures": {}
+      }
+    },
+    {
+      "event_id": 5,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "model",
+      "operation_id": "decide:2",
+      "phase": "started",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {},
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 6,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "model",
+      "operation_id": "decide:2",
+      "phase": "succeeded",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {},
+      "result": {
+        "response": {
+          "content": "I found material M01. Let me revise the plan with a creative brief for this campaign.",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"rationale\": \"基于影芽剪辑字幕功能素材制定推广创意方案\", \"material_id\": \"M01\", \"creative_brief\": \"以\\\"自动字幕+可编辑\\\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。\", \"production_mode\": \"basic\"}",
+                "name": "revise_plan"
+              },
+              "id": "call_00_Zziez9XkgLM939hLHyZy4727",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        },
+        "usage": {
+          "input_tokens": 2080,
+          "output_tokens": 180
+        }
+      },
+      "state_patch": null
+    },
+    {
+      "event_id": 7,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "control",
+      "operation_id": "tool:call_00_Zziez9XkgLM939hLHyZy4727",
+      "phase": "started",
+      "name": "revise_plan",
+      "error_code": null,
+      "rationale": "基于影芽剪辑字幕功能素材制定推广创意方案",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {
+        "arguments": {
+          "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+          "material_id": "M01",
+          "production_mode": "basic",
+          "rationale": "基于影芽剪辑字幕功能素材制定推广创意方案"
+        },
+        "logical_key": "revise_plan:fd5e7117b56ffe4cde614afbe1b296b3f85ba7a230a7e6fd0b20db8d8e1af98e",
+        "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727"
+      },
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 8,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "control",
+      "operation_id": "tool:call_00_Zziez9XkgLM939hLHyZy4727",
+      "phase": "succeeded",
+      "name": "revise_plan",
+      "error_code": null,
+      "rationale": "基于影芽剪辑字幕功能素材制定推广创意方案",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {
+        "arguments": {
+          "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+          "material_id": "M01",
+          "production_mode": "basic",
+          "rationale": "基于影芽剪辑字幕功能素材制定推广创意方案"
+        },
+        "logical_key": "revise_plan:fd5e7117b56ffe4cde614afbe1b296b3f85ba7a230a7e6fd0b20db8d8e1af98e",
+        "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727"
+      },
+      "result": {
+        "data": {
+          "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+          "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+          "invalidated": [],
+          "material_id": "M01",
+          "production_mode": "basic",
+          "revision": 1,
+          "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+          "script_reused": false
+        },
+        "error": null,
+        "ok": true,
+        "reused": false,
+        "tool": "revise_plan",
+        "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727"
+      },
+      "state_patch": {
+        "candidate_history": {
+          "1": {
+            "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+            "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+            "material_id": "M01",
+            "production_mode": "basic",
+            "revision": 1,
+            "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+          }
+        },
+        "current_estimate_id": null,
+        "current_revision": 1,
+        "estimate_history": {},
+        "last_observation": {
+          "data": {
+            "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+            "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+            "invalidated": [],
+            "material_id": "M01",
+            "production_mode": "basic",
+            "revision": 1,
+            "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+            "script_reused": false
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "revise_plan",
+          "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727"
+        },
+        "manifest": {
+          "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+          "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+          "model_id": "deepseek-v4-pro",
+          "planner_prompt_version": "planner-v1",
+          "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "schema_version": "1.0",
+          "script_prompt_version": "script-v1",
+          "thinking": "disabled"
+        },
+        "message": "",
+        "reason": null,
+        "request": {
+          "budget_units": 10,
+          "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+          "request_id": "E01-2934d851a7c5",
+          "topic": "影芽剪辑字幕功能推广"
+        },
+        "saved_plan_id": null,
+        "script_artifacts": {},
+        "seen_material_ids": [
+          "M01"
+        ],
+        "status": "running",
+        "tool_results": [
+          {
+            "data": {
+              "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+              "materials": [
+                {
+                  "facts": [
+                    "影芽剪辑支持自动生成字幕。",
+                    "自动生成的字幕文本可以编辑。"
+                  ],
+                  "fee_units": 1,
+                  "lead_minutes": 10,
+                  "material_id": "M01",
+                  "score": 1,
+                  "tags": [
+                    "字幕",
+                    "自动字幕",
+                    "字幕编辑"
+                  ],
+                  "title": "影芽剪辑字幕功能",
+                  "version": "2026-10-29"
+                }
+              ],
+              "query": "影芽剪辑 字幕功能 推广"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "search_materials",
+            "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+          },
+          {
+            "data": {
+              "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+              "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+              "invalidated": [],
+              "material_id": "M01",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "script_reused": false
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "revise_plan",
+            "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727"
+          }
+        ],
+        "unresolved_failures": {}
+      }
+    },
+    {
+      "event_id": 9,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "model",
+      "operation_id": "decide:3",
+      "phase": "started",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {},
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 10,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "model",
+      "operation_id": "decide:3",
+      "phase": "succeeded",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {},
+      "result": {
+        "response": {
+          "content": "Now let me generate the script for this plan.",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"rationale\": \"为字幕功能推广短视频生成脚本\", \"plan_revision\": 1}",
+                "name": "generate_script"
+              },
+              "id": "call_00_oeUID62aTWYLKiWHPhp39509",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        },
+        "usage": {
+          "input_tokens": 2711,
+          "output_tokens": 78
+        }
+      },
+      "state_patch": null
+    },
+    {
+      "event_id": 11,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "tool",
+      "operation_id": "tool:call_00_oeUID62aTWYLKiWHPhp39509",
+      "phase": "started",
+      "name": "generate_script",
+      "error_code": null,
+      "rationale": "为字幕功能推广短视频生成脚本",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {
+        "arguments": {
+          "plan_revision": 1,
+          "rationale": "为字幕功能推广短视频生成脚本"
+        },
+        "logical_key": "generate_script:6913eaedbe31ee386b9110ac340cbbc13908f0b131fb35bcfb7e333304a8ae92",
+        "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509"
+      },
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 12,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "model",
+      "operation_id": "tool:call_00_oeUID62aTWYLKiWHPhp39509:script",
+      "phase": "started",
+      "name": "script",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {},
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 13,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "model",
+      "operation_id": "tool:call_00_oeUID62aTWYLKiWHPhp39509:script",
+      "phase": "succeeded",
+      "name": "script",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {},
+      "result": {
+        "response": "{\n  \"title\": \"一键字幕，自由编辑\",\n  \"hook\": \"还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！\",\n  \"body\": \"导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。\",\n  \"cta\": \"立即下载影芽剪辑，告别字幕烦恼！\",\n  \"source_ids\": [\"M01\"]\n}",
+        "usage": {
+          "input_tokens": 458,
+          "output_tokens": 101
+        }
+      },
+      "state_patch": null
+    },
+    {
+      "event_id": 14,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "tool",
+      "operation_id": "tool:call_00_oeUID62aTWYLKiWHPhp39509",
+      "phase": "succeeded",
+      "name": "generate_script",
+      "error_code": null,
+      "rationale": "为字幕功能推广短视频生成脚本",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {
+        "arguments": {
+          "plan_revision": 1,
+          "rationale": "为字幕功能推广短视频生成脚本"
+        },
+        "logical_key": "generate_script:6913eaedbe31ee386b9110ac340cbbc13908f0b131fb35bcfb7e333304a8ae92",
+        "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509"
+      },
+      "result": {
+        "data": {
+          "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+          "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+          "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+          "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+          "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+          "source_ids": [
+            "M01"
+          ],
+          "title": "一键字幕，自由编辑"
+        },
+        "error": null,
+        "ok": true,
+        "reused": false,
+        "tool": "generate_script",
+        "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509"
+      },
+      "state_patch": {
+        "candidate_history": {
+          "1": {
+            "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+            "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+            "material_id": "M01",
+            "production_mode": "basic",
+            "revision": 1,
+            "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+          }
+        },
+        "current_estimate_id": null,
+        "current_revision": 1,
+        "estimate_history": {},
+        "last_observation": {
+          "data": {
+            "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+            "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+            "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+            "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+            "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+            "source_ids": [
+              "M01"
+            ],
+            "title": "一键字幕，自由编辑"
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "generate_script",
+          "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509"
+        },
+        "manifest": {
+          "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+          "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+          "model_id": "deepseek-v4-pro",
+          "planner_prompt_version": "planner-v1",
+          "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "schema_version": "1.0",
+          "script_prompt_version": "script-v1",
+          "thinking": "disabled"
+        },
+        "message": "",
+        "reason": null,
+        "request": {
+          "budget_units": 10,
+          "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+          "request_id": "E01-2934d851a7c5",
+          "topic": "影芽剪辑字幕功能推广"
+        },
+        "saved_plan_id": null,
+        "script_artifacts": {
+          "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6": {
+            "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+            "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+            "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+            "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+            "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+            "source_ids": [
+              "M01"
+            ],
+            "title": "一键字幕，自由编辑"
+          }
+        },
+        "seen_material_ids": [
+          "M01"
+        ],
+        "status": "running",
+        "tool_results": [
+          {
+            "data": {
+              "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+              "materials": [
+                {
+                  "facts": [
+                    "影芽剪辑支持自动生成字幕。",
+                    "自动生成的字幕文本可以编辑。"
+                  ],
+                  "fee_units": 1,
+                  "lead_minutes": 10,
+                  "material_id": "M01",
+                  "score": 1,
+                  "tags": [
+                    "字幕",
+                    "自动字幕",
+                    "字幕编辑"
+                  ],
+                  "title": "影芽剪辑字幕功能",
+                  "version": "2026-10-29"
+                }
+              ],
+              "query": "影芽剪辑 字幕功能 推广"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "search_materials",
+            "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+          },
+          {
+            "data": {
+              "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+              "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+              "invalidated": [],
+              "material_id": "M01",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "script_reused": false
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "revise_plan",
+            "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727"
+          },
+          {
+            "data": {
+              "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+              "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+              "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+              "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "source_ids": [
+                "M01"
+              ],
+              "title": "一键字幕，自由编辑"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "generate_script",
+            "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509"
+          }
+        ],
+        "unresolved_failures": {}
+      }
+    },
+    {
+      "event_id": 15,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "model",
+      "operation_id": "decide:4",
+      "phase": "started",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {},
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 16,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "model",
+      "operation_id": "decide:4",
+      "phase": "succeeded",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {},
+      "result": {
+        "response": {
+          "content": "Now let me estimate the cost for this plan.",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"plan_revision\": 1, \"rationale\": \"估算字幕推广短视频的制作成本\"}",
+                "name": "estimate_cost"
+              },
+              "id": "call_00_xBsx9uZlL30tnzTRIuqp3811",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        },
+        "usage": {
+          "input_tokens": 3097,
+          "output_tokens": 76
+        }
+      },
+      "state_patch": null
+    },
+    {
+      "event_id": 17,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "tool",
+      "operation_id": "tool:call_00_xBsx9uZlL30tnzTRIuqp3811",
+      "phase": "started",
+      "name": "estimate_cost",
+      "error_code": null,
+      "rationale": "估算字幕推广短视频的制作成本",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {
+        "arguments": {
+          "plan_revision": 1,
+          "rationale": "估算字幕推广短视频的制作成本"
+        },
+        "logical_key": "estimate_cost:d65a41e834518591be7383e3ee46b85194ff2bb315c5f095aa47c1ddec8b34c3",
+        "tool_call_id": "call_00_xBsx9uZlL30tnzTRIuqp3811"
+      },
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 18,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "tool",
+      "operation_id": "tool:call_00_xBsx9uZlL30tnzTRIuqp3811",
+      "phase": "succeeded",
+      "name": "estimate_cost",
+      "error_code": null,
+      "rationale": "估算字幕推广短视频的制作成本",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {
+        "arguments": {
+          "plan_revision": 1,
+          "rationale": "估算字幕推广短视频的制作成本"
+        },
+        "logical_key": "estimate_cost:d65a41e834518591be7383e3ee46b85194ff2bb315c5f095aa47c1ddec8b34c3",
+        "tool_call_id": "call_00_xBsx9uZlL30tnzTRIuqp3811"
+      },
+      "result": {
+        "data": {
+          "alternatives": [
+            {
+              "budget_gap_units": 2,
+              "deadline_gap_minutes": 0,
+              "estimated_finish_at": "2026-10-31T13:19:19.685321+00:00",
+              "feasible": false,
+              "production_mode": "premium",
+              "total_minutes": 135,
+              "total_units": 12,
+              "within_budget": false,
+              "within_deadline": true
+            }
+          ],
+          "budget_gap_units": 0,
+          "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+          "deadline_gap_minutes": 0,
+          "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+          "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+          "feasible": true,
+          "line_items": [
+            {
+              "catalog_item_id": "M01",
+              "duration_minutes": 10,
+              "fee_units": 1,
+              "step_id": "material_prepare"
+            },
+            {
+              "catalog_item_id": "script_finalize",
+              "duration_minutes": 20,
+              "fee_units": 2,
+              "step_id": "script_finalize"
+            },
+            {
+              "catalog_item_id": "video_edit:basic",
+              "duration_minutes": 45,
+              "fee_units": 4,
+              "step_id": "video_edit"
+            },
+            {
+              "catalog_item_id": "review",
+              "duration_minutes": 15,
+              "fee_units": 1,
+              "step_id": "review"
+            }
+          ],
+          "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "quoted_at": "2026-10-31T11:04:19.685321+00:00",
+          "revision": 1,
+          "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+          "total_minutes": 90,
+          "total_units": 8,
+          "within_budget": true,
+          "within_deadline": true
+        },
+        "error": null,
+        "ok": true,
+        "reused": false,
+        "tool": "estimate_cost",
+        "tool_call_id": "call_00_xBsx9uZlL30tnzTRIuqp3811"
+      },
+      "state_patch": {
+        "candidate_history": {
+          "1": {
+            "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+            "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+            "material_id": "M01",
+            "production_mode": "basic",
+            "revision": 1,
+            "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+          }
+        },
+        "current_estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+        "current_revision": 1,
+        "estimate_history": {
+          "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040": {
+            "alternatives": [
+              {
+                "budget_gap_units": 2,
+                "deadline_gap_minutes": 0,
+                "estimated_finish_at": "2026-10-31T13:19:19.685321+00:00",
+                "feasible": false,
+                "production_mode": "premium",
+                "total_minutes": 135,
+                "total_units": 12,
+                "within_budget": false,
+                "within_deadline": true
+              }
+            ],
+            "budget_gap_units": 0,
+            "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+            "deadline_gap_minutes": 0,
+            "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+            "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+            "feasible": true,
+            "line_items": [
+              {
+                "catalog_item_id": "M01",
+                "duration_minutes": 10,
+                "fee_units": 1,
+                "step_id": "material_prepare"
+              },
+              {
+                "catalog_item_id": "script_finalize",
+                "duration_minutes": 20,
+                "fee_units": 2,
+                "step_id": "script_finalize"
+              },
+              {
+                "catalog_item_id": "video_edit:basic",
+                "duration_minutes": 45,
+                "fee_units": 4,
+                "step_id": "video_edit"
+              },
+              {
+                "catalog_item_id": "review",
+                "duration_minutes": 15,
+                "fee_units": 1,
+                "step_id": "review"
+              }
+            ],
+            "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+            "quoted_at": "2026-10-31T11:04:19.685321+00:00",
+            "revision": 1,
+            "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+            "total_minutes": 90,
+            "total_units": 8,
+            "within_budget": true,
+            "within_deadline": true
+          }
+        },
+        "last_observation": {
+          "data": {
+            "alternatives": [
+              {
+                "budget_gap_units": 2,
+                "deadline_gap_minutes": 0,
+                "estimated_finish_at": "2026-10-31T13:19:19.685321+00:00",
+                "feasible": false,
+                "production_mode": "premium",
+                "total_minutes": 135,
+                "total_units": 12,
+                "within_budget": false,
+                "within_deadline": true
+              }
+            ],
+            "budget_gap_units": 0,
+            "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+            "deadline_gap_minutes": 0,
+            "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+            "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+            "feasible": true,
+            "line_items": [
+              {
+                "catalog_item_id": "M01",
+                "duration_minutes": 10,
+                "fee_units": 1,
+                "step_id": "material_prepare"
+              },
+              {
+                "catalog_item_id": "script_finalize",
+                "duration_minutes": 20,
+                "fee_units": 2,
+                "step_id": "script_finalize"
+              },
+              {
+                "catalog_item_id": "video_edit:basic",
+                "duration_minutes": 45,
+                "fee_units": 4,
+                "step_id": "video_edit"
+              },
+              {
+                "catalog_item_id": "review",
+                "duration_minutes": 15,
+                "fee_units": 1,
+                "step_id": "review"
+              }
+            ],
+            "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+            "quoted_at": "2026-10-31T11:04:19.685321+00:00",
+            "revision": 1,
+            "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+            "total_minutes": 90,
+            "total_units": 8,
+            "within_budget": true,
+            "within_deadline": true
+          },
+          "error": null,
+          "ok": true,
+          "reused": false,
+          "tool": "estimate_cost",
+          "tool_call_id": "call_00_xBsx9uZlL30tnzTRIuqp3811"
+        },
+        "manifest": {
+          "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+          "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+          "model_id": "deepseek-v4-pro",
+          "planner_prompt_version": "planner-v1",
+          "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "schema_version": "1.0",
+          "script_prompt_version": "script-v1",
+          "thinking": "disabled"
+        },
+        "message": "",
+        "reason": null,
+        "request": {
+          "budget_units": 10,
+          "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+          "request_id": "E01-2934d851a7c5",
+          "topic": "影芽剪辑字幕功能推广"
+        },
+        "saved_plan_id": null,
+        "script_artifacts": {
+          "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6": {
+            "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+            "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+            "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+            "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+            "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+            "source_ids": [
+              "M01"
+            ],
+            "title": "一键字幕，自由编辑"
+          }
+        },
+        "seen_material_ids": [
+          "M01"
+        ],
+        "status": "running",
+        "tool_results": [
+          {
+            "data": {
+              "catalog_hash": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+              "materials": [
+                {
+                  "facts": [
+                    "影芽剪辑支持自动生成字幕。",
+                    "自动生成的字幕文本可以编辑。"
+                  ],
+                  "fee_units": 1,
+                  "lead_minutes": 10,
+                  "material_id": "M01",
+                  "score": 1,
+                  "tags": [
+                    "字幕",
+                    "自动字幕",
+                    "字幕编辑"
+                  ],
+                  "title": "影芽剪辑字幕功能",
+                  "version": "2026-10-29"
+                }
+              ],
+              "query": "影芽剪辑 字幕功能 推广"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "search_materials",
+            "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465"
+          },
+          {
+            "data": {
+              "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+              "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+              "invalidated": [],
+              "material_id": "M01",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "script_reused": false
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "revise_plan",
+            "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727"
+          },
+          {
+            "data": {
+              "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+              "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+              "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+              "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "source_ids": [
+                "M01"
+              ],
+              "title": "一键字幕，自由编辑"
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "generate_script",
+            "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509"
+          },
+          {
+            "data": {
+              "alternatives": [
+                {
+                  "budget_gap_units": 2,
+                  "deadline_gap_minutes": 0,
+                  "estimated_finish_at": "2026-10-31T13:19:19.685321+00:00",
+                  "feasible": false,
+                  "production_mode": "premium",
+                  "total_minutes": 135,
+                  "total_units": 12,
+                  "within_budget": false,
+                  "within_deadline": true
+                }
+              ],
+              "budget_gap_units": 0,
+              "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+              "deadline_gap_minutes": 0,
+              "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+              "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+              "feasible": true,
+              "line_items": [
+                {
+                  "catalog_item_id": "M01",
+                  "duration_minutes": 10,
+                  "fee_units": 1,
+                  "step_id": "material_prepare"
+                },
+                {
+                  "catalog_item_id": "script_finalize",
+                  "duration_minutes": 20,
+                  "fee_units": 2,
+                  "step_id": "script_finalize"
+                },
+                {
+                  "catalog_item_id": "video_edit:basic",
+                  "duration_minutes": 45,
+                  "fee_units": 4,
+                  "step_id": "video_edit"
+                },
+                {
+                  "catalog_item_id": "review",
+                  "duration_minutes": 15,
+                  "fee_units": 1,
+                  "step_id": "review"
+                }
+              ],
+              "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+              "quoted_at": "2026-10-31T11:04:19.685321+00:00",
+              "revision": 1,
+              "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "total_minutes": 90,
+              "total_units": 8,
+              "within_budget": true,
+              "within_deadline": true
+            },
+            "error": null,
+            "ok": true,
+            "reused": false,
+            "tool": "estimate_cost",
+            "tool_call_id": "call_00_xBsx9uZlL30tnzTRIuqp3811"
+          }
+        ],
+        "unresolved_failures": {}
+      }
+    },
+    {
+      "event_id": 19,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "model",
+      "operation_id": "decide:5",
+      "phase": "started",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {},
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 20,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "model",
+      "operation_id": "decide:5",
+      "phase": "succeeded",
+      "name": "planner",
+      "error_code": null,
+      "rationale": "",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {},
+      "result": {
+        "response": {
+          "content": "The estimate is feasible (8 units, within budget of 10, within deadline). Let me save the plan.",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"rationale\": \"方案成本与期限均满足要求，提交保存\", \"plan_revision\": 1, \"estimate_id\": \"estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040\"}",
+                "name": "save_plan"
+              },
+              "id": "call_00_4QcY2M6Y51WDVJVo82lI9538",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        },
+        "usage": {
+          "input_tokens": 4799,
+          "output_tokens": 147
+        }
+      },
+      "state_patch": null
+    },
+    {
+      "event_id": 21,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "tool",
+      "operation_id": "tool:call_00_4QcY2M6Y51WDVJVo82lI9538",
+      "phase": "started",
+      "name": "save_plan",
+      "error_code": null,
+      "rationale": "方案成本与期限均满足要求，提交保存",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {
+        "arguments": {
+          "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+          "plan_revision": 1,
+          "rationale": "方案成本与期限均满足要求，提交保存"
+        },
+        "logical_key": "save_plan:780ac89aec7cb3a38d1673518932a17747557d1acc498ab35ec09759f63f258b",
+        "tool_call_id": "call_00_4QcY2M6Y51WDVJVo82lI9538"
+      },
+      "result": null,
+      "state_patch": null
+    },
+    {
+      "event_id": 22,
+      "request_id": "E01-2934d851a7c5",
+      "kind": "tool",
+      "operation_id": "tool:call_00_4QcY2M6Y51WDVJVo82lI9538",
+      "phase": "succeeded",
+      "name": "save_plan",
+      "error_code": null,
+      "rationale": "方案成本与期限均满足要求，提交保存",
+      "created_at": "2026-10-31T11:04:19.685321+00:00",
+      "args": {
+        "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+        "plan_revision": 1,
+        "rationale": "方案成本与期限均满足要求，提交保存"
+      },
+      "result": {
+        "data": {
+          "content_hash": "7440bcba89ae8c36a3db28cb180de31c1ad94b88c37a357056484621a441933f",
+          "plan_id": "plan_ada4d8071f1571c8cd1af4939f95e7d98c5da9e1deae30341985beff6a02c998",
+          "request_id": "E01-2934d851a7c5",
+          "saved_at": "2026-10-31T11:04:19.685321+00:00",
+          "saved_plan": {
+            "budget_units": 10,
+            "candidate": {
+              "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+              "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+              "material_id": "M01",
+              "production_mode": "basic",
+              "revision": 1,
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+            },
+            "content_hash": "7440bcba89ae8c36a3db28cb180de31c1ad94b88c37a357056484621a441933f",
+            "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+            "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+            "estimated_start_at": "2026-10-31T11:04:19.685321+00:00",
+            "line_items": [
+              {
+                "catalog_item_id": "M01",
+                "duration_minutes": 10,
+                "fee_units": 1,
+                "step_id": "material_prepare"
+              },
+              {
+                "catalog_item_id": "script_finalize",
+                "duration_minutes": 20,
+                "fee_units": 2,
+                "step_id": "script_finalize"
+              },
+              {
+                "catalog_item_id": "video_edit:basic",
+                "duration_minutes": 45,
+                "fee_units": 4,
+                "step_id": "video_edit"
+              },
+              {
+                "catalog_item_id": "review",
+                "duration_minutes": 15,
+                "fee_units": 1,
+                "step_id": "review"
+              }
+            ],
+            "plan_id": "plan_ada4d8071f1571c8cd1af4939f95e7d98c5da9e1deae30341985beff6a02c998",
+            "request_id": "E01-2934d851a7c5",
+            "saved_at": "2026-10-31T11:04:19.685321+00:00",
+            "script": {
+              "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+              "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+              "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+              "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+              "source_ids": [
+                "M01"
+              ],
+              "title": "一键字幕，自由编辑"
+            },
+            "source_ids": [
+              "M01"
+            ],
+            "task_plan": [
+              {
+                "depends_on": [],
+                "description": "准备选中素材",
+                "duration_minutes": 10,
+                "fee_units": 1,
+                "finishes_at": "2026-10-31T11:14:19.685321+00:00",
+                "starts_at": "2026-10-31T11:04:19.685321+00:00",
+                "status": "planned",
+                "step_id": "material_prepare"
+              },
+              {
+                "depends_on": [
+                  "material_prepare"
+                ],
+                "description": "定稿当前脚本",
+                "duration_minutes": 20,
+                "fee_units": 2,
+                "finishes_at": "2026-10-31T11:34:19.685321+00:00",
+                "starts_at": "2026-10-31T11:14:19.685321+00:00",
+                "status": "planned",
+                "step_id": "script_finalize"
+              },
+              {
+                "depends_on": [
+                  "script_finalize"
+                ],
+                "description": "按选中档位剪辑制作",
+                "duration_minutes": 45,
+                "fee_units": 4,
+                "finishes_at": "2026-10-31T12:19:19.685321+00:00",
+                "starts_at": "2026-10-31T11:34:19.685321+00:00",
+                "status": "planned",
+                "step_id": "video_edit"
+              },
+              {
+                "depends_on": [
+                  "video_edit"
+                ],
+                "description": "审核内容与来源",
+                "duration_minutes": 15,
+                "fee_units": 1,
+                "finishes_at": "2026-10-31T12:34:19.685321+00:00",
+                "starts_at": "2026-10-31T12:19:19.685321+00:00",
+                "status": "planned",
+                "step_id": "review"
+              }
+            ],
+            "topic": "影芽剪辑字幕功能推广",
+            "total_minutes": 90,
+            "total_units": 8
+          }
+        },
+        "error": null,
+        "ok": true,
+        "reused": false,
+        "tool": "save_plan",
+        "tool_call_id": "call_00_4QcY2M6Y51WDVJVo82lI9538"
+      },
+      "state_patch": {
+        "saved_plan_id": "plan_ada4d8071f1571c8cd1af4939f95e7d98c5da9e1deae30341985beff6a02c998",
+        "status": "completed"
+      }
+    }
+  ],
+  "plans": [
+    {
+      "budget_units": 10,
+      "candidate": {
+        "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+        "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+        "material_id": "M01",
+        "production_mode": "basic",
+        "revision": 1,
+        "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+      },
+      "content_hash": "7440bcba89ae8c36a3db28cb180de31c1ad94b88c37a357056484621a441933f",
+      "deadline_at": "2026-10-31T15:04:19.685321+00:00",
+      "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+      "estimated_start_at": "2026-10-31T11:04:19.685321+00:00",
+      "line_items": [
+        {
+          "catalog_item_id": "M01",
+          "duration_minutes": 10,
+          "fee_units": 1,
+          "step_id": "material_prepare"
+        },
+        {
+          "catalog_item_id": "script_finalize",
+          "duration_minutes": 20,
+          "fee_units": 2,
+          "step_id": "script_finalize"
+        },
+        {
+          "catalog_item_id": "video_edit:basic",
+          "duration_minutes": 45,
+          "fee_units": 4,
+          "step_id": "video_edit"
+        },
+        {
+          "catalog_item_id": "review",
+          "duration_minutes": 15,
+          "fee_units": 1,
+          "step_id": "review"
+        }
+      ],
+      "plan_id": "plan_ada4d8071f1571c8cd1af4939f95e7d98c5da9e1deae30341985beff6a02c998",
+      "request_id": "E01-2934d851a7c5",
+      "saved_at": "2026-10-31T11:04:19.685321+00:00",
+      "script": {
+        "body": "导入视频，点击自动字幕，瞬间生成。发现错字？直接点击修改，轻松调整。省时省力，精准可控。新手也能快速上手。",
+        "cta": "立即下载影芽剪辑，告别字幕烦恼！",
+        "hook": "还在手动打字幕？影芽剪辑帮你自动生成，还能随意改！",
+        "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+        "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+        "source_ids": [
+          "M01"
+        ],
+        "title": "一键字幕，自由编辑"
+      },
+      "source_ids": [
+        "M01"
+      ],
+      "task_plan": [
+        {
+          "depends_on": [],
+          "description": "准备选中素材",
+          "duration_minutes": 10,
+          "fee_units": 1,
+          "finishes_at": "2026-10-31T11:14:19.685321+00:00",
+          "starts_at": "2026-10-31T11:04:19.685321+00:00",
+          "status": "planned",
+          "step_id": "material_prepare"
+        },
+        {
+          "depends_on": [
+            "material_prepare"
+          ],
+          "description": "定稿当前脚本",
+          "duration_minutes": 20,
+          "fee_units": 2,
+          "finishes_at": "2026-10-31T11:34:19.685321+00:00",
+          "starts_at": "2026-10-31T11:14:19.685321+00:00",
+          "status": "planned",
+          "step_id": "script_finalize"
+        },
+        {
+          "depends_on": [
+            "script_finalize"
+          ],
+          "description": "按选中档位剪辑制作",
+          "duration_minutes": 45,
+          "fee_units": 4,
+          "finishes_at": "2026-10-31T12:19:19.685321+00:00",
+          "starts_at": "2026-10-31T11:34:19.685321+00:00",
+          "status": "planned",
+          "step_id": "video_edit"
+        },
+        {
+          "depends_on": [
+            "video_edit"
+          ],
+          "description": "审核内容与来源",
+          "duration_minutes": 15,
+          "fee_units": 1,
+          "finishes_at": "2026-10-31T12:34:19.685321+00:00",
+          "starts_at": "2026-10-31T12:19:19.685321+00:00",
+          "status": "planned",
+          "step_id": "review"
+        }
+      ],
+      "topic": "影芽剪辑字幕功能推广",
+      "total_minutes": 90,
+      "total_units": 8
+    }
+  ],
+  "trace": [
+    {
+      "schema_version": "1.0",
+      "event_id": 1,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:1",
+      "phase": "started",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 5,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 2,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:1",
+      "phase": "succeeded",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"succeeded\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 5,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 3,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_2Mye9cxHVU1HVkxMgqhm5465",
+      "phase": "started",
+      "name": "search_materials",
+      "args": {
+        "query": "影芽剪辑 字幕功能 推广",
+        "rationale": "检索与影芽剪辑字幕功能相关的可用素材",
+        "top_k": 5
+      },
+      "rationale": "检索与影芽剪辑字幕功能相关的可用素材",
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 5,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 4,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_2Mye9cxHVU1HVkxMgqhm5465",
+      "phase": "succeeded",
+      "name": "search_materials",
+      "args": {
+        "query": "影芽剪辑 字幕功能 推广",
+        "rationale": "检索与影芽剪辑字幕功能相关的可用素材",
+        "top_k": 5
+      },
+      "rationale": "检索与影芽剪辑字幕功能相关的可用素材",
+      "observation_summary": "{\"phase\": \"succeeded\", \"ok\": true, \"reused\": false}",
+      "result_ref": "tool_results:0",
+      "task_status": "running",
+      "next_decision_event_id": 5,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 5,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:2",
+      "phase": "started",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 9,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 6,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:2",
+      "phase": "succeeded",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"succeeded\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 9,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 7,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "control",
+      "operation_id": "tool:call_00_Zziez9XkgLM939hLHyZy4727",
+      "phase": "started",
+      "name": "revise_plan",
+      "args": {
+        "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+        "material_id": "M01",
+        "production_mode": "basic",
+        "rationale": "基于影芽剪辑字幕功能素材制定推广创意方案"
+      },
+      "rationale": "基于影芽剪辑字幕功能素材制定推广创意方案",
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 9,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 8,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "control",
+      "operation_id": "tool:call_00_Zziez9XkgLM939hLHyZy4727",
+      "phase": "succeeded",
+      "name": "revise_plan",
+      "args": {
+        "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+        "material_id": "M01",
+        "production_mode": "basic",
+        "rationale": "基于影芽剪辑字幕功能素材制定推广创意方案"
+      },
+      "rationale": "基于影芽剪辑字幕功能素材制定推广创意方案",
+      "observation_summary": "{\"phase\": \"succeeded\", \"ok\": true, \"reused\": false}",
+      "result_ref": "tool_results:1",
+      "task_status": "running",
+      "next_decision_event_id": 9,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 9,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:3",
+      "phase": "started",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 15,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 10,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:3",
+      "phase": "succeeded",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"succeeded\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 15,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 11,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_oeUID62aTWYLKiWHPhp39509",
+      "phase": "started",
+      "name": "generate_script",
+      "args": {
+        "plan_revision": 1,
+        "rationale": "为字幕功能推广短视频生成脚本"
+      },
+      "rationale": "为字幕功能推广短视频生成脚本",
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 15,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 12,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "tool:call_00_oeUID62aTWYLKiWHPhp39509:script",
+      "phase": "started",
+      "name": "script",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 15,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 13,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "tool:call_00_oeUID62aTWYLKiWHPhp39509:script",
+      "phase": "succeeded",
+      "name": "script",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"succeeded\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 15,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 14,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_oeUID62aTWYLKiWHPhp39509",
+      "phase": "succeeded",
+      "name": "generate_script",
+      "args": {
+        "plan_revision": 1,
+        "rationale": "为字幕功能推广短视频生成脚本"
+      },
+      "rationale": "为字幕功能推广短视频生成脚本",
+      "observation_summary": "{\"phase\": \"succeeded\", \"ok\": true, \"reused\": false}",
+      "result_ref": "tool_results:2",
+      "task_status": "running",
+      "next_decision_event_id": 15,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 15,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:4",
+      "phase": "started",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 19,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 16,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:4",
+      "phase": "succeeded",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"succeeded\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 19,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 17,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_xBsx9uZlL30tnzTRIuqp3811",
+      "phase": "started",
+      "name": "estimate_cost",
+      "args": {
+        "plan_revision": 1,
+        "rationale": "估算字幕推广短视频的制作成本"
+      },
+      "rationale": "估算字幕推广短视频的制作成本",
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": 19,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 18,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_xBsx9uZlL30tnzTRIuqp3811",
+      "phase": "succeeded",
+      "name": "estimate_cost",
+      "args": {
+        "plan_revision": 1,
+        "rationale": "估算字幕推广短视频的制作成本"
+      },
+      "rationale": "估算字幕推广短视频的制作成本",
+      "observation_summary": "{\"phase\": \"succeeded\", \"ok\": true, \"reused\": false, \"total_units\": 8, \"feasible\": true, \"budget_gap_units\": 0, \"deadline_gap_minutes\": 0}",
+      "result_ref": "tool_results:3",
+      "task_status": "running",
+      "next_decision_event_id": 19,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 19,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:5",
+      "phase": "started",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": null,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 20,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "system",
+      "kind": "model",
+      "operation_id": "decide:5",
+      "phase": "succeeded",
+      "name": "planner",
+      "args": null,
+      "rationale": null,
+      "observation_summary": "{\"phase\": \"succeeded\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": null,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 21,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_4QcY2M6Y51WDVJVo82lI9538",
+      "phase": "started",
+      "name": "save_plan",
+      "args": {
+        "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+        "plan_revision": 1,
+        "rationale": "方案成本与期限均满足要求，提交保存"
+      },
+      "rationale": "方案成本与期限均满足要求，提交保存",
+      "observation_summary": "{\"phase\": \"started\"}",
+      "result_ref": null,
+      "task_status": "running",
+      "next_decision_event_id": null,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": 22,
+      "request_id": "E01-2934d851a7c5",
+      "backend": "deepseek",
+      "model": "deepseek-v4-pro",
+      "origin": "model",
+      "kind": "tool",
+      "operation_id": "tool:call_00_4QcY2M6Y51WDVJVo82lI9538",
+      "phase": "succeeded",
+      "name": "save_plan",
+      "args": {
+        "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+        "plan_revision": 1,
+        "rationale": "方案成本与期限均满足要求，提交保存"
+      },
+      "rationale": "方案成本与期限均满足要求，提交保存",
+      "observation_summary": "{\"phase\": \"succeeded\", \"ok\": true, \"reused\": false}",
+      "result_ref": "tool_results:4",
+      "task_status": "completed",
+      "next_decision_event_id": null,
+      "created_at": "2026-10-31T11:04:19.685321+00:00"
+    }
+  ],
+  "decisions": [
+    {
+      "event_id": 1,
+      "operation_id": "decide:1",
+      "memory": {
+        "candidate": null,
+        "latest_estimate": null,
+        "seen_material_ids": [],
+        "script": null,
+        "evaluated_quotes": [],
+        "budget_units": 10,
+        "last_observation": {
+          "tool_call_id": null,
+          "tool": null,
+          "ok": null,
+          "error": null
+        },
+        "deadline_at": "2026-10-31T15:04:19.685321+00:00"
+      },
+      "response": {
+        "role": "assistant",
+        "content": "I'll start by searching for relevant materials for this video campaign.",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_2Mye9cxHVU1HVkxMgqhm5465",
+            "type": "function",
+            "function": {
+              "name": "search_materials",
+              "arguments": "{\"rationale\": \"检索与影芽剪辑字幕功能相关的可用素材\", \"query\": \"影芽剪辑 字幕功能 推广\", \"top_k\": 5}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": 5,
+      "operation_id": "decide:2",
+      "memory": {
+        "candidate": null,
+        "latest_estimate": null,
+        "seen_material_ids": [
+          "M01"
+        ],
+        "script": null,
+        "evaluated_quotes": [],
+        "budget_units": 10,
+        "last_observation": {
+          "tool_call_id": "call_00_2Mye9cxHVU1HVkxMgqhm5465",
+          "tool": "search_materials",
+          "ok": true,
+          "error": null
+        },
+        "deadline_at": "2026-10-31T15:04:19.685321+00:00"
+      },
+      "response": {
+        "role": "assistant",
+        "content": "I found material M01. Let me revise the plan with a creative brief for this campaign.",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_Zziez9XkgLM939hLHyZy4727",
+            "type": "function",
+            "function": {
+              "name": "revise_plan",
+              "arguments": "{\"rationale\": \"基于影芽剪辑字幕功能素材制定推广创意方案\", \"material_id\": \"M01\", \"creative_brief\": \"以\\\"自动字幕+可编辑\\\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。\", \"production_mode\": \"basic\"}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": 9,
+      "operation_id": "decide:3",
+      "memory": {
+        "candidate": {
+          "revision": 1,
+          "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+          "material_id": "M01",
+          "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+          "production_mode": "basic",
+          "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+        },
+        "latest_estimate": null,
+        "seen_material_ids": [
+          "M01"
+        ],
+        "script": null,
+        "evaluated_quotes": [],
+        "budget_units": 10,
+        "last_observation": {
+          "tool_call_id": "call_00_Zziez9XkgLM939hLHyZy4727",
+          "tool": "revise_plan",
+          "ok": true,
+          "error": null
+        },
+        "deadline_at": "2026-10-31T15:04:19.685321+00:00"
+      },
+      "response": {
+        "role": "assistant",
+        "content": "Now let me generate the script for this plan.",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_oeUID62aTWYLKiWHPhp39509",
+            "type": "function",
+            "function": {
+              "name": "generate_script",
+              "arguments": "{\"rationale\": \"为字幕功能推广短视频生成脚本\", \"plan_revision\": 1}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": 15,
+      "operation_id": "decide:4",
+      "memory": {
+        "candidate": {
+          "revision": 1,
+          "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+          "material_id": "M01",
+          "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+          "production_mode": "basic",
+          "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+        },
+        "latest_estimate": null,
+        "seen_material_ids": [
+          "M01"
+        ],
+        "script": {
+          "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+          "title": "一键字幕，自由编辑",
+          "source_ids": [
+            "M01"
+          ]
+        },
+        "evaluated_quotes": [],
+        "budget_units": 10,
+        "last_observation": {
+          "tool_call_id": "call_00_oeUID62aTWYLKiWHPhp39509",
+          "tool": "generate_script",
+          "ok": true,
+          "error": null
+        },
+        "deadline_at": "2026-10-31T15:04:19.685321+00:00"
+      },
+      "response": {
+        "role": "assistant",
+        "content": "Now let me estimate the cost for this plan.",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_xBsx9uZlL30tnzTRIuqp3811",
+            "type": "function",
+            "function": {
+              "name": "estimate_cost",
+              "arguments": "{\"plan_revision\": 1, \"rationale\": \"估算字幕推广短视频的制作成本\"}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": 19,
+      "operation_id": "decide:5",
+      "memory": {
+        "candidate": {
+          "revision": 1,
+          "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+          "material_id": "M01",
+          "creative_brief": "以\"自动字幕+可编辑\"为核心卖点，制作一条15秒短视频：展示用户导入视频后一键自动生成字幕，再演示字幕文本可自由编辑修正，突出省时省力、精准可控的体验，结尾引导下载影芽剪辑。",
+          "production_mode": "basic",
+          "script_input_hash": "8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6"
+        },
+        "latest_estimate": {
+          "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+          "revision": 1,
+          "candidate_hash": "4fc6d3ca694863d42c91b6b7de920a452fa86b4250199a501ee39d7ffce05e35",
+          "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+          "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+          "line_items": [
+            {
+              "step_id": "material_prepare",
+              "catalog_item_id": "M01",
+              "fee_units": 1,
+              "duration_minutes": 10
+            },
+            {
+              "step_id": "script_finalize",
+              "catalog_item_id": "script_finalize",
+              "fee_units": 2,
+              "duration_minutes": 20
+            },
+            {
+              "step_id": "video_edit",
+              "catalog_item_id": "video_edit:basic",
+              "fee_units": 4,
+              "duration_minutes": 45
+            },
+            {
+              "step_id": "review",
+              "catalog_item_id": "review",
+              "fee_units": 1,
+              "duration_minutes": 15
+            }
+          ],
+          "quoted_at": "2026-10-31T11:04:19.685321+00:00",
+          "total_units": 8,
+          "total_minutes": 90,
+          "estimated_finish_at": "2026-10-31T12:34:19.685321+00:00",
+          "within_budget": true,
+          "within_deadline": true,
+          "feasible": true,
+          "budget_gap_units": 0,
+          "deadline_gap_minutes": 0,
+          "alternatives": [
+            {
+              "total_units": 12,
+              "total_minutes": 135,
+              "estimated_finish_at": "2026-10-31T13:19:19.685321+00:00",
+              "within_budget": false,
+              "within_deadline": true,
+              "feasible": false,
+              "budget_gap_units": 2,
+              "deadline_gap_minutes": 0,
+              "production_mode": "premium"
+            }
+          ]
+        },
+        "seen_material_ids": [
+          "M01"
+        ],
+        "script": {
+          "script_id": "script_8921f794a0012354c2bf1d268c06ed160a4121cf4c4dffc163d5a81048a70fa6",
+          "title": "一键字幕，自由编辑",
+          "source_ids": [
+            "M01"
+          ]
+        },
+        "evaluated_quotes": [
+          {
+            "estimate_id": "estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040",
+            "revision": 1,
+            "total_units": 8,
+            "total_minutes": 90,
+            "feasible": true,
+            "budget_gap_units": 0,
+            "deadline_gap_minutes": 0
+          }
+        ],
+        "budget_units": 10,
+        "last_observation": {
+          "tool_call_id": "call_00_xBsx9uZlL30tnzTRIuqp3811",
+          "tool": "estimate_cost",
+          "ok": true,
+          "error": null
+        },
+        "deadline_at": "2026-10-31T15:04:19.685321+00:00"
+      },
+      "response": {
+        "role": "assistant",
+        "content": "The estimate is feasible (8 units, within budget of 10, within deadline). Let me save the plan.",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_4QcY2M6Y51WDVJVo82lI9538",
+            "type": "function",
+            "function": {
+              "name": "save_plan",
+              "arguments": "{\"rationale\": \"方案成本与期限均满足要求，提交保存\", \"plan_revision\": 1, \"estimate_id\": \"estimate_23c7954aaadbc00e7e2091aab6019a42059c2771955e1dc8477db6739e875040\"}"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "script_attempts": 1,
+  "fault_log": [],
+  "followup": null,
+  "catalog": {
+    "materials": [
+      {
+        "material_id": "M01",
+        "version": "2026-10-29",
+        "title": "影芽剪辑字幕功能",
+        "tags": [
+          "字幕",
+          "自动字幕",
+          "字幕编辑"
+        ],
+        "facts": [
+          "影芽剪辑支持自动生成字幕。",
+          "自动生成的字幕文本可以编辑。"
+        ],
+        "fee_units": 1,
+        "lead_minutes": 10
+      },
+      {
+        "material_id": "M02",
+        "version": "2026-10-29",
+        "title": "影芽剪辑片段编辑",
+        "tags": [
+          "裁剪",
+          "拼接",
+          "剪辑入门"
+        ],
+        "facts": [
+          "影芽剪辑支持裁剪视频片段。",
+          "影芽剪辑支持拼接视频片段。"
+        ],
+        "fee_units": 1,
+        "lead_minutes": 10
+      }
+    ],
+    "pricing": {
+      "version": "pricing-v1",
+      "currency": "simulated_unit",
+      "execution": "sequential",
+      "script_finalize": {
+        "fee_units": 2,
+        "duration_minutes": 20
+      },
+      "video_edit": {
+        "basic": {
+          "fee_units": 4,
+          "duration_minutes": 45
+        },
+        "premium": {
+          "fee_units": 8,
+          "duration_minutes": 90
+        }
+      },
+      "review": {
+        "fee_units": 1,
+        "duration_minutes": 15
+      }
+    }
+  }
+}

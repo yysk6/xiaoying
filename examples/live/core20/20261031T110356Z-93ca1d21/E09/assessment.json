@@ -1,0 +1,16 @@
+{
+  "case_id": "E09",
+  "label": "期限60分钟最低90分钟仍不可行",
+  "invariants_pass": true,
+  "behavior_pass": true,
+  "errors": [],
+  "behavior_errors": [],
+  "passed": true,
+  "status": "incomplete",
+  "reason": "constraints_unsatisfied",
+  "total_units": 8,
+  "plan_rows": 0,
+  "trace_rows": 22,
+  "decision_count": 5,
+  "content_review": "NON_BLOCKING: marketing copy outside this core rubric"
+}

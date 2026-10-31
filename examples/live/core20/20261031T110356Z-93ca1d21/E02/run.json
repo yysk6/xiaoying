@@ -1,0 +1,28 @@
+{
+  "case_id": "E02",
+  "label": "另一素材且预算恰好8",
+  "invariants_pass": true,
+  "behavior_pass": true,
+  "errors": [],
+  "behavior_errors": [],
+  "passed": true,
+  "status": "completed",
+  "reason": null,
+  "total_units": 8,
+  "plan_rows": 1,
+  "trace_rows": 22,
+  "decision_count": 5,
+  "content_review": "NON_BLOCKING: marketing copy outside this core rubric",
+  "request_id": "E02-0efc82e1e8e0",
+  "usage": {
+    "model_requests": 6,
+    "action_calls": 5,
+    "input_tokens": 14662,
+    "output_tokens": 709,
+    "api_cost_usd": null
+  },
+  "fault_count": 0,
+  "entry": "service.run_task",
+  "http_attempts": 6,
+  "elapsed_seconds": 13.39
+}

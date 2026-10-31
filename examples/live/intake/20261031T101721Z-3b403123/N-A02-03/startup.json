@@ -1,0 +1,18 @@
+{
+  "session": {
+    "pid": 11560,
+    "status": "ready",
+    "launch_id": null,
+    "model": "deepseek-v4-pro",
+    "input_mode": "natural",
+    "api_key_configured": true,
+    "http_attempts": 0,
+    "database": "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\live\\intake\\20261031T101721Z-3b403123\\N-A02-03\\runtime.db",
+    "output_root": "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\live\\intake\\20261031T101721Z-3b403123\\N-A02-03\\runs"
+  },
+  "database": {
+    "requests": 0,
+    "events": 0,
+    "plans": 0
+  }
+}

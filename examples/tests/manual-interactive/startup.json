@@ -1,0 +1,18 @@
+{
+  "verified_at": "2026-10-31T09:31:13.874298+00:00",
+  "session": {
+    "pid": 32492,
+    "status": "ready",
+    "model": "deepseek-v4-pro",
+    "api_key_configured": true,
+    "http_attempts": 0,
+    "database": "C:\\Users\\11250\\Desktop\\xiaoying\\work\\manual\\runtime.db",
+    "output_root": "C:\\Users\\11250\\Desktop\\xiaoying\\work\\manual\\runs"
+  },
+  "database_exists_at_verification": false,
+  "verification": "Get-Process确认业务PID存活；原启动器PID匹配误报已修复，现有子终端独立核查ready。",
+  "launch_process_exit_code": 1,
+  "live_prediction_submitted_by_agent": false,
+  "final_launcher_relaunched": false,
+  "credential_handling": "hidden input -> anonymous stdin pipe -> client memory; no environment/argv/file credential"
+}

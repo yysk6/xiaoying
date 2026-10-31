@@ -1,0 +1,62 @@
+{
+  "case": "L05",
+  "started_at": "2026-10-31T09:05:22.483009+00:00",
+  "ended_at": "2026-10-31T09:05:39.349644+00:00",
+  "source": {
+    "commit": null,
+    "status": null
+  },
+  "backend": "deepseek",
+  "model": "deepseek-v4-pro",
+  "parameters": {
+    "temperature": 0,
+    "thinking": "disabled",
+    "planner_max_tokens": 2048,
+    "script_max_tokens": 1536
+  },
+  "argv": [
+    "scripts/evaluate_budget.py",
+    "--live",
+    "--key-stdin"
+  ],
+  "status": "incomplete",
+  "reason": "constraints_unsatisfied",
+  "http_attempts": 6,
+  "usage": {
+    "model_requests": 6,
+    "action_calls": 5,
+    "input_tokens": 14916,
+    "output_tokens": 998,
+    "api_cost_usd": null
+  },
+  "manifest": {
+    "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+    "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+    "model_id": "deepseek-v4-pro",
+    "planner_prompt_version": "planner-v1",
+    "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+    "schema_version": "1.0",
+    "script_prompt_version": "script-v1",
+    "thinking": "disabled"
+  },
+  "verdict": {
+    "case": "L05",
+    "invariants_pass": true,
+    "errors": [],
+    "behavior_pass": true,
+    "failure_handling_pass": null,
+    "recovery_pass": null,
+    "content_pass": null,
+    "passed": null,
+    "content_review": "PENDING",
+    "minimum_budget_gap_units": 3,
+    "plan_rows": 0,
+    "decision_event_ids": [
+      35,
+      39,
+      43,
+      49,
+      53
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "markdown_links_checked": 76,
+  "broken_links": [],
+  "secret_pattern_files": [],
+  "final_junit": {
+    "tests": 389,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "git_diff_check": {
+    "exit_code": 0,
+    "passed": true
+  }
+}
