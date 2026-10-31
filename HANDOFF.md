@@ -4,7 +4,7 @@
 
 ## 当前授权与状态
 
-用户已授权“开始改造，然后全部提交到GitHub”，并再次明确目标https://github.com/yysk6/xiaoying 。本轮材料整理与自验完成，ready_for_review；不得把用户要求提交当成所有历史阶段的accepted。按授权将此前未提交的自然需求入口、评测器、测试、原始证据和本次文档一起提交，随后核对远端；不是另开自然对话/事实审核开发。
+用户已授权“开始改造，然后全部提交到GitHub”，并再次明确目标https://github.com/yysk6/xiaoying 。本轮材料整理与自验完成，ready_for_review；不得把用户要求提交当成所有历史阶段的accepted。已按授权将此前未提交的自然需求入口、评测器、测试、原始证据和本次文档一起提交并推送，内容提交与远端已核对一致；不是另开自然对话/事实审核开发。
 
 主评审入口为README、docs01—05及examples/README。五篇原稿归档但未删历史；包内data仍是唯一运行资料源，新增说明；原始Trace/输出路径保留。AI贡献记录基于需求/开发/评测会话，强调本人选题/架构取舍、阶段约束、过程纠偏、真实体验反馈及验收设计，代码/提示/测试的AI辅助如实说明，不编造独立手写或开发工时。
 
@@ -18,7 +18,7 @@
 
 ## Git与发布
 
-本轮起始main/6885d85e6da9a6b4e8e4fe2af5b39ad6cb429711、单worktree；已fetch到origin/main=48874f6，原本ahead8，无远端分叉。已明确授权commit/push到上述仓库，不强推或改写历史。本记录写入时待执行最终commit/push及SHA核对，后续补记实际结果。Git在沙箱中写.git受限；经批准提升执行，命令用-c safe.directory指向当前仓库，不改全局配置。
+本轮起始main/6885d85e6da9a6b4e8e4fe2af5b39ad6cb429711、单worktree；已fetch到origin/main=48874f6，原本ahead8，无远端分叉。已明确授权commit/push到上述仓库，不强推或改写历史。内容提交57ab79fc3dae73ddde723761804b657b42698745已成功推送，git ls-remote确认GitHub main与本地相同。随后仅补记交付/扫描元数据，不改业务或证据；最终分支SHA通过git rev-parse HEAD与ls-remote获取。Git在沙箱中写.git受限；经批准提升执行，命令用-c safe.directory指向当前仓库，不改全局配置。
 
 真实密钥、env文件、虚拟环境、work/build/dist/cache及*.db不提交。evidence.json包含可读持久快照；仅克隆仓库没有runtime.db，物理--recheck须原库。产物审计可只用已提交JSON/Trace，离线pytest重建临时库。
 

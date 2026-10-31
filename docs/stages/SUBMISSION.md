@@ -35,4 +35,4 @@ Windows安装/正式wheel的先前验证在[安装记录](../../examples/tests/i
 
 整理起始基线main/6885d85e6da9a6b4e8e4fe2af5b39ad6cb429711，单worktree。已fetch核对origin/main为48874f6，本地原有8个未推送提交，无远端分叉；保留原历史，不强推。全部项目源码/文档/合成资料/可读证据按用户授权提交；虚拟环境、work、缓存、dist、真实密钥及SQLite工作库不提交。
 
-本记录完成时尚待提交/推送，最终同步情况将由Git核对并补记。最终提交SHA通过git rev-parse HEAD获取，远端通过git ls-remote origin refs/heads/main核对；仓库与分支为上述origin/main。
+内容提交57ab79fc3dae73ddde723761804b657b42698745已推送至origin/main，git ls-remote核对远端SHA完全一致。其后仅补充本交付记录、交接和扫描元数据；最终分支SHA通过git rev-parse HEAD获取，并与git ls-remote origin refs/heads/main核对。

@@ -11,5 +11,12 @@
   "artifact_audit_passed": true,
   "http_requests": 0,
   "business_behavior_changed": false,
-  "static_checks_passed": true
+  "static_checks_passed": true,
+  "publication": {
+    "repository": "https://github.com/yysk6/xiaoying",
+    "branch": "main",
+    "verified_content_commit": "57ab79fc3dae73ddde723761804b657b42698745",
+    "remote_matches_content_commit": true,
+    "subsequent_changes": "delivery metadata only; final branch SHA from git rev-parse HEAD"
+  }
 }
