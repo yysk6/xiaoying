@@ -1,0 +1,78 @@
+{
+  "now": "2026-10-31T02:00:00+00:00",
+  "decisions": [
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "search",
+          "type": "function",
+          "function": {
+            "name": "search_materials",
+            "arguments": "{\"rationale\": \"显式离线示例动作\", \"query\": \"字幕\", \"top_k\": 1}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "revise",
+          "type": "function",
+          "function": {
+            "name": "revise_plan",
+            "arguments": "{\"rationale\": \"显式离线示例动作\", \"material_id\": \"M01\", \"creative_brief\": \"展示字幕编辑\", \"production_mode\": \"basic\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "generate",
+          "type": "function",
+          "function": {
+            "name": "generate_script",
+            "arguments": "{\"rationale\": \"显式离线示例动作\", \"plan_revision\": 1}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "estimate",
+          "type": "function",
+          "function": {
+            "name": "estimate_cost",
+            "arguments": "{\"rationale\": \"显式离线示例动作\", \"plan_revision\": 1}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "save",
+          "type": "function",
+          "function": {
+            "name": "save_plan",
+            "arguments": "{\"rationale\": \"显式离线示例动作\", \"plan_revision\": 1, \"estimate_id\": \"estimate_79e1d925e79c904a9cf8ef433d2eb255d5e3f1a881e45d7e3ea1121a86da1749\"}"
+          }
+        }
+      ]
+    }
+  ],
+  "responses": [
+    "{\"title\": \"字幕演示\", \"hook\": \"试试字幕\", \"body\": \"自动生成的字幕文本可以编辑。\", \"cta\": \"体验字幕编辑\", \"source_ids\": [\"M01\"]}"
+  ]
+}

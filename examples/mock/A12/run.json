@@ -1,0 +1,79 @@
+{
+  "backend": "mock",
+  "model": "mock",
+  "source_baseline": "feb17bc71a2bdc55f52bd04619b0d06c9bcff5ec",
+  "working_tree_modified": true,
+  "clock_source": "explicit fixed mock scenario",
+  "runs": [
+    {
+      "command": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "content_planner",
+        "run",
+        "--input",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A12\\input.json",
+        "--mock-scenario",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A12\\scenario.json",
+        "--db",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s6-evidence\\runtime.db",
+        "--output-dir",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A12\\initial"
+      ],
+      "started_at": "2026-10-31T08:01:05.843150+00:00",
+      "ended_at": "2026-10-31T08:01:07.837048+00:00",
+      "exit_code": 3,
+      "stderr": "tool_failure: 生成失败后等待显式续跑\n"
+    },
+    {
+      "command": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "content_planner",
+        "resume",
+        "--request-id",
+        "s6-A12",
+        "--db",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s6-evidence\\runtime.db",
+        "--output-dir",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A12",
+        "--mock-scenario",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A12\\continuation.json"
+      ],
+      "started_at": "2026-10-31T08:01:07.852959+00:00",
+      "ended_at": "2026-10-31T08:01:09.842753+00:00",
+      "exit_code": 0,
+      "stderr": ""
+    }
+  ],
+  "before_resume": {
+    "plan_rows": 0,
+    "events": 18
+  },
+  "after_resume": {
+    "plan_rows": 1,
+    "events": 32
+  },
+  "usage": {
+    "model_requests": 9,
+    "action_calls": 7,
+    "input_tokens": null,
+    "output_tokens": null,
+    "api_cost_usd": null
+  },
+  "live_model_calls": 0,
+  "data_manifest": {
+    "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+    "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+    "model_id": "mock",
+    "planner_prompt_version": "planner-v1",
+    "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+    "schema_version": "1.0",
+    "script_prompt_version": "script-v1",
+    "thinking": "disabled"
+  }
+}

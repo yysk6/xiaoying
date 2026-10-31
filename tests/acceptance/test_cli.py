@@ -300,7 +300,7 @@ def test_save_rechecks_clock_and_reports_new_deadline_gap(tmp_path):
 
 @pytest.mark.parametrize('arguments,code,reason', [
     (['show', '--request-id', 'missing'], 2, 'REQUEST_NOT_FOUND'),
-    (['resume', '--request-id', 'missing'], 2, 'CONFIG_ERROR'),
+    (['resume', '--request-id', 'missing'], 2, 'REQUEST_NOT_FOUND'),
     (['run', '--input', 'input.json', '--backend', 'deepseek'], 2, 'CONFIG_ERROR'),
     (['run', '--input', 'missing.json'], 2, 'INVALID_ARGUMENT'),
     (['run', '--input', 'input.json', '--mock-scenario', 'broken.json'], 2, 'CONFIG_ERROR')])

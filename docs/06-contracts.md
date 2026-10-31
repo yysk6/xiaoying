@@ -4,7 +4,7 @@
 
 ## CLI
 
-S5实现前约定：本阶段开放run/show，resume仍留S6；deepseek后端留S7，选择时明确配置错误，不降级Mock。
+S6实现前约定：run/show保持既有语义，本阶段开放显式resume；deepseek后端留S7，选择时明确配置错误，不降级Mock。S5历史范围见阶段报告。
 
 ```text
 python -m content_planner run --input <request.json> --backend mock|deepseek --db <runtime.db> --output-dir <directory>
@@ -13,6 +13,8 @@ python -m content_planner resume --request-id <ID> --db <runtime.db> --output-di
 ```
 
 `run` 默认 backend=mock、db=`work/runtime.db`、output-dir=`work/runs/<request_id>`；业务资料通过包资源 `content_planner/data/` 读取。`resume` 使用原任务 backend 和配置，不允许借续跑变更模型/资料/预算。`show` 不调用模型或业务工具。live 模式缺少模型环境变量时明确报配置错误，不退回 Mock。
+
+S6的Mock续跑可加`--mock-scenario <后续响应.json>`，格式沿用下节；未完成任务需要显式后续响应，不能让默认演示从头重播。拒绝恢复返回incomplete/退出3及MANIFEST_MISMATCH、CHECKPOINT_NOT_FOUND、RESUME_NOT_ALLOWED或原限额原因，原持久状态不变；缺任务仍为REQUEST_NOT_FOUND/退出2。细节与公开注入入口见[恢复规格](07-state-and-storage.md#s6接通细化实现前2026-10-31)。
 
 ### S5离线入口细化（实现前，2026-10-31）
 

@@ -1,0 +1,72 @@
+{
+  "backend": "mock",
+  "model": "mock",
+  "source_baseline": "feb17bc71a2bdc55f52bd04619b0d06c9bcff5ec",
+  "working_tree_modified": true,
+  "clock_source": "explicit fixed mock scenario",
+  "runs": [
+    {
+      "command": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport json,os,sys\nfrom content_planner import service\nfrom content_planner.storage import Repository\nwhere=sys.argv[1]\nclass CrashRepository(Repository):\n    def record_event(self,request_id,operation_id,phase,**fields):\n        result=super().record_event(request_id,operation_id,phase,**fields)\n        if where=='save_failure' and phase=='failed' and fields['name']=='save_plan': os._exit(91)\n        if phase=='succeeded' and ((where=='planner' and fields['name']=='planner')\n            or (where=='script' and fields['name']=='script')\n            or (where=='tool' and fields['name']=='generate_script')):\n            os._exit(91)\n        return result\n    def save_plan(self,*args,**kwargs):\n        if where=='unknown_save': os._exit(91)\n        result=super().save_plan(*args,**kwargs)\n        if where=='save': os._exit(91)\n        return result\nservice.Repository=CrashRepository\nif where.startswith('unknown_'):\n    from datetime import datetime\n    from content_planner.model import FakeModelClient\n    setup=json.load(open(sys.argv[4],encoding='utf-8'))\n    class Clock:\n        def now(self): return datetime.fromisoformat(setup['now'])\n    class CrashModel(FakeModelClient):\n        def decide(self,context):\n            response=super().decide(context)\n            if where=='unknown_planner': os._exit(91)\n            return response\n        def generate_script(self,context):\n            response=super().generate_script(context)\n            if where=='unknown_script': os._exit(91)\n            return response\n    model=CrashModel(setup['responses'],decisions=setup['decisions'])\n    service.run_task(json.load(open(sys.argv[2],encoding='utf-8')),database=sys.argv[3],model=model,clock=Clock())\nelse:\n    if len(sys.argv)>5 and sys.argv[5]=='resume':\n        service.resume_task('s6',database=sys.argv[3],mock_scenario=sys.argv[4])\n    else:\n        service.run_task(json.load(open(sys.argv[2],encoding='utf-8')),database=sys.argv[3],mock_scenario=sys.argv[4])\n",
+        "save",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A13\\input.json",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s6-evidence\\runtime.db",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A13\\scenario.json"
+      ],
+      "started_at": "2026-10-31T08:01:09.943789+00:00",
+      "ended_at": "2026-10-31T08:01:11.887230+00:00",
+      "exit_code": 91,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\11250\\Desktop\\xiaoying\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "content_planner",
+        "resume",
+        "--request-id",
+        "s6-A13",
+        "--db",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s6-evidence\\runtime.db",
+        "--output-dir",
+        "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A13"
+      ],
+      "started_at": "2026-10-31T08:01:11.907230+00:00",
+      "ended_at": "2026-10-31T08:01:13.734211+00:00",
+      "exit_code": 0,
+      "stderr": ""
+    }
+  ],
+  "before_resume": {
+    "plan_rows": 1,
+    "events": 22
+  },
+  "after_resume": {
+    "plan_rows": 1,
+    "events": 22
+  },
+  "usage": {
+    "model_requests": 6,
+    "action_calls": 5,
+    "input_tokens": null,
+    "output_tokens": null,
+    "api_cost_usd": null
+  },
+  "live_model_calls": 0,
+  "data_manifest": {
+    "aliases_sha256": "d353edc86510a18f4b09c4fd41eb3695db209267b3182a3188bb4663bb617e66",
+    "catalog_sha256": "27f37e2c51fc25533b3d719f4b82a9cfe637a164d419fb0b3b54c4bc167c5864",
+    "model_id": "mock",
+    "planner_prompt_version": "planner-v1",
+    "pricing_sha256": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+    "schema_version": "1.0",
+    "script_prompt_version": "script-v1",
+    "thinking": "disabled"
+  }
+}

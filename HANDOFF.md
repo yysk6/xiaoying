@@ -1,57 +1,53 @@
 # 项目上下文交接
 
-更新：2026-10-31（UTC+08）。接手先读AGENTS.md、本文件、[S5报告](docs/stages/S5.md)及[阶段计划](docs/08-development-plan.md)，再核对git status --short --branch、git log -3 --oneline、git worktree list、git remote -v。保留已有改动，以实际Git和最新用户指令核对范围。
+更新：2026-10-31（UTC+08）。接手先读AGENTS.md、本文件、[S6报告](docs/stages/S6.md)及[阶段计划](docs/08-development-plan.md)，再核对git status --short --branch、git log -3 --oneline、git worktree list、git remote -v。保留已有改动，以实际Git及最新用户指令核对范围。
 
 ## 当前授权与进展
 
-**S5 ready_for_review，用户验收pending。** 用户明确“开始s5”，本阶段实现、自验、双轴审查及安装验证完成，停在验收包。前阶段单独验收不代填，S6—S8未开始/未授权。用户已决定不接入Deep Agents，继续原LangGraph路线。
+**S6 ready_for_review，用户验收pending。** 用户授权“进行s6”；实现、自验、双轴审查及最终产物验证完成，停在验收包。前阶段验收不代填，S7/S8未开始/未授权。仍为LangGraph/Python3.10.8路线，未引入Deep Agents，依赖锁未变。
 
-历史见[S0](docs/stages/S0.md)、[S1](docs/stages/S1.md)、[S2](docs/stages/S2.md)、[S3](docs/stages/S3.md)、[S4](docs/stages/S4.md)。S5范围、Red/Green、实际案例、审查和限制统一见[S5](docs/stages/S5.md)，本文件只保留继续工作的必要快照。
+历史结果见[S5](docs/stages/S5.md)及其前阶段引用。S6设计、真实Red/Green、诊断、案例、审查和限制集中见[S6](docs/stages/S6.md)，本文件只保留继续工作的必要信息。
 
-## 当前实现与决定
+## 当前实现与关键决定
 
-- Python3.10.8/LangGraph/SQLite路线及依赖锁不变；无Deep Agents依赖。遗留.venv-deepagents不参与开发/运行，不删除旧环境。
-- CLI开放run/show与JSON/Markdown/Trace导出，stdout/stderr及文件UTF-8。Mock为显式场景，可指定固定Clock；省略场景为包内固定M01/basic示例，使用SystemClock。不是模型智能效果证据。
-- 新请求先严格校验；缺失/格式错误不创建任务。已有请求先比较输入指纹，重复run/show只读历史及已提交方案，不加载新场景/资料或再执行，过期不覆盖历史成功。冲突返回REQUEST_CONFLICT。
-- TaskResult/attempt/usage/Trace来自持久事实，提交方案优先。未完成Markdown保留当前有效估算缺口；活动表显示北京时间，四活动仍为planned。导出失败不回滚方案，completed+EXPORT_FAILED，show可重导出。
-- S4任务记忆、完整历史及按完整交互组裁剪保持；模型32/动作24/候选4/同键重试2/协议错误2/图80。细节见docs/02、06、07。Trace不导出planner原响应、推理字段或内部状态补丁。
-- 不提供业务resume或真实HTTP；CLI选择deepseek/resume会明确报错，不假装可用。跨进程恢复/manifest校验属S6，真实DeepSeek接入与效果属S7。
+- CLI已有run/show/resume及JSON/Markdown/Trace。普通重复run只读；显式resume先核对原请求/提交事实、manifest、额度和可恢复原因。已完成任务无需新场景/模型配置。
+- 未完成Mock续跑需后续显式场景或注入ModelClient；不能改变原输入/backend/model/manifest。工具瞬时失败或MODEL_UNAVAILABLE可续跑；资料/约束停止、非法脚本、协议/执行上限等拒绝，原任务不改写。
+- 框架恢复检查next **或tasks**，用invoke(None)应用真实pending writes/节点；正常可恢复结束从下一次decide继续。不能只看next：已完成节点持久写入可能令next为空。
+- 已提交plan优先；坏checkpoint不抹掉方案，返回completed+CHECKPOINT_UNAVAILABLE。已持久模型/工具结果重放，不再次执行；保存失败事件缺完整补丁时补齐原结果和当前失败引用。
+- 模型/动作日志按kind及started operation关联结束事件，避免外部合法ID和内部script操作碰撞，保留原tool_call_id。结果未知的started标interrupted；新recovery尝试照常计数，不承诺外部API exactly-once。
+- 恢复保留候选/产物/历史/决策序号及累计限额（模型32、动作24、候选4、同键可重试失败2）。换档位复用脚本，换brief/素材失效，必须重估并保存前重新核对截止时间。
+
+权威规格为docs/06、[docs/07恢复细化](docs/07-state-and-storage.md#s6接通细化实现前2026-10-31)和contracts。HANDOFF是开发交接，不是应用记忆。
 
 ## 验证与复现
 
-Windows/Python3.10.8，最终**260 passed、0 failed、0 skipped**（38项S5新增+222回归），见[最终JUnit](examples/tests/stages/S5/pytest-junit.xml)。259通过后干净安装发现Windows默认编码缺陷，补真实Red修复，最终重跑260并重建wheel；不复用旧产物结论。
+Windows/Python3.10.8，最终**288 passed、0 failed、0 skipped**（28项S6新增+260回归），见[最终JUnit](examples/tests/stages/S6/pytest-junit.xml)。首次全量285 passed/2 failed暴露异步checkpoint窗口，新增确定性回归并修复后重跑；不改写初次失败为通过。诊断过程及测试夹具的flush固定见阶段报告。
 
 ```powershell
-.\.venv\Scripts\python.exe -X utf8 -m pytest -q tests/acceptance/test_cli.py
-.\.venv\Scripts\python.exe -X utf8 -m pytest -q --junitxml=examples/tests/stages/S5/pytest-junit.xml
-.\.venv\Scripts\python.exe -X utf8 -m content_planner run --input examples/mock/A01/input.json --mock-scenario examples/mock/A01/scenario.json --db work/demo.db --output-dir work/demo-output
-.\.venv\Scripts\python.exe -X utf8 -m content_planner show --request-id s5-A01 --db work/demo.db --output-dir work/demo-show
+.\.venv\Scripts\python.exe -X utf8 -m pytest -q tests/acceptance/test_resume.py
+.\.venv\Scripts\python.exe -X utf8 -m pytest -q --junitxml=examples/tests/stages/S6/pytest-junit.xml
+.\.venv\Scripts\python.exe -m content_planner run --input examples/mock/A12/input.json --mock-scenario examples/mock/A12/scenario.json --db work/resume-demo.db --output-dir work/resume-before
+.\.venv\Scripts\python.exe -m content_planner resume --request-id s6-A12 --mock-scenario examples/mock/A12/continuation.json --db work/resume-demo.db --output-dir work/resume-after
 ```
 
-POSIX对应命令见README，解释器替换为.venv/bin/python。普通pytest网络禁用，模型为Fake，真实API调用0。
+演示用新数据库；初次预期incomplete/退出3，后续completed/退出0。POSIX命令见README。普通pytest网络禁用；Fake仅验证程序，真实API调用0，token/美元成本未知为null。
 
-五组实际证据见examples/mock/A01（正常）、A02（缺预算）、A08（持续生成失败）、A04（12→8并复用脚本）、A10（重复A01）；每组含实际input/scenario/output/plan/trace/run，固定Clock来源已注明。A02无持久事件、空Trace不伪造执行。
+实际[A12](examples/mock/A12/)失败续跑：方案0→1、事件18→32、累计9模型/7动作；[A13](examples/mock/A13/)真实保存后os._exit(91)，新进程恢复仍1方案/22事件，零新增模型/工具。原输入、固定Clock/场景、前后输出及Trace/run记录均保留。
 
-最终正式wheel在新建work/s5-clean中由公开锁离线安装，非仓库cwd、移除宿主/模型环境、python -I实际验证默认场景run/重复run/show和Schema，均通过。[安装记录](examples/tests/stages/S5/clean-install.json)保留首轮编码失败及最终产物hash。干净环境未重复全套pytest；Linux/其他Python、S6恢复、S7 Live及完整A01—A23验收仍NOT_RUN/未全部完成。不能把S5局部安装验证当S8整体通过。
+最终wheel已重建并在S5原干净公开运行环境离线重装（锁未变，未新建重复环境）；非仓库cwd、移除宿主/模型变量、python -I验证续跑链及最终pending-writes恢复窗口，Schema/UTF-8通过。[安装记录](examples/tests/stages/S6/clean-install.json)区分原/最终产物hash与实际检查。未重复干净环境全套pytest。Linux/其他Python、真实DeepSeek HTTP/效果及S8完整交付仍NOT_RUN；不能称完整项目已验收。
 
-审查：Standards硬违规0/判断项0；Spec初始P2两项（Markdown缺口、时区）均真实Red后修复，独立目标复核2 passed；两轴未解决0。编码入口修正另作Standards复核，无当前技术阻塞；审查不替代用户验收。
+审查：Standards硬违反0/判断项0；Spec初始3项P2均真实Red后修复复核；自验的pending-writes缺陷另作独立复核，两轴最终未解决0。无已知技术阻塞，用户验收仍独立pending。
 
-## Git与同步
+## Git、同步与下一步
 
-仓库[yysk6/xiaoying](https://github.com/yysk6/xiaoying)，main单worktree；S5起始HEAD为`a45595cbf1a4c13df11956e2916f76b357c7c925`，工作区干净。阶段提交用`git log -1 --format=%H -- docs/stages/S5.md`定位，不猜本文自身SHA。
+仓库[yysk6/xiaoying](https://github.com/yysk6/xiaoying)，main单worktree；S6起始HEAD `feb17bc71a2bdc55f52bd04619b0d06c9bcff5ec`，工作区干净。阶段提交用`git log -1 --format=%H -- docs/stages/S6.md`定位，不猜本文自身SHA。已知本地origin/main仍为48874f6，本轮未fetch/推送，不代表最新远端事实。案例run.json标注起始基线+工作区修改状态。
 
-已知本地origin/main仍为`48874f6c44dcb6bde94106a859e36bd1603bcfc3`，本轮未fetch/推送，不代表最新远端事实。Git需要safe.directory时仅在命令级指定实际项目路径。示例run.json记录起始基线+工作区修改状态，不能把它当运行时已提交新版本。
+下一步处理S6反馈；收到S7明确授权后才接DeepSeek官方deepseek-v4-pro的HTTP协议测试、真实探针与效果评估。没有提前付费调用或配置密钥。遗留.venv-deepagents不参与运行，不删除旧环境。当前work/s6-evidence保存演示库，work/dist不提交。
 
-## 下一步与开发方式
+沿用[效率约定](docs/08-development-plan.md#开发效率约定s2复盘后生效)：逐行为TDD，集中报告、一份最终JUnit，按实际变化补验；不增加逐轮证据或一次性辅助脚本。docs/与contracts/为维护源，content-planner-spec/为历史快照。应用不依赖Codex/MCP/账户/开发机目录。
 
-下一步处理S5反馈；收到S6明确授权后再实现resume、跨进程业务恢复、有效产物复用、manifest核对及累计额度。当前不得自动开始S6或付费API探针。
-
-沿用[效率约定](docs/08-development-plan.md#开发效率约定s2复盘后生效)：逐业务行为TDD，集中报告、一份最终JUnit，按变化验证；只有入口/资源/依赖/验收需要时验证最终安装。S5复用现有CLI工具和内联命令，无新增一次性记录脚本。
-
-docs/与contracts/是维护源，content-planner-spec/为历史快照。.venv/work/dist不提交。程序只用公开包、标准库、Git/普通CLI，不能依赖Codex/MCP/账户或开发机专用路径；HANDOFF不是应用记忆。密钥仅从环境变量读取，模型固定DeepSeek官方deepseek-v4-pro；离线不发付费请求。
-
-用户验收/修订、阶段自验结束、重要阻塞或中断时更新本文件，详细历史留在阶段报告/Git。
+用户验收/修订、阶段自验结束、重要阻塞或中断时更新本文件，历史留在阶段报告/Git。
 
 ## Suggested skills
 
-按[技能约定](docs/09-development-skills.md)读取实际SKILL.md：karpathy-guidelines持续适用；实现用tdd（tests.md/mocking.md）、具体接口问题用codebase-design；阶段交付用code-review双轴；交接用handoff/writing-for-agents。原因不明故障才用diagnosing-bugs。本轮使用前六项，编码缺陷已定位、用聚焦TDD修正，未执行diagnosing-bugs完整流程。根HANDOFF路径覆盖handoff默认临时目录规则。
+按[技能约定](docs/09-development-skills.md)读取实际SKILL.md：karpathy-guidelines持续适用；业务实现用tdd（tests.md/mocking.md）、具体接口用codebase-design；阶段交付用code-review双轴；原因不明故障用diagnosing-bugs；交接用handoff/writing-for-agents。本轮实际使用以上七项；根HANDOFF路径覆盖handoff默认临时目录规则。

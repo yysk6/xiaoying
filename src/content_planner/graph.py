@@ -35,8 +35,29 @@ class PlanningAgent:
             return state
         if previous.values:
             return previous.values
+        return self._invoke(initial, recursion_limit)
+
+    def resume(self, *, recursion_limit=80):
+        previous = self.graph.get_state(self.config)
+        if not previous.values:
+            raise Fault('CHECKPOINT_NOT_FOUND', 'No task checkpoint is available')
+        interrupted = bool(previous.next or previous.tasks)
+        if not interrupted:
+            state = previous.values
+            retryable_ids = {r['tool_call_id'] for r in state['tool_results']
+                             if not r['ok'] and r['error']['retryable']}
+            retryable = state['reason'] == 'MODEL_UNAVAILABLE' or (
+                state['reason'] == 'tool_failure' and any(ref['tool_call_id'] in retryable_ids
+                    for ref in state.get('unresolved_failures', {}).values()))
+            if not retryable:
+                raise Fault('RESUME_NOT_ALLOWED', 'Task stopped for a nonrecoverable reason')
+        state = {**previous.values, 'status': 'running', 'reason': None, 'message': ''}
+        self.runtime.tools.restore(state)
+        return self._invoke(None if interrupted else state, recursion_limit)
+
+    def _invoke(self, state, recursion_limit):
         try:
-            return self.graph.invoke(initial, {**self.config, 'recursion_limit': recursion_limit})
+            return self.graph.invoke(state, {**self.config, 'recursion_limit': recursion_limit})
         except GraphRecursionError:
             state = dict(self.graph.get_state(self.config).values)
             call = state.get('pending_call')

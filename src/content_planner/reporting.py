@@ -34,12 +34,12 @@ def task_result(record, state, events, saved):
         key = event['args'].get('logical_key', event['name'])
         attempts[key] = attempts.get(key, 0) + 1
         end = next((e for e in reversed(events) if e['operation_id'] == event['operation_id']), event)
-        call_id = event['operation_id'].removeprefix('tool:')
+        call_id = event['args'].get('tool_call_id', event['args'].get('recovery_of', event['operation_id']).removeprefix('tool:'))
         observation = end['result'] or {}
         steps.append({'event_id': event['event_id'], 'operation_id': event['operation_id'],
                       'tool_call_id': call_id, 'tool': event['name'], 'attempt': attempts[key],
                       'status': end['phase'], 'reused': observation.get('reused', False),
-                      'result_index': indexes.get(call_id), 'error_code': end['error_code']})
+                      'result_index': indexes.get(call_id) if observation else None, 'error_code': end['error_code']})
     candidate = state.get('candidate_history', {}).get(str(state.get('current_revision')))
     plan = saved['saved_plan'] if saved else None
     if plan:
@@ -70,7 +70,7 @@ def trace_events(result, events):
         if event == events[-1]:
             status = result['status']
         observation = event['result'] or {}
-        args = event['args'].get('arguments', event['args'])
+        args = event['args'].get('arguments', {k: v for k, v in event['args'].items() if k != 'recovery_of'})
         index = indexes.get(observation.get('tool_call_id'))
         summary = {'phase': event['phase']}
         if event['error_code']:

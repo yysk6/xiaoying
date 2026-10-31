@@ -1,0 +1,210 @@
+{
+  "stage": "S6",
+  "status": "passed",
+  "platform": "win32",
+  "python": "3.10.8",
+  "clean_environment_reused_from": "S5; runtime lock unchanged; only public runtime packages",
+  "cwd": "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s6-wheel-fmpkowlc",
+  "cwd_is_repository": false,
+  "host_and_model_environment_removed": true,
+  "live_model_calls": 0,
+  "build_command": ".venv/Scripts/python.exe -X utf8 -m build --no-isolation",
+  "build_exit_code": 0,
+  "install_command": "work/s5-clean/Scripts/python.exe -X utf8 -m pip install --no-index --no-deps --force-reinstall dist/xiaoying_content_planner-0.1.0-py3-none-any.whl",
+  "install_exit_code": 0,
+  "pip_check_exit_code": 0,
+  "isolated_wheel_import_exit_code": 0,
+  "schema_validation": "passed in original verification command",
+  "encoding_flags": "python -I; no -X utf8",
+  "linux": "NOT_RUN",
+  "steps": [
+    {
+      "name": "initial_failure",
+      "observed_exit_code": 3,
+      "result_summary": {
+        "request_id": "s6-A12",
+        "status": "incomplete",
+        "reason": "tool_failure",
+        "usage": {
+          "model_requests": 5,
+          "action_calls": 4,
+          "input_tokens": null,
+          "output_tokens": null,
+          "api_cost_usd": null
+        },
+        "limits": {
+          "max_model_requests": 32,
+          "max_action_calls": 24,
+          "max_revisions": 4,
+          "remaining_model_requests": 27,
+          "remaining_action_calls": 20
+        },
+        "warnings": []
+      }
+    },
+    {
+      "name": "resume_new_process",
+      "observed_exit_code": 0,
+      "result_summary": {
+        "request_id": "s6-A12",
+        "status": "completed",
+        "reason": null,
+        "usage": {
+          "model_requests": 9,
+          "action_calls": 7,
+          "input_tokens": null,
+          "output_tokens": null,
+          "api_cost_usd": null
+        },
+        "limits": {
+          "max_model_requests": 32,
+          "max_action_calls": 24,
+          "max_revisions": 4,
+          "remaining_model_requests": 23,
+          "remaining_action_calls": 17
+        },
+        "warnings": []
+      }
+    },
+    {
+      "name": "resume_completed_read_only",
+      "observed_exit_code": 0,
+      "result_summary": {
+        "request_id": "s6-A12",
+        "status": "completed",
+        "reason": null,
+        "usage": {
+          "model_requests": 9,
+          "action_calls": 7,
+          "input_tokens": null,
+          "output_tokens": null,
+          "api_cost_usd": null
+        },
+        "limits": {
+          "max_model_requests": 32,
+          "max_action_calls": 24,
+          "max_revisions": 4,
+          "remaining_model_requests": 23,
+          "remaining_action_calls": 17
+        },
+        "warnings": []
+      }
+    },
+    {
+      "name": "show",
+      "observed_exit_code": 0,
+      "result_summary": {
+        "request_id": "s6-A12",
+        "status": "completed",
+        "reason": null,
+        "usage": {
+          "model_requests": 9,
+          "action_calls": 7,
+          "input_tokens": null,
+          "output_tokens": null,
+          "api_cost_usd": null
+        },
+        "limits": {
+          "max_model_requests": 32,
+          "max_action_calls": 24,
+          "max_revisions": 4,
+          "remaining_model_requests": 23,
+          "remaining_action_calls": 17
+        },
+        "warnings": []
+      }
+    }
+  ],
+  "recording_note": "Verification succeeded; initial report write preceded JUnit directory creation and failed. Recovered result summaries from actual exported files; no application calls were repeated.",
+  "wheel_sha256": "80d0f02bf78ca3140897277f3ff7bd85dc4b4719809fa1154b9ee1e20a5c6759",
+  "commands": [
+    [
+      "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s5-clean\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "content_planner",
+      "run",
+      "--input",
+      "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A12\\input.json",
+      "--mock-scenario",
+      "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A12\\scenario.json",
+      "--db",
+      "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s6-wheel-fmpkowlc\\runtime.db",
+      "--output-dir",
+      "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s6-wheel-fmpkowlc\\first"
+    ],
+    [
+      "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s5-clean\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "content_planner",
+      "resume",
+      "--request-id",
+      "s6-A12",
+      "--mock-scenario",
+      "C:\\Users\\11250\\Desktop\\xiaoying\\examples\\mock\\A12\\continuation.json",
+      "--db",
+      "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s6-wheel-fmpkowlc\\runtime.db",
+      "--output-dir",
+      "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s6-wheel-fmpkowlc\\resumed"
+    ],
+    [
+      "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s5-clean\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "content_planner",
+      "resume",
+      "--request-id",
+      "s6-A12",
+      "--db",
+      "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s6-wheel-fmpkowlc\\runtime.db",
+      "--output-dir",
+      "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s6-wheel-fmpkowlc\\repeat"
+    ],
+    [
+      "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s5-clean\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "content_planner",
+      "show",
+      "--request-id",
+      "s6-A12",
+      "--db",
+      "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s6-wheel-fmpkowlc\\runtime.db",
+      "--output-dir",
+      "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s6-wheel-fmpkowlc\\show"
+    ]
+  ],
+  "previous_wheel_sha256": "ad857af88880da6d70e15c4ae236b0137fd45e4c89d4bfea6cd57d12ff524b8c",
+  "final_artifact_check": {
+    "fixture_source": "test_resume.py crash_run(tool,checkpoint_ready=True); keep real step2 checkpoint and pending writes",
+    "command": [
+      "C:\\Users\\11250\\Desktop\\xiaoying\\work\\s5-clean\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "content_planner",
+      "resume",
+      "--request-id",
+      "s6",
+      "--mock-scenario",
+      "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s6-final-wheel-_zxivjui\\continuation.json",
+      "--db",
+      "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s6-final-wheel-_zxivjui\\runtime.db",
+      "--output-dir",
+      "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s6-final-wheel-_zxivjui\\out"
+    ],
+    "cwd": "C:\\Users\\11250\\AppData\\Local\\Temp\\planner-s6-final-wheel-_zxivjui",
+    "exit_code": 0,
+    "stderr": "",
+    "status": "completed",
+    "usage": {
+      "model_requests": 6,
+      "action_calls": 5,
+      "input_tokens": null,
+      "output_tokens": null,
+      "api_cost_usd": null
+    },
+    "schema_validation": "passed",
+    "rebuild_and_force_reinstall_exit_code": 0
+  }
+}

@@ -143,6 +143,24 @@ checkpoint 与 events 不是统一跨连接事务。dispatch 重放相同 operat
 
 ## 续跑行为
 
+### S6接通细化（实现前，2026-10-31）
+
+公开入口为`service.resume_task(request_id, database=..., model=None, clock=None, mock_scenario=None, catalog=None)`及CLI `resume --request-id ... --db ... --output-dir ... --mock-scenario <后续响应.json>`。catalog仅复用既有公开资料加载入口的可替换目录/快照，供真实资料变化验证；不创建新框架。Mock后续场景只提供新的显式响应/测试Clock，不能更改原任务输入、backend/model或manifest；未完成Mock续跑需要后续场景（或注入ModelClient）。completed查询不需要场景、当前资料或模型配置。
+
+先读requests/plans：有提交方案直接返回completed，无新事件/模型/工具；checkpoint不可读时可用提交事实与已有事件返回并附CHECKPOINT_UNAVAILABLE告警。无提交时需有效checkpoint。恢复前比较原manifest与当前资料三hash、提示版本、契约版本、model_id/thinking及backend，差异为MANIFEST_MISMATCH；缺checkpoint为CHECKPOINT_NOT_FOUND。不可恢复正常停止为RESUME_NOT_ALLOWED；累计模型/动作耗尽使用既有对应LIMIT原因。拒绝只返回带明确reason的incomplete视图，不修改原任务/历史/额度。
+
+可恢复的正常结束只限MODEL_UNAVAILABLE，以及tool_failure中仍适用且retryable=true的业务错误；显式停止资料不足、约束不足、SCRIPT_INVALID等不可重试错误、MODEL_STOPPED、协议/候选/图/调用限额均拒绝。成功resume清运行终态字段，不清候选、产物、失败历史、决策序号、协议错误计数或任何累计额度；原截止时间不变，保存时重新报价守住期限。
+
+框架有pending节点时使用LangGraph invoke(None)，不重跑已完成节点；恢复可信checkpoint到LocalTools工作状态。dispatch按原tool_call_id核对同operation的结束事件，有已持久结果/补丁则复用并补齐原消息配对，不再次执行或追加同一ToolResult。候选/脚本使用当前指纹；换素材/brief仍废弃旧脚本引用，换档位只废弃估算。日志有已提交状态补丁但checkpoint落后时，重放补丁恢复业务事实。
+
+框架中断判断同时检查StateSnapshot.next及tasks：已完成节点的pending writes可能使next为空而tasks仍存在，此时仍使用invoke(None)应用框架持久写入，不能当作正常停止，也不能从START重启。
+
+每个model请求先按operation查日志：已成功响应直接复用；已失败响应恢复为同一次失败观察；只有started且无结束结果时追加interrupted，结果仍未知。未知的模型/工具尝试以`<原operation_id>:recovery:<n>`记录新started，args中内部recovery_of关联原operation，沿用原工具调用ID与原模型决策序号；新started照常计数。内部script模型operation仍关联原工具调用，已有脚本模型成功响应在工具节点重放时复用。未知外部请求可能再次产生费用，不承诺exactly-once。恢复后仍不得绕过同键两次可重试失败或全局额度。Trace不暴露recovery_of等内部参数；attempt按真实started保留interrupted与后续尝试。
+
+日志分组必须同时核对operation基名与kind（model/tool/control），结束事件通过同operation_id的started关联，不能依赖结束事件恰好携带recovery_of。外部合法调用ID可含`:script`等字符；与内部operation基名碰撞时使用未占用的recovery后缀记录该新动作，不复用另一kind的响应，原tool_call_id保持不变。
+
+验收用新进程及真实SQLite/checkpoint，在持久结果前、工具事件提交后但节点checkpoint前、plan事务提交后但checkpoint前注入进程退出；不以Mock保存结果替代真实提交。故障注入只在测试进程的数据库适配边界，业务程序不增加隐藏故障参数。离线阶段不发真实HTTP。
+
 - checkpoint 有未完成框架节点：按框架接口恢复 pending 节点，不从头再跑正常路径。
 - 上一轮已经以可恢复 incomplete 正常结束：保留 checkpoint 产物与合法历史，将运行状态设为 running，从 decide 让模型观察已有错误并选择下一步。
 - 可恢复原因：工具瞬时失败、模型网络/限流/服务故障、进程中断；受每参数最多两次工具尝试和累计限额限制。

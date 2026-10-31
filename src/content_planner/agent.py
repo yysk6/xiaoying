@@ -103,9 +103,39 @@ class AgentRuntime:
         return {'kind': kind, 'name': name, 'args': arguments or {}, 'rationale': rationale,
                 'created_at': self.clock.now().astimezone(timezone.utc).isoformat()}
 
+    def operation_events(self, base, kind):
+        events = self.repo.events(self.request.request_id)
+        operations = {e['operation_id'] for e in events if e['phase'] == 'started' and e['kind'] == kind
+                      and ((e['operation_id'] == base and not e['args'].get('recovery_of'))
+                           or e['args'].get('recovery_of') == base)}
+        return [e for e in events if e['operation_id'] in operations]
+
+    def start_attempt(self, base, fields, limit):
+        events = self.operation_events(base, fields['kind'])
+        starts = [e for e in events if e['phase'] == 'started']
+        if starts:
+            last = starts[-1]
+            if not any(e['operation_id'] == last['operation_id'] and e['phase'] != 'started' for e in events):
+                self.repo.record_event(self.request.request_id, last['operation_id'], 'interrupted',
+                    error_code='OPERATION_INTERRUPTED', **self.fields(last['kind'], last['name'], last['args'], last['rationale']))
+        used = {e['operation_id'] for e in self.repo.events(self.request.request_id)}
+        operation_id, number = base, 0
+        while operation_id in used:
+            number += 1
+            operation_id = f'{base}:recovery:{number}'
+        if operation_id != base:
+            fields = {**fields, 'args': {**fields['args'], 'recovery_of': base}}
+        self.repo.start_operation(self.request.request_id, operation_id, limit=limit, **fields)
+        return operation_id, fields
+
     def model_request(self, operation_id, name, execute):
         fields = self.fields('model', name)
-        self.repo.start_operation(self.request.request_id, operation_id, limit=32, **fields)
+        for event in reversed(self.operation_events(operation_id, 'model')):
+            if event['phase'] == 'succeeded':
+                return event['result']['response']
+            if event['phase'] == 'failed':
+                raise ModelUnavailable('Persisted model failure')
+        operation_id, fields = self.start_attempt(operation_id, fields, 32)
         try:
             response = execute()
         except ModelUnavailable:
@@ -192,13 +222,20 @@ class AgentRuntime:
         return patch
 
     def dispatch(self, state):
+        self.tools.restore(state)
         call = state['pending_call']
         name = call['function']['name']
         arguments = json.loads(call['function']['arguments'])
         operation_id = 'tool:' + call['id']
+        kind = 'control' if name in {'revise_plan', 'stop_task'} else 'tool'
+        for event in reversed(self.operation_events(operation_id, kind)):
+            if (event['phase'] in {'succeeded', 'failed', 'rejected'}
+                    and event['result'] is not None):
+                self.tools.replay_result(event['result'], event['state_patch'] or {}, arguments)
+                return self._dispatch_patch(state, event['result'])
         key = self.tools.logical_key(name, ACTION_ARGS[name].model_validate(arguments).model_dump(mode='json'))
-        fields = self.fields('control' if name in {'revise_plan', 'stop_task'} else 'tool', name,
-                             {'arguments': arguments, 'logical_key': key},
+        fields = self.fields(kind, name,
+                             {'arguments': arguments, 'logical_key': key, 'tool_call_id': call['id']},
                              arguments['rationale'])
         events = self.repo.events(self.request.request_id)
         matching = {event['operation_id'] for event in events if event['phase'] == 'started'
@@ -208,24 +245,29 @@ class AgentRuntime:
         exhausted = len(outcomes) >= 2 and all(event['phase'] == 'failed' and event['result']
                     and event['result']['error']['retryable'] for event in outcomes[-2:])
         try:
-            self.repo.start_operation(self.request.request_id, operation_id, limit=24, **fields)
+            operation_id, fields = self.start_attempt(operation_id, fields, 24)
         except Fault as error:
             if error.code != 'ACTION_LIMIT_REACHED':
                 raise
             return self.halt(error.code)
-        self.script_model.operation_id = operation_id
+        self.script_model.operation_id = 'tool:' + call['id']
         if exhausted:
             result = self.tools.reject_action(name, call['id'], Fault('TOOL_RETRY_LIMIT_REACHED',
                                                                       'Two retryable attempts have already failed'))
+        elif name == 'save_plan':
+            result = self.tools.save_plan(call['id'], arguments, operation_id=operation_id)
         else:
             result = getattr(self.tools, name)(call['id'], arguments)
         after = self.tools.snapshot()
         phase = 'succeeded' if result['ok'] else ('failed' if result['error']['retryable'] else 'rejected')
         self.repo.record_event(self.request.request_id, operation_id, phase,
                                result=result, state_patch=after, error_code=result['error']['code'] if result['error'] else None, **fields)
-        messages = state['planner_messages'] + [{'role': 'tool', 'tool_call_id': call['id'],
+        return self._dispatch_patch(state, result)
+
+    def _dispatch_patch(self, state, result):
+        messages = state['planner_messages'] + [{'role': 'tool', 'tool_call_id': result['tool_call_id'],
                                                'content': json.dumps(result, ensure_ascii=False)}]
-        patch = {**after, 'pending_call': None, 'planner_messages': messages, 'consecutive_protocol_errors': 0}
+        patch = {**self.tools.snapshot(), 'pending_call': None, 'planner_messages': messages, 'consecutive_protocol_errors': 0}
         if not result['ok'] and result['error']['code'] == 'MODEL_CALL_LIMIT_REACHED':
             patch.update(self.halt('MODEL_CALL_LIMIT_REACHED'))
         return patch

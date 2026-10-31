@@ -2,13 +2,14 @@
 
 编写日期：2026-10-29（北京时间）。选题：第 2 题。开发方式：SDD（规格驱动开发）+ TDD（测试驱动开发）。
 
-已实现领域规则、本地工具、SQLite保存/幂等、LangGraph离线循环及S5的run/show与JSON/Markdown/Trace导出。当前阶段、授权与验收状态统一见[HANDOFF](HANDOFF.md)，实际测试与审查见[S5报告](docs/stages/S5.md)。当前仅Mock；resume与真实DeepSeek后端尚未开放。
+已实现领域规则、本地工具、SQLite保存/幂等、LangGraph离线循环、run/show/resume及JSON/Markdown/Trace导出。当前阶段、授权与验收状态统一见[HANDOFF](HANDOFF.md)，实际测试与审查见[S6报告](docs/stages/S6.md)。当前仅Mock；真实DeepSeek后端尚未开放。
 
 接手或恢复开发请先阅读[上下文交接文档](HANDOFF.md)。该文档须在每阶段交付验收前更新，用户验收或修订后同步更新；规则见AGENTS.md与阶段计划。
 
 ## 当前评审入口
 
-- [S5验收报告](docs/stages/S5.md)：CLI、核心离线案例、导出与安装验证。
+- [S6验收报告](docs/stages/S6.md)：显式续跑、跨进程恢复、重放及累计限额。
+- [S5验收报告](docs/stages/S5.md)：历史CLI核心案例、导出与安装验证。
 - [S4验收报告](docs/stages/S4.md)：历史离线循环、停止/限额及上下文验证。
 - [S3验收报告](docs/stages/S3.md)：历史存储/保存验证。
 - [S2验收报告](docs/stages/S2.md)：历史工具层测试与wheel验证。
@@ -72,6 +73,20 @@ POSIX对应命令（Linux仍未实测）：
 ```
 
 省略`--mock-scenario`时使用包内固定M01/basic演示，采用真实当前时间；自备输入需要提供未来deadline。场景字段、退出码与错误规则见[CLI契约](docs/06-contracts.md)。stdout仅最终JSON，进度/错误在stderr；默认数据库work/runtime.db，默认输出work/runs/<request_id>/的output.json、plan.md、trace.jsonl。completed仅表示方案已保存，四项活动仍为planned。不支持同时运行同一任务的多个进程。
+
+显式续跑示例（新数据库，第一条预期退出3；第二条在新进程完成）：
+
+```powershell
+.\.venv\Scripts\python.exe -m content_planner run --input examples/mock/A12/input.json --mock-scenario examples/mock/A12/scenario.json --db work/resume-demo.db --output-dir work/resume-before
+.\.venv\Scripts\python.exe -m content_planner resume --request-id s6-A12 --mock-scenario examples/mock/A12/continuation.json --db work/resume-demo.db --output-dir work/resume-after
+```
+
+```sh
+.venv/bin/python -m content_planner run --input examples/mock/A12/input.json --mock-scenario examples/mock/A12/scenario.json --db work/resume-demo.db --output-dir work/resume-before
+.venv/bin/python -m content_planner resume --request-id s6-A12 --mock-scenario examples/mock/A12/continuation.json --db work/resume-demo.db --output-dir work/resume-after
+```
+
+上述两流固定UTF-8，无需Python编码参数；POSIX/Linux仍未实测。Mock未完成任务的resume需提供后续显式响应；已完成任务resume直接返回原方案，无需场景。资料/提示/模型配置变化、不可恢复停止或额度耗尽会明确拒绝，不修改原任务，也不重置额度。已持久成功产物/响应会复用；外部返回但未持久的请求结果未知，恢复可能再请求，不承诺API exactly-once。普通重复run始终只读。详细边界见[恢复规格](docs/07-state-and-storage.md#s6接通细化实现前2026-10-31)。
 
 ## 已确定的路线
 
@@ -140,4 +155,4 @@ docs/                       # 保留本包文档并更新实际结果
 contracts/                  # 本包接口规格；实现后由 Pydantic 导出并检查兼容
 ```
 
-PlanningAgent通过LangGraph decide/dispatch执行ModelClient明确返回的六动作；现有LocalTools和SQLite继续守住依赖、约束及保存事实。Fake仅验证流程，不证明真实模型效果。任务记忆与上下文裁剪见docs/02；CLI、跨进程业务resume及真实HTTP按后续阶段实现。
+PlanningAgent通过LangGraph decide/dispatch执行ModelClient明确返回的六动作；LocalTools和SQLite守住依赖、约束、保存及恢复事实。Fake仅验证流程，不证明真实模型效果。任务记忆与上下文裁剪见docs/02；真实HTTP和真实决策效果归S7。

@@ -24,6 +24,13 @@ class _QuoteClock:
         return self.instant
 
 
+def manifest_for(catalog: Catalog, model_id: str) -> dict:
+    return {'schema_version': '1.0', 'catalog_sha256': catalog.catalog_hash,
+            'pricing_sha256': catalog.pricing_hash, 'aliases_sha256': catalog.aliases_hash,
+            'planner_prompt_version': PLANNER_VERSION, 'script_prompt_version': SCRIPT_VERSION,
+            'model_id': model_id, 'thinking': 'disabled'}
+
+
 class LocalTools:
     def __init__(self, request: Request, catalog: Catalog, model: ModelClient, clock: Clock,
                  repository: Repository | None = None):
@@ -34,10 +41,7 @@ class LocalTools:
         self._repository = repository
         self._state = {
             'request': request.model_dump(mode='json'),
-            'manifest': {'schema_version': '1.0', 'catalog_sha256': catalog.catalog_hash,
-                         'pricing_sha256': catalog.pricing_hash, 'aliases_sha256': catalog.aliases_hash,
-                         'planner_prompt_version': PLANNER_VERSION, 'script_prompt_version': SCRIPT_VERSION,
-                         'model_id': model.model_id, 'thinking': 'disabled'},
+            'manifest': manifest_for(catalog, model.model_id),
             'seen_material_ids': [], 'tool_results': [], 'last_observation': None,
             'candidate_history': {}, 'current_revision': None, 'script_artifacts': {},
             'estimate_history': {}, 'current_estimate_id': None, 'status': 'running', 'reason': None,
@@ -53,6 +57,20 @@ class LocalTools:
 
     def snapshot(self) -> dict:
         return deepcopy(self._state)
+
+    def restore(self, state: dict):
+        """Restore trusted persisted task facts after manifest verification."""
+        for key in (*self._state, 'message'):
+            if key in state and key not in {'request', 'manifest'}:
+                self._state[key] = deepcopy(state[key])
+
+    def replay_result(self, result: dict, state_patch: dict, arguments: dict):
+        """Restore an ended operation, including save errors committed before its node patch."""
+        self.restore(state_patch)
+        if not any(r['tool_call_id'] == result['tool_call_id'] for r in self._state['tool_results']):
+            self._state['tool_results'].append(deepcopy(result))
+        self._state['last_observation'] = deepcopy(result)
+        self._update_failures(result['tool'], arguments, result)
 
     def _record(self, tool, call_id, data=None, error=None, reused=False):
         result = {'tool_call_id': call_id, 'tool': tool, 'ok': error is None,
@@ -73,8 +91,9 @@ class LocalTools:
     def estimate_cost(self, tool_call_id: str, arguments: dict) -> dict:
         return self._invoke('estimate_cost', tool_call_id, arguments, RevisionArgs, self._estimate)
 
-    def save_plan(self, tool_call_id: str, arguments: dict) -> dict:
-        return self._invoke('save_plan', tool_call_id, arguments, SavePlanArgs, self._save)
+    def save_plan(self, tool_call_id: str, arguments: dict, *, operation_id=None) -> dict:
+        return self._invoke('save_plan', tool_call_id, arguments, SavePlanArgs,
+                            lambda args, call_id: self._save(args, call_id, operation_id))
 
     def stop_task(self, tool_call_id: str, arguments: dict) -> dict:
         return self._invoke('stop_task', tool_call_id, arguments, StopTaskArgs, self._stop)
@@ -109,8 +128,12 @@ class LocalTools:
             result = self._failure(tool, call_id, error)
         else:
             result = self._record(tool, call_id, data, reused=reused)
+        self._update_failures(tool, args.model_dump(mode='json'), result)
+        return result
+
+    def _update_failures(self, tool, arguments, result):
         if tool in {'search_materials', 'generate_script', 'estimate_cost', 'save_plan'}:
-            key = self.logical_key(tool, args.model_dump(mode='json'))
+            key = self.logical_key(tool, arguments)
             failures = self._state['unresolved_failures']
             if result['ok']:
                 failures.pop(key, None)
@@ -118,11 +141,10 @@ class LocalTools:
                     self._state['unresolved_failures'] = {key: ref for key, ref in failures.items()
                                                           if ref['tool'] != 'search_materials'}
             else:
-                failures[key] = {'tool': tool, 'tool_call_id': call_id}
+                failures[key] = {'tool': tool, 'tool_call_id': result['tool_call_id']}
         self._state['unresolved_failures'] = {
             key: ref for key, ref in self._state['unresolved_failures'].items()
             if ref['tool'] == 'search_materials' or key == self.logical_key(ref['tool'], {})}
-        return result
 
     def _failure(self, tool, call_id, fault):
         return self._record(tool, call_id, error=self._error(fault))
@@ -231,18 +253,19 @@ class LocalTools:
         self._state['current_estimate_id'] = estimate_id
         return estimate, False
 
-    def _save(self, args, call_id):
+    def _save(self, args, call_id, operation_id=None):
         repo = self._repository
         if repo is None:
             raise Fault('STORAGE_UNAVAILABLE', 'Saving requires a repository')
+        operation_id = operation_id or 'tool:' + call_id
         for event in repo.events(self._request.request_id):
-            if event['operation_id'] == 'tool:' + call_id and event['phase'] == 'succeeded':
+            if event['operation_id'] == operation_id and event['phase'] == 'succeeded':
                 self._state.update(event['state_patch'])
                 return event['result']['data'], True
         instant = self._clock.now().astimezone(timezone.utc)
         fields = {'kind': 'tool', 'name': 'save_plan', 'args': args.model_dump(mode='json'),
                   'rationale': args.rationale, 'created_at': instant.isoformat()}
-        repo.record_event(self._request.request_id, 'tool:' + call_id, 'started', **fields)
+        repo.record_event(self._request.request_id, operation_id, 'started', **fields)
         try:
             candidate = self._current_candidate(args.plan_revision)
             script = self._state['script_artifacts'].get(candidate['script_input_hash'])
@@ -258,12 +281,12 @@ class LocalTools:
                 gaps = {key: value[key] for key in ('budget_gap_units', 'deadline_gap_minutes')}
                 raise Fault('CONSTRAINT_VIOLATION', 'Current plan does not satisfy the hard constraints', gaps)
             payload = build_saved_plan(self._request, candidate, script, self._catalog.pricing_hash, value)
-            data, reused = repo.save_plan(payload, call_id, args.model_dump(mode='json'))
+            data, reused = repo.save_plan(payload, call_id, args.model_dump(mode='json'), operation_id=operation_id)
         except Fault as fault:
             result = {'tool_call_id': call_id, 'tool': 'save_plan', 'ok': False, 'reused': False,
                       'data': None, 'error': self._error(fault)}
             phase = 'failed' if fault.code in {'SAVE_FAILED', 'STORAGE_UNAVAILABLE'} else 'rejected'
-            repo.record_event(self._request.request_id, 'tool:' + call_id, phase,
+            repo.record_event(self._request.request_id, operation_id, phase,
                               result=result, error_code=fault.code, **fields)
             raise
         self._state.update(status='completed', saved_plan_id=data['plan_id'])

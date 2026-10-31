@@ -11,7 +11,7 @@ from pydantic import ValidationError
 from .contracts import Request
 from .domain import Fault
 from .reporting import empty_result
-from .service import export_task, run_task, show_task
+from .service import export_task, resume_task, run_task, show_task
 
 
 class _Parser(argparse.ArgumentParser):
@@ -20,7 +20,7 @@ class _Parser(argparse.ArgumentParser):
 
 
 def main(argv=None):
-    parser = _Parser(description='内容活动规划（S5离线版）')
+    parser = _Parser(description='内容活动规划（离线版）')
     commands = parser.add_subparsers(dest='command', required=True)
     run = commands.add_parser('run')
     run.add_argument('--input', required=True, type=Path)
@@ -28,7 +28,10 @@ def main(argv=None):
     run.add_argument('--mock-scenario', type=Path)
     show = commands.add_parser('show')
     show.add_argument('--request-id', required=True)
-    for command in (run, show):
+    resume = commands.add_parser('resume')
+    resume.add_argument('--request-id', required=True)
+    resume.add_argument('--mock-scenario', type=Path)
+    for command in (run, show, resume):
         command.add_argument('--db', type=Path, default=Path('work/runtime.db'))
         command.add_argument('--output-dir', type=Path)
     args = None
@@ -44,7 +47,8 @@ def main(argv=None):
             result = run_task(raw, database=args.db, mock_scenario=args.mock_scenario)
         else:
             request_id = Request(request_id=args.request_id).request_id
-            result = show_task(request_id, database=args.db)
+            result = (resume_task(request_id, database=args.db, mock_scenario=args.mock_scenario)
+                      if args.command == 'resume' else show_task(request_id, database=args.db))
         directory = args.output_dir or Path('work/runs') / (result['request_id'] or 'invalid-input')
         result = export_task(result, database=args.db, directory=directory)
     except (Fault, sqlite3.Error, OSError, ValueError, ValidationError) as error:

@@ -85,7 +85,7 @@ class Repository:
         data['saved_plan'] = json.loads(data.pop('payload_json'))
         return data
 
-    def save_plan(self, payload: dict, tool_call_id: str, arguments: dict) -> tuple[dict, bool]:
+    def save_plan(self, payload: dict, tool_call_id: str, arguments: dict, *, operation_id=None) -> tuple[dict, bool]:
         patch = {'status': 'completed', 'saved_plan_id': payload['plan_id']}
         try:
             with self._db:
@@ -99,7 +99,7 @@ class Repository:
                 reused = cursor.rowcount == 0
                 result = {'tool_call_id': tool_call_id, 'tool': 'save_plan', 'ok': True, 'reused': reused,
                           'data': data, 'error': None}
-                self._insert_event(payload['request_id'], 'tool:' + tool_call_id, 'succeeded', kind='tool',
+                self._insert_event(payload['request_id'], operation_id or 'tool:' + tool_call_id, 'succeeded', kind='tool',
                                    name='save_plan', args=arguments, rationale=arguments['rationale'],
                                    created_at=payload['saved_at'], result=result, state_patch=patch)
         except sqlite3.Error as error:
