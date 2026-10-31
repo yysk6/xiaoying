@@ -1,0 +1,28 @@
+{
+  "case_id": "E09",
+  "label": "期限60分钟最低90分钟仍不可行",
+  "invariants_pass": true,
+  "behavior_pass": true,
+  "errors": [],
+  "behavior_errors": [],
+  "passed": true,
+  "status": "incomplete",
+  "reason": "constraints_unsatisfied",
+  "total_units": 8,
+  "plan_rows": 0,
+  "trace_rows": 22,
+  "decision_count": 5,
+  "content_review": "NON_BLOCKING: marketing copy outside this core rubric",
+  "request_id": "E09-a93646f0b313",
+  "usage": {
+    "model_requests": 6,
+    "action_calls": 5,
+    "input_tokens": 14581,
+    "output_tokens": 860,
+    "api_cost_usd": null
+  },
+  "fault_count": 0,
+  "entry": "service.run_task",
+  "http_attempts": 6,
+  "elapsed_seconds": 16.641
+}

@@ -1,0 +1,142 @@
+{
+  "input": {
+    "request_id": "E13-128219cb61d0",
+    "topic": "影芽剪辑字幕功能推广"
+  },
+  "scenario": {
+    "case_id": "E13",
+    "label": "同时缺预算和截止时间",
+    "budget": 10,
+    "deadline_minutes": 240,
+    "topic": "影芽剪辑字幕功能推广",
+    "material_id": "M01",
+    "seed_premium": false,
+    "allowed_units": [
+      8
+    ],
+    "expected_status": "needs_input",
+    "expected_reason": "NEEDS_INPUT",
+    "budget_gap": null,
+    "deadline_gap": null,
+    "omit": [
+      "budget_units",
+      "deadline_at"
+    ],
+    "replan": null,
+    "exact_deadline": false,
+    "fault": null,
+    "followup": null,
+    "clock_at": "2026-10-31T15:36:40.144988+00:00",
+    "entry": "service.run_task",
+    "fixture_origin": null
+  },
+  "output": {
+    "schema_version": "1.0",
+    "request_id": "E13-128219cb61d0",
+    "backend": "deepseek",
+    "model": "deepseek-v4-pro",
+    "status": "needs_input",
+    "reason": "NEEDS_INPUT",
+    "message": "请补齐必填字段",
+    "missing_fields": [
+      "budget_units",
+      "deadline_at"
+    ],
+    "task_plan": [],
+    "execution_steps": [],
+    "tool_results": [],
+    "current_revision": null,
+    "candidate": null,
+    "total_units": null,
+    "saved_plan": null,
+    "usage": {
+      "model_requests": 0,
+      "action_calls": 0,
+      "input_tokens": null,
+      "output_tokens": null,
+      "api_cost_usd": null
+    },
+    "limits": {
+      "max_model_requests": 32,
+      "max_action_calls": 24,
+      "max_revisions": 4,
+      "remaining_model_requests": 32,
+      "remaining_action_calls": 24
+    },
+    "warnings": [],
+    "trace_path": null,
+    "manifest": null
+  },
+  "database": {
+    "exists": false,
+    "request": null,
+    "events": [],
+    "plans": []
+  },
+  "events": [],
+  "plans": [],
+  "trace": [],
+  "decisions": [],
+  "script_attempts": 0,
+  "fault_log": [],
+  "followup": null,
+  "catalog": {
+    "materials": [
+      {
+        "material_id": "M01",
+        "version": "2026-10-29",
+        "title": "影芽剪辑字幕功能",
+        "tags": [
+          "字幕",
+          "自动字幕",
+          "字幕编辑"
+        ],
+        "facts": [
+          "影芽剪辑支持自动生成字幕。",
+          "自动生成的字幕文本可以编辑。"
+        ],
+        "fee_units": 1,
+        "lead_minutes": 10
+      },
+      {
+        "material_id": "M02",
+        "version": "2026-10-29",
+        "title": "影芽剪辑片段编辑",
+        "tags": [
+          "裁剪",
+          "拼接",
+          "剪辑入门"
+        ],
+        "facts": [
+          "影芽剪辑支持裁剪视频片段。",
+          "影芽剪辑支持拼接视频片段。"
+        ],
+        "fee_units": 1,
+        "lead_minutes": 10
+      }
+    ],
+    "pricing": {
+      "version": "pricing-v1",
+      "currency": "simulated_unit",
+      "execution": "sequential",
+      "script_finalize": {
+        "fee_units": 2,
+        "duration_minutes": 20
+      },
+      "video_edit": {
+        "basic": {
+          "fee_units": 4,
+          "duration_minutes": 45
+        },
+        "premium": {
+          "fee_units": 8,
+          "duration_minutes": 90
+        }
+      },
+      "review": {
+        "fee_units": 1,
+        "duration_minutes": 15
+      }
+    }
+  }
+}

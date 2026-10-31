@@ -1,0 +1,423 @@
+[
+  {
+    "event_id": 11,
+    "operation_id": "decide:1",
+    "memory": {
+      "candidate": {
+        "revision": 1,
+        "candidate_hash": "09f27f931fbcc4064a4227098261745e75877f92c3392a9665aa020f1f3188e0",
+        "material_id": "M01",
+        "creative_brief": "展示字幕编辑",
+        "production_mode": "premium",
+        "script_input_hash": "38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e"
+      },
+      "latest_estimate": {
+        "estimate_id": "estimate_dfd5922f5aa9441e95d21ed58bb9f2209a004912a1232e89f75f725bd37f3d4a",
+        "revision": 1,
+        "candidate_hash": "09f27f931fbcc4064a4227098261745e75877f92c3392a9665aa020f1f3188e0",
+        "script_id": "script_38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+        "line_items": [
+          {
+            "step_id": "material_prepare",
+            "catalog_item_id": "M01",
+            "fee_units": 1,
+            "duration_minutes": 10
+          },
+          {
+            "step_id": "script_finalize",
+            "catalog_item_id": "script_finalize",
+            "fee_units": 2,
+            "duration_minutes": 20
+          },
+          {
+            "step_id": "video_edit",
+            "catalog_item_id": "video_edit:premium",
+            "fee_units": 8,
+            "duration_minutes": 90
+          },
+          {
+            "step_id": "review",
+            "catalog_item_id": "review",
+            "fee_units": 1,
+            "duration_minutes": 15
+          }
+        ],
+        "quoted_at": "2026-10-31T15:35:55.953632+00:00",
+        "total_units": 12,
+        "total_minutes": 135,
+        "estimated_finish_at": "2026-10-31T17:50:55.953632+00:00",
+        "within_budget": true,
+        "within_deadline": false,
+        "feasible": false,
+        "budget_gap_units": 0,
+        "deadline_gap_minutes": 15,
+        "alternatives": [
+          {
+            "total_units": 8,
+            "total_minutes": 90,
+            "estimated_finish_at": "2026-10-31T17:05:55.953632+00:00",
+            "within_budget": true,
+            "within_deadline": true,
+            "feasible": true,
+            "budget_gap_units": 0,
+            "deadline_gap_minutes": 0,
+            "production_mode": "basic"
+          }
+        ]
+      },
+      "seen_material_ids": [
+        "M01"
+      ],
+      "script": {
+        "script_id": "script_38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "title": "字幕编辑，轻松搞定",
+        "source_ids": [
+          "M01"
+        ]
+      },
+      "evaluated_quotes": [
+        {
+          "estimate_id": "estimate_dfd5922f5aa9441e95d21ed58bb9f2209a004912a1232e89f75f725bd37f3d4a",
+          "revision": 1,
+          "total_units": 12,
+          "total_minutes": 135,
+          "feasible": false,
+          "budget_gap_units": 0,
+          "deadline_gap_minutes": 15
+        }
+      ],
+      "budget_units": 12,
+      "last_observation": {
+        "tool_call_id": "fixture-3",
+        "tool": "estimate_cost",
+        "ok": true,
+        "error": null
+      },
+      "deadline_at": "2026-10-31T17:35:55.953632+00:00"
+    },
+    "response": {
+      "role": "assistant",
+      "content": "I'll review the current state. The premium plan is over deadline by 15 minutes, but the basic alternative is feasible. I need to revise the plan to basic mode to meet the deadline.",
+      "tool_calls": [
+        {
+          "index": 0,
+          "id": "call_00_0TNE92mAhpxDdMyYzNvT8252",
+          "type": "function",
+          "function": {
+            "name": "revise_plan",
+            "arguments": "{\"rationale\": \"当前premium档位超出截止时间15分钟，改用basic档位以满足期限。\", \"material_id\": \"M01\", \"creative_brief\": \"展示字幕编辑\", \"production_mode\": \"basic\"}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "event_id": 15,
+    "operation_id": "decide:2",
+    "memory": {
+      "candidate": {
+        "revision": 2,
+        "candidate_hash": "a6d7121e2ffc627f6cac8af485f42b1294153ec2dd2bcf60a4292c7d2d49762c",
+        "material_id": "M01",
+        "creative_brief": "展示字幕编辑",
+        "production_mode": "basic",
+        "script_input_hash": "38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e"
+      },
+      "latest_estimate": null,
+      "seen_material_ids": [
+        "M01"
+      ],
+      "script": {
+        "script_id": "script_38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "title": "字幕编辑，轻松搞定",
+        "source_ids": [
+          "M01"
+        ]
+      },
+      "evaluated_quotes": [
+        {
+          "estimate_id": "estimate_dfd5922f5aa9441e95d21ed58bb9f2209a004912a1232e89f75f725bd37f3d4a",
+          "revision": 1,
+          "total_units": 12,
+          "total_minutes": 135,
+          "feasible": false,
+          "budget_gap_units": 0,
+          "deadline_gap_minutes": 15
+        }
+      ],
+      "budget_units": 12,
+      "last_observation": {
+        "tool_call_id": "call_00_0TNE92mAhpxDdMyYzNvT8252",
+        "tool": "revise_plan",
+        "ok": true,
+        "error": null
+      },
+      "deadline_at": "2026-10-31T17:35:55.953632+00:00"
+    },
+    "response": {
+      "role": "assistant",
+      "content": "The plan is now set to basic mode. Let me generate the script and estimate the cost.",
+      "tool_calls": [
+        {
+          "index": 0,
+          "id": "call_00_WZWhrZPxKcfPDDeryaHJ7781",
+          "type": "function",
+          "function": {
+            "name": "generate_script",
+            "arguments": "{\"rationale\": \"基于basic档位生成字幕编辑展示脚本。\", \"plan_revision\": 2}"
+          }
+        },
+        {
+          "index": 1,
+          "id": "call_01_lSINMIaoaXhNuKmxb1pI7348",
+          "type": "function",
+          "function": {
+            "name": "estimate_cost",
+            "arguments": "{\"rationale\": \"估算basic档位方案的成本与耗时。\", \"plan_revision\": 2}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "event_id": 18,
+    "operation_id": "decide:3",
+    "memory": {
+      "candidate": {
+        "revision": 2,
+        "candidate_hash": "a6d7121e2ffc627f6cac8af485f42b1294153ec2dd2bcf60a4292c7d2d49762c",
+        "material_id": "M01",
+        "creative_brief": "展示字幕编辑",
+        "production_mode": "basic",
+        "script_input_hash": "38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e"
+      },
+      "latest_estimate": null,
+      "seen_material_ids": [
+        "M01"
+      ],
+      "script": {
+        "script_id": "script_38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "title": "字幕编辑，轻松搞定",
+        "source_ids": [
+          "M01"
+        ]
+      },
+      "evaluated_quotes": [
+        {
+          "estimate_id": "estimate_dfd5922f5aa9441e95d21ed58bb9f2209a004912a1232e89f75f725bd37f3d4a",
+          "revision": 1,
+          "total_units": 12,
+          "total_minutes": 135,
+          "feasible": false,
+          "budget_gap_units": 0,
+          "deadline_gap_minutes": 15
+        }
+      ],
+      "budget_units": 12,
+      "last_observation": {
+        "tool_call_id": "call_00_0TNE92mAhpxDdMyYzNvT8252",
+        "tool": "revise_plan",
+        "ok": true,
+        "error": null
+      },
+      "deadline_at": "2026-10-31T17:35:55.953632+00:00"
+    },
+    "response": {
+      "role": "assistant",
+      "content": "I need to perform these sequentially. Let me generate the script first.",
+      "tool_calls": [
+        {
+          "index": 0,
+          "id": "call_00_Oxa2dVAcovE7pYHOia7y2915",
+          "type": "function",
+          "function": {
+            "name": "generate_script",
+            "arguments": "{\"plan_revision\": 2, \"rationale\": \"基于basic档位生成字幕编辑展示脚本。\"}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "event_id": 22,
+    "operation_id": "decide:4",
+    "memory": {
+      "candidate": {
+        "revision": 2,
+        "candidate_hash": "a6d7121e2ffc627f6cac8af485f42b1294153ec2dd2bcf60a4292c7d2d49762c",
+        "material_id": "M01",
+        "creative_brief": "展示字幕编辑",
+        "production_mode": "basic",
+        "script_input_hash": "38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e"
+      },
+      "latest_estimate": null,
+      "seen_material_ids": [
+        "M01"
+      ],
+      "script": {
+        "script_id": "script_38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "title": "字幕编辑，轻松搞定",
+        "source_ids": [
+          "M01"
+        ]
+      },
+      "evaluated_quotes": [
+        {
+          "estimate_id": "estimate_dfd5922f5aa9441e95d21ed58bb9f2209a004912a1232e89f75f725bd37f3d4a",
+          "revision": 1,
+          "total_units": 12,
+          "total_minutes": 135,
+          "feasible": false,
+          "budget_gap_units": 0,
+          "deadline_gap_minutes": 15
+        }
+      ],
+      "budget_units": 12,
+      "last_observation": {
+        "tool_call_id": "call_00_Oxa2dVAcovE7pYHOia7y2915",
+        "tool": "generate_script",
+        "ok": true,
+        "error": null
+      },
+      "deadline_at": "2026-10-31T17:35:55.953632+00:00"
+    },
+    "response": {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "index": 0,
+          "id": "call_00_dyUslFWLZhZNyhczsUI76251",
+          "type": "function",
+          "function": {
+            "name": "estimate_cost",
+            "arguments": "{\"plan_revision\": 2, \"rationale\": \"估算basic档位方案的成本与耗时。\"}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "event_id": 26,
+    "operation_id": "decide:5",
+    "memory": {
+      "candidate": {
+        "revision": 2,
+        "candidate_hash": "a6d7121e2ffc627f6cac8af485f42b1294153ec2dd2bcf60a4292c7d2d49762c",
+        "material_id": "M01",
+        "creative_brief": "展示字幕编辑",
+        "production_mode": "basic",
+        "script_input_hash": "38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e"
+      },
+      "latest_estimate": {
+        "estimate_id": "estimate_ca516388990d4970ffd6f9cf0805ab1cbbc78dc90e04bf9e226f153bdd9ac94c",
+        "revision": 2,
+        "candidate_hash": "a6d7121e2ffc627f6cac8af485f42b1294153ec2dd2bcf60a4292c7d2d49762c",
+        "script_id": "script_38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+        "line_items": [
+          {
+            "step_id": "material_prepare",
+            "catalog_item_id": "M01",
+            "fee_units": 1,
+            "duration_minutes": 10
+          },
+          {
+            "step_id": "script_finalize",
+            "catalog_item_id": "script_finalize",
+            "fee_units": 2,
+            "duration_minutes": 20
+          },
+          {
+            "step_id": "video_edit",
+            "catalog_item_id": "video_edit:basic",
+            "fee_units": 4,
+            "duration_minutes": 45
+          },
+          {
+            "step_id": "review",
+            "catalog_item_id": "review",
+            "fee_units": 1,
+            "duration_minutes": 15
+          }
+        ],
+        "quoted_at": "2026-10-31T15:35:55.953632+00:00",
+        "total_units": 8,
+        "total_minutes": 90,
+        "estimated_finish_at": "2026-10-31T17:05:55.953632+00:00",
+        "within_budget": true,
+        "within_deadline": true,
+        "feasible": true,
+        "budget_gap_units": 0,
+        "deadline_gap_minutes": 0,
+        "alternatives": [
+          {
+            "total_units": 12,
+            "total_minutes": 135,
+            "estimated_finish_at": "2026-10-31T17:50:55.953632+00:00",
+            "within_budget": true,
+            "within_deadline": false,
+            "feasible": false,
+            "budget_gap_units": 0,
+            "deadline_gap_minutes": 15,
+            "production_mode": "premium"
+          }
+        ]
+      },
+      "seen_material_ids": [
+        "M01"
+      ],
+      "script": {
+        "script_id": "script_38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "title": "字幕编辑，轻松搞定",
+        "source_ids": [
+          "M01"
+        ]
+      },
+      "evaluated_quotes": [
+        {
+          "estimate_id": "estimate_dfd5922f5aa9441e95d21ed58bb9f2209a004912a1232e89f75f725bd37f3d4a",
+          "revision": 1,
+          "total_units": 12,
+          "total_minutes": 135,
+          "feasible": false,
+          "budget_gap_units": 0,
+          "deadline_gap_minutes": 15
+        },
+        {
+          "estimate_id": "estimate_ca516388990d4970ffd6f9cf0805ab1cbbc78dc90e04bf9e226f153bdd9ac94c",
+          "revision": 2,
+          "total_units": 8,
+          "total_minutes": 90,
+          "feasible": true,
+          "budget_gap_units": 0,
+          "deadline_gap_minutes": 0
+        }
+      ],
+      "budget_units": 12,
+      "last_observation": {
+        "tool_call_id": "call_00_dyUslFWLZhZNyhczsUI76251",
+        "tool": "estimate_cost",
+        "ok": true,
+        "error": null
+      },
+      "deadline_at": "2026-10-31T17:35:55.953632+00:00"
+    },
+    "response": {
+      "role": "assistant",
+      "content": "The estimate is feasible (8 units, 90 minutes, within budget and deadline). Now I'll save the plan.",
+      "tool_calls": [
+        {
+          "index": 0,
+          "id": "call_00_jrTAyPKdVGN35D8aIbnj7171",
+          "type": "function",
+          "function": {
+            "name": "save_plan",
+            "arguments": "{\"rationale\": \"basic档位方案在预算与期限内可行，提交保存。\", \"plan_revision\": 2, \"estimate_id\": \"estimate_ca516388990d4970ffd6f9cf0805ab1cbbc78dc90e04bf9e226f153bdd9ac94c\"}"
+          }
+        }
+      ]
+    }
+  }
+]

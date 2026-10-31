@@ -159,6 +159,103 @@ def test_paid_runner_requires_both_explicit_flags_before_reading_credentials(tmp
     assert error.value.code == 2 and not (tmp_path / 'results').exists()
 
 
+def test_live_runner_records_current_sources_before_credential_prompt(tmp_path, monkeypatch):
+    import getpass
+    import hashlib
+    import json
+    from pathlib import Path
+    from scripts.evaluate_core20 import main
+
+    class PromptReached(Exception):
+        pass
+
+    def stop_at_prompt(prompt):
+        raise PromptReached
+
+    monkeypatch.setattr(getpass, 'getpass', stop_at_prompt)
+    with pytest.raises(PromptReached):
+        main(['--live', '--key-stdin', '--output-root', str(tmp_path)])
+
+    source = json.loads(next(tmp_path.glob('*/source.json')).read_text(encoding='utf-8'))
+    hashes = {name.replace('\\', '/'): value for name, value in source['sha256'].items()}
+    root = Path(__file__).resolve().parents[2]
+    required = ['docs/01-requirements.md', 'docs/02-solution.md', 'docs/03-evaluation.md',
+                'docs/04-ai-usage.md', 'docs/05-retrospective.md',
+                'contracts/request.schema.json', 'contracts/result.schema.json',
+                'contracts/trace-event.schema.json', 'contracts/common.schema.json',
+                'contracts/tools.json', 'contracts/fixtures/materials.json',
+                'contracts/fixtures/pricing.json', 'contracts/fixtures/aliases.json',
+                'src/content_planner/data/materials.json', 'src/content_planner/data/pricing.json',
+                'src/content_planner/data/aliases.json']
+    for name in required:
+        assert hashes[name] == hashlib.sha256((root / name).read_bytes()).hexdigest()
+    assert 'docs/12-core20-evaluation.md' not in hashes
+    assert source['commit'] and source['status'] is not None
+
+
+def test_live_runner_missing_required_source_fails_before_credential_prompt(tmp_path, monkeypatch):
+    import getpass
+    from pathlib import Path
+    from scripts.evaluate_core20 import main
+
+    original_read = Path.read_bytes
+
+    def read_bytes(path):
+        if path.name == '03-evaluation.md':
+            raise FileNotFoundError(str(path))
+        return original_read(path)
+
+    def forbidden_prompt(prompt):
+        raise AssertionError('Credential prompt must not run')
+
+    monkeypatch.setattr(Path, 'read_bytes', read_bytes)
+    monkeypatch.setattr(getpass, 'getpass', forbidden_prompt)
+    with pytest.raises(FileNotFoundError, match='03-evaluation.md'):
+        main(['--live', '--key-stdin', '--output-root', str(tmp_path)])
+
+
+def test_live_runner_missing_packaged_data_fails_before_credential_prompt(tmp_path, monkeypatch):
+    import getpass
+    from pathlib import Path
+    from scripts.evaluate_core20 import main
+
+    original_glob, original_read = Path.glob, Path.read_bytes
+
+    def glob(path, pattern):
+        return (item for item in original_glob(path, pattern) if item.as_posix().endswith('/data/materials.json') is False)
+
+    def read_bytes(path):
+        if path.as_posix().endswith('/data/materials.json'):
+            raise FileNotFoundError(str(path))
+        return original_read(path)
+
+    def forbidden_prompt(prompt):
+        raise AssertionError('Credential prompt must not run')
+
+    monkeypatch.setattr(Path, 'glob', glob)
+    monkeypatch.setattr(Path, 'read_bytes', read_bytes)
+    monkeypatch.setattr(getpass, 'getpass', forbidden_prompt)
+    with pytest.raises(FileNotFoundError, match='materials.json'):
+        main(['--live', '--key-stdin', '--output-root', str(tmp_path)])
+
+
+def test_live_runner_requires_git_source_before_credential_prompt(tmp_path, monkeypatch):
+    import getpass
+    import subprocess
+    from scripts.evaluate_core20 import main
+
+    def failed_git(*args, **kwargs):
+        return subprocess.CompletedProcess(args[0], 1, '', 'git unavailable')
+
+    def forbidden_prompt(prompt):
+        raise AssertionError('Credential prompt must not run')
+
+    monkeypatch.setattr(subprocess, 'run', failed_git)
+    monkeypatch.setattr(getpass, 'getpass', forbidden_prompt)
+    with pytest.raises(RuntimeError, match='Git'):
+        main(['--live', '--key-stdin', '--output-root', str(tmp_path)])
+
+
 @pytest.mark.parametrize('damage', ['steps', 'request', 'memory'])
 def test_rejects_missing_steps_mismatched_database_input_or_lost_observation(tmp_path, damage):
     from scripts.evaluate_core20 import load_cases, run_suite_case, assess_case

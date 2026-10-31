@@ -1,0 +1,296 @@
+[
+  {
+    "event_id": 11,
+    "operation_id": "decide:1",
+    "memory": {
+      "candidate": {
+        "revision": 1,
+        "candidate_hash": "0d9f43f504dfcad40093138e3736951306428771f309345ca2688b8070e8a21e",
+        "material_id": "M01",
+        "creative_brief": "展示字幕编辑",
+        "production_mode": "premium",
+        "script_input_hash": "38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e"
+      },
+      "latest_estimate": {
+        "estimate_id": "estimate_dfd5922f5aa9441e95d21ed58bb9f2209a004912a1232e89f75f725bd37f3d4a",
+        "revision": 1,
+        "candidate_hash": "0d9f43f504dfcad40093138e3736951306428771f309345ca2688b8070e8a21e",
+        "script_id": "script_38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+        "line_items": [
+          {
+            "step_id": "material_prepare",
+            "catalog_item_id": "M01",
+            "fee_units": 1,
+            "duration_minutes": 10
+          },
+          {
+            "step_id": "script_finalize",
+            "catalog_item_id": "script_finalize",
+            "fee_units": 2,
+            "duration_minutes": 20
+          },
+          {
+            "step_id": "video_edit",
+            "catalog_item_id": "video_edit:premium",
+            "fee_units": 8,
+            "duration_minutes": 90
+          },
+          {
+            "step_id": "review",
+            "catalog_item_id": "review",
+            "fee_units": 1,
+            "duration_minutes": 15
+          }
+        ],
+        "quoted_at": "2026-10-31T15:35:04.407643+00:00",
+        "total_units": 12,
+        "total_minutes": 135,
+        "estimated_finish_at": "2026-10-31T17:50:04.407643+00:00",
+        "within_budget": false,
+        "within_deadline": true,
+        "feasible": false,
+        "budget_gap_units": 2,
+        "deadline_gap_minutes": 0,
+        "alternatives": [
+          {
+            "total_units": 8,
+            "total_minutes": 90,
+            "estimated_finish_at": "2026-10-31T17:05:04.407643+00:00",
+            "within_budget": true,
+            "within_deadline": true,
+            "feasible": true,
+            "budget_gap_units": 0,
+            "deadline_gap_minutes": 0,
+            "production_mode": "basic"
+          }
+        ]
+      },
+      "seen_material_ids": [
+        "M01"
+      ],
+      "script": {
+        "script_id": "script_38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "title": "字幕编辑，轻松搞定",
+        "source_ids": [
+          "M01"
+        ]
+      },
+      "evaluated_quotes": [
+        {
+          "estimate_id": "estimate_dfd5922f5aa9441e95d21ed58bb9f2209a004912a1232e89f75f725bd37f3d4a",
+          "revision": 1,
+          "total_units": 12,
+          "total_minutes": 135,
+          "feasible": false,
+          "budget_gap_units": 2,
+          "deadline_gap_minutes": 0
+        }
+      ],
+      "budget_units": 10,
+      "last_observation": {
+        "tool_call_id": "fixture-3",
+        "tool": "estimate_cost",
+        "ok": true,
+        "error": null
+      },
+      "deadline_at": "2026-10-31T19:35:04.407643+00:00"
+    },
+    "response": {
+      "role": "assistant",
+      "content": "当前方案 premium 档位超出预算 2 units，替代报价显示 basic 档位可行。我将修订为 basic 档位以符合预算。",
+      "tool_calls": [
+        {
+          "index": 0,
+          "id": "call_00_DmhofFuf2pVIMy8WC7FK1563",
+          "type": "function",
+          "function": {
+            "name": "revise_plan",
+            "arguments": "{\"rationale\": \"premium 档位超出预算 2 units，改用 basic 档位以符合预算约束。\", \"material_id\": \"M01\", \"creative_brief\": \"展示字幕编辑\", \"production_mode\": \"basic\"}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "event_id": 15,
+    "operation_id": "decide:2",
+    "memory": {
+      "candidate": {
+        "revision": 2,
+        "candidate_hash": "a35ee9747b338ad4b09443ab466111013bce476868661034307cfaaecef334d5",
+        "material_id": "M01",
+        "creative_brief": "展示字幕编辑",
+        "production_mode": "basic",
+        "script_input_hash": "38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e"
+      },
+      "latest_estimate": null,
+      "seen_material_ids": [
+        "M01"
+      ],
+      "script": {
+        "script_id": "script_38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "title": "字幕编辑，轻松搞定",
+        "source_ids": [
+          "M01"
+        ]
+      },
+      "evaluated_quotes": [
+        {
+          "estimate_id": "estimate_dfd5922f5aa9441e95d21ed58bb9f2209a004912a1232e89f75f725bd37f3d4a",
+          "revision": 1,
+          "total_units": 12,
+          "total_minutes": 135,
+          "feasible": false,
+          "budget_gap_units": 2,
+          "deadline_gap_minutes": 0
+        }
+      ],
+      "budget_units": 10,
+      "last_observation": {
+        "tool_call_id": "call_00_DmhofFuf2pVIMy8WC7FK1563",
+        "tool": "revise_plan",
+        "ok": true,
+        "error": null
+      },
+      "deadline_at": "2026-10-31T19:35:04.407643+00:00"
+    },
+    "response": {
+      "role": "assistant",
+      "content": "方案已修订为 basic 档位（revision 2），脚本复用。现在重新估算成本。",
+      "tool_calls": [
+        {
+          "index": 0,
+          "id": "call_00_osHdCa1QVy3FoPWnJw111238",
+          "type": "function",
+          "function": {
+            "name": "estimate_cost",
+            "arguments": "{\"rationale\": \"basic 档位修订完成，重新估算成本以确认符合预算。\", \"plan_revision\": 2}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "event_id": 19,
+    "operation_id": "decide:3",
+    "memory": {
+      "candidate": {
+        "revision": 2,
+        "candidate_hash": "a35ee9747b338ad4b09443ab466111013bce476868661034307cfaaecef334d5",
+        "material_id": "M01",
+        "creative_brief": "展示字幕编辑",
+        "production_mode": "basic",
+        "script_input_hash": "38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e"
+      },
+      "latest_estimate": {
+        "estimate_id": "estimate_31e5aeb60d6cc4c46e58614cc4ba93f8beabe7e041386c4739dc0cac21609eab",
+        "revision": 2,
+        "candidate_hash": "a35ee9747b338ad4b09443ab466111013bce476868661034307cfaaecef334d5",
+        "script_id": "script_38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+        "line_items": [
+          {
+            "step_id": "material_prepare",
+            "catalog_item_id": "M01",
+            "fee_units": 1,
+            "duration_minutes": 10
+          },
+          {
+            "step_id": "script_finalize",
+            "catalog_item_id": "script_finalize",
+            "fee_units": 2,
+            "duration_minutes": 20
+          },
+          {
+            "step_id": "video_edit",
+            "catalog_item_id": "video_edit:basic",
+            "fee_units": 4,
+            "duration_minutes": 45
+          },
+          {
+            "step_id": "review",
+            "catalog_item_id": "review",
+            "fee_units": 1,
+            "duration_minutes": 15
+          }
+        ],
+        "quoted_at": "2026-10-31T15:35:04.407643+00:00",
+        "total_units": 8,
+        "total_minutes": 90,
+        "estimated_finish_at": "2026-10-31T17:05:04.407643+00:00",
+        "within_budget": true,
+        "within_deadline": true,
+        "feasible": true,
+        "budget_gap_units": 0,
+        "deadline_gap_minutes": 0,
+        "alternatives": [
+          {
+            "total_units": 12,
+            "total_minutes": 135,
+            "estimated_finish_at": "2026-10-31T17:50:04.407643+00:00",
+            "within_budget": false,
+            "within_deadline": true,
+            "feasible": false,
+            "budget_gap_units": 2,
+            "deadline_gap_minutes": 0,
+            "production_mode": "premium"
+          }
+        ]
+      },
+      "seen_material_ids": [
+        "M01"
+      ],
+      "script": {
+        "script_id": "script_38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "title": "字幕编辑，轻松搞定",
+        "source_ids": [
+          "M01"
+        ]
+      },
+      "evaluated_quotes": [
+        {
+          "estimate_id": "estimate_dfd5922f5aa9441e95d21ed58bb9f2209a004912a1232e89f75f725bd37f3d4a",
+          "revision": 1,
+          "total_units": 12,
+          "total_minutes": 135,
+          "feasible": false,
+          "budget_gap_units": 2,
+          "deadline_gap_minutes": 0
+        },
+        {
+          "estimate_id": "estimate_31e5aeb60d6cc4c46e58614cc4ba93f8beabe7e041386c4739dc0cac21609eab",
+          "revision": 2,
+          "total_units": 8,
+          "total_minutes": 90,
+          "feasible": true,
+          "budget_gap_units": 0,
+          "deadline_gap_minutes": 0
+        }
+      ],
+      "budget_units": 10,
+      "last_observation": {
+        "tool_call_id": "call_00_osHdCa1QVy3FoPWnJw111238",
+        "tool": "estimate_cost",
+        "ok": true,
+        "error": null
+      },
+      "deadline_at": "2026-10-31T19:35:04.407643+00:00"
+    },
+    "response": {
+      "role": "assistant",
+      "content": "估算确认：basic 档位总成本 8 units，符合预算（10 units），且在期限内。现在保存方案。",
+      "tool_calls": [
+        {
+          "index": 0,
+          "id": "call_00_rxuVNY4iuEGRed1QEOwL5055",
+          "type": "function",
+          "function": {
+            "name": "save_plan",
+            "arguments": "{\"rationale\": \"basic 档位方案成本 8 units 符合预算且期限内，提交保存。\", \"plan_revision\": 2, \"estimate_id\": \"estimate_31e5aeb60d6cc4c46e58614cc4ba93f8beabe7e041386c4739dc0cac21609eab\"}"
+          }
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "case_id": "E14",
+  "label": "截止时间已经过去",
+  "invariants_pass": true,
+  "behavior_pass": true,
+  "errors": [],
+  "behavior_errors": [],
+  "passed": true,
+  "status": "needs_input",
+  "reason": "INVALID_ARGUMENT",
+  "total_units": null,
+  "plan_rows": 0,
+  "trace_rows": 0,
+  "decision_count": 0,
+  "content_review": "NON_BLOCKING: marketing copy outside this core rubric"
+}

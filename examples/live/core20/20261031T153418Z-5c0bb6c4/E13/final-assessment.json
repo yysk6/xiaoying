@@ -1,0 +1,16 @@
+{
+  "case_id": "E13",
+  "label": "同时缺预算和截止时间",
+  "invariants_pass": true,
+  "behavior_pass": true,
+  "errors": [],
+  "behavior_errors": [],
+  "passed": true,
+  "status": "needs_input",
+  "reason": "NEEDS_INPUT",
+  "total_units": null,
+  "plan_rows": 0,
+  "trace_rows": 0,
+  "decision_count": 0,
+  "content_review": "NON_BLOCKING: marketing copy outside this core rubric"
+}

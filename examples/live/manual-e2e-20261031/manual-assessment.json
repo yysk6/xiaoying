@@ -1,0 +1,20 @@
+{
+  "method": "Manual natural-language terminal session with real DeepSeek API; assessment based on observed terminal output and saved artifacts",
+  "input": "帮我做影芽剪辑字幕功能推广，预算10个模拟单位，明天下午六点前完成。",
+  "confirmation": "确认",
+  "request_id": "nl-247e1dcb30bc45a08185e00ef26157b5",
+  "intake_log": "intake.jsonl",
+  "output": "nl-247e1dcb30bc45a08185e00ef26157b5/output.json",
+  "trace": "nl-247e1dcb30bc45a08185e00ef26157b5/trace.jsonl",
+  "plan": "nl-247e1dcb30bc45a08185e00ef26157b5/plan.md",
+  "observed": {
+    "deadline_beijing": "2026-11-01T18:00:00+08:00",
+    "status": "completed",
+    "total_units": 8,
+    "intake_model_requests": 1,
+    "business_model_requests": 6,
+    "technical_result": "PASS",
+    "content_result": "FAIL: output claims efficiency doubles and adjusts styles, while M01 only supports automatic subtitles and editable text."
+  },
+  "limitations": "One manually observed sample; no independent automated semantic assessment. The content problem was previously documented."
+}

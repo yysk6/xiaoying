@@ -4,7 +4,7 @@
 
 当前交付包含真实 DeepSeek 决策循环、四个业务工具、任务记忆、失败处理、重复请求保护、显式续跑、自然语言需求收集及离线 Mock 入口。`completed` 表示本地方案保存成功，未来的视频制作与发布没有执行。
 
-**实际结果：核心评测20/20通过；最新完整离线测试408/408通过。** 20例含16例真实模型场景、4例零调用输入防护；其中6例明确给定初始premium方案，再交真实模型决策。结果来自每例一个样本，范围和限制见[评估](docs/03-evaluation.md)。
+**实际结果：最新核心评测20/20通过；最新完整离线测试412/412通过。** 20例含16例真实模型场景、4例零调用输入防护；其中6例明确给定初始premium方案，再交真实模型决策。结果来自每例一个样本；自然语言实测仍发现素材未支持的营销措辞，范围和限制见[评估](docs/03-evaluation.md)。
 
 ## 评审入口
 
@@ -104,11 +104,11 @@ POSIX对应`.venv/bin/python scripts/interactive_planner.py`。Windows如需独�
 git worktree add --detach ../xiaoying-evidence-29e 29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f
 .venv/Scripts/python.exe -X utf8 ../xiaoying-evidence-29e/examples/tests/core20/audit_artifacts.py ../xiaoying-evidence-29e/examples/live/core20/20261031T110356Z-93ca1d21
 
-# 新的付费20例评测须进入上述历史工作树，按该版README执行
-# 原专项脚本仍引用历史docs12；本轮文档整理不修改代码
+# 如需新的付费20例评测，在当前项目目录显式运行（将提示输入密钥）
+.venv/Scripts/python.exe -X utf8 -m scripts.evaluate_core20 --live --key-stdin
 ```
 
-POSIX同样替换解释器路径。上述命令在独立历史工作树核验原版本；本轮不改审计器，当前树已合并旧来源文档，不能声称仍与冻结版本相同。浅克隆缺少该Git对象时需先取得历史，详见评估文档。实际SQLite库是本地运行产物，不提交Git；仓库的`evidence.json`包含事件、请求及plan的可读快照。`--recheck <run目录>`需要原runtime.db才能重读物理数据库；仅克隆仓库时使用上方产物审计，或离线测试重新创建临时库。
+POSIX同样替换解释器路径。历史审计命令在独立工作树核验原版本；当前树已合并旧来源文档，不能声称仍与冻结版本相同。新评测单独记录当前代码、数据、文档和契约的哈希及Git状态，不覆盖旧记录；新运行需要可用的Git工作树，来源或Git信息不可用时会在提示密钥前停止。最近一次新运行及其未提交修改的来源快照见[评估](docs/03-evaluation.md)。浅克隆缺少历史Git对象时需先取得历史。实际SQLite库是本地运行产物，不提交Git；仓库的`evidence.json`包含事件、请求及plan的可读快照。`--recheck <run目录>`需要原runtime.db才能重读物理数据库；仅克隆仓库时使用上方产物审计，或离线测试重新创建临时库。
 
 ## 项目结构与数据
 

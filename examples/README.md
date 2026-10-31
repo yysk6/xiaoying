@@ -46,7 +46,7 @@ E17的[fault-log](live/core20/20261031T110356Z-93ca1d21/E17/fault-log.json)现�
 
 ## 测试与历史记录
 
-- 当前[完整离线JUnit](tests/core20/final-full-junit.xml)408/408通过，[复测汇总](tests/core20/final-verification.json)保存首次异常与后续通过的区别。
+- 最新[完整离线JUnit](tests/full-validation-20261031/pytest-junit.xml)412/412通过；历史[复测汇总](tests/core20/final-verification.json)保存首次异常与后续通过的区别。
 - [产物审计](tests/core20/artifact-audit.json)：23份输出、408条含阶段Trace经Schema与事实核验。
 - [Windows正式包运行](tests/intake/clean-install.json)：公开运行环境、仓库外导入、MockTransport及实际业务/重复保护通过；真实HTTP0。
 - [自然语言终端实际报告](../docs/03-evaluation.md#自然语言终端历史验证)引用三轮全部产物，包含失败与修订后记录。
@@ -63,4 +63,4 @@ python ../xiaoying-evidence-29e/examples/tests/core20/audit_artifacts.py ../xiao
 
 需先安装开发依赖，本地Git须有该历史提交；在独立历史工作树核验原来源，当前树已合并原文档，不能直接通过旧来源核验。物理库复核`python -m scripts.evaluate_core20 --recheck <run目录>`还须原始runtime.db；本机实测已完成，不能声称仅克隆仓库即可读取未提交数据库。离线pytest会重新创建临时数据库验证相同规则。
 
-真实评测不会自动启动。旧专项脚本仍引用历史docs12，新付费运行须进入上述历史工作树，再按该版说明显式执行`python -m scripts.evaluate_core20 --live --key-stdin`；会产生费用，新运行另存新目录。当前文档整理不调整该代码入口。合成资料、预算单位和模拟活动工期均不等同真实业务执行或API账单。
+真实评测不会自动启动。新付费运行在当前项目显式执行`python -m scripts.evaluate_core20 --live --key-stdin`；会产生费用，新运行另存新目录并记录当前来源。最新[复测结果和自然语言实测](../docs/03-evaluation.md#当前结论)与历史运行分开保存；历史产物仍按上述历史提交核验。合成资料、预算单位和模拟活动工期均不等同真实业务执行或API账单。

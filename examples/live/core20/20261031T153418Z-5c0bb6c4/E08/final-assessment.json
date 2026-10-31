@@ -1,0 +1,16 @@
+{
+  "case_id": "E08",
+  "label": "135分钟超120分钟期限改选90分钟",
+  "invariants_pass": true,
+  "behavior_pass": true,
+  "errors": [],
+  "behavior_errors": [],
+  "passed": true,
+  "status": "completed",
+  "reason": null,
+  "total_units": 8,
+  "plan_rows": 1,
+  "trace_rows": 29,
+  "decision_count": 5,
+  "content_review": "NON_BLOCKING: marketing copy outside this core rubric"
+}

@@ -458,14 +458,26 @@ def main(argv=None):
     run_id = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ-') + uuid.uuid4().hex[:8]
     folder = args.output_root.resolve() / run_id
     folder.mkdir(parents=True, exist_ok=False)
-    files = [*ROOT.glob('src/content_planner/*.py'), Path(__file__), ROOT / 'scripts/evaluate_budget.py', CASES,
-             ROOT / 'requirements.lock', ROOT / 'docs/12-core20-evaluation.md']
+    files = [*ROOT.glob('src/content_planner/*.py'),
+             *(ROOT / 'src/content_planner/data' / name for name in
+               ('materials.json', 'pricing.json', 'aliases.json', 'mock-scenario.json')),
+             Path(__file__), ROOT / 'scripts/evaluate_budget.py', CASES, ROOT / 'requirements.lock',
+             *(ROOT / 'docs' / name for name in ('01-requirements.md', '02-solution.md', '03-evaluation.md',
+                                                  '04-ai-usage.md', '05-retrospective.md')),
+             *(ROOT / 'contracts' / name for name in ('common.schema.json', 'request.schema.json',
+                  'result.schema.json', 'trace-event.schema.json', 'tools.json', 'fixtures/materials.json',
+                  'fixtures/pricing.json', 'fixtures/aliases.json'))]
     source = {'sha256': {str(path.relative_to(ROOT)).replace('\\', '/'): hashlib.sha256(path.read_bytes()).hexdigest()
                          for path in files}}
     for field, command in [('commit', ['rev-parse', 'HEAD']), ('status', ['status', '--porcelain'])]:
-        result = subprocess.run(['git', '-c', f'safe.directory={ROOT.as_posix()}', *command], cwd=ROOT,
-                                 capture_output=True, text=True, encoding='utf-8')
-        source[field] = result.stdout.strip() if result.returncode == 0 else None
+        try:
+            result = subprocess.run(['git', '-c', f'safe.directory={ROOT.as_posix()}', *command], cwd=ROOT,
+                                    capture_output=True, text=True, encoding='utf-8')
+        except OSError as error:
+            raise RuntimeError(f'Git {field} unavailable') from error
+        if result.returncode != 0 or (field == 'commit' and not result.stdout.strip()):
+            raise RuntimeError(f'Git {field} unavailable')
+        source[field] = result.stdout.strip()
     write_json(folder / 'source.json', source)
     write_json(folder / 'cases.json', [case.model_dump(mode='json') for case in cases])
     summary = {'run_id': run_id, 'started_at': datetime.now(timezone.utc).isoformat(),

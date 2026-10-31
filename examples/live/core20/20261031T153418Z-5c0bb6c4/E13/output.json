@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "request_id": "E13-128219cb61d0",
+  "backend": "deepseek",
+  "model": "deepseek-v4-pro",
+  "status": "needs_input",
+  "reason": "NEEDS_INPUT",
+  "message": "请补齐必填字段",
+  "missing_fields": [
+    "budget_units",
+    "deadline_at"
+  ],
+  "task_plan": [],
+  "execution_steps": [],
+  "tool_results": [],
+  "current_revision": null,
+  "candidate": null,
+  "total_units": null,
+  "saved_plan": null,
+  "usage": {
+    "model_requests": 0,
+    "action_calls": 0,
+    "input_tokens": null,
+    "output_tokens": null,
+    "api_cost_usd": null
+  },
+  "limits": {
+    "max_model_requests": 32,
+    "max_action_calls": 24,
+    "max_revisions": 4,
+    "remaining_model_requests": 32,
+    "remaining_action_calls": 24
+  },
+  "warnings": [],
+  "trace_path": null,
+  "manifest": null
+}

@@ -1,0 +1,74 @@
+diff --git a/docs/03-evaluation.md b/docs/03-evaluation.md
+index c7ecca6..616ed4d 100644
+--- a/docs/03-evaluation.md
++++ b/docs/03-evaluation.md
+@@ -191,9 +191,13 @@ S2严格Literal[True]接受1/1.0、S7冲突backend/证据元数据、自然入
+ 
+ ## 历史来源与复现
+ 
++新专项运行的来源清单应在读取凭据之前生成，包含当前五篇主文档、contracts下的机器契约和fixture，以及原有代码、案例、包内数据和依赖锁；记录各文件SHA-256、Git commit和工作树状态。必需的包内materials、pricing、aliases数据或明确列出的其他来源文件缺失，以及Git信息无法读取时，应在凭据提示和任何HTTP调用前报错。离线验收通过已有CLI入口检查来源清单及哈希，不启动真实模型；历史运行的source.json和其他原始产物保持不变，历史审计仍在原Git提交执行。
++
++来源清单修复的实际验证：修复前新增测试因缺失docs12出现FileNotFoundError；复核补充的缺资料、Git失败反例在补强前也均失败。最终评测器离线测试23项通过，见[JUnit](../examples/tests/core20/source-manifest-junit.xml)。测试在凭据提示边界停止，核对新清单的文档、契约、资料哈希和Git信息，并检查缺必需来源或Git不可用时不会进入凭据提示；本轮未运行付费模型评测。
++
+ docs现仅维护五篇；冗余阶段、调研和归档正文保存在既有Git历史，不再保留并行文档树。完整旧版本为[29e3a716](https://github.com/yysk6/xiaoying/tree/29e3a7163dd28ad8cc5c1e7f8f9e2c2c94d36a0f/docs)。原始input/output/Trace/source/assessment与冻结哈希保持原样。
+ 
+-旧20例来源包含已合并的docs12，原始source.json仍冻结当时路径和哈希。本轮只改文档，不修改审计器或评测脚本，因此当前工作区不能再通过旧来源文件核验；这不是原20例业务评测失败，也不能把旧哈希改成新文档来伪装一致。
++旧20例来源包含已合并的docs12，原始source.json仍冻结当时路径和哈希，因此当前工作区不能直接通过旧来源文件核验；这不是原20例业务评测失败，也不能把旧哈希改成新文档来伪装一致。
+ 
+ 如需重算完整历史审计，可在独立历史工作树运行原版本（需本地有完整Git历史及已安装开发依赖）：
+ 
+@@ -204,14 +208,14 @@ git worktree add --detach ../xiaoying-evidence-29e 29e3a7163dd28ad8cc5c1e7f8f9e2
+ 
+ POSIX替换解释器为.venv/bin/python。浅克隆/源码压缩包没有旧对象时，应先取得历史；也可直接阅读已提交的JSON/Trace和原始审计报告。runtime.db不提交，物理--recheck仍须本地原库；evidence包含可读请求/事件/plan快照。
+ 
+-专项evaluate_core20脚本也仍引用原docs12：新的付费20例运行应在上述历史工作树中按该版说明执行，当前整理后的工作区不直接支持此旧入口。调整评测脚本属于另行授权的代码工作，不在本次文档合并范围。
++此前专项evaluate_core20脚本引用原docs12，无法从当前树启动新运行。本次修复将新运行的来源清单切换至当前文档、契约和包内数据；历史记录仍须在上述历史工作树核验。新付费运行未执行，详见本轮交接的离线验证结果。
+ 
+ ## 当前限制与维护记录
+ 
+ Windows/Python3.10.8有实际证据；Linux、其他Python、同任务并发、长对话及所有故障组合未测。固定合成资料、每例一次，不承诺任意主题质量、泛化稳定性、全局最优、完整自由对话、真实素材/视频发布或生产级耐久执行。上下文预算是字符/字节边界，不伪装为已精确校准的token预算。
+ 
+-本次仅合并文档、迁移技能安装材料和修正引用；验收要求为docs递归只有01—05、无失效内部链接、原始评测证据不改。旧正文的归并位置见[映射](../examples/tests/docs-merge/merge-map.json)。未新增业务行为或付费模型运行。
++上一个文档整理阶段合并文档、迁移技能安装材料和修正引用；验收要求为docs递归只有01—05、无失效内部链接、原始评测证据不改。旧正文的归并位置见[映射](../examples/tests/docs-merge/merge-map.json)。该阶段未新增业务行为或付费模型运行。
+ 
+-完整离线408项及核心20例继续引用原始历史记录；本轮只进行文档结构、链接、差异与敏感内容检查，不新增效果评测结论。
++完整离线408项及核心20例继续引用原始历史记录；本次来源清单修复不新增模型效果评测结论。
+ 
+-本轮[静态检查](../examples/tests/docs-merge/static-checks.json)通过：docs仅五篇，内部链接与章节锚点无失效，代码及原始评测证据无差异，敏感密钥模式零命中。
++文档整理阶段的[静态检查](../examples/tests/docs-merge/static-checks.json)通过：docs仅五篇，内部链接与章节锚点无失效，当时代码及原始评测证据无差异，敏感密钥模式零命中。
+diff --git a/scripts/evaluate_core20.py b/scripts/evaluate_core20.py
+index 568635f..4f6fbf4 100644
+--- a/scripts/evaluate_core20.py
++++ b/scripts/evaluate_core20.py
+@@ -458,14 +458,26 @@ def main(argv=None):
+     run_id = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ-') + uuid.uuid4().hex[:8]
+     folder = args.output_root.resolve() / run_id
+     folder.mkdir(parents=True, exist_ok=False)
+-    files = [*ROOT.glob('src/content_planner/*.py'), Path(__file__), ROOT / 'scripts/evaluate_budget.py', CASES,
+-             ROOT / 'requirements.lock', ROOT / 'docs/12-core20-evaluation.md']
++    files = [*ROOT.glob('src/content_planner/*.py'),
++             *(ROOT / 'src/content_planner/data' / name for name in
++               ('materials.json', 'pricing.json', 'aliases.json', 'mock-scenario.json')),
++             Path(__file__), ROOT / 'scripts/evaluate_budget.py', CASES, ROOT / 'requirements.lock',
++             *(ROOT / 'docs' / name for name in ('01-requirements.md', '02-solution.md', '03-evaluation.md',
++                                                  '04-ai-usage.md', '05-retrospective.md')),
++             *(ROOT / 'contracts' / name for name in ('common.schema.json', 'request.schema.json',
++                  'result.schema.json', 'trace-event.schema.json', 'tools.json', 'fixtures/materials.json',
++                  'fixtures/pricing.json', 'fixtures/aliases.json'))]
+     source = {'sha256': {str(path.relative_to(ROOT)).replace('\\', '/'): hashlib.sha256(path.read_bytes()).hexdigest()
+                          for path in files}}
+     for field, command in [('commit', ['rev-parse', 'HEAD']), ('status', ['status', '--porcelain'])]:
+-        result = subprocess.run(['git', '-c', f'safe.directory={ROOT.as_posix()}', *command], cwd=ROOT,
+-                                 capture_output=True, text=True, encoding='utf-8')
+-        source[field] = result.stdout.strip() if result.returncode == 0 else None
++        try:
++            result = subprocess.run(['git', '-c', f'safe.directory={ROOT.as_posix()}', *command], cwd=ROOT,
++                                    capture_output=True, text=True, encoding='utf-8')
++        except OSError as error:
++            raise RuntimeError(f'Git {field} unavailable') from error
++        if result.returncode != 0 or (field == 'commit' and not result.stdout.strip()):
++            raise RuntimeError(f'Git {field} unavailable')
++        source[field] = result.stdout.strip()
+     write_json(folder / 'source.json', source)
+     write_json(folder / 'cases.json', [case.model_dump(mode='json') for case in cases])
+     summary = {'run_id': run_id, 'started_at': datetime.now(timezone.utc).isoformat(),

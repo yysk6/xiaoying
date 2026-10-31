@@ -1,0 +1,8 @@
+[
+  {
+    "kind": "save_transaction_failure",
+    "tool_call_id": "call_00_4q72rv5AmtpMrmmvPoM95678",
+    "plan_rows_at_failure": 0,
+    "trigger_removed": true
+  }
+]

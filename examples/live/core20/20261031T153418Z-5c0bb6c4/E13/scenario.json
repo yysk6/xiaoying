@@ -1,0 +1,27 @@
+{
+  "case_id": "E13",
+  "label": "同时缺预算和截止时间",
+  "budget": 10,
+  "deadline_minutes": 240,
+  "topic": "影芽剪辑字幕功能推广",
+  "material_id": "M01",
+  "seed_premium": false,
+  "allowed_units": [
+    8
+  ],
+  "expected_status": "needs_input",
+  "expected_reason": "NEEDS_INPUT",
+  "budget_gap": null,
+  "deadline_gap": null,
+  "omit": [
+    "budget_units",
+    "deadline_at"
+  ],
+  "replan": null,
+  "exact_deadline": false,
+  "fault": null,
+  "followup": null,
+  "clock_at": "2026-10-31T15:36:40.144988+00:00",
+  "entry": "service.run_task",
+  "fixture_origin": null
+}

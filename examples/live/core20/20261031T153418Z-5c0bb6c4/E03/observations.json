@@ -1,0 +1,115 @@
+[
+  {
+    "event_id": 11,
+    "operation_id": "decide:1",
+    "memory": {
+      "candidate": {
+        "revision": 1,
+        "candidate_hash": "612497814737222bd2c988deb52dd544191af58a2fff58aca1c1df09c40a6495",
+        "material_id": "M01",
+        "creative_brief": "展示字幕编辑",
+        "production_mode": "premium",
+        "script_input_hash": "38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e"
+      },
+      "latest_estimate": {
+        "estimate_id": "estimate_dfd5922f5aa9441e95d21ed58bb9f2209a004912a1232e89f75f725bd37f3d4a",
+        "revision": 1,
+        "candidate_hash": "612497814737222bd2c988deb52dd544191af58a2fff58aca1c1df09c40a6495",
+        "script_id": "script_38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "pricing_hash": "65382bec23e207f48ef1fd7ec59014ce7cd1e9b8f676a2225174f7d621c5e48f",
+        "line_items": [
+          {
+            "step_id": "material_prepare",
+            "catalog_item_id": "M01",
+            "fee_units": 1,
+            "duration_minutes": 10
+          },
+          {
+            "step_id": "script_finalize",
+            "catalog_item_id": "script_finalize",
+            "fee_units": 2,
+            "duration_minutes": 20
+          },
+          {
+            "step_id": "video_edit",
+            "catalog_item_id": "video_edit:premium",
+            "fee_units": 8,
+            "duration_minutes": 90
+          },
+          {
+            "step_id": "review",
+            "catalog_item_id": "review",
+            "fee_units": 1,
+            "duration_minutes": 15
+          }
+        ],
+        "quoted_at": "2026-10-31T15:34:58.659455+00:00",
+        "total_units": 12,
+        "total_minutes": 135,
+        "estimated_finish_at": "2026-10-31T17:49:58.659455+00:00",
+        "within_budget": true,
+        "within_deadline": true,
+        "feasible": true,
+        "budget_gap_units": 0,
+        "deadline_gap_minutes": 0,
+        "alternatives": [
+          {
+            "total_units": 8,
+            "total_minutes": 90,
+            "estimated_finish_at": "2026-10-31T17:04:58.659455+00:00",
+            "within_budget": true,
+            "within_deadline": true,
+            "feasible": true,
+            "budget_gap_units": 0,
+            "deadline_gap_minutes": 0,
+            "production_mode": "basic"
+          }
+        ]
+      },
+      "seen_material_ids": [
+        "M01"
+      ],
+      "script": {
+        "script_id": "script_38833b860f95b82a2648729fae8c2d00b76b2f1bd40d0d71acf41aded7411a8e",
+        "title": "字幕编辑，轻松搞定",
+        "source_ids": [
+          "M01"
+        ]
+      },
+      "evaluated_quotes": [
+        {
+          "estimate_id": "estimate_dfd5922f5aa9441e95d21ed58bb9f2209a004912a1232e89f75f725bd37f3d4a",
+          "revision": 1,
+          "total_units": 12,
+          "total_minutes": 135,
+          "feasible": true,
+          "budget_gap_units": 0,
+          "deadline_gap_minutes": 0
+        }
+      ],
+      "budget_units": 12,
+      "last_observation": {
+        "tool_call_id": "fixture-3",
+        "tool": "estimate_cost",
+        "ok": true,
+        "error": null
+      },
+      "deadline_at": "2026-10-31T19:34:58.659455+00:00"
+    },
+    "response": {
+      "role": "assistant",
+      "content": "I'll review the current state. The estimate is already generated and feasible (within budget and deadline). The next step is to save the plan to the database.",
+      "tool_calls": [
+        {
+          "index": 0,
+          "id": "call_00_rnGzhh5FX0SMtB8odQwq3212",
+          "type": "function",
+          "function": {
+            "name": "save_plan",
+            "arguments": "{\"rationale\": \"报价已确认在预算和期限内可行，提交方案完成数据库保存。\", \"plan_revision\": 1, \"estimate_id\": \"estimate_dfd5922f5aa9441e95d21ed58bb9f2209a004912a1232e89f75f725bd37f3d4a\"}"
+          }
+        }
+      ]
+    }
+  }
+]
